@@ -26,7 +26,7 @@ import com.cx.www.login.ShopResistCommand;
 import com.cx.www.login.ShopResistOkCommand;
 import com.cx.www.orders.OrdersAction;
 import com.cx.www.sales.SalesAction;
-import com.cx.www.sales.SalesDetailAction;
+import com.cx.www.sales.SalesListAction;
 import com.cx.www.stock.StockListAction;
 
 import cxcom.cx.www.action.Action;
@@ -143,11 +143,11 @@ public class MainController extends HttpServlet{
 			url = sa.execute(req, resp);
 		}
 		else if (type.equals("sales_list")){
-			 Action ac = new SalesDetailAction();
+			 Action ac = new SalesListAction();
 			 url = ac.execute(req, resp);
 		}
 		else if (type.equals("sales_detail")) {
-			 Action ac = new SalesDetailAction();
+			 Action ac = new SalesListAction();
 			 url = ac.execute(req, resp);
 		}
 		
