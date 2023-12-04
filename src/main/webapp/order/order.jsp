@@ -12,11 +12,16 @@
 		
 		<div class="left">
 			랭킹 리스트
-			<input type="button" value="더보기" name="showAllProductRanking" />
+			<a href="mc?type=productRank">
+				<input type="button" value="더보기" name="showAllProductRanking" />
+			</a>
 		</div>
+		<a href="mc?type=allProducts">
+					<input type="button" value="전체상품리스트" name="showAllProduct" />
+		</a>
 		<form action="">
 			<div class="main">
-				<input type="button" value="전체상품리스트" name="showAllProduct" />
+				
 				상품검색창
 				발주 예정 리스트
 				발주 상품 명 (xxx 외 x개) 발주 총 금액 (총 xxxx원)
@@ -25,7 +30,9 @@
 		</form>
 		<div class="right">
 			신상품 리스트
-			<input type="button" value="더보기" name="showNewProduct" />
+			<a href="mc?type=newProducts">
+				<input type="button" value="더보기" name="showNewProduct" />
+			</a>
 		</div>
 	</div>
 </body>

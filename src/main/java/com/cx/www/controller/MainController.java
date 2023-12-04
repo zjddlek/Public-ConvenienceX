@@ -34,6 +34,9 @@ import com.cx.www.sales.SalesListAction;
 import com.cx.www.stock.StockListAction;
 
 import cxcom.cx.www.action.Action;
+import cxcom.cx.www.action.AllProductListAction;
+import cxcom.cx.www.action.NewProductListAction;
+import cxcom.cx.www.action.ProductRankingListAction;
 
 
 @WebServlet("/mc")
@@ -197,6 +200,20 @@ public class MainController extends HttpServlet{
 		// 부대비용관리
 		else if (type.equals("etc")) {
 			
+		}
+		
+		else if (type.equals("orders")) {
+			Action ac = new OrdersAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("allProducts")) {
+			Action ac = new AllProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("newProducts")) {
+			Action ac = new NewProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("productRank")) {
+			Action ac = new ProductRankingListAction();
+			url = ac.execute(req, resp);
 		}
 		
 		
