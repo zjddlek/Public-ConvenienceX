@@ -12,7 +12,7 @@ public class RegisterAction implements Action{
 
 
 		
-		return "views/register.jsp";
+		return "emp/register.jsp";
 	}
 
 }

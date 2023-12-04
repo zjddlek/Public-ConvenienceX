@@ -109,6 +109,7 @@ public class MainController extends HttpServlet{
 		}
 		
 		// 폐기- 밝음
+
 		else if(type.equals("main")) { 
 			Action ac = new DisposeAction();
 			url = ac.execute(req, resp);
