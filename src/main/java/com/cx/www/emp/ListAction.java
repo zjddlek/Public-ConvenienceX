@@ -57,7 +57,7 @@ public class ListAction  implements Action{
       
       dao.close();
       
-      return "views/test.jsp";
+      return "views/empList.jsp";
    }
 
 }
