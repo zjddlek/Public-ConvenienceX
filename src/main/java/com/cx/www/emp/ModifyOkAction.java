@@ -63,7 +63,7 @@ public class ModifyOkAction implements Action {
 			dao.close();
 			
 			}
-			return "mc?type=type";
+			return "mc?type=modifyOk";
 		}
 
 	}

@@ -35,8 +35,7 @@
 	</div>
 	<div class="container">
 
-		<!-- 버튼을 클릭 WriteFormAction => views/writeForm.jsp -->
-		<!-- <a href="mc.do?cmd=type"><input type="button" value="조회하기"/></a> -->
+	
 		<table class="table">
 			<tr>
 				<th>사원번호</th>

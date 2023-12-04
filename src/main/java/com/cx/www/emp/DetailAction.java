@@ -26,7 +26,7 @@ public class DetailAction implements Action {
 			
 		}
 		
-		return "views/empDetail.jsp";
+		return "emp/empDetail.jsp";
 	}
 
 }
