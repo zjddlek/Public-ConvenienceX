@@ -13,7 +13,11 @@ import com.cx.www.cal.CalMainAction;
 import com.cx.www.cal.TotalProfitAction;
 import com.cx.www.discard.DisposeAction;
 import com.cx.www.discard.disposeSearch;
+import com.cx.www.emp.DeleteAction;
+import com.cx.www.emp.DetailAction;
 import com.cx.www.emp.ListAction;
+import com.cx.www.emp.ModifyAction;
+import com.cx.www.emp.ModifyOkAction;
 import com.cx.www.emp.RegisterAction;
 import com.cx.www.emp.RegisterOkAction;
 import com.cx.www.login.AttendCommand;
@@ -131,6 +135,29 @@ public class MainController extends HttpServlet{
 			Action ac = new RegisterOkAction();
 			url = ac.execute(req,resp);
 		}
+		else if(type.equals("detail")) {
+			Action ac = new DetailAction();
+	    	  url=ac.execute(req,resp);
+	    	  
+	    }
+		else if(type.equals("modify")) {
+			Action ac = new ModifyAction();
+	    	  url=ac.execute(req,resp);
+	    	  
+	    }
+		else if(type.equals("modifyOk")) {
+			Action ac = new ModifyOkAction();
+	    	  url=ac.execute(req,resp);	  
+	    	  
+	    }
+		else if(type.equals("delete")) {
+			Action ac = new DeleteAction();
+	    	  url=ac.execute(req,resp);
+	    	  
+	    }
+		
+		
+		
 		
 		// 발주 - 석원
 		else if(type.equals("orders")) {
