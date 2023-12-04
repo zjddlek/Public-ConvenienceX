@@ -47,7 +47,7 @@
 			<c:if test="${list != null }">
 				<c:forEach var="vo" items="${list}">
 				<tr>
-					<td>${vo.empno }</td>
+               		<td><a href="mc?type=detail&empno=${vo.empno }">${vo.empno }</a></td>
 					<td>${vo.ename }</td>
 					<td>${vo.phone }</td>
 					<td>${vo.address }</td>
