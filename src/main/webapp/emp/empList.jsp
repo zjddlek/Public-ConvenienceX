@@ -22,7 +22,7 @@
 			<h2>사원정보 조회</h2>
 			<div>
 				<span>성명</span> 
-				<input type="text" name="name" id="name" />
+				<input type="text" name="name" id="name" class="form-control"/>
 				<input type="hidden" name="type" value="emp" />
 			
 				<span>근무기간</span>
