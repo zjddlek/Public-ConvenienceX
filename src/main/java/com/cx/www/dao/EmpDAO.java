@@ -215,6 +215,53 @@ public class EmpDAO {
 	      return vo;
 
 	   }
+   
+// 점장로그인용
+   public EmpVO getOneSM(String id, String pwd) { 
+
+      sb.setLength(0);
+      sb.append("SELECT * FROM CXEMP WHERE ID=? AND PASSWORD=? ");
+      try {
+         pstmt = conn.prepareStatement(sb.toString());
+         pstmt.setString(1, id);
+         pstmt.setString(2, pwd);
+
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+
+      try {
+
+         rs = pstmt.executeQuery();
+
+         while (rs.next()) {
+            String empno = rs.getString("empno");
+            String ename = rs.getString("ename");
+            String date = rs.getString("birthdate");
+            String phone = rs.getString("phone");
+            String address = rs.getString("address");
+            String address_detail = rs.getString("address_detail");
+            String email = rs.getString("email");
+            String giredate = rs.getString("hiredate");
+            String is_retire = rs.getString("isretire");
+            int sal_hour = rs.getInt("sal_hour");
+            String sno = rs.getString("sno");
+            int jobno = rs.getInt("jobno");
+
+            vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, giredate, is_retire, sal_hour,
+                  id, pwd, sno, jobno);
+         }
+      } catch (
+
+      SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      return vo;
+
+   }
+   
 
 
    public  ArrayList<EmpVO> getAllByDate(String startDate, String endDate) { // 근무일자로 정보검색
