@@ -21,7 +21,7 @@ public class AttendanceLoginOkCommand implements Action {
 		String pwd = req.getParameter("pwd");
 
 		EmpDAO dao = new EmpDAO();
-		EmpVO vo = dao.getOne(id, pwd);
+		EmpVO vo = dao.getOneSM(id, pwd);
 		String empno = vo.getEmpno();
 		AttendanceDAO adao = new AttendanceDAO();
 		AttendanceVO avo2 = adao.attGetOne(empno);

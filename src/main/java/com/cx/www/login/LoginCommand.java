@@ -18,7 +18,7 @@ public class LoginCommand implements Action {
 		String pwd = req.getParameter("pwd");
 
 		EmpDAO dao = new EmpDAO();
-		EmpVO vo = dao.getOne(id, pwd);
+		EmpVO vo = dao.getOneSM(id, pwd);
 		int jobno = vo.getJobno();
 		if (vo == null || jobno != 400) {
 			return "login/login.jsp";
