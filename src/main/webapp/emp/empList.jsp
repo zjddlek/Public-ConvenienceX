@@ -23,7 +23,7 @@
 			<div>
 				<span>성명</span> 
 				<input type="text" name="name" id="name" />
-				<input type="hidden" name="type" value="type" />
+				<input type="hidden" name="type" value="emp" />
 			
 				<span>근무기간</span>
 				<input type="date" name="period" id="period" />- <input type="date" name="period2" id="period2" />
