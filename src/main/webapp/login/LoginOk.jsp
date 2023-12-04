@@ -12,7 +12,7 @@
 	EmpVO vo = dao.getOne(id,pwd);
 	int jobno = vo.getJobno();
 	if(vo==null||jobno!= 400) {
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("login/login.jsp");
 	}else{	
 		String sno = vo.getSno();
  		ShopDAO sdao = new ShopDAO();

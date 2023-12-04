@@ -49,9 +49,8 @@ public class MainController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html; charset=UTF-8");
 		
-		// 2. mc라는 파라미터값 가져오기
+		// 2. type 파라미터값 가져오기
 		String type = req.getParameter("type");
-		System.out.println(type);
 		
 		String url = "";
 		
@@ -63,7 +62,7 @@ public class MainController extends HttpServlet{
 		}
 		else if(type.equals("login")) {
 			Action ac = new LoginCommand();
-			url=ac.execute(req, resp);
+			url = ac.execute(req, resp);
 		}
 		
 		// 점포
@@ -103,7 +102,7 @@ public class MainController extends HttpServlet{
 		}
 		
 		// 폐기- 밝음
-		if(type.equals("main")) {
+		else if(type.equals("main")) { 
 			Action ac = new DisposeAction();
 			url = ac.execute(req, resp);
 		}

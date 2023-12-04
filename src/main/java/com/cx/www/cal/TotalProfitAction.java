@@ -10,8 +10,7 @@ public class TotalProfitAction implements Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
-		
-		return "/cal/disposeList.jsp";
+		return "cal/profit.jsp";
 	}
 
 }
