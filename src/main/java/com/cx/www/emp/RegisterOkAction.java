@@ -52,7 +52,7 @@ public class RegisterOkAction implements Action{
 
 		dao.close();
 
-		return "emp/register.jsp";
+		return "mc?type=emp";
 	}
 	
 	
