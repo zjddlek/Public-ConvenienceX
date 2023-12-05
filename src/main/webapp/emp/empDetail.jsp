@@ -26,7 +26,7 @@
 			<tr>
 				<td colspan="6">
 				
-				<a href="mc"><input type="button" class="btn btn-success" value="목록" /></a>
+				<a href="mc?type=emp"><input type="button" class="btn btn-success" value="목록" /></a>
 				<a href="mc?type=modify&empno=${vo.empno }"><input type="button" class="btn btn-primary" value="수정" /></a>
 				<a href="mc?type=delete&empno=${vo.empno }"><input type="button" class="btn btn-danger" value="삭제" /></a>
 				</td>
