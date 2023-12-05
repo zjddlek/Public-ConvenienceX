@@ -9,12 +9,40 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script>
+	window.onload=()=>{
+	
+	let btn=document.getElementById("btn");
+	btn.onclick = openkakaoPostCode;
+	
+	}	
+
+	function openkakaoPostCode(){
+		console.log("버튼 눌림");
+		new daum.Postcode({
+		oncomplete: function(data){
+			//팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분
+			//console.log("팝업검색버튼 누름");
+			console.dir(data);
+			//document.getElementById("address").value= data.zonecode;
+			document.getElementById("address").value= data.roadAddress;
+			document.getElementById("address_detail").value= data.jibunAddress;
+
+			}
+		}).open();
+	
+	}
+
+</script>
+
 <body>
 	<div class="container">
 		
@@ -43,7 +71,7 @@
 			
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">생년월일</label>
-				<input type="text" class="form-control" name="date"  />
+				<input type="date" class="form-control" name="date"  />
             
 			</div>
 			
@@ -65,13 +93,21 @@
 			
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">주소</label>
-				<input type="text" class="form-control" name="address"  />
-			</div>
+				<input type="text" class="form-control" name="address" id="address"/>
+				
+			</div >
 			
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">상세주소</label>
-				<input type="text" class="form-control" name="address_detail"  />
+				<input type="text" class="form-control" name="address_detail" id="address_detail" />
 			</div>
+
+
+			<div class="col-md-6 offset-md-4">
+				<input type="button" value="주소검색" id="btn" class="btn btn-success"/>
+			</div>
+			
+			
 			
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">이메일</label>
