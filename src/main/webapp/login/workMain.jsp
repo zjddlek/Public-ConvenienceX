@@ -61,7 +61,7 @@
 		</table>
 		<div>
 			<a href="mc?type=attendanceLogin&sno=<%= request.getParameter("sno") %>"><input type="button" value="출근"/></a>
-			<a href="mc?type=main&sno=<%= request.getParameter("sno") %>"><input type="button" value="돌아가기"/></a>
+			<a href="mc?type=main&sno=${svo.sno }"><input type="button" value="돌아가기"/></a>
 		</div>
 	</div>
 </body>
