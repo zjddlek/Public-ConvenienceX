@@ -50,6 +50,8 @@ public class RegisterOkAction implements Action{
 		vo.setJobno(jobno);
 
 		dao.addOne(vo);
+		
+		System.out.println(vo);
 
 		dao.close();
 
