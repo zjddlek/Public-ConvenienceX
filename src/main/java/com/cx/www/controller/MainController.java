@@ -32,6 +32,7 @@ import com.cx.www.orders.AllProductListAction;
 import com.cx.www.orders.NewProductListAction;
 import com.cx.www.orders.OrdersAction;
 import com.cx.www.orders.ProductRankingListAction;
+import com.cx.www.orders.SearchProductAction;
 import com.cx.www.sales.SalesAction;
 import com.cx.www.sales.SalesListAction;
 import com.cx.www.stock.StockListAction;
@@ -166,7 +167,7 @@ public class MainController extends HttpServlet{
 		else if (type.equals("orders")) {
 			Action ac = new OrdersAction();
 			url = ac.execute(req, resp);
-		}  else if (type.equals("allProducts")) {
+		} else if (type.equals("allProducts")) {
 			Action ac = new AllProductListAction();
 			url = ac.execute(req, resp);
 		} else if (type.equals("newProducts")) {
@@ -174,6 +175,9 @@ public class MainController extends HttpServlet{
 			url = ac.execute(req, resp);
 		} else if (type.equals("productRank")) {
 			Action ac = new ProductRankingListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("searchProduct")) {
+			Action ac = new SearchProductAction();
 			url = ac.execute(req, resp);
 		}
 		

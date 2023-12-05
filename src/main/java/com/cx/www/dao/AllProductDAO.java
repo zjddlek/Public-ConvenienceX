@@ -162,6 +162,7 @@ public class AllProductDAO {
 				String scName = rs.getString("SCNAME");
 				String accName = rs.getString("ACCNAME");
 				String pName = rs.getString("PNAME");
+				if ( pName.length() >=8 ) pName = pName.substring(0,8)+"...";
 				String expirydate = rs.getString("EXPIRYDATE");
 				int priceServer = rs.getInt("PRICE_SERVER");
 				int priceConsumer = rs.getInt("PRICE_CONSUMER");
@@ -256,6 +257,80 @@ public class AllProductDAO {
 		}
 		
 		return list;
+	}
+	
+	public ArrayList<AllProductVO> getSearchPname(String pName) {
+		ArrayList<AllProductVO> list = new ArrayList<AllProductVO>();
+		
+		sb.setLength(0);
+		sb.append("SELECT MC.MCNAME, SC.SCNAME, A.ACCNAME, P.PNO, PA.PNAME, PA.EXPIRYDATE, PA.PRICE_SERVER, P.PRICE_CONSUMER, P.REGDATE "
+				+ "FROM MAJOR_CATEGORY MC, SUB_CATEGORY SC, PRODUCT P, PRODUCT_ACCOUNT PA, ACCOUNTS A "
+				+ "WHERE MC.MCNO = SC.MCNO "
+				+ "AND SC.SCNO = P.SCNO "
+				+ "AND PA.PNO_ACCOUNT = P.PNO_ACCOUNT "
+				+ "AND PA.ACCNO = A.ACCNO "
+				+ "AND PA.PNAME LIKE ? "
+				+ "ORDER BY P.REGDATE DESC");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, pName);
+			rs = pstmt.executeQuery();
+			while ( rs.next() ) {
+				String mcName = rs.getString("MCNAME");
+				String scName = rs.getString("SCNAME");
+				String accName = rs.getString("ACCNAME");
+				String pNo = rs.getString("PNO");
+				pName = rs.getString("PNAME");
+				String expirydate = rs.getString("EXPIRYDATE");
+				int priceServer = rs.getInt("PRICE_SERVER");
+				int priceConsumer = rs.getInt("PRICE_CONSUMER");
+				String regdate = rs.getString("REGDATE");
+				
+				AllProductVO vo = new AllProductVO(mcName, scName, accName, pNo, pName, expirydate, priceServer, priceConsumer, regdate);
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public AllProductVO getSearchPno(String pNo) {
+		AllProductVO vo = null;
+		
+		sb.setLength(0);
+		sb.append("SELECT MC.MCNAME, SC.SCNAME, A.ACCNAME, P.PNO, PA.PNAME, PA.EXPIRYDATE, PA.PRICE_SERVER, P.PRICE_CONSUMER, P.REGDATE "
+				+ "FROM MAJOR_CATEGORY MC, SUB_CATEGORY SC, PRODUCT P, PRODUCT_ACCOUNT PA, ACCOUNTS A "
+				+ "WHERE MC.MCNO = SC.MCNO "
+				+ "AND SC.SCNO = P.SCNO "
+				+ "AND PA.PNO_ACCOUNT = P.PNO_ACCOUNT "
+				+ "AND PA.ACCNO = A.ACCNO "
+				+ "AND P.PNO = ? ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, pNo);
+			rs = pstmt.executeQuery();
+			if ( rs.next() ) {
+				String mcName = rs.getString("MCNAME");
+				String scName = rs.getString("SCNAME");
+				String accName = rs.getString("ACCNAME");
+				String pName = rs.getString("PNAME");
+				String expirydate = rs.getString("EXPIRYDATE");
+				int priceServer = rs.getInt("PRICE_SERVER");
+				int priceConsumer = rs.getInt("PRICE_CONSUMER");
+				String regdate = rs.getString("REGDATE");
+				
+				vo = new AllProductVO(mcName, scName, accName, pNo, pName, expirydate, priceServer, priceConsumer, regdate);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
 	}
 	
 	public void close() {
