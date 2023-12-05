@@ -2,6 +2,7 @@ package cxcom.cx.www.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public interface Action {
 	// 추상 메소드

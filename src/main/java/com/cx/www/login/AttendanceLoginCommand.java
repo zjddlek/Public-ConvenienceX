@@ -3,13 +3,20 @@ package com.cx.www.login;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cx.www.dao.ShopDAO;
+import com.cx.www.vo.ShopVO;
+
 import cxcom.cx.www.action.Action;
 
 public class AttendanceLoginCommand implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
+		String sno = req.getParameter("sno");
+		ShopDAO sdao = new ShopDAO();
+		ShopVO svo = sdao.getOne(sno);
+		req.setAttribute("svo", svo);
+		sdao.close();
 		return "login/attendanceLogin.jsp";
 	}
 

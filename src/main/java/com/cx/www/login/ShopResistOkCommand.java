@@ -23,7 +23,7 @@ public class ShopResistOkCommand implements Action{
 		
 		dao.close();
 		req.setAttribute("svo", svo);
-		return "login/testemp.jsp";
+		return "main/main.jsp";
 	}
 
 }

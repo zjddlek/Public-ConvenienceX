@@ -26,7 +26,7 @@ public class EmpDAO {
 
       Context initCtx;
       conn = DBConnection.getConnection();
-      System.out.println("conn >>>> " + conn);
+     // System.out.println("conn >>>> " + conn);
 
    }
 

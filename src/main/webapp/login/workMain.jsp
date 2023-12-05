@@ -50,7 +50,7 @@
 					<td>${vo.attstart }</td>
 					<td>${vo.attend }</td>
 					<c:if test="${vo.attend == null }">
-						<td><a href="mc?type=calLast&empno=${vo.empno }"><input type="button" value="정산하기" /></a></td>
+						<td><a href="mc?type=calLast&empno=${vo.empno }&sno=${svo.sno }"><input type="button" value="정산하기" /></a></td>
 					</c:if>
 					<c:if test="${vo.attend != null }">
 						<td><h5>퇴근 완료</h5></td>
@@ -60,7 +60,8 @@
 			</c:forEach>
 		</table>
 		<div>
-			<a href="mc?type=attendanceLogin"><input type="button" value="출근"/></a>
+			<a href="mc?type=attendanceLogin&sno=<%= request.getParameter("sno") %>"><input type="button" value="출근"/></a>
+			<a href="mc?type=main&sno=<%= request.getParameter("sno") %>"><input type="button" value="돌아가기"/></a>
 		</div>
 	</div>
 </body>

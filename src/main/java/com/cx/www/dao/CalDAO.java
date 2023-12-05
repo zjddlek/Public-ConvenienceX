@@ -22,26 +22,21 @@ public class CalDAO {
 	public ArrayList<CalVO> getCashCal(String empno) {
 		sb.setLength(0);
 		sb.append(
-				"SELECT P.PNO, P.PRICE_CONSUMER,  PI.PNO_INFO, AA.CNT, AA.DEALNO, AA.SALEDATE  "
+				"SELECT P.PNO, P.PRICE_CONSUMER,  PI.PNO_INFO, AA.CNT, AA.DEALNO, AA.SALEDATE "
 				+ "FROM PRODUCT_INFO PI, PRODUCT P,  "
-				+ "    (  "
-				+ "      SELECT SAD.DETAILNO, SAD.SALENO, PRODUCT_INFO.PNO_INFO, SAD.CNT, SAD.ISREFUND, SAD.DEALNO, SA.SALEDATE "
-				+ "      FROM SALES_DETAIL SAD, SALES SA "
-				+ "      JOIN STOCK ST ON SA.STOCKNO = ST.STOCKNO "
-				+ "      JOIN PRODUCT_INFO ON ST.PNO_INFO = PRODUCT_INFO.PNO_INFO "
-				+ "      WHERE SAD.SALENO = SA.SALENO  "
-				+ "      AND SA.SALEDATE  "
-				+ "      BETWEEN  "
-				+ "        ( "
-				+ "          SELECT ATT.ATTSTART  "
-				+ "          FROM ATTENDANCE ATT, CXEMP CX  "
-				+ "          WHERE ATT.EMPNO = CX.EMPNO  "
-				+ "          AND CX.EMPNO = ?  "
-				+ "          ORDER BY ATT.ATTSTART DESC LIMIT 1 "
-				+ "         )  "
-				+ "      AND NOW() "
-				+ "     ) AA  "
-				+ "     WHERE P.PNO = PI.PNO AND PI.PNO_INFO = AA.PNO_INFO AND DEALNO = 2 ");
+				+ "    (SELECT SAD.DETAILNO, SAD.SALENO, PI.PNO_INFO, SAD.CNT, SAD.ISREFUND, SAD.DEALNO, SA.SALEDATE "
+				+ "    FROM SALES_DETAIL SAD, SALES SA, STOCK ST, PRODUCT_INFO PI"
+				+ "    WHERE SAD.STOCKNO = ST.STOCKNO "
+				+ "    AND ST.PNO_INFO = PI.PNO_INFO "
+				+ "    AND SAD.SALENO = SA.SALENO  "
+				+ "    AND SA.SALEDATE BETWEEN ( "
+				+ "    SELECT ATT.ATTSTART  "
+				+ "    FROM ATTENDANCE ATT, CXEMP CX  "
+				+ "    WHERE ATT.EMPNO = CX.EMPNO  "
+				+ "    AND CX.EMPNO = ? "
+				+ "    ORDER BY ATT.ATTSTART DESC LIMIT 1 "
+				+ "    ) AND NOW() ) AA  "
+				+ "WHERE P.PNO = PI.PNO AND PI.PNO_INFO = AA.PNO_INFO AND DEALNO = 2 ");
 
 		ArrayList<CalVO> list = new ArrayList<CalVO>();
 		try {
@@ -67,25 +62,20 @@ public class CalDAO {
 		sb.setLength(0);
 		sb.append(
 				"SELECT P.PNO, P.PRICE_CONSUMER,  PI.PNO_INFO, AA.CNT, AA.DEALNO, AA.SALEDATE  "
-				+ "FROM PRODUCT_INFO PI, PRODUCT P,  "
-				+ "    (  "
-				+ "      SELECT SAD.DETAILNO, SAD.SALENO, PRODUCT_INFO.PNO_INFO, SAD.CNT, SAD.ISREFUND, SAD.DEALNO, SA.SALEDATE "
-				+ "      FROM SALES_DETAIL SAD, SALES SA "
-				+ "      JOIN STOCK ST ON SA.STOCKNO = ST.STOCKNO "
-				+ "      JOIN PRODUCT_INFO ON ST.PNO_INFO = PRODUCT_INFO.PNO_INFO "
-				+ "      WHERE SAD.SALENO = SA.SALENO  "
-				+ "      AND SA.SALEDATE  "
-				+ "      BETWEEN  "
-				+ "        ( "
-				+ "          SELECT ATT.ATTSTART  "
-				+ "          FROM ATTENDANCE ATT, CXEMP CX  "
-				+ "          WHERE ATT.EMPNO = CX.EMPNO  "
-				+ "          AND CX.EMPNO = ?  "
-				+ "          ORDER BY ATT.ATTSTART DESC LIMIT 1 "
-				+ "         )  "
-				+ "      AND NOW() "
-				+ "     ) AA  "
-				+ "     WHERE P.PNO = PI.PNO AND PI.PNO_INFO = AA.PNO_INFO AND DEALNO = 3 ");
+				+ "FROM PRODUCT_INFO PI, PRODUCT P,   "
+				+ "    (SELECT SAD.DETAILNO, SAD.SALENO, PI.PNO_INFO, SAD.CNT, SAD.ISREFUND, SAD.DEALNO, SA.SALEDATE  "
+				+ "    FROM SALES_DETAIL SAD, SALES SA, STOCK ST, PRODUCT_INFO PI "
+				+ "    WHERE SAD.STOCKNO = ST.STOCKNO  "
+				+ "    AND ST.PNO_INFO = PI.PNO_INFO  "
+				+ "    AND SAD.SALENO = SA.SALENO   "
+				+ "    AND SA.SALEDATE BETWEEN (  "
+				+ "    SELECT ATT.ATTSTART   "
+				+ "    FROM ATTENDANCE ATT, CXEMP CX   "
+				+ "    WHERE ATT.EMPNO = CX.EMPNO   "
+				+ "    AND CX.EMPNO = ? "
+				+ "    ORDER BY ATT.ATTSTART DESC LIMIT 1  "
+				+ "    ) AND NOW() ) AA   "
+				+ "WHERE P.PNO = PI.PNO AND PI.PNO_INFO = AA.PNO_INFO AND DEALNO = 3 ");
 
 		ArrayList<CalVO> list = new ArrayList<CalVO>();
 		try {

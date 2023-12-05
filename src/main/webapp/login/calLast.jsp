@@ -270,7 +270,7 @@
 		$("input[value='정산하기']").on("click",()=>{
 			if(confirm("정산을 완료하시겠습니까? \n 확인을 누르시면 더이상 수정할 수 없습니다.")){
 				alert("정산완료");
-				location.href="mc?type=attend&empno=<%=request.getParameter("empno")%>"
+				location.href="mc?type=attend&empno=<%=request.getParameter("empno")%>&sno=${svo.sno }"
 			}else{
 				return false;
 			}
