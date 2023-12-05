@@ -110,7 +110,7 @@ public class MainController extends HttpServlet{
 		
 		// 폐기- 밝음
 
-		else if(type.equals("main")) { 
+		else if(type.equals("dismain")) { 
 			Action ac = new DisposeAction();
 			url = ac.execute(req, resp);
 		}
@@ -216,7 +216,10 @@ public class MainController extends HttpServlet{
 			Action ac = new ProductRankingListAction();
 			url = ac.execute(req, resp);
 		}
-		
+		//메인페이지로
+		else if(type.equals("main")) {
+			url="main/main.jsp";
+		}
 		
 		// forward
 		if( isRedirect ) {
