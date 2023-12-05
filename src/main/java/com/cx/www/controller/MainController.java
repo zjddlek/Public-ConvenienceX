@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cx.www.action.Action;
 import com.cx.www.cal.CalMainAction;
 import com.cx.www.cal.TotalProfitAction;
 import com.cx.www.discard.DisposeAction;
@@ -36,8 +37,6 @@ import com.cx.www.orders.SearchProductAction;
 import com.cx.www.sales.SalesAction;
 import com.cx.www.sales.SalesListAction;
 import com.cx.www.stock.StockListAction;
-
-import cxcom.cx.www.action.Action;
 
 
 @WebServlet("/mc")
@@ -101,6 +100,9 @@ public class MainController extends HttpServlet{
 		else if(type.equals("attend")) {
 			Action ac = new AttendCommand();
 			url=ac.execute(req, resp);
+		}else if(type.equals("workmain")) {
+			Action ac = new WorkMainCommand();
+			url = ac.execute(req, resp);
 		}
 		
 		// 정산
@@ -111,7 +113,7 @@ public class MainController extends HttpServlet{
 		
 		// 폐기- 밝음
 
-		else if(type.equals("main")) { 
+		else if(type.equals("dismain")) { 
 			Action ac = new DisposeAction();
 			url = ac.execute(req, resp);
 		}
@@ -156,11 +158,8 @@ public class MainController extends HttpServlet{
 	    }
 		else if(type.equals("delete")) {
 			Action ac = new DeleteAction();
-	    	  url=ac.execute(req,resp);
-	    	  
-	    }
-		
-		
+	    	  url=ac.execute(req,resp);	  
+	    }		
 		
 		
 		// 발주 - 석원
@@ -216,6 +215,24 @@ public class MainController extends HttpServlet{
 			
 		}
 		
+		else if (type.equals("orders")) {
+			Action ac = new OrdersAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("allProducts")) {
+			Action ac = new AllProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("newProducts")) {
+			Action ac = new NewProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("productRank")) {
+			Action ac = new ProductRankingListAction();
+			url = ac.execute(req, resp);
+		}
+		
+		//메인페이지로
+		else if(type.equals("main")) {
+			url="main/main.jsp";
+		}
 		
 		// forward
 		if( isRedirect ) {
