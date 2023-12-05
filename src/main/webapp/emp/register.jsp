@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+	crossorigin="anonymous"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,81 +16,106 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>사원 등록</h3>
-
+	<div class="container">
+		
 
 		<form action="mc" method="get">
-        
-        <table border="1">
-           <tr>
-            	<td>사원번호</td>
-                <td><input type="text" name="empno"/>
-                <input type="hidden" name="type" value="registerOk" />
-                </td>
-            </tr>
-             <tr>
-            	<td>사원이름</td>
-                <td><input type="text" name="ename"/></td>
-            </tr>
-             <tr>
-            	<td>생년월일</td>
-                <td><input type="text" name="date"/></td>
-            </tr>
-             <tr>
-            	<td>전화번호</td>
-                <td><input type="text" name="phone"/></td>
-            </tr>
-             <tr>
-            	<td>주소</td>
-                <td><input type="text" name="address"/></td>
-            </tr>
+			<div class="col-md-4 offset-md-3">
+				<h3>사원 등록</h3>
+			</div>
+			
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">이름</label>
+				<input type="text" class="form-control" name="ename" >
+				<input type="hidden" name="type" value="registerOk" />
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<input type="hidden" name="empno"/>
+				
+				<!-- empno는 자동 생성되도록 넣어줘야 함 -->
+				
             
-            <tr>
-            	<td>상세주소</td>
-                <td><input type="text" name="address_detail"/></td>
-            </tr>
-            <tr>
-            	<td>이메일</td>
-                <td><input type="text" name="email"/></td>
-            </tr>
-            <tr>
-            	<td>입사일자</td>
-                <td><input type="text" name="hiredate"/></td>
-            </tr>
-            <tr>
-            	<td>퇴사여부</td>
-                <td><input type="text" name="isretire"/></td>
-            </tr>
-            <tr>
-            	<td>시급</td>
-                <td><input type="text" name="sal_hour"/></td>
-            </tr>
-            <tr>
-            	<td>아이디</td>
-                <td><input type="text" name="id"/></td>
-            </tr>
-            <tr>
-            	<td>비밀번호</td>
-                <td><input type="text" name="pwd"/></td>
-            </tr>
-            <tr>
-            	<td>점포번호</td>
-                <td><input type="text" name="sno"/></td>
-            </tr>
+			</div>
+			
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">생년월일</label>
+				<input type="text" class="form-control" name="date"  />
             
-            <tr>
-            	<td>직책번호</td>
-                <td><input type="text" name="jobno"/></td>
-                
-            </tr>
-            
-          <tr>
-          <td> <input type="submit" value="제출하기" /></td>
-          </tr>
-          
-        </table>
-      </form>
-
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">아이디</label>
+				<input type="text" class="form-control" name="id"  /> 
+				
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">비밀번호</label>
+				<input type="password" class="form-control" name="pwd"  />
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">전화번호</label>
+				<input type="text" class="form-control" name="phone"  />
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">주소</label>
+				<input type="text" class="form-control" name="address"  />
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">상세주소</label>
+				<input type="text" class="form-control" name="address_detail"  />
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">이메일</label>
+				<input type="text" class="form-control" name="email"  />
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">입사일자</label>
+				<input type="text" class="form-control" name="hiredate"  />
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">시급</label>
+				<input type="text" class="form-control" name="sal_hour"  />
+			</div>
+			
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">구분</label>
+				<input type="text" class="form-control" name="jobno"  />
+			</div>
+			
+				
+			</div>
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<input type="hidden" class="form-control" name="sno"  value="03485"/>
+			</div>
+			
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<input type="hidden" class="form-control" name="isretire"  value="N"/>
+			</div>
+			
+			
+			<div class="col-md-4 offset-md-2 row my-3">
+				<button type="submit" class="btn btn-primary">등록하기</button>
+			</div>
+			
+		
+			
+			
+		</form>
+		
+	</div>
 
 
 </body>
