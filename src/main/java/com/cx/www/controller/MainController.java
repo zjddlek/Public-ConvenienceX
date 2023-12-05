@@ -9,10 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cx.www.action.Action;
-import com.cx.www.action.AllProductListAction;
-import com.cx.www.action.NewProductListAction;
-import com.cx.www.action.ProductRankingListAction;
 import com.cx.www.cal.CalMainAction;
 import com.cx.www.cal.TotalProfitAction;
 import com.cx.www.discard.DisposeAction;
@@ -36,6 +32,11 @@ import com.cx.www.orders.OrdersAction;
 import com.cx.www.sales.SalesAction;
 import com.cx.www.sales.SalesListAction;
 import com.cx.www.stock.StockListAction;
+
+import cxcom.cx.www.action.Action;
+import cxcom.cx.www.action.AllProductListAction;
+import cxcom.cx.www.action.NewProductListAction;
+import cxcom.cx.www.action.ProductRankingListAction;
 
 
 @WebServlet("/mc")
