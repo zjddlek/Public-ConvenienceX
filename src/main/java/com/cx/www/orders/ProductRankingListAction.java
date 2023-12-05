@@ -1,4 +1,4 @@
-package cxcom.cx.www.action;
+package com.cx.www.orders;
 
 import java.util.ArrayList;
 
@@ -6,18 +6,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cx.www.dao.AllProductDAO;
+import com.cx.www.dao.ProductRankingDAO;
 import com.cx.www.vo.AllProductVO;
+import com.cx.www.vo.ProductRankingVO;
 
-public class NewProductListAction implements Action{
+import cxcom.cx.www.action.Action;
+
+public class ProductRankingListAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
-		AllProductDAO dao = new AllProductDAO();
+		ProductRankingDAO dao = new ProductRankingDAO();
 		
-		int totalCount = dao.getNewCount();
+		int totalCount = dao.getTotalCount();
 		int recordPerPage = 20;
-		int totalPage = totalCount % recordPerPage == 0 ? totalCount / recordPerPage : totalCount / recordPerPage + 1;
+		int totalPage = 1;
+		if ( totalCount >= recordPerPage ) {
+			if ( totalCount % recordPerPage == 0 ) {
+				totalPage = totalCount / recordPerPage;
+			} else {
+				totalPage = totalCount / recordPerPage + 1;
+			}
+		} else { totalPage = 1; }
 		int currentPage = 0;
 		String cp = req.getParameter("cp");
 		currentPage = cp != null ? Integer.parseInt(cp) : 1;
@@ -32,7 +43,7 @@ public class NewProductListAction implements Action{
 			else endPage = currentPage + 4;
 		}
 		
-		ArrayList<AllProductVO> list = dao.getNewAll(startNo, recordPerPage);
+		ArrayList<ProductRankingVO> list = dao.getAll(startNo, recordPerPage);
 		
 		req.setAttribute("list", list);
 		req.setAttribute("totalCount", totalCount);
@@ -46,7 +57,7 @@ public class NewProductListAction implements Action{
 		
 		dao.close();
 		
-		return "/order/newProductList.jsp";
+		return "/order/productRankingList.jsp";
 	}
 
 }
