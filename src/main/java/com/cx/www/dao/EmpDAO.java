@@ -374,7 +374,7 @@ public class EmpDAO {
 				String sno1 =rs.getString("SNO");
 				
 				
-				String empno= 22+sno1+empno4;
+				String empno= 23+sno1+empno4;
 				
 				System.out.println(empno);
 		
