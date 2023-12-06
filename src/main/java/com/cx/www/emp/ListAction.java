@@ -49,6 +49,7 @@ public class ListAction  implements Action{
          EmpVO vo = dao.getOne(name);
 
          req.setAttribute("vo", vo);
+         System.out.println("getOne vo:"+vo);
       
          
       }

@@ -15,7 +15,7 @@
 		<form action="mc" method="get">
 		
 			<div class="col-md-4 offset-md-3">
-				<h3>사원 등록</h3>
+				<h3>사원정보 조회</h3>
 			</div>
 			
 			
