@@ -2,6 +2,7 @@ package com.cx.www.emp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.cx.www.action.Action;
 import com.cx.www.dao.EmpDAO;
@@ -21,6 +22,9 @@ public class DetailAction implements Action {
 			
 			req.setAttribute("vo", vo);
 			dao.close();
+			
+			HttpSession Session = req.getSession();
+			Session.setAttribute("vo", vo);
 			
 			
 		}

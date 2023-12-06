@@ -145,11 +145,11 @@
 			</div>
 			
 			<div class="col-md-4 offset-md-2 row my-3">
-				<input type="text" class="form-control" name="sal_hour" value="${vo.sal_hour }"   />
+				<input type="hidden" class="form-control" name="sal_hour" value="${vo.sal_hour }"   />
 			</div>
 			
 			<div class="col-md-4 offset-md-2 row my-3">
-				<input type="text" class="form-control" name="sno" value="${vo.sno }"/>
+				<input type="hidden" class="form-control" name="sno" value="${vo.sno }"/>
 			</div>
             
           

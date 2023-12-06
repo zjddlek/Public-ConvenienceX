@@ -24,6 +24,7 @@ public class EmpVO {
 	String pwd;
 	String sno;
 	int jobno;
+	String picture;
 	
 	
 }
