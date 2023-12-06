@@ -14,6 +14,8 @@ public class ModifyOkAction implements Action {
 		
 		String b= req.getParameter("empno");
 		
+		System.out.println("b:"+b);
+		
 		
 		if(b !=null) {
 
@@ -56,8 +58,8 @@ public class ModifyOkAction implements Action {
 
 			dao.modifyOne(vo);
 			
-			//System.out.println("ModifyOkAction 실행중");
-			//System.out.println("vo:"+vo);
+			System.out.println("ModifyOkAction 실행중");
+			System.out.println("vo:"+vo);
 
 			dao.close();
 			
