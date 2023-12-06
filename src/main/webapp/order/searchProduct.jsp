@@ -14,35 +14,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script>
 	let id1 = [];
 	$(()=>{
 		$(".addOrder").on("click",(e)=>{
-			/* console.log($(e.currentTarget).attr("id")); */
 			let id = $(e.currentTarget).attr("id");
-			console.log(id);
-			
-			
-			
-			console.dir(id1);
-			id1.push(id);
-			console.log(id1);
-			
-			$.cookie("pno", id1);
-			console.log($.cookie("pno"));
-			/* console.log($(e.currentTarget).parent().parent().children());
-			console.log($(e.currentTarget).parent().parent().children()[0].innerText);
-			console.log($(e.currentTarget).parent().parent().children()[1].innerText);
-			console.log($(e.currentTarget).parent().parent().children()[2].innerText); */
-			
-			
+			let prepareOrderList = $.cookie("pno1")+","+$.cookie("pno2")+","+$.cookie("pno3")+","+$.cookie("pno4")
+			if ( prepareOrderList.indexOf(id) < 0 )	id1.push(id);
+			$.cookie("pno1", id1);
 		});
 	});
 </script>
 </head>
 <body>
-	<div class="container">
-		<table class="table">
+	<div class="container-fluid">
+		<table class="table table-striped">
 			<h2>'${searchPname }'(으)로 검색한 결과</h2>
 			<tr>
 				<th>대분류</th>
