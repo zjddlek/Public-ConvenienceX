@@ -22,11 +22,11 @@
 		<div>
 			<h2>ConvenienceX</h2>
 		</div>
-		<form action="mc" method="get">
+		<form action="mc?sno=${svo.sno }" method="get">
 			<div class="form-floating">
 				<input type="text" name="id" id="" placeholder="아이디" />
 				<input type="hidden" name="type" value="attendanceLoginOk"/>
-				<input type="hidden" name="sno" value="<%= request.getParameter("sno") %>" />
+				
 			</div>
 			<div class="form-floating">
 				<input type="password" name="pwd" id="" placeholder="패스워드" />
@@ -36,7 +36,7 @@
 				<a href="mc?type=main&sno=${svo.sno }"><input type="button" value="돌아가기" /></a>
 			</div>
 			<div>
-				<a href="mc?type=empAddOne">직원등록을 아직안하셨나요? 등록하러가기</a>
+				<a href="mc?type=empAddOne&sno=${svo.sno }">직원등록을 아직안하셨나요? 등록하러가기</a>
 			</div>
 		</form>
 	</div>

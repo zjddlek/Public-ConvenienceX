@@ -6,9 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cx.www.dao.CalDAO;
-import com.cx.www.dao.ShopDAO;
 import com.cx.www.vo.CalVO;
-import com.cx.www.vo.ShopVO;
 
 import cxcom.cx.www.action.Action;
 
@@ -18,11 +16,6 @@ public class CalLastCommand implements Action{
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String empno = req.getParameter("empno");
-		String sno = req.getParameter("sno");
-		ShopDAO sdao = new ShopDAO();
-		ShopVO svo = sdao.getOne(sno);
-		req.setAttribute("svo", svo);
-		sdao.close();
 		
 		CalDAO dao = new CalDAO();
 		ArrayList<CalVO> list = dao.getCashCal(empno);

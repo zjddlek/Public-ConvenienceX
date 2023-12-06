@@ -65,7 +65,7 @@ public class MainController extends HttpServlet{
 		
 		boolean isRedirect = false;
 		
-		// 로그인 - 은총
+		// 로그인 - 은총s
 		if (type == null) {
 			url = "login/login.jsp";
 		}

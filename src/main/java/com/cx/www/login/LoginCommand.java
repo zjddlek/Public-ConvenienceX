@@ -2,6 +2,7 @@ package com.cx.www.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.cx.www.dao.EmpDAO;
 import com.cx.www.dao.ShopDAO;
@@ -31,7 +32,8 @@ public class LoginCommand implements Action {
 			dao.close();
 			//System.out.println(vo.getSno());
 			
-			req.setAttribute("svo", svo);
+			HttpSession session = req.getSession();
+			session.setAttribute("svo", svo);
 			req.setAttribute("vo", vo);
 			return "main/main.jsp";
 		}
