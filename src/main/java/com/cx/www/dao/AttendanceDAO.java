@@ -86,7 +86,7 @@ public class AttendanceDAO {
 
 	public AttendanceVO attGetOne(String empno) {
 		sb.setLength(0);
-		sb.append("select * from ATTENDANCE where empno =? ");
+		sb.append("select * from ATTENDANCE where empno =? ORDER BY LENGTH(ATTNO) DESC, ATTNO DESC LIMIT 1");
 		AttendanceVO vo = null;
 
 		try {
@@ -117,8 +117,7 @@ public class AttendanceDAO {
 				int attnoSeq = Integer.parseInt(attno.substring(3));
 				attnoSeq++;
 				attno = "ATT" + attnoSeq;
-				// 출근 시간 퇴근시간 명제로 나눠서 로그인 하기
-				if(rs.getString("attend")!=null) {
+
 				sb.setLength(0);
 				sb.append("insert into ATTENDANCE(attno, attstart,empno) values (?,now(),?)");
 				pstmt = conn.prepareStatement(sb.toString());
@@ -127,21 +126,8 @@ public class AttendanceDAO {
 				pstmt.setString(2, vo.getEmpno());
 
 				pstmt.executeUpdate();
-			}
-		}else if(rs.getString("attend")==null) {
-			sb.setLength(0);
-			sb.append("update ATTENDANCE set attend=now() where empno=?");
 
-			try {
-				pstmt = conn.prepareStatement(sb.toString());
-				pstmt.setString(1, vo.getEmpno());
-
-				pstmt.executeUpdate();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

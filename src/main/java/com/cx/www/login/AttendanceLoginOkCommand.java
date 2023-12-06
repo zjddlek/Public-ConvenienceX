@@ -38,8 +38,8 @@ public class AttendanceLoginOkCommand implements Action {
 				req.setAttribute("list", list);
 				dao.close();
 				adao.close();
-				System.out.println("출근");
-				return "login/workMain.jsp";
+				//System.out.println("출근");
+				return "login/attendanceLoginOk.jsp";
 			} else {
 				System.out.println("회원이아님");
 				req.setAttribute("list", list);
