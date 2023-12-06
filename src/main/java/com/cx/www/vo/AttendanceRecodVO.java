@@ -13,4 +13,5 @@ public class AttendanceRecodVO {
 	String attstart;
 	String attend;
 	String empno;
+	String sno;
 }

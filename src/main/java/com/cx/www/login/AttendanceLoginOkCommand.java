@@ -18,13 +18,14 @@ public class AttendanceLoginOkCommand implements Action {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		String id = req.getParameter("id");
 		String pwd = req.getParameter("pwd");
+		String sno = req.getParameter("sno");
 
 		EmpDAO dao = new EmpDAO();
 		EmpVO vo = dao.getOneSM(id, pwd);
 		String empno = vo.getEmpno();
 		AttendanceDAO adao = new AttendanceDAO();
 		AttendanceVO avo2 = adao.attGetOne(empno);
-		ArrayList<AttendanceRecodVO> list = adao.getRecordAll();
+		ArrayList<AttendanceRecodVO> list = adao.getRecordAll(sno);
 		
 		if (vo.getId()==null) {
 			return "login/attendanceLogin.jsp";

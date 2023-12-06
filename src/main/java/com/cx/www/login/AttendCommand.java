@@ -15,11 +15,11 @@ public class AttendCommand implements Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		String empno = req.getParameter("empno");
-		
+		String sno = req.getParameter("sno");
 		
 		AttendanceDAO dao = new AttendanceDAO();
 		AttendanceVO vo = dao.attGetOne(empno);
-		ArrayList<AttendanceRecodVO> list = dao.getRecordAll();
+		ArrayList<AttendanceRecodVO> list = dao.getRecordAll(sno);
 		
 		dao.updateEnd(vo);
 		
