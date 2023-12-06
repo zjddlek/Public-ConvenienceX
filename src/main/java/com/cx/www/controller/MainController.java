@@ -26,6 +26,7 @@ import com.cx.www.login.AttendanceLoginOkCommand;
 import com.cx.www.login.CalLastCommand;
 import com.cx.www.login.EmpAddOneCommand;
 import com.cx.www.login.LoginCommand;
+import com.cx.www.login.SendEmailCommand;
 import com.cx.www.login.ShopResistCommand;
 import com.cx.www.login.ShopResistOkCommand;
 import com.cx.www.login.WorkMainCommand;
@@ -81,6 +82,10 @@ public class MainController extends HttpServlet{
 		}
 		else if(type.equals("shopResistOk")) {
 			Action ac = new ShopResistOkCommand();
+			url=ac.execute(req, resp);
+		}
+		else if(type.equals("sendEmail")) {
+			Action ac = new SendEmailCommand();
 			url=ac.execute(req, resp);
 		}
 		
