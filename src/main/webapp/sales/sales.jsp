@@ -124,6 +124,7 @@
 	// 전역변수
 	let salesNo = '';
 	let salesDate = '';
+	let sdate = '';
 	
 	const d = new Date();
 	
@@ -178,13 +179,10 @@
 				let dateList = data.trim().split(",");
 				
 				$.each(dateList, function(index, element){
-					salesDate = element.substr(0,12);
+					sdate = element.substr(0,12);
 					salesNo = element.substr(11);
 					
-					console.log("salesDate : " + salesDate);
-					
-//					$("#dateList").append("<div id='date' onclick='goList("+salesNo+");'>" + salesDate + "</div>");
-					$("#dateList").append("<div id='date' onclick='goList("+salesDate+");'>" + salesDate + "</div>");
+					$("#dateList").append("<div id='date' onclick='goList(' '" + sdate + " ')>" + sdate + "</div>");
 				});
 				
 				
@@ -193,12 +191,46 @@
 		});// ajax end
 		
 	} // datepicker_init end
+	
+	
+	// 날짜변경시 거래날짜 변경
+	$("#datepicker").change(function(){
+		var date = $("#datepicker").val();
+		
+		$.ajax({
+			url : "ajax/salesAjaxDate.jsp",
+			data : {
+					"salesdate" : date
+			},
+			success:function(data){
+				
+				let dateList = data.trim().split(",");
+					
+				// #dateList 초기화
+				$("#dateList *").remove();
+				
+				$.each(dateList, function(index, element){
+					sdate = element.substr(0,12);
+					sdate = sdate.trim();
+					console.log("sdate : " + sdate);
+					let msg = "<div id='date' onclick=goList('" + sdate + "')>" + sdate + "</div>";				
+					
+					console.log("msg: " + msg);
+					
+					//$("#dateList").append();
+					$("#dateList").append(msg);
+					
+				});
+			}
+			
+		});// ajax end
+		
+	}); // change 이벤트 end
 
 	
 	function goList(salesDate){
 		
-		console.log("salesDate> " + salesDate);
-		
+		console.log("goList : " + salesDate);
 		
 		$.ajax({
 			url : "ajax/salesAjaxList.jsp",
@@ -208,11 +240,11 @@
 			success:function(data){
 				console.log("data: "+data)
 				
-				/* let dateList = data.trim().split(",");
+				let dateList = data.trim().split(",");
 				
 				$.each(dateList, function(index, element){
 					$("#dateList").append("<div id='date' onclick='goList("+index+','+element+");'>" + element + "</div>");
-				}); */
+				});
 				
 				
 			}// success end
@@ -222,42 +254,6 @@
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/* $("#datepicker").change(function(){
-		var date = $("#datepicker").val();
-		
-		$.ajax({
-			url : "./mc",
-			data : {
-					type : "sales"
-			},
-			success:function(data){
-				
-				//console.log(data);
-				
-			}
-			
-		});// ajax end
-		
-	}); */
 
 	
 </script>

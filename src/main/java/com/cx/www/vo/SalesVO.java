@@ -12,6 +12,7 @@ public class SalesVO {
 	private String saleno;
 	private String salesdate;
 	private String stockno;
+	private String sdate;
 	
 	// SalesDetail
 	private int cnt;	
@@ -20,8 +21,17 @@ public class SalesVO {
 	private String isrefund;
 	private int pno_info;
 
+	// 전체 조회용
 	public SalesVO(String saleno, String salesdate) {
 		this.saleno = saleno;
 		this.salesdate = salesdate;
+	}
+
+	// 날짜 변경시 조회용
+	public SalesVO(String saleno, String salesdate, String sdate) {
+		this.saleno = saleno;
+		this.salesdate = salesdate;
+		this.sdate = sdate;
+		
 	}
 }

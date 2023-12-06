@@ -7,6 +7,8 @@
 <%
 //	String salesno = request.getParameter("salesno");
 	String salesDate = request.getParameter("salesDate");
+	System.out.println("salesDate: " +salesDate);
+	
 	
 	SalesDAO dao = new SalesDAO();
 	

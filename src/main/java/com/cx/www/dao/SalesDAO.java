@@ -27,21 +27,17 @@ public class SalesDAO{
 		System.out.println("conn : " + conn);
 	}
 	
-	// 전체조회 - 페이징처리 o
-	public ArrayList<SalesVO> getAll(int starNO, int endNO){
+	// 전체조회
+	public ArrayList<SalesVO> getAll(){
 		sb.setLength(0);
 		
 		sb.append(" select SALENO, SALEDATE ");
 		sb.append(" from SALES ");
 		sb.append(" GROUP BY SALEDATE ");
-		sb.append(" ORDER by SALEDATE desc LIMIT ? OFFSET ? ");
+		sb.append(" ORDER by SALEDATE desc LIMIT 7 OFFSET 1 ");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			
-			// 1번이 끝번호 2번이 시작번호 
-			pstmt.setInt(1, endNO);
-			pstmt.setInt(2, starNO);
 			
 			rs = pstmt.executeQuery();
 			
@@ -63,7 +59,48 @@ public class SalesDAO{
 		return list;
 	}
 	
-	// 거래번호로 검색하기
+	// 날짜 변경시 해당 날짜 포함한 7일전 날짜만 리스트에 보여줌 
+	public ArrayList<SalesVO> getDateList(String date){
+		
+		System.out.println("dao salesdate : " +date);
+		
+		sb.setLength(0);
+//		sb.append(" select SALENO, SALEDATE ");
+		sb.append(" select SALENO, substr(SALEDATE,1,10) as sdate, SALEDATE ");
+		sb.append(" from SALES ");
+		sb.append(" where SALEDATE < ? ");
+		sb.append(" GROUP BY SALEDATE ");
+		sb.append(" ORDER by SALEDATE desc LIMIT 7 OFFSET 1 ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, date+"%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String saleno = rs.getString("saleno");
+				String salesdate = rs.getString("SALEDATE");
+				String sdate = rs.getString("sdate");
+				
+				SalesVO vo = new SalesVO(saleno, salesdate, sdate);
+				
+				System.out.println("saleno: " + saleno);
+				System.out.println("salesdate : "+salesdate);
+				System.out.println("sdate : "+sdate);
+				
+				list.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	// 거래일자로 검색하기
 	public ArrayList<SalesVO> getSalesList(String salesdate){
 		
 		System.out.println("dao salesdate : " +salesdate);
@@ -96,7 +133,7 @@ public class SalesDAO{
 				int cnt = rs.getInt("cnt");
 				
 //				vo = new SalesVO(saleno, salesdate, null, dealno, pno_info, detailno, isrefund, cnt);
-				vo = new SalesVO(saleno, salesdate, stockno, dealno, pno_info, detailno, isrefund, cnt);
+				vo = new SalesVO(saleno, salesdate, stockno, null, dealno, pno_info, detailno, isrefund, cnt);
 				
 				System.out.println("dao vo : " + vo);
 				
