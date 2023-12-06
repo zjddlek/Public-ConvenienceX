@@ -16,6 +16,7 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script><%@taglib prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"%>
+
 </head>
 <body>
 	<div class="container">

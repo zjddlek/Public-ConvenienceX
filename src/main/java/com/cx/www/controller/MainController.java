@@ -28,6 +28,7 @@ import com.cx.www.login.EmpAddOneCommand;
 import com.cx.www.login.LoginCommand;
 import com.cx.www.login.ShopResistCommand;
 import com.cx.www.login.ShopResistOkCommand;
+import com.cx.www.login.WorkMainCommand;
 import com.cx.www.orders.AllProductListAction;
 import com.cx.www.orders.NewProductListAction;
 import com.cx.www.orders.OrdersAction;
@@ -101,6 +102,9 @@ public class MainController extends HttpServlet{
 		else if(type.equals("attend")) {
 			Action ac = new AttendCommand();
 			url=ac.execute(req, resp);
+		}else if(type.equals("workmain")) {
+			Action ac = new WorkMainCommand();
+			url = ac.execute(req, resp);
 		}
 		
 		// 정산

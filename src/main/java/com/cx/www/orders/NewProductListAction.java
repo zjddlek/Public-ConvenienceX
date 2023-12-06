@@ -1,4 +1,4 @@
-package cxcom.cx.www.action;
+package com.cx.www.orders;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cx.www.dao.AllProductDAO;
 import com.cx.www.vo.AllProductVO;
+
+import cxcom.cx.www.action.Action;
 
 public class NewProductListAction implements Action{
 
