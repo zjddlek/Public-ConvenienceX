@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cx.www.dao.AttendanceDAO;
 import com.cx.www.vo.AttendanceRecodVO;
 
-import cxcom.cx.www.action.Action;
+import com.cx.www.action.Action;
 
 public class WorkMainCommand implements Action {
 
