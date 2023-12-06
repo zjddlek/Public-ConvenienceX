@@ -13,6 +13,7 @@ import com.cx.www.dbconnection.DBConnection;
 import com.cx.www.vo.EmpVO;
 
 
+
 public class EmpDAO {
 
    EmpVO vo = null;
@@ -91,9 +92,11 @@ public class EmpDAO {
             String pwd = rs.getString("PASSWORD");
             String sno = rs.getString("sno");
             int jobno = rs.getInt("JOBNO");
+            String picture = rs.getString("picture");
+
 
             EmpVO vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire,
-                  sal_hour, id, pwd, sno, jobno);
+                  sal_hour, id, pwd, sno, jobno,picture);
             
    
             
@@ -143,8 +146,10 @@ public class EmpDAO {
                String pwd = rs.getString("PASSWORD");
                String sno = rs.getString("sno");
                int jobno = rs.getInt("jobno");
+               String picture = rs.getString("picture");
 
-               vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire, sal_hour, id, pwd, sno, jobno);
+
+               vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire, sal_hour, id, pwd, sno, jobno,picture);
             
                
             
@@ -193,8 +198,10 @@ public class EmpDAO {
 	               String pwd = rs.getString("PASSWORD");
 	               String sno = rs.getString("sno");
 	               int jobno = rs.getInt("jobno");
+	               String picture = rs.getString("picture");
+	               
 
-	               vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire, sal_hour, id, pwd, sno, jobno);
+	               vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire, sal_hour, id, pwd, sno, jobno,picture);
 	            
 	               
 	            
@@ -243,9 +250,10 @@ public class EmpDAO {
             int sal_hour = rs.getInt("sal_hour");
             String sno = rs.getString("sno");
             int jobno = rs.getInt("jobno");
+            String picture = rs.getString("picture");
 
             vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, giredate, is_retire, sal_hour,
-                  id, pwd, sno, jobno);
+                  id, pwd, sno, jobno,picture);
          }
       } catch (
 
@@ -296,9 +304,11 @@ public class EmpDAO {
             String pwd = rs.getString("PASSWORD");
             String sno = rs.getString("sno");
             int jobno = rs.getInt("JOBNO");
+            String picture = rs.getString("picture");
 
+            
             EmpVO vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire,
-                  sal_hour, id, pwd, sno, jobno);
+                  sal_hour, id, pwd, sno, jobno,picture);
             
             
             
@@ -337,6 +347,7 @@ public class EmpDAO {
          pstmt.setString(12, vo.getSno());
          pstmt.setInt(13, vo.getJobno());
          pstmt.setString(14, vo.getEmpno());
+         
 
          
          pstmt.executeUpdate();

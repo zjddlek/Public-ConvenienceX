@@ -14,6 +14,96 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+
+
+#root{
+margin: auto;
+width:800px;
+margin:auto;
+width:1500px;
+height:1000px;
+
+border:1px solid black;
+background-color: aqua;
+
+}
+
+#header{
+padding-top:20px;
+withd:100%;
+height:100px;
+text-align:center;
+
+border:1px solid black;
+background-color:green;
+}
+
+#leftpicture{
+width:50%;
+height:250px;
+float:left;
+border: 1px solid black;
+display: flex;
+justify-content: right;
+
+padding-top: 50px;
+padding-left: 300px;
+border:1px solid black;
+background-color:yellow;
+
+}
+
+#rightside{
+width:50%;
+height:250px;
+float:left;
+
+
+border:1px solid black;
+background-color:lime;
+
+
+
+}
+
+
+#middle{
+
+height:800px;
+padding-left: 250px;
+padding-top: 60px;
+
+border:1px solid black;
+background-color:silver;
+
+}
+
+
+#buttons{
+
+text-align:center;
+
+}
+
+#picturebox{
+width:60%;
+height:180px;
+
+border:1px solid black;
+background-color:silver;
+margin-right: 30px;
+
+}
+
+#searchPic{
+margin-left: 460px; 
+}
+
+
+
+
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -34,7 +124,7 @@
 			console.dir(data);
 			//document.getElementById("address").value= data.zonecode;
 			document.getElementById("address").value= data.roadAddress;
-			document.getElementById("address_detail").value= data.jibunAddress;
+			//document.getElementById("address_detail").value= data.jibunAddress;
 
 			}
 		}).open();
@@ -44,18 +134,29 @@
 </script>
 
 <body>
-	<div class="container">
+	<div class="container" id="root">
 		
+		
+		<div id="header" >
+			<h3>사원 등록</h3>
+		</div>
 
 		<form action="mc" method="get">
-		
-			<div class="col-md-4 offset-md-3">
-				<h3>사원 등록</h3>
+			
+			<div id="leftpicture">
+			
+				<div id="picturebox"/></div>
+				
+			<%-- <div class="col-md-4 offset-md-1 my-3">
+				<img src="${vo.picture }" alt=""  /></div> --%>
 			</div>
 			
 			
-			<div class="col-md-4 offset-md-2 row my-3">
-				<label for="username">이름</label>
+			
+			
+			<div id="rightside">
+			<div class="col-md-4 offset-md-1 row my-3">
+				<label for="username">사원명</label>
 				<input type="text" class="form-control" name="ename" >
 				<input type="hidden" name="type" value="registerOk" />
 			</div>
@@ -69,35 +170,57 @@
 			</div>
 			
 			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-4 offset-md-1 row my-3">
 				<label for="username">생년월일</label>
 				<input type="date" class="form-control" name="date"  />
             
 			</div>
 			
-			<div class="col-md-4 offset-md-2 row my-3">
-				<label for="username">아이디</label>
-				<input type="text" class="form-control" name="id"  /> 
-				
-			</div>
-			
-			<div class="col-md-4 offset-md-2 row my-3">
-				<label for="username">비밀번호</label>
-				<input type="password" class="form-control" name="pwd"  />
-			</div>
-			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-4 offset-md-1 row my-3">
 				<label for="username">전화번호</label>
 				<input type="text" class="form-control" name="phone"  />
 			</div>
 			
-			<div class="col-md-4 offset-md-2 row my-3">
+			
+			</div>
+
+			<input type="button" class="btn btn-success"  value="파일 검색" id="searchPic" />
+			
+			<div id="middle">		
+			
+			<div class="row">
+			
+			
+			<div class="col-md-3 offset-md-1 row my-1">
+				<label for="username">아이디</label>
+				<input type="text" class="form-control" name="id" id="idsearch" /> 
+				
+			</div>
+				
+				
+			<div class="col-md-3 offset-md-1">
+				<input type="button" value="중복확인" class="btn btn-success"/>
+			</div>
+			</div>
+			
+			<div class="col-md-3 offset-md-1 row my-3">
+				<label for="username">비밀번호</label>
+				<input type="password" class="form-control" name="pwd"  />
+			</div>
+						
+			
+			<div class="col-md-7 offset-md-1 row my-3">
+				<label for="username">이메일</label>
+				<input type="text" class="form-control" name="email"  />
+			</div>
+			
+			<div class="col-md-7 offset-md-1 row my-3">
 				<label for="username">주소</label>
 				<input type="text" class="form-control" name="address" id="address"/>
 				
 			</div >
 			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-7 offset-md-1 row my-3">
 				<label for="username">상세주소</label>
 				<input type="text" class="form-control" name="address_detail" id="address_detail" />
 			</div>
@@ -109,12 +232,7 @@
 			
 			
 			
-			<div class="col-md-4 offset-md-2 row my-3">
-				<label for="username">이메일</label>
-				<input type="text" class="form-control" name="email"  />
-			</div>
-			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-4 offset-md-1 row my-3">
 				<label for="username">입사일자</label>
 				<input type="date" class="form-control" name="hiredate"  />
 			</div>
@@ -123,8 +241,7 @@
 				<input type="hidden" class="form-control" name="sal_hour" value="10000"  />
 			</div>
 			
-			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-4 offset-md-1 row my-3">
 				<label for="username">구분</label>
 				<select name="jobno" id="jobno">
 					<option value="">---선택하세요---</option>
@@ -135,6 +252,15 @@
 					
 				</select>
 			</div>
+			</div>
+			
+		
+			
+			
+			<div id="buttons">
+			
+			
+			
 			
 				
 			
@@ -155,7 +281,7 @@
 			
 			</div>
 			
-			
+			</div>
 			
 		</form>
 		
