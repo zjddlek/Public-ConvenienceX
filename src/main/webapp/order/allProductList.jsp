@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신상품 리스트</title>
+<title>전체 상품 리스트</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -26,7 +26,7 @@
 			let id = $(e.currentTarget).attr("id");
 			let prepareOrderList = $.cookie("pno1")+","+$.cookie("pno2")+","+$.cookie("pno3")+","+$.cookie("pno4")
 			if ( prepareOrderList.indexOf(id) < 0 )	id1.push(id);
-			$.cookie("pno2", id1);
+			$.cookie("pno4", id1);
 		});
 	});
 </script>
@@ -64,25 +64,25 @@
 				<td colspan='2' style='text-align: end'>
 					<nav aria-label="Page navigation">
 						  <ul class="pagination justify-content-center">
-						    <li class="page-item"><a class="page-link" href="mc?type=newProducts&cp=1">첫 페이지로</a></li>
+						    <li class="page-item"><a class="page-link" href="mc?type=allProducts&cp=1">첫 페이지로</a></li>
 						  </ul>
 					</nav>
 				</td>
 				<td colspan='6' style='text-align: center'>
 					<nav aria-label="Page navigation">
 					  <ul class="pagination justify-content-center">
-					    <li class="page-item"><a class="page-link" href="mc?type=newProducts&cp=${currentPage -1 }">Previous</a></li>
+					    <li class="page-item"><a class="page-link" href="mc?type=allProducts&cp=${currentPage -1 }">Previous</a></li>
 					    <c:forEach var="i" begin="${startPage }" end="${endPage }" >
-					    <li class="page-item"><a class="page-link" href="mc?type=newProducts&cp=${i }">${i }</a></li>
+					    <li class="page-item"><a class="page-link" href="mc?type=allProducts&cp=${i }">${i }</a></li>
 						</c:forEach>
-					    <li class="page-item"><a class="page-link" href="mc?type=newProducts&cp=${currentPage +1 }">Next</a></li>
+					    <li class="page-item"><a class="page-link" href="mc?type=allProducts&cp=${currentPage +1 }">Next</a></li>
 					  </ul>
 					</nav>
 				</td>
 				<td colspan='2' >
 					<nav aria-label="Page navigation">
 						  <ul class="pagination justify-content-center">
-						    <li class="page-item"><a class="page-link" href="mc?type=newProducts&cp=${totalPage }">마지막 페이지로</a></li>
+						    <li class="page-item"><a class="page-link" href="mc?type=allProducts&cp=${totalPage }">마지막 페이지로</a></li>
 						  </ul>
 					</nav>
 				</td>

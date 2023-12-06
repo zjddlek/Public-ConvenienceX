@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,26 +15,28 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <body class="text-center">
 	<div class="container">
 		<div>
 			<h2>ConvenienceX</h2>
 		</div>
-		<form action="mc" method="post">
+		<form action="mc?sno=${svo.sno }" method="get">
 			<div class="form-floating">
 				<input type="text" name="id" id="" placeholder="아이디" />
 				<input type="hidden" name="type" value="attendanceLoginOk"/>
+				
 			</div>
 			<div class="form-floating">
 				<input type="password" name="pwd" id="" placeholder="패스워드" />
 			</div>
 			<div>
 				<input type="submit" value="로그인하기" />
-				<a href="mc?type=main"><input type="button" value="돌아가기" /></a>
+				<a href="mc?type=main&sno=${svo.sno }"><input type="button" value="돌아가기" /></a>
 			</div>
 			<div>
-				<a href="mc?type=empAddOne">직원등록을 아직안하셨나요? 등록하러가기</a>
+				<a href="mc?type=empAddOne&sno=${svo.sno }">직원등록을 아직안하셨나요? 등록하러가기</a>
 			</div>
 		</form>
 	</div>

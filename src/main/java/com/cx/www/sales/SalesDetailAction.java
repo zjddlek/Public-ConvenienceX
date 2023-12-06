@@ -12,7 +12,6 @@ public class SalesDetailAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		
 		/*
 		 * String salesdate = req.getParameter("date");
 		 * 

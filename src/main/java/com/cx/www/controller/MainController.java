@@ -9,11 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cx.www.action.Action;
 import com.cx.www.cal.CalMainAction;
 import com.cx.www.cal.TotalProfitAction;
 import com.cx.www.discard.DisposeAction;
 import com.cx.www.discard.disposeSearch;
+import com.cx.www.emp.DeleteAction;
+import com.cx.www.emp.DetailAction;
 import com.cx.www.emp.ListAction;
+import com.cx.www.emp.ModifyAction;
+import com.cx.www.emp.ModifyOkAction;
 import com.cx.www.emp.RegisterAction;
 import com.cx.www.emp.RegisterOkAction;
 import com.cx.www.login.AttendCommand;
@@ -22,14 +27,18 @@ import com.cx.www.login.AttendanceLoginOkCommand;
 import com.cx.www.login.CalLastCommand;
 import com.cx.www.login.EmpAddOneCommand;
 import com.cx.www.login.LoginCommand;
+import com.cx.www.login.SendEmailCommand;
 import com.cx.www.login.ShopResistCommand;
 import com.cx.www.login.ShopResistOkCommand;
+import com.cx.www.login.WorkMainCommand;
+import com.cx.www.orders.AllProductListAction;
+import com.cx.www.orders.NewProductListAction;
 import com.cx.www.orders.OrdersAction;
+import com.cx.www.orders.ProductRankingListAction;
+import com.cx.www.orders.SearchProductAction;
 import com.cx.www.sales.SalesAction;
 import com.cx.www.sales.SalesListAction;
 import com.cx.www.stock.StockListAction;
-
-import cxcom.cx.www.action.Action;
 
 
 @WebServlet("/mc")
@@ -77,6 +86,10 @@ public class MainController extends HttpServlet{
 			Action ac = new ShopResistOkCommand();
 			url=ac.execute(req, resp);
 		}
+		else if(type.equals("sendEmail")) {
+			Action ac = new SendEmailCommand();
+			url=ac.execute(req, resp);
+		}
 		
 		// 점장등록
 		else if(type.equals("empAddOne")) {
@@ -96,6 +109,9 @@ public class MainController extends HttpServlet{
 		else if(type.equals("attend")) {
 			Action ac = new AttendCommand();
 			url=ac.execute(req, resp);
+		}else if(type.equals("workmain")) {
+			Action ac = new WorkMainCommand();
+			url = ac.execute(req, resp);
 		}
 		
 		// 정산
@@ -105,7 +121,8 @@ public class MainController extends HttpServlet{
 		}
 		
 		// 폐기- 밝음
-		else if(type.equals("main")) { 
+
+		else if(type.equals("dismain")) { 
 			Action ac = new DisposeAction();
 			url = ac.execute(req, resp);
 		}
@@ -133,10 +150,42 @@ public class MainController extends HttpServlet{
 			Action ac = new RegisterOkAction();
 			url = ac.execute(req,resp);
 		}
+		else if(type.equals("detail")) {
+			Action ac = new DetailAction();
+	    	  url=ac.execute(req,resp);
+	    	  
+	    }
+		else if(type.equals("modify")) {
+			Action ac = new ModifyAction();
+	    	  url=ac.execute(req,resp);
+	    	  
+	    }
+		else if(type.equals("modifyOk")) {
+			Action ac = new ModifyOkAction();
+	    	  url=ac.execute(req,resp);	  
+	    	  
+	    }
+		else if(type.equals("delete")) {
+			Action ac = new DeleteAction();
+	    	  url=ac.execute(req,resp);	  
+	    }		
+		
 		
 		// 발주 - 석원
-		else if(type.equals("orders")) {
+		else if (type.equals("orders")) {
 			Action ac = new OrdersAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("allProducts")) {
+			Action ac = new AllProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("newProducts")) {
+			Action ac = new NewProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("productRank")) {
+			Action ac = new ProductRankingListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("searchProduct")) {
+			Action ac = new SearchProductAction();
 			url = ac.execute(req, resp);
 		}
 		
@@ -175,6 +224,23 @@ public class MainController extends HttpServlet{
 			
 		}
 		
+		else if (type.equals("orders")) {
+			Action ac = new OrdersAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("allProducts")) {
+			Action ac = new AllProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("newProducts")) {
+			Action ac = new NewProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("productRank")) {
+			Action ac = new ProductRankingListAction();
+			url = ac.execute(req, resp);
+		}
+		//메인페이지로
+		else if(type.equals("main")) {
+			url="main/main.jsp";
+		}
 		
 		// forward
 		if( isRedirect ) {

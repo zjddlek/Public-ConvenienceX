@@ -13,6 +13,7 @@ import com.cx.www.dbconnection.DBConnection;
 import com.cx.www.vo.EmpVO;
 
 
+
 public class EmpDAO {
 
    EmpVO vo = null;
@@ -26,7 +27,7 @@ public class EmpDAO {
 
       Context initCtx;
       conn = DBConnection.getConnection();
-      System.out.println("conn >>>> " + conn);
+     // System.out.println("conn >>>> " + conn);
 
    }
 
@@ -96,9 +97,11 @@ public class EmpDAO {
             String pwd = rs.getString("PASSWORD");
             String sno = rs.getString("sno");
             int jobno = rs.getInt("JOBNO");
+            String picture = rs.getString("picture");
+
 
             EmpVO vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire,
-                  sal_hour, id, pwd, sno, jobno);
+                  sal_hour, id, pwd, sno, jobno,picture);
             
    
             
@@ -148,8 +151,10 @@ public class EmpDAO {
                String pwd = rs.getString("PASSWORD");
                String sno = rs.getString("sno");
                int jobno = rs.getInt("jobno");
+               String picture = rs.getString("picture");
 
-               vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire, sal_hour, id, pwd, sno, jobno);
+
+               vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire, sal_hour, id, pwd, sno, jobno,picture);
             
                
             
@@ -166,8 +171,7 @@ public class EmpDAO {
 
    }
    
-   public EmpVO getOneByEmpno(String empno) { // 사원이름으로 정보검색
-
+   public EmpVO getOneByEmpno(String empno) { // 사원번호로 정보검색
 	      sb.setLength(0);
 	      sb.append("SELECT * FROM CXEMP WHERE empno=? ");
 	      try {
@@ -198,8 +202,10 @@ public class EmpDAO {
 	               String pwd = rs.getString("PASSWORD");
 	               String sno = rs.getString("sno");
 	               int jobno = rs.getInt("jobno");
+	               String picture = rs.getString("picture");
+	               
 
-	               vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire, sal_hour, id, pwd, sno, jobno);
+	               vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire, sal_hour, id, pwd, sno, jobno,picture);
 	            
 	               
 	            
@@ -215,9 +221,60 @@ public class EmpDAO {
 	      return vo;
 
 	   }
-	   
-	   // 점장로그인용
-	   public EmpVO getOne(String id, String pwd) { 
+   
+// 점장로그인용
+   public EmpVO getOneSM(String id, String pwd) { 
+
+      sb.setLength(0);
+      sb.append("SELECT * FROM CXEMP WHERE empno=? ");
+      try {
+         pstmt = conn.prepareStatement(sb.toString());
+         pstmt.setString(1, empno);
+
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+
+      try {
+
+         rs = pstmt.executeQuery();
+         
+      
+         while (rs.next()) {
+            String empno = rs.getString("empno");
+            String ename = rs.getString("ename");
+            String date = rs.getString("birthdate");
+            String phone = rs.getString("phone");
+            String address = rs.getString("address");
+            String address_detail = rs.getString("address_detail");
+            String email = rs.getString("email");
+            String giredate = rs.getString("hiredate");
+            String is_retire = rs.getString("isretire");
+            int sal_hour = rs.getInt("sal_hour");
+            String sno = rs.getString("sno");
+            int jobno = rs.getInt("jobno");
+            String picture = rs.getString("picture");
+
+            vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, giredate, is_retire, sal_hour,
+                  id, pwd, sno, jobno,picture);
+         }
+      } catch (
+
+      SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      
+      
+      return vo;
+
+
+   }
+   
+
+   // 점장로그인용
+   public EmpVO getOneSM(String id, String pwd) { 
 
 		sb.setLength(0);
 		sb.append("SELECT * FROM CXEMP WHERE ID=? AND PASSWORD=? ");
@@ -225,16 +282,16 @@ public class EmpDAO {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
-
+	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+	
 		try {
-
+	
 			rs = pstmt.executeQuery();
-
+	
 			while (rs.next()) {
 				String empno = rs.getString("empno");
 				String ename = rs.getString("ename");
@@ -248,19 +305,24 @@ public class EmpDAO {
 				int sal_hour = rs.getInt("sal_hour");
 				String sno = rs.getString("sno");
 				int jobno = rs.getInt("jobno");
-
+	
 				vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, giredate, is_retire, sal_hour,
 						id, pwd, sno, jobno);
 			}
 		} catch (
-
+	
 		SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return vo;
-
+	
 	}
+   
+   
+  
+   
+
 
 
    public  ArrayList<EmpVO> getAllByDate(String startDate, String endDate) { // 근무일자로 정보검색
@@ -300,9 +362,11 @@ public class EmpDAO {
             String pwd = rs.getString("PASSWORD");
             String sno = rs.getString("sno");
             int jobno = rs.getInt("JOBNO");
+            String picture = rs.getString("picture");
 
+            
             EmpVO vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire,
-                  sal_hour, id, pwd, sno, jobno);
+                  sal_hour, id, pwd, sno, jobno,picture);
             
             
             
@@ -320,27 +384,30 @@ public class EmpDAO {
 
    }
    
-   public void modifyOne(EmpVO vo) { // 사원정보 수정
+   public void modifyOne(EmpVO vo) { // 사원번호로 사원정보 수정
       sb.setLength(0);
-      sb.append("UPDATE CXEMP SET dname=?,loc=? WHERE deptno=?");
+      sb.append("UPDATE CXEMP SET ENAME=?, BIRTHDATE=?, PHONE=?, ADDRESS=?, ADDRESS_DETAIL=?, EMAIL=?, HIREDATE=?, ISRETIRE=?, SAL_HOUR=?, ID=?, PASSWORD=?, SNO=?, JOBNO=? WHERE EMPNO=? ");
 
       try {
          pstmt = conn.prepareStatement(sb.toString());
-         pstmt.setString(1, vo.getEmpno());
+
          pstmt.setString(1, vo.getEname());
          pstmt.setString(2, vo.getDate());
-         pstmt.setString(2, vo.getPhone());
-         pstmt.setString(2, vo.getAddress());
-         pstmt.setString(2, vo.getAddress_detail());
-         pstmt.setString(2, vo.getEmail());
-         pstmt.setString(2, vo.getHiredate());
-         pstmt.setString(2, vo.getIsretire());
-         pstmt.setInt(2, vo.getSal_hour());
-         pstmt.setString(2, vo.getId());
-         pstmt.setString(2, vo.getPwd());
-         pstmt.setString(2, vo.getSno());
-         pstmt.setInt(3, vo.getJobno());
+         pstmt.setString(3, vo.getPhone());
+         pstmt.setString(4, vo.getAddress());
+         pstmt.setString(5, vo.getAddress_detail());
+         pstmt.setString(6, vo.getEmail());
+         pstmt.setString(7, vo.getHiredate());
+         pstmt.setString(8, vo.getIsretire());
+         pstmt.setInt(9, vo.getSal_hour());
+         pstmt.setString(10, vo.getId());
+         pstmt.setString(11, vo.getPwd());
+         pstmt.setString(12, vo.getSno());
+         pstmt.setInt(13, vo.getJobno());
+         pstmt.setString(14, vo.getEmpno());
+         
 
+         
          pstmt.executeUpdate();
 
       } catch (SQLException e) {
@@ -350,13 +417,13 @@ public class EmpDAO {
 
    }
 
-   public void deleteOne(int empno) { // 사원정보 삭제
+   public void deleteOne(String empno) { // 사원정보 삭제
       sb.setLength(0);
-      sb.append("DELETE from CXEMP WHERE deptno=?");
+      sb.append("DELETE from CXEMP WHERE EMPNO=?");
 
       try {
          pstmt = conn.prepareStatement(sb.toString());
-         pstmt.setInt(1, empno);
+         pstmt.setString(1, empno);
 
          pstmt.executeUpdate();
 

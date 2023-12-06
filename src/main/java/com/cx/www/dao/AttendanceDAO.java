@@ -40,18 +40,20 @@ public class AttendanceDAO {
 		}
 		return list;
 	}
-	
-	public ArrayList<AttendanceRecodVO> getRecordAll() {
+
+	public ArrayList<AttendanceRecodVO> getRecordAll(String sno) {
 		sb.setLength(0);
-		sb.append("select CXEMP.ename, CXEMP.jobno, ATTENDANCE.attstart, ATTENDANCE.attend, CXEMP.empno from ATTENDANCE join CXEMP on ATTENDANCE.empno = CXEMP.empno ORDER BY ATTSTART DESC");
+		sb.append(
+				" SELECT C.JOBNO, C.ENAME, A.ATTSTART,A.ATTEND, C.EMPNO, C.SNO FROM SHOP S JOIN CXEMP C JOIN ATTENDANCE A WHERE S.SNO = C.SNO AND C.EMPNO = A.EMPNO AND C.SNO=? ORDER BY A.ATTSTART DESC");
 		ArrayList<AttendanceRecodVO> list = new ArrayList<AttendanceRecodVO>();
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, sno);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				AttendanceRecodVO vo = new AttendanceRecodVO(rs.getString("ename"), rs.getInt("jobno"),
-						rs.getString("attstart"), rs.getString("attend"), rs.getString("empno"));
+						rs.getString("attstart"), rs.getString("attend"), rs.getString("empno"), rs.getString("sno"));
 				list.add(vo);
 			}
 
@@ -84,7 +86,7 @@ public class AttendanceDAO {
 
 	public AttendanceVO attGetOne(String empno) {
 		sb.setLength(0);
-		sb.append("select * from ATTENDANCE where empno =? ");
+		sb.append("select * from ATTENDANCE where empno =? ORDER BY LENGTH(ATTNO) DESC, ATTNO DESC LIMIT 1");
 		AttendanceVO vo = null;
 
 		try {
@@ -93,7 +95,7 @@ public class AttendanceDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				vo = new AttendanceVO(rs.getString("attno"), rs.getString("attstart"), rs.getString("attend"), empno);
-				//System.out.println(vo);
+				// System.out.println(vo);
 			}
 
 		} catch (SQLException e) {
@@ -105,7 +107,7 @@ public class AttendanceDAO {
 
 	public void addOne(AttendanceVO vo) {
 		sb.setLength(0);
-		sb.append("SELECT ATTNO FROM ATTENDANCE ORDER BY LENGTH(ATTNO) DESC, ATTNO DESC LIMIT 1");
+		sb.append("SELECT ATTNO, ATTSTART, ATTEND FROM ATTENDANCE ORDER BY LENGTH(ATTNO) DESC, ATTNO DESC LIMIT 1");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -116,20 +118,20 @@ public class AttendanceDAO {
 				attnoSeq++;
 				attno = "ATT" + attnoSeq;
 
-			sb.setLength(0);
-			sb.append("insert into ATTENDANCE(attno, attstart,empno) values (?,now(),?)");
-			pstmt = conn.prepareStatement(sb.toString());
+				sb.setLength(0);
+				sb.append("insert into ATTENDANCE(attno, attstart,empno) values (?,now(),?)");
+				pstmt = conn.prepareStatement(sb.toString());
 
-			pstmt.setString(1, attno);
-			pstmt.setString(2, vo.getEmpno());
-			
-			pstmt.executeUpdate();
+				pstmt.setString(1, attno);
+				pstmt.setString(2, vo.getEmpno());
+
+				pstmt.executeUpdate();
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void deleteOne(String attno) {
@@ -184,11 +186,12 @@ public class AttendanceDAO {
 
 	public void updateEnd(AttendanceVO vo) {
 		sb.setLength(0);
-		sb.append("update ATTENDANCE set attend=now() where empno=?");
+		sb.append("update ATTENDANCE set attend=now() where empno=? and attno=?");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setString(1, vo.getEmpno());
+			pstmt.setString(2, vo.getAttno());
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

@@ -4,16 +4,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cx.www.action.Action;
+import com.cx.www.dao.EmpDAO;
 
-public class RegisterAction implements Action{
-
-
+public class DeleteAction implements Action {
+	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-
+		String b = req.getParameter("empno");
+		
+		EmpDAO dao = new EmpDAO();
+		dao.deleteOne(b);
+		
+		dao.close();
 		
 		
-		return "emp/register.jsp";
+		
+		return "mc?type=type";
 	}
 
 }
