@@ -25,8 +25,6 @@ public class DetailAction implements Action {
 			
 			HttpSession Session = req.getSession();
 			Session.setAttribute("vo", vo);
-			
-			
 		}
 		
 		return "emp/empDetail.jsp";

@@ -42,32 +42,21 @@
 		<form action="mc">
         
         	<div class="col-md-4 offset-md-3">
-			<h3>사원정보 수정</h3>
-				
+				<h3>사원정보 수정</h3>
 			</div>
-			
-			
 			<div class="col-md-4 offset-md-2 row my-3">
-				
 				<input type="text" class="form-control" name="empno" value="${vo.empno}">
-				 <input type="hidden" name="type" value="modifyOk"/>
-
+				<input type="hidden" name="type" value="modifyOk"/>
 			</div>
-			
-			
-			
+
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">이름</label>
 				<input type="text" class="form-control" name="ename" value="${vo.ename }" />
-            
-			</div>			
+			</div>
 			
-			
-				
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">생년월일</label>
 				<input type="date" class="form-control" name="date" value="${vo.date }" />
-            
 			</div>
 			
 			<div class="col-md-4 offset-md-2 row my-3">
@@ -99,9 +88,7 @@
 
 			<div class="col-md-6 offset-md-4">
 				<input type="button" value="주소검색" id="btn" class="btn btn-success"/>
-			</div>			
-			
-			
+			</div>
 			
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">이메일</label>
@@ -113,34 +100,26 @@
 				<input type="date" class="form-control" name="hiredate" value="${vo.hiredate }"  />
 			</div>
 			
-			
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">퇴사여부</label>
 				<select name="isretire" id="isretire" >
-				
 					<option value="N">재직중</option>
 					<option value="Y">퇴사</option>
-				</select>
-				
+				</select>	
 			</div>
-			
 			
 			<%-- <div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">시급</label>
 				<input type="text" class="form-control" name="sal_hour" value="${vo.sal_hour }"   />
 			</div> --%>
-            
-            
+
             <div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">구분</label>
 				<select name="jobno" id="jobno" >
-				
 					<option value="100">아르바이트</option>
 					<option value="200">사원</option>
 					<option value="300">매니저</option>
 					<option value="400">점장</option>
-					
-					
 				</select>
 			</div>
 			
@@ -151,18 +130,14 @@
 			<div class="col-md-4 offset-md-2 row my-3">
 				<input type="hidden" class="form-control" name="sno" value="${vo.sno }"/>
 			</div>
-            
           
  			<div class="col-md-4 offset-md-2 my-3">         
-          			<input type="submit" class="btn btn-primary" value="수정" />
-			<a href="mc?type=emp"><input type="button" class="btn btn-danger" value="취소" /></a>
-          			</div>
-         
-          
-      </form>
+          		<input type="submit" class="btn btn-primary" value="수정" />
+				<a href="mc?type=emp">
+					<input type="button" class="btn btn-danger" value="취소" />
+				</a>
+          	</div>
+    	</form>
 	</div>
-
-
-
 </body>
 </html>
