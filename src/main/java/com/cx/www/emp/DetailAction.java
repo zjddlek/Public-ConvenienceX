@@ -4,10 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.cx.www.action.Action;
 import com.cx.www.dao.EmpDAO;
 import com.cx.www.vo.EmpVO;
-
-import cxcom.cx.www.action.Action;
 
 public class DetailAction implements Action {
 	@Override
@@ -15,9 +14,6 @@ public class DetailAction implements Action {
 
 		String empno = req.getParameter("empno");
 		
-		
-		 System.out.println("empno:"+empno);
-		 
 		System.out.println("detailAction 실행중");
 		
 		if(empno!= null) {
@@ -25,9 +21,6 @@ public class DetailAction implements Action {
 			EmpVO vo = dao.getOneByEmpno(empno);
 			
 			req.setAttribute("vo", vo);
-			
-			System.out.println("vo:"+vo);
-			
 			dao.close();
 			
 			HttpSession Session = req.getSession();

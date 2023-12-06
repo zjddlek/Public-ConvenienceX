@@ -7,32 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.cx.www.dbconnection.DBConnection;
 import com.cx.www.vo.ShopVO;
 
 public class ShopDAO {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://xe.cf5cxgodlgfu.ap-northeast-2.rds.amazonaws.com:3306/xe";
-	String user = "scott";
-	String password = "tigertiger1";
-
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	private StringBuffer sb = new StringBuffer();
 
 	public ShopDAO() {
-		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, user, password);
-			System.out.println(conn);
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩실패");
-			e.printStackTrace();
-		} catch (SQLException e) {
-			System.out.println("DB 연결 실패");
-			e.printStackTrace();
-		}
+		conn = DBConnection.getConnection();
 	}
+
 	
 	public ArrayList<ShopVO> getAll(){
 		sb.setLength(0);

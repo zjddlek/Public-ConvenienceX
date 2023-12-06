@@ -23,13 +23,13 @@
 			<div>
 				<span>성명</span> 
 				<input type="text" name="name" id="name" />
-				<input type="hidden" name="type" value="emp" />
+				<input type="hidden" name="type" value="type" />
 			
 				<span>근무기간</span>
 				<input type="date" name="period" id="period" />- <input type="date" name="period2" id="period2" />
 			
-				<input type="submit" value="검색" class="btn btn-primary" />
-				<a href="mc?type=register"><input type="button" class="btn btn-primary" value="사원등록" /></a>
+				<input type="submit" value="검색" />
+				<a href="mc?type=register"><input type="button" value="사원등록" /></a>
 			</div>
 		</form>
 	</div>
@@ -47,7 +47,7 @@
 			<c:if test="${list != null }">
 				<c:forEach var="vo" items="${list}">
 				<tr>
-               		<td><a href="mc?type=detail&empno=${vo.empno }">${vo.empno }</a></td>
+					<td>${vo.empno }</td>
 					<td>${vo.ename }</td>
 					<td>${vo.phone }</td>
 					<td>${vo.address }</td>

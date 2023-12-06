@@ -3,16 +3,15 @@ package com.cx.www.emp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cx.www.action.Action;
 import com.cx.www.dao.EmpDAO;
 import com.cx.www.vo.EmpVO;
-
-import cxcom.cx.www.action.Action;
 
 public class RegisterOkAction implements Action{
 
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-		//String empno = req.getParameter("empno");
+		String empno = req.getParameter("empno");
 		String ename = req.getParameter("ename");
 		String date = req.getParameter("date");
 		String phone = req.getParameter("phone");
@@ -28,13 +27,12 @@ public class RegisterOkAction implements Action{
 		String jobno1 = req.getParameter("jobno");
 
 		int sal_hour = Integer.parseInt(sal_hour1);
-		int jobno = Integer.parseInt(jobno1);		
-		
-		
+		int jobno = Integer.parseInt(jobno1);
+
 		EmpDAO dao = new EmpDAO();
 		EmpVO vo = new EmpVO();
 
-		//vo.setEmpno(empno);
+		vo.setEmpno(empno);
 		vo.setEname(ename);
 		vo.setDate(date);
 		vo.setPhone(phone);
@@ -50,12 +48,10 @@ public class RegisterOkAction implements Action{
 		vo.setJobno(jobno);
 
 		dao.addOne(vo);
-		
-		System.out.println(vo);
 
 		dao.close();
 
-		return "mc?type=emp";
+		return "emp/register.jsp";
 	}
 	
 	

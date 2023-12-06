@@ -3,9 +3,8 @@ package com.cx.www.emp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cx.www.action.Action;
 import com.cx.www.dao.EmpDAO;
-
-import cxcom.cx.www.action.Action;
 
 public class DeleteAction implements Action {
 	@Override
@@ -20,7 +19,7 @@ public class DeleteAction implements Action {
 		
 		
 		
-		return "mc?type=emp";
+		return "mc?type=type";
 	}
 
 }
