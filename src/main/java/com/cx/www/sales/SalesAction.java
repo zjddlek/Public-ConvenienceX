@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cx.www.action.Action;
 import com.cx.www.dao.SalesDAO;
 import com.cx.www.vo.SalesVO;
-
-import cxcom.cx.www.action.Action;
 
 public class SalesAction implements Action {
 

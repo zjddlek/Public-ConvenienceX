@@ -3,10 +3,9 @@ package com.cx.www.login;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cx.www.action.Action;
 import com.cx.www.dao.ShopDAO;
 import com.cx.www.vo.ShopVO;
-
-import cxcom.cx.www.action.Action;
 
 public class ShopResistOkCommand implements Action{
 
