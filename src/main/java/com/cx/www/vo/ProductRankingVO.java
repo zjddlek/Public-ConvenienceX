@@ -26,7 +26,22 @@ ORDER BY SUM(R.CNT) DESC;*/
 @AllArgsConstructor
 @Builder
 public class ProductRankingVO {
-	String mcName, scName, accName, pName;
+	String mcName, scName, accName, pNo, pName;
 	int total, priceServer, priceConsumer;
 	String expirydate, regdate;
+	public ProductRankingVO(String mcName, String scName, String accName, String pName, int total, int priceServer,
+			int priceConsumer, String expirydate, String regdate) {
+		super();
+		this.mcName = mcName;
+		this.scName = scName;
+		this.accName = accName;
+		this.pName = pName;
+		this.total = total;
+		this.priceServer = priceServer;
+		this.priceConsumer = priceConsumer;
+		this.expirydate = expirydate;
+		this.regdate = regdate;
+	}
+	
+	
 }
