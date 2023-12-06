@@ -9,7 +9,8 @@ public class ShopResistCommand implements Action{
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
+
+		
 		return "login/shopregist.jsp";
 	}
 

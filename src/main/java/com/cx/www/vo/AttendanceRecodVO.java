@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AttendanceRecodVO {
-	String ename;
-	int jobno;
-	String attstart;
-	String attend;
-	String empno;
-	String sno;
+	private String ename;
+	private int jobno;
+	private String attstart;
+	private String attend;
+	private String empno;
+	private String sno;
 }

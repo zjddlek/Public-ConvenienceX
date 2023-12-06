@@ -9,7 +9,7 @@ public class EmpAddOneCommand implements Action{
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-
+		
 		return "login/testemp.jsp";
 	}
 	

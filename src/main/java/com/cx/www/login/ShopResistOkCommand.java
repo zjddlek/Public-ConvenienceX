@@ -21,8 +21,8 @@ public class ShopResistOkCommand implements Action{
 		dao.addOne(svo);
 		
 		dao.close();
-		req.setAttribute("svo", svo);
-		return "login/testemp.jsp";
+
+		return "login/login.jsp";
 	}
 
 }

@@ -21,7 +21,7 @@ public class DBConnection {
 			DataSource ds = (DataSource)ctx.lookup("mysql");
 			
 			conn = ds.getConnection();
-			System.out.println("DBConnection conn : " + conn);
+			//System.out.println("DBConnection conn : " + conn);
 			
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
