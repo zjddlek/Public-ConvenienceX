@@ -8,22 +8,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SalesVO {
+	// Sales
 	private String saleno;
 	private String salesdate;
 	private String stockno;
 	
-	//sales_detail
+	// SalesDetail
 	private int cnt;	
 	private int dealno;
 	private int detailno;
 	private String isrefund;
 	private int pno_info;
-	
 
-	// SALE_COUNT 오류 때문에 추가함
-	public SalesVO(String saleno, String salesdate, String stockno) {
+	public SalesVO(String saleno, String salesdate) {
 		this.saleno = saleno;
 		this.salesdate = salesdate;
-		this.stockno = stockno;
 	}
 }

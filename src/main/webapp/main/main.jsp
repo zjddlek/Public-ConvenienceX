@@ -19,6 +19,6 @@
 	<a href="mc?type=emp"><input type="button" value="인사관리" /></a>
 	<a href="mc?type=attendanceLogin"><input type="button" value="출퇴근" /></a>
 	<a href="mc?type=etc"><input type="button" value="부대비용관리 - 접속불가" /></a>
-
+	
 </body>
 </html>

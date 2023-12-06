@@ -1,13 +1,11 @@
-	package com.cx.www.dao;
+package com.cx.www.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.naming.Context;
-
 import com.cx.www.dbconnection.DBConnection;
 import com.cx.www.vo.SalesVO;
 
@@ -33,8 +31,10 @@ public class SalesDAO{
 	public ArrayList<SalesVO> getAll(int starNO, int endNO){
 		sb.setLength(0);
 		
-		sb.append(" select SALENO, SALEDATE, STOCKNO ");
-		sb.append(" from SALES ORDERS LIMIT ? OFFSET ? ");
+		sb.append(" select SALENO, SALEDATE ");
+		sb.append(" from SALES ");
+		sb.append(" GROUP BY SALEDATE ");
+		sb.append(" ORDER by SALEDATE desc LIMIT ? OFFSET ? ");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -48,11 +48,10 @@ public class SalesDAO{
 			while(rs.next()) {
 				String saleno = rs.getString("saleno");
 				String date = rs.getString("SALEDATE");
-				String stockno = rs.getString("stockno");
 				
 				String salesdate = date.substring(0, 10);
 				
-				SalesVO vo = new SalesVO(saleno, salesdate, stockno);
+				SalesVO vo = new SalesVO(saleno, salesdate);
 				
 				list.add(vo);
 			}
@@ -64,55 +63,46 @@ public class SalesDAO{
 		return list;
 	}
 	
-	// 거래일자로 검색하기
-	public ArrayList<SalesVO> getSalesList(String saleno, String salesdate){
+	// 거래번호로 검색하기
+	public ArrayList<SalesVO> getSalesList(String salesdate){
 		
-		//System.out.println("dao : " +saleno);
-		//System.out.println("dao : " +salesdate);
-		
-		//salesdate += "%";
-		
-		System.out.println("dao1 : " +salesdate);
+		System.out.println("dao salesdate : " +salesdate);
 		
 		sb.setLength(0);
-		sb.append(" select sd.DETAILNO, sd.SALENO, sd.PNO_INFO, sd.CNT, sd.ISREFUND, sd.DEALNO, s.SALEDATE ");
-		sb.append(" from SALES_DETAIL sd ");
-		sb.append(" RIGHT JOIN SALES s ");
-		sb.append(" ON sd.? = s.? ");
-		sb.append(" WHERE s.SALEDATE LIKE = ? ");
-		
-		/*
-  	    -- 거래일자로 검색하기 ( sql에서 검색은 됨... 여기서는 계속 에러뜸 )
-  	    SELECT * 
-		FROM SALES_DETAIL SD
-		RIGHT JOIN SALES S
-		ON SD.SALENO = S.SALENO
-		WHERE S.SALEDATE LIKE '2023-07%';
-		*/
-		
+		sb.append(" SELECT SD.DETAILNO, S.SALENO, SD.STOCKNO, S.SALEDATE, PA.PNAME, SD.CNT, SD.ISREFUND, SD.DEALNO ");
+		sb.append(" FROM SALES S ");
+		sb.append(" JOIN SALES_DETAIL SD ON S.SALENO = SD.SALENO ");
+		sb.append(" JOIN STOCK ST ON SD.STOCKNO = ST.STOCKNO ");
+		sb.append(" JOIN PRODUCT_INFO PI ON ST.PNO_INFO = PI.PNO_INFO ");
+		sb.append(" JOIN PRODUCT P ON PI.PNO = P.PNO ");
+		sb.append(" JOIN PRODUCT_ACCOUNT PA ON PA.PNO_ACCOUNT = P.PNO_ACCOUNT ");
+		sb.append(" WHERE S.SALEDATE LIKE ? ");
+
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			
-			pstmt.setString(1, saleno);
-			pstmt.setString(2, saleno);
-			pstmt.setString(3, salesdate);
+//			pstmt.setString(1, saleno+"%");
+			pstmt.setString(1, salesdate+"%");
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String stockno = rs.getString("stockno");
+				String saleno = rs.getString("saleno");
 				int dealno = rs.getInt("dealno");
+				//String salesdate = rs.getString("salesdate");
+				String stockno = rs.getString("stockno");
 				int pno_info = rs.getInt("PNO_INFO");
 				int detailno = rs.getInt("DETAILNO");
 				String isrefund = rs.getString("isrefund");
 				int cnt = rs.getInt("cnt");
 				
-				salesdate.substring(0,9);
-				System.out.println("subString : " + salesdate);
-				
+//				vo = new SalesVO(saleno, salesdate, null, dealno, pno_info, detailno, isrefund, cnt);
 				vo = new SalesVO(saleno, salesdate, stockno, dealno, pno_info, detailno, isrefund, cnt);
 				
+				System.out.println("dao vo : " + vo);
+				
 				list.add(vo);
+				
+				System.out.println("dao list : " + list);
 			}
 			
 		} catch (SQLException e) {
@@ -122,9 +112,8 @@ public class SalesDAO{
 		return list;
 	}
 	
-	//거래번호로 검색하기
-	public SalesVO getSalesDetail(String saleno){
-		SalesVO vo = null;
+	//거래일자로 검색하기
+	/*public SalesDetailVO getSalesDetail(String saleno){
 		
 		//salesdate += "%";
 		
@@ -147,7 +136,7 @@ public class SalesDAO{
 		join PRODUCT_ACCOUNT on PRODUCT_ACCOUNT.PNO_ACCOUNT = PRODUCT.PNO_ACCOUNT 
 		join ACCOUNTS on PRODUCT_ACCOUNT.ACCNO = ACCOUNTS.ACCNO
 		where SALES_DETAIL.SALENO = '23110501'; 
-		*/
+		* /
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -166,17 +155,16 @@ public class SalesDAO{
 				int cnt = rs.getInt("cnt");
 				String salesdate = rs.getString("salesdate");
 				
-				vo = new SalesVO(saleno, salesdate, stockno, dealno, pno_info, detailno, isrefund, cnt);
+				vo2 = new SalesDetailVO(dealno, pno_info, detailno, isrefund, cnt);
 				
-				list.add(vo);
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return vo;
-	}
+		return vo2;
+	} */
 	
 	
 	public void close() {
