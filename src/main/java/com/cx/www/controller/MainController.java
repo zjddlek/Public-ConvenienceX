@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cx.www.action.Action;
 import com.cx.www.cal.CalMainAction;
 import com.cx.www.cal.TotalProfitAction;
 import com.cx.www.discard.DisposeAction;
@@ -28,15 +29,15 @@ import com.cx.www.login.EmpAddOneCommand;
 import com.cx.www.login.LoginCommand;
 import com.cx.www.login.ShopResistCommand;
 import com.cx.www.login.ShopResistOkCommand;
+import com.cx.www.login.WorkMainCommand;
+import com.cx.www.orders.AllProductListAction;
+import com.cx.www.orders.NewProductListAction;
 import com.cx.www.orders.OrdersAction;
+import com.cx.www.orders.ProductRankingListAction;
+import com.cx.www.orders.SearchProductAction;
 import com.cx.www.sales.SalesAction;
 import com.cx.www.sales.SalesListAction;
 import com.cx.www.stock.StockListAction;
-
-import cxcom.cx.www.action.Action;
-import cxcom.cx.www.action.AllProductListAction;
-import cxcom.cx.www.action.NewProductListAction;
-import cxcom.cx.www.action.ProductRankingListAction;
 
 
 @WebServlet("/mc")
@@ -100,6 +101,9 @@ public class MainController extends HttpServlet{
 		else if(type.equals("attend")) {
 			Action ac = new AttendCommand();
 			url=ac.execute(req, resp);
+		}else if(type.equals("workmain")) {
+			Action ac = new WorkMainCommand();
+			url = ac.execute(req, resp);
 		}
 		
 		// 정산
@@ -155,16 +159,25 @@ public class MainController extends HttpServlet{
 	    }
 		else if(type.equals("delete")) {
 			Action ac = new DeleteAction();
-	    	  url=ac.execute(req,resp);
-	    	  
-	    }
-		
-		
+	    	  url=ac.execute(req,resp);	  
+	    }		
 		
 		
 		// 발주 - 석원
-		else if(type.equals("orders")) {
+		else if (type.equals("orders")) {
 			Action ac = new OrdersAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("allProducts")) {
+			Action ac = new AllProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("newProducts")) {
+			Action ac = new NewProductListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("productRank")) {
+			Action ac = new ProductRankingListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("searchProduct")) {
+			Action ac = new SearchProductAction();
 			url = ac.execute(req, resp);
 		}
 		

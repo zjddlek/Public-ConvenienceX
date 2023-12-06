@@ -1,10 +1,11 @@
-package cxcom.cx.www.action;
+package com.cx.www.orders;
 
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cx.www.action.Action;
 import com.cx.www.dao.AllProductDAO;
 import com.cx.www.dao.ProductRankingDAO;
 import com.cx.www.vo.AllProductVO;
@@ -19,14 +20,7 @@ public class ProductRankingListAction implements Action{
 		
 		int totalCount = dao.getTotalCount();
 		int recordPerPage = 20;
-		int totalPage = 1;
-		if ( totalCount >= recordPerPage ) {
-			if ( totalCount % recordPerPage == 0 ) {
-				totalPage = totalCount / recordPerPage;
-			} else {
-				totalPage = totalCount / recordPerPage + 1;
-			}
-		} else { totalPage = 1; }
+		int totalPage = totalCount % recordPerPage == 0 ? totalCount / recordPerPage : totalCount / recordPerPage + 1;
 		int currentPage = 0;
 		String cp = req.getParameter("cp");
 		currentPage = cp != null ? Integer.parseInt(cp) : 1;

@@ -22,14 +22,14 @@
 			<h2>사원정보 조회</h2>
 			<div>
 				<span>성명</span> 
-				<input type="text" name="name" id="name" class="form-control"/>
+				<input type="text" name="name" id="name" />
 				<input type="hidden" name="type" value="emp" />
 			
 				<span>근무기간</span>
 				<input type="date" name="period" id="period" />- <input type="date" name="period2" id="period2" />
 			
-				<input type="submit" value="검색" />
-				<a href="mc?type=register"><input type="button" value="사원등록" /></a>
+				<input type="submit" value="검색" class="btn btn-primary" />
+				<a href="mc?type=register"><input type="button" class="btn btn-primary" value="사원등록" /></a>
 			</div>
 		</form>
 	</div>
