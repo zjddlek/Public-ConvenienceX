@@ -42,6 +42,32 @@ public class ShopDAO {
 		return list;
 	}
 	
+	public int snameCount(String sname) {
+		sb.setLength(0);
+		sb.append("SELECT COUNT(*) FROM SHOP WHERE SNAME = ? ");
+		int count = -1;
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, sname);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				count = rs.getInt("COUNT(*)");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return count;
+	}
+	
+	
+	
+	
+	
+	
 	public ShopVO getOne(String sno) {
 		sb.setLength(0);
 		sb.append("select * from SHOP where sno =? ");

@@ -15,27 +15,67 @@
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 	crossorigin="anonymous"></script>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	
+	<style>
+		/* .row{
+			margin:0 auto;
+		} */
+	
+	</style>
+
 </head>
-<body class="text-center">
-	<div class="container">
-		<div>
-			<h2>ConvenienceX</h2>
-		</div>
-		<form action="mc" method="post">
-			<div class="form-floating">
-				<input type="text" name="id" id="" placeholder="아이디" />
-				<input type="hidden" name="type" value="login"/>
+<body>
+	<section class="ftco-section" >
+		<div class="container">
+			<div class="row d-flex justify-content-center ">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section" >ConvenienceX</h2>
+				</div>
 			</div>
-			<div class="form-floating">
-				<input type="password" name="pwd" id="" placeholder="패스워드" />
-			</div>
-			<div>
-				<input type="submit" value="로그인하기" />
-			</div>
-			<div>
-				<a href="mc?type=shopResist">점포등록하러가기</a>
-			</div>
-		</form>
-	</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-7 col-lg-5">
+					<div class="wrap">
+						<div class ="img" style='background-color: red' >이미지들어갈자리<!-- 추후 background-img: url(jpg)로 변경 -->	
+						</div>
+						<div class="login-wrap p-4 p-md-5" >
+							<div class="d-flex">
+								<div class="w-100">
+									<h3>Sign In</h3>
+								</div>
+								<div class="w-100">
+									<h5>Create Tomorrow's Smile Together</h5>
+								</div>
+							</div>
+							<form action="mc" method="post" class="signin-form" >
+								<div class="form-floating mb-3">
+									<input type="text" name="id" id="id" class="form-control" placeholder="UserID"  required />
+									<input type="hidden" name="type" value="login"/>
+									<label for="id" class="form-control-placeholder" >UserID</label>
+								</div>
+								<div class="form-floating mb-3" >
+									<input type="password" name="pwd" id="pwd" class="form-control" placeholder="PASSWORD" required />
+									<label for="pwd" class="form-control-placeholder" >PASSWORD</label>
+								</div>
+									<div class="form-group">
+										<input type="submit" value="로그인하기" class="form-control btn btn-primary rounded sumbit px-3" />
+									</div>
+								<div class="form-group d-md-flex">
+									<div class="w-50 text-left p-3"  >
+										<a href="mc?type=shopResist">점포등록하러가기</a>
+									</div>
+									<div class="w-50 text-md-right p-3" >
+										<a href="#">비밀번호를 잊으셨나요?</a>
+									</div>
+								</div>			
+							</form>
+						</div>
+					</div>
+				</div> <!--col-md-7 col-lg-5  -->
+			</div><!-- row jusify-content-center -->
+		</div> <!--container  -->
+	</section>
+	
+	
 </body>
 </html>
