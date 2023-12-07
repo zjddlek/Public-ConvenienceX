@@ -19,7 +19,12 @@ public class SalesVO {
 	private int dealno;
 	private int detailno;
 	private String isrefund;
-	private int pno_info;
+	
+	// 추가
+	private String pname;
+	private int price_consumer;
+	private int cost;
+	
 
 	// 전체 조회용
 	public SalesVO(String saleno, String salesdate) {

@@ -1,23 +1,18 @@
-<%@page import="org.json.simple.JSONArray"%>
-<%@page import="com.cx.www.vo.AllProductVO"%>
-<%@page import="com.cx.www.vo.SalesVO"%>
+<%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cx.www.dao.SalesDAO"%>
-<%@page import="org.json.simple.JSONObject"%>
+<%@page import="com.cx.www.vo.SalesVO"%>
+<%@page import="org.json.simple.JSONArray"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%
 
-	String salesDate = request.getParameter("salesDate");
+	String salesno = request.getParameter("salesno");
 	
 	JSONArray saleArray = new JSONArray();
 	SalesDAO dao = new SalesDAO();
-	
-	
-	ArrayList<SalesVO> list = dao.getSalesList(salesDate);
-	
-	System.out.println(list);
+	ArrayList<SalesVO> list = dao.getDetailList(salesno);
 	
 	for(SalesVO vo : list){
 		
@@ -38,9 +33,8 @@
 	
 	// 출력
 	out.println(saleArray.toJSONString());
-
 	
 	// 사용하면 꼭 닫아주기!
-	dao.close();
+	dao.close();	
 
 %>

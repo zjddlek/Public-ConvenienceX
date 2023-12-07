@@ -20,11 +20,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
-<style>
-	.container{
-		padding-top: 30px;	
-	}
-	
+<style>	
 	h2{
 		text-align: center;
 		font-weight:bold;
@@ -39,18 +35,50 @@
 		text-decoration: underline;
 	}
 	
+	#select_date{
+		padding-bottom: 20px;
+		font-weight: bold;
+	}
+	
 	.ui-datepicker-trigger{
 		padding-left: 15px;
 	}
 	
-	#date{
+	#date, #saleNo{
 		cursor : pointer;
+	}
+	
+	.index{
+		border : 1px solid black;
+		margin-right: 10px;
+		height : 400px;
+	}
+	
+	#history{
+		overflow-y : scroll;
+		overflow-x : hidden; 
+		height : 247px;
+	}
+	
+	#listHead{
+		padding-bottom: 10px; 
+		font-family:Gulim; 
+		font-weight: bold;
+		font-size: 15px; 
+	}
+	
+	#salesDate{
+		width : 200px;
+	}
+	
+	.sale_list{
+		margin-left: 10px;
 	}
 	
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container min-vw-75 justify-content-center" style="border:1px solid red; margin-top:30px; padding-bottom: 20px;">
 		<h2>판매내역</h3>
 		<div>
 			<div class="picker">
@@ -59,82 +87,40 @@
 		        </div>
 			</div>
 			
-			<div class="row">
-				<div class="col-md-2" style="border:1px solid black;">
-					<h3>거래날짜</h3>
-					<div id="dateList">
-						<%-- <c:forEach var="vo" items="${list }" varStatus="index">
-							<div id="date_list_${index.index}" style="cursor : pointer;">
-								${vo.salesdate }
-							</div>
-						</c:forEach> --%>
-					
-					<%-- 
-						<c:forEach var="vo" items="${list }">
-							<div id="date_list">
-								<a style="text-decoration: none;" href="mc?type=sales_list&no=${vo.saleno }&date=${vo.salesdate}"> ${vo.salesdate } </a>
-							</div>
-						</c:forEach> --%>
+			<div style="display: flex;">
+			
+				<div class="index" style="width:140px;">
+					<div class="sale_list">
+						<h3 style="width:150px;">거래일자</h3>
+						<div id="dateList" style="margin-left:10px;"></div>
 					</div>
 				</div>
 				
-				<div class="col-md-6" style="border:1px solid black;">
-					<h3>판매일자</h3>
-					<div>${salesdate}</div>
-					<div id="sales_list">
-						<c:forEach var="vo" items="${s_list }" varStatus="count">
-							<div>
-								<a href="mc?type=sales_detail&no=${vo.saleno }&date=${vo.salesdate}"> ${vo.salesdate } </a>
-							</div>
-						</c:forEach>
+				<div class="index" style=" width:50%">
+					<div class="sale_list">
+						<h3>판매일자</h3>
+						<div id="select_date"></div>
+						<div id="sales_list" style="display: none;"></div>
 					</div>
 				</div>
-				<div class="col-md-4" style="border:1px solid black;">
-					<h3>상세내역</h3>
-					<div id="detail"></div>
+				
+				<div class="index" style="width:50%">
+					<div class="sale_list">
+						<h3 id="select_no" style="font-weight: bold; margin-bottom: 15px;"></h3>
+						<div id="detail_list" style="display: none;"></div>
+					</div>
 				</div>
+				
 			</div>
-			
-			<%-- 페이징 --%>
-			<%-- <div>
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">	
-						<li class="page-item">
-							<a class="page-link" href="#">Previous</a>
-						</li>
-						
-						<c:forEach var="i" begin="${startPage}" end="${endPage}">
-							<li class="page-item">
-								<a class="page-link" href="mc?type=sales&cp=${i}">${i}</a>
-							</li>
-						</c:forEach>		
-										        
-						<li class="page-item">
-							<a class="page-link" href="#">Next</a>
-						</li>
-					</ul>
-				</nav>					
-			</div> --%>
 		</div>
 	</div>
 </body>
 </html>
 <script type="text/javascript">
 	
-	// 전역변수
-	let salesNo = '';
-	let salesDate = '';
-	let sdate = '';
-	
-	const d = new Date();
-	
-	//오늘의 년, 월, 일 데이터
-	const day = d.getDate();
-	const month = d.getMonth();
-	const year = d.getFullYear();
-	
 	$(function(){
-	    //모든 datepicker에 대한 공통 옵션 설정
+		
+	    // datepicker에 대한 공통 옵션 설정
 	    $.datepicker.setDefaults({
 	        dateFormat: 'yy-mm-dd' //Input Display Format 변경
 	        ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
@@ -151,46 +137,42 @@
 	        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
 	        ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
 	        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
-	        ,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-	        ,maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                    
+	        ,minDate: "-1Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+	        ,maxDate: "0" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)      
 	    });
 	  	//input을 datepicker로 선언
 	    $("#datepicker").datepicker();                    
-	    $("#datepicker2").datepicker();
 	    
-	    //From의 초기값을 오늘 날짜로 설정
+	    //초기값을 오늘 날짜로 설정
 	    $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-	    //To의 초기값을 내일로 설정
-	    $('#datepicker2').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 	    
 	    datepicker_init();
 	
 	}); //ready end
 
-	//일주일 전 구하기
-	//var week_ago = new Date(new Date().setDate(day - 7)).toLocaleDateString();
 	
+	// 날짜리스트 
 	function datepicker_init(){
+		var date = $("#datepicker").val();
 		
 		$.ajax({
 			url : "ajax/salesAjaxDate.jsp",
+			data : {
+				"salesdate" : date
+			},
 			success:function(data){
 				
-				let dateList = data.trim().split(",");
+				let obj = JSON.parse(data);
 				
-				$.each(dateList, function(index, element){
-					sdate = element.substr(0,12);
-					salesNo = element.substr(11);
+				$.each(obj, function(i, e){
 					
-					$("#dateList").append("<div id='date' onclick='goList(' '" + sdate + " ')>" + sdate + "</div>");
+					let msg = "<div class='date' id='date' onclick=goList(this,'" + e.sdate + "')>" + e.sdate + "</div>";				
+					
+					$("#dateList").append(msg);
 				});
-				
-				
 			}// success end
-			
 		});// ajax end
-		
-	} // datepicker_init end
+	} // function end
 	
 	
 	// 날짜변경시 거래날짜 변경
@@ -203,34 +185,33 @@
 					"salesdate" : date
 			},
 			success:function(data){
-				
-				let dateList = data.trim().split(",");
 					
 				// #dateList 초기화
 				$("#dateList *").remove();
 				
-				$.each(dateList, function(index, element){
-					sdate = element.substr(0,12);
-					sdate = sdate.trim();
-					console.log("sdate : " + sdate);
-					let msg = "<div id='date' onclick=goList('" + sdate + "')>" + sdate + "</div>";				
+				let obj = JSON.parse(data);
+				
+				$.each(obj, function(i, e){
 					
-					console.log("msg: " + msg);
-					
-					//$("#dateList").append();
+					let msg = "<div class='date' id='date' onclick=goList(this,'" + e.sdate + "')>" + e.sdate + "</div>";
 					$("#dateList").append(msg);
-					
 				});
 			}
-			
 		});// ajax end
-		
 	}); // change 이벤트 end
-
 	
-	function goList(salesDate){
+	
+	// 일자별 리스트
+	function goList(obj, salesDate){
 		
-		console.log("goList : " + salesDate);
+		// 선택안된 거래일자 굵기 기본
+		$(".date").css("font-weight","normal");
+
+		// 선택된 거래일자 굵기 변경
+		$(obj).css("font-weight", "bold");
+		
+		// 판매리스트 보여주기
+		$("#sales_list").show();
 		
 		$.ajax({
 			url : "ajax/salesAjaxList.jsp",
@@ -240,11 +221,125 @@
 			success:function(data){
 				console.log("data: "+data)
 				
-				let dateList = data.trim().split(",");
+				$("#select_date").text(salesDate);
 				
-				$.each(dateList, function(index, element){
-					$("#dateList").append("<div id='date' onclick='goList("+index+','+element+");'>" + element + "</div>");
+				let obj = JSON.parse(data);
+				
+				// 판매리스트 초기화
+				$("#sales_list *").remove();
+				
+				let div = "";
+				
+				div += "<div class='row' id='listHead'>";
+				div += "	<div class='col-sm-2'>거래번호</div>";
+				div += "	<div class='col-sm-3'>거래날짜</div>";
+				div += "	<div class='col-sm-2' style='margin-left:75px;'>가격</div>";
+				div += "	<div class='col-sm-2'>결제수단</div>";
+				div += "</div>";
+				div += "<div id='history'>"; 
+				$.each(obj, function(i, e){
+
+					div += "<div class='row' id='listBody'>";
+					div += " 		<div class='col-sm-2' id='saleNo' onclick=goDetail(this,'" + salesDate +"/" +e.saleno + "')>"+e.saleno+"</div>";
+					div += "		<div class='col-sm-2' id='salesDate' >"+e.date+"</div>";
+					div += "		<div class='col-sm-2' id='saleCost' style='margin-left: 20px;'>"+e.cost+"</div>";
+					
+					if(e.dealno == 1){
+						div += "	<div class='col-sm-2' id='deal'style='margin-left: 20px;'>카드</div>";	
+					}
+					else if(e.dealno == 2){
+						div += "	<div class='col-sm-2' id='deal'style='margin-left: 20px;'>현금</div>";
+					}
+					else{
+						div += "	<div class='col-sm-2' id='deal' style='margin-left: 20px;'>상품권</div>";
+					}
+					
+					div += "</div>";
+				});				
+				div += "</ div>";
+				
+				$('#sales_list').append(div);
+			}// success end
+		});// ajax end
+	}
+	
+	// 상세
+	function goDetail(e, saleno){
+		
+		console.log("saleno : " + saleno);
+		
+		let sdate = saleno.substr(0,10);
+		let num = saleno.substr(11);
+		
+		// 선택안된 거래번호 굵기 기본
+		$("#saleNo").css("font-weight","normal");
+
+		// 선택된 거래번호 굵기 변경
+		$(e).css("font-weight", "bold");
+		
+		// 판매리스트 보여주기
+		$("#detail_list").show();
+		
+		$.ajax({
+			url : "ajax/salesAjaxDetail.jsp",
+			data : {
+				"salesno" : num
+			},
+			success:function(data){
+				console.log("detail data: "+data)
+				
+				$("#select_no").text(num);
+				
+				let obj = JSON.parse(data);
+				
+				// 판매리스트 초기화
+				$("#detail_list *").remove();
+				
+				let div = "";
+				
+				div += "<div class='row'>";
+				div += "	<div>거래날짜</div>";
+				div += "	<div id='salesDate' styel='margin-bottom : 10px;'>"+sdate+"</div>";
+				div += "</div>";
+				
+				div += "<br/>"
+				
+				div += "<div class='row'>";
+				div += "	<div class='col-sm-3'>상품명</div>";
+				div += "	<div class='col-sm-2' style='margin-left: 75px;'>판매수량</div>";
+				div += "	<div class='col-sm-2'>가격</div>";
+				div += "</div>";
+				
+				div += "<div calss='row'>";
+				div += "	<div class='col-sm-2'>결제수단</div>";
+				div += "</div>";
+				
+				//div += "<div id='history'>"; 
+				$.each(obj, function(i, e){
+					
+					div += "<div class='row'>";
+					div += "	<div class='col-sm-2' id='saleCost' style='margin-left: 20px;'>"+e.pname+"</div>";
+					div += "	<div class='col-sm-2' id='saleCost' style='margin-left: 20px;'>"+e.cnt+"</div>";
+					div += "	<div class='col-sm-2' id='saleCost' style='margin-left: 20px;'>"+e.cost+"</div>";
+								
+					/* div += "		<div class='col-sm-2' id='saleCost' style='margin-left: 20px;'>"+e.cost+"</div>";
+					
+					if(e.dealno == 1){
+						div += "		<div class='col-sm-2' id='deal'style='margin-left: 20px;'>카드</div>";	
+					}
+					else if(e.dealno == 2){
+						div += "		<div class='col-sm-2' id='deal'style='margin-left: 20px;'>현금</div>";
+					}
+					else{
+						div += "		<div class='col-sm-2' id='deal' style='margin-left: 20px;'>상품권</div>";
+					} */
+					
+					div += "</div>";
+					
 				});
+				
+				
+				$('#detail_list').append(div);
 				
 				
 			}// success end
@@ -252,7 +347,6 @@
 		});// ajax end
 		
 	}
-	
 	
 
 	

@@ -3,54 +3,37 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page import="javax.servlet.http.HttpServletRequest" %> 
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
-
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.json.simple.JSONArray"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	SalesDAO dao = new SalesDAO();
-
+	
 	String date = request.getParameter("salesdate");
 	System.out.println("salesdate_action : " + date);
 	
-	if ( date == null  ) {
+	
+	JSONArray saleArray = new JSONArray();	
+	ArrayList<SalesVO> list = dao.getDateList(date);
+	
+	System.out.println("list : " + list);
+	
+	for(SalesVO vo : list){
+		JSONObject saleObject = new JSONObject();
 		
-		ArrayList<SalesVO> list = dao.getAll();
+		saleObject.put("saleno",vo.getSaleno());
+		saleObject.put("getSalesdate",vo.getSalesdate());
+		saleObject.put("sdate",vo.getSdate());
 		
-		for(int i = 0; i < list.size(); i++){
-			out.println(list.get(i).getSalesdate());
-			out.println(list.get(i).getSaleno());
-			
-			if(i != list.size()-1){
-				out.println(",");	
-			}
-		}
 		
-		// 사용하면 꼭 닫아주기!
-		dao.close();
-	}
-	else if ( date != null  ){
-		ArrayList<SalesVO> list = dao.getDateList(date);
-		
-		for(int i = 0; i < list.size(); i++){
-			out.println(list.get(i).getSdate());
-			out.println(list.get(i).getSaleno());
-			out.println(list.get(i).getSalesdate());
-			
-			if(i != list.size()-1){
-				out.println(",");	
-			}
-		}
-		
-		// 사용하면 꼭 닫아주기!
-		dao.close();
+		saleArray.add(saleObject);
 	}
 	
-	// 넘겨줄 값이 있어서 요청객체에 담기
-	/* request.setAttribute("list", list);
+	// 출력
+	out.println(saleArray.toJSONString());
 	
-	System.out.println("Action: " +list);
-	
-	request.setAttribute("startPage", startPage);
-	request.setAttribute("endPage" ,endPage);
-	 */
+	// 사용하면 꼭 닫아주기!
+	dao.close();
+
 %>
