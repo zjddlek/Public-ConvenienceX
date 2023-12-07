@@ -1,39 +1,59 @@
 package com.cx.www.emp;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cx.www.action.Action;
 import com.cx.www.dao.EmpDAO;
 import com.cx.www.vo.EmpVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class ModifyOkAction implements Action {
+@WebServlet("/modifyController")
 
-	public String execute(HttpServletRequest req, HttpServletResponse resp) {
+public class ModifyOkAction extends HttpServlet {
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-		String b= req.getParameter("empno");
 		
+		String saveDir = req.getRealPath("/upload");
+		int maxFileSize = 1024*1024*30;
+
+		MultipartRequest mr=
+				new MultipartRequest(req,saveDir,
+						maxFileSize,"UTF-8", new DefaultFileRenamePolicy());
+		
+		String b= mr.getParameter("empno");
 		System.out.println("b:"+b);
-		
 		
 		if(b !=null) {
 
-			String empno = req.getParameter("empno");
-			String ename = req.getParameter("ename");
-			String date = req.getParameter("date");
-			String phone = req.getParameter("phone");
-			String address = req.getParameter("address");
-			String address_detail = req.getParameter("address_detail");
-			String email = req.getParameter("email");
-			String hiredate = req.getParameter("hiredate");
-			String isretire = req.getParameter("isretire");
-			String sal_hour1 = req.getParameter("sal_hour");
-			String id = req.getParameter("id");
-			String pwd = req.getParameter("pwd");
-			String sno = req.getParameter("sno");
-			String jobno1 = req.getParameter("jobno");
-		    
+			String empno = mr.getParameter("empno");
+			String ename = mr.getParameter("ename");
+			String date = mr.getParameter("date");
+			String phone = mr.getParameter("phone");
+			String address = mr.getParameter("address");
+			String address_detail = mr.getParameter("address_detail");
+			String email = mr.getParameter("email");
+			String hiredate = mr.getParameter("hiredate");
+			String isretire = mr.getParameter("isretire");
+			String sal_hour1 = mr.getParameter("sal_hour");
+			String id = mr.getParameter("id");
+			String pwd = mr.getParameter("pwd");
+			String sno = mr.getParameter("sno");
+			String jobno1 = mr.getParameter("jobno");
+			
+			
+			String picture = mr.getOriginalFileName("picture");
+
+			
 			int sal_hour = Integer.parseInt(sal_hour1);
 			int jobno = Integer.parseInt(jobno1);
 
@@ -55,6 +75,7 @@ public class ModifyOkAction implements Action {
 			vo.setPwd(pwd);
 			vo.setSno(sno);
 			vo.setJobno(jobno);
+			vo.setPicture(picture);
 
 			dao.modifyOne(vo);
 			
@@ -64,7 +85,11 @@ public class ModifyOkAction implements Action {
 			dao.close();
 			
 			}
-			return "mc?type=modifyOk";
 		}
+
+	public String execute(HttpServletRequest req, HttpServletResponse resp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	}

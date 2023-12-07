@@ -19,7 +19,7 @@ public class DeleteAction implements Action {
 		
 		
 		
-		return "mc?type=type";
+		return "mc?type=emp";
 	}
 
 }

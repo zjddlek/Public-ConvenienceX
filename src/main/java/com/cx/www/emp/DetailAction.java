@@ -21,6 +21,9 @@ public class DetailAction implements Action {
 			EmpVO vo = dao.getOneByEmpno(empno);
 			
 			req.setAttribute("vo", vo);
+			
+			System.out.println("ActionVO:"+vo);
+			
 			dao.close();
 			
 			HttpSession Session = req.getSession();

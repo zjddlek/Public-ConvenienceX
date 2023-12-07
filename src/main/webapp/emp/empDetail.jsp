@@ -61,8 +61,9 @@
 		<form action="mc" method="get">
 			<div id="leftpicture">
 			<div class="col-md-4 offset-md-1 my-3">
-				<img src="${vo.picture }" alt=""  /></div>
+				<img src="/cx/upload/${vo.picture}" alt=""  /></div>
 			</div>
+			<!-- 이부분 강사님께서 경로 지정해주셨는데 이해가 1도 안감.........저 폴더엔 아무것도없는데,,,??? -->
 			
 			<div id="rightside">
 				<div class="col-md-5 offset-md-1 my-3">
