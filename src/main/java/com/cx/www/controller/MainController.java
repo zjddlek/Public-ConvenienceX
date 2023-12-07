@@ -13,7 +13,7 @@ import com.cx.www.action.Action;
 import com.cx.www.cal.CalMainAction;
 import com.cx.www.cal.TotalProfitAction;
 import com.cx.www.discard.DisposeAction;
-import com.cx.www.discard.disposeSearch;
+import com.cx.www.discard.DisposeSearchDay;
 import com.cx.www.emp.DeleteAction;
 import com.cx.www.emp.DetailAction;
 import com.cx.www.emp.ListAction;
@@ -121,17 +121,12 @@ public class MainController extends HttpServlet{
 		}
 		
 		// 폐기- 밝음
-
-		else if(type.equals("dismain")) { 
-			Action ac = new DisposeAction();
-			url = ac.execute(req, resp);
-		}
 		else if(type.equals("dispose")) {
 			Action ac = new DisposeAction();
 			url = ac.execute(req, resp);
 		}
 		else if(type.equals("disposeSearch")) {
-			Action ac = new disposeSearch();
+			Action ac = new DisposeSearchDay();
 			url = ac.execute(req, resp);
 		}
 		
