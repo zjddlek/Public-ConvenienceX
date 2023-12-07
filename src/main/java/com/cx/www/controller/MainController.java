@@ -146,7 +146,7 @@ public class MainController extends HttpServlet{
 			
 		}
 		else if(type.equals("registerOk")) {
-			Action ac = new RegisterOkAction();
+			RegisterOkAction ac = new RegisterOkAction();
 			url = ac.execute(req,resp);
 		}
 		else if(type.equals("detail")) {
@@ -160,7 +160,7 @@ public class MainController extends HttpServlet{
 	    	  
 	    }
 		else if(type.equals("modifyOk")) {
-			Action ac = new ModifyOkAction();
+			ModifyOkAction ac = new ModifyOkAction();
 	    	  url=ac.execute(req,resp);	  
 	    	  
 	    }

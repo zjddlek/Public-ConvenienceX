@@ -297,7 +297,7 @@ public class EmpDAO {
    
    public void modifyOne(EmpVO vo) { // 사원번호로 사원정보 수정
       sb.setLength(0);
-      sb.append("UPDATE CXEMP SET ENAME=?, BIRTHDATE=?, PHONE=?, ADDRESS=?, ADDRESS_DETAIL=?, EMAIL=?, HIREDATE=?, ISRETIRE=?, SAL_HOUR=?, ID=?, PASSWORD=?, SNO=?, JOBNO=? WHERE EMPNO=? ");
+      sb.append("UPDATE CXEMP SET ENAME=?, BIRTHDATE=?, PHONE=?, ADDRESS=?, ADDRESS_DETAIL=?, EMAIL=?, HIREDATE=?, ISRETIRE=?, SAL_HOUR=?, ID=?, PASSWORD=?, SNO=?, JOBNO=?, PICTURE=? WHERE EMPNO=? ");
 
       try {
          pstmt = conn.prepareStatement(sb.toString());
@@ -315,7 +315,9 @@ public class EmpDAO {
          pstmt.setString(11, vo.getPwd());
          pstmt.setString(12, vo.getSno());
          pstmt.setInt(13, vo.getJobno());
-         pstmt.setString(14, vo.getEmpno());
+         pstmt.setString(14, vo.getPicture());
+         pstmt.setString(15, vo.getEmpno());
+
 
          pstmt.executeUpdate();
 
@@ -354,7 +356,7 @@ public class EmpDAO {
 				System.out.println(empno);
 		
 				sb.setLength(0);
-				sb.append("INSERT INTO CXEMP values( ?,?,?,?,?,?,?,now(),?,?,?,?,?,? ) ");
+				sb.append("INSERT INTO CXEMP values( ?,?,?,?,?,?,?,now(),?,?,?,?,?,?,? ) ");
 				pstmt = conn.prepareStatement(sb.toString());
 				
 				 
@@ -371,6 +373,7 @@ public class EmpDAO {
 				pstmt.setString(11, vo.getPwd()); 
 				pstmt.setString(12, vo.getSno());
 				pstmt.setInt(13, vo.getJobno());
+				pstmt.setString(14, vo.getPicture());
 				
 				pstmt.executeUpdate();
 			

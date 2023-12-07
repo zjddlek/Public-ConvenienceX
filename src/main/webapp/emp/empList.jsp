@@ -23,7 +23,7 @@
 			<div>
 				<span>성명</span> 
 				<input type="text" name="name" id="name" />
-				<input type="hidden" name="type" value="type" />
+				<input type="hidden" name="type" value="emp" />
 			
 				<span>근무기간</span>
 				<input type="date" name="period" id="period" />- <input type="date" name="period2" id="period2" />
@@ -47,7 +47,7 @@
 			<c:if test="${list != null }">
 				<c:forEach var="vo" items="${list}">
 				<tr>
-					<td>${vo.empno }</td>
+					<td><a href="mc?type=detail&empno=${vo.empno}">${vo.empno }</a></td>
 					<td>${vo.ename }</td>
 					<td>${vo.phone }</td>
 					<td>${vo.address }</td>
@@ -60,6 +60,7 @@
 				<tr>
 					
 					<td><a href="mc?type=detail&empno=${vo.empno}">${vo.empno }</a></td>
+
 					<td>${vo.ename }</td>
 					<td>${vo.phone }</td>
 					<td>${vo.address }</td>

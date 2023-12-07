@@ -10,6 +10,59 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
+<style>
+#root{
+	margin: auto;
+	width:800px;
+	margin:auto;
+	width:1500px;
+	height:1000px;
+
+}
+#header{
+	padding-top:20px;
+	withd:100%;
+	height:100px;
+	text-align:center;
+
+}
+#leftpicture{
+	width:50%;
+	height:250px;
+	float:left;
+	display: flex;
+	justify-content: right;
+	padding-top: 50px;
+	padding-left: 300px;
+
+}
+#rightside{
+	width:50%;
+	height:250px;
+	float:left;
+
+}
+#middle{
+	height:800px;
+	padding-left: 250px;
+	padding-top: 60px;
+
+}
+#buttons{
+	text-align:center;
+}
+#picturebox{
+	width:70%;
+	height:180px;
+	border:1px solid black;
+	margin-right: 30px;
+}
+#searchPic{
+	margin-left: 390px; 
+}
+</style>
+
 <script>
 	window.onload=()=>{
 	
@@ -27,7 +80,7 @@
 			console.dir(data);
 			//document.getElementById("address").value= data.zonecode;
 			document.getElementById("address").value= data.roadAddress;
-			document.getElementById("address_detail").value= data.jibunAddress;
+			//document.getElementById("address_detail").value= data.jibunAddress;
 
 			}
 		}).open();
@@ -37,20 +90,26 @@
 </script>
 <body>
 
-		<div class="container">
+	<div class="container" id="root">
 
-		<form action="mc">
-        
-        	<div class="col-md-4 offset-md-3">
-				<h3>사원정보 수정</h3>
-			</div>
+		<div id="header" >
+			<h3>사원정보 수정</h3>
+		</div>
+			<form action="modifyController" method="post" enctype="multipart/form-data">
+				<div id="leftpicture">
+					<div id="picturebox"/></div>
+					<img src="/${vo.picture }" id="picture" name="picture"  />
+				</div>
+			
 			<div class="col-md-4 offset-md-2 row my-3">
-				<input type="text" class="form-control" name="empno" value="${vo.empno}">
+				<input type="hidden" class="form-control" name="empno" value="${vo.empno}">
 				<input type="hidden" name="type" value="modifyOk"/>
 			</div>
 
+			<div id="rightside">
+
 			<div class="col-md-4 offset-md-2 row my-3">
-				<label for="username">이름</label>
+				<label for="username">사원명</label>
 				<input type="text" class="form-control" name="ename" value="${vo.ename }" />
 			</div>
 			
@@ -60,28 +119,52 @@
 			</div>
 			
 			<div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">전화번호</label>
+				<input type="text" class="form-control" name="phone" value="${vo.phone }"  />
+			</div>
+
+			</div>
+
+			<input type="file" value="파일검색" name="picture" id="searchPic" />
+
+
+			<div id="middle">		
+			<div class="row">
+
+			<div class="col-md-3 offset-md-1 row my-1">
 				<label for="username">아이디</label>
 				<input type="text" class="form-control" name="id" value="${vo.id }" /> 
 				
 			</div>
 			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-2 row offset-md-1">
+				<label for="username">&nbsp;</label>
+				<input type="button" class="btn btn-success"  value="중복확인" />
+			</div>
+			
+			</div>
+					
+					
+			
+			<div class="col-md-3 offset-md-1 row my-3">
 				<label for="username">비밀번호</label>
 				<input type="text" class="form-control" name="pwd" value="${vo.pwd }" />
 			</div>
 			
-			<div class="col-md-4 offset-md-2 row my-3">
-				<label for="username">전화번호</label>
-				<input type="text" class="form-control" name="phone" value="${vo.phone }"  />
-			</div>
 			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-7 offset-md-1 row my-3">
+				<label for="username">이메일</label>
+				<input type="text" class="form-control" name="email" value="${vo.email }"   />
+			</div>
+
+
+			<div class="col-md-7 offset-md-1 row my-3">
 				<label for="username">주소</label>
 				<input type="text" class="form-control" name="address" id="address"  value="${vo.address }" />
 				
 			</div >
 			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-7 offset-md-1 row my-3">
 				<label for="username">상세주소</label>
 				<input type="text" class="form-control" name="address_detail" id="address_detail"   value="${vo.address_detail }"/>
 			</div>
@@ -90,17 +173,13 @@
 				<input type="button" value="주소검색" id="btn" class="btn btn-success"/>
 			</div>
 			
-			<div class="col-md-4 offset-md-2 row my-3">
-				<label for="username">이메일</label>
-				<input type="text" class="form-control" name="email" value="${vo.email }"   />
-			</div>
 			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-4 offset-md-1 row my-3">
 				<label for="username">입사일자</label>
 				<input type="date" class="form-control" name="hiredate" value="${vo.hiredate }"  />
 			</div>
 			
-			<div class="col-md-4 offset-md-2 row my-3">
+			<div class="col-md-4 offset-md-1 row my-4">
 				<label for="username">퇴사여부</label>
 				<select name="isretire" id="isretire" >
 					<option value="N">재직중</option>
@@ -108,12 +187,8 @@
 				</select>	
 			</div>
 			
-			<%-- <div class="col-md-4 offset-md-2 row my-3">
-				<label for="username">시급</label>
-				<input type="text" class="form-control" name="sal_hour" value="${vo.sal_hour }"   />
-			</div> --%>
-
-            <div class="col-md-4 offset-md-2 row my-3">
+			
+            <div class="col-md-4 offset-md-1 row my-4">
 				<label for="username">구분</label>
 				<select name="jobno" id="jobno" >
 					<option value="100">아르바이트</option>
@@ -123,6 +198,16 @@
 				</select>
 			</div>
 			
+			</div>
+			
+			<%-- <div class="col-md-4 offset-md-2 row my-3">
+				<label for="username">시급</label>
+				<input type="text" class="form-control" name="sal_hour" value="${vo.sal_hour }"   />
+			</div> --%>
+
+
+
+			
 			<div class="col-md-4 offset-md-2 row my-3">
 				<input type="hidden" class="form-control" name="sal_hour" value="${vo.sal_hour }"   />
 			</div>
@@ -130,13 +215,15 @@
 			<div class="col-md-4 offset-md-2 row my-3">
 				<input type="hidden" class="form-control" name="sno" value="${vo.sno }"/>
 			</div>
+       
+       		<div id="buttons">
           
- 			<div class="col-md-4 offset-md-2 my-3">         
+			<div class="col-md-6 offset-md-4">
           		<input type="submit" class="btn btn-primary" value="수정" />
-				<a href="mc?type=emp">
-					<input type="button" class="btn btn-danger" value="취소" />
-				</a>
+				<a href="mc?type=emp"><input type="button" class="btn btn-danger" value="취소" /></a>
           	</div>
+          	</div>
+          	
     	</form>
 	</div>
 </body>
