@@ -24,6 +24,7 @@ public class SalesVO {
 	private String pname;
 	private int price_consumer;
 	private int cost;
+	private int total;
 	
 
 	// 전체 조회용
