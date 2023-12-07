@@ -32,6 +32,7 @@
 		saleObject.put("pname",vo.getPname());
 		saleObject.put("price_consumer",vo.getPrice_consumer());
 		saleObject.put("cost",vo.getCost());
+		saleObject.put("total",vo.getTotal());
 		
 		saleArray.add(saleObject);
 	}

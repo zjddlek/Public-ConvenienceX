@@ -1,0 +1,134 @@
+@charset "UTF-8";
+
+h2{
+	text-align: center;
+	font-weight:bold;
+	margin-bottom: 15px;
+}
+
+h3{
+	text-decoration: underline;
+}
+
+.picker{
+	padding-bottom: 15px;
+}
+
+.ui-datepicker-trigger{
+	padding-left: 15px;
+}
+
+#select_date{
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+
+#date, #saleNo{
+	cursor : pointer;
+}
+
+.index{
+	border : 1px solid black;
+	margin-right: 10px;
+	height : 400px;
+}
+
+#history{
+	overflow-y : scroll;
+	overflow-x : hidden; 
+	height : 270px;
+}
+
+#history2{
+	overflow-y : scroll;
+	overflow-x : hidden; 
+	height : 195px;
+}
+
+#listHead{
+	padding-bottom: 10px; 
+	font-family:Gulim; 
+	font-weight: bold;
+	font-size: 15px; 
+}
+
+#salesDate{
+	width : 200px;
+}
+
+.sale_list{
+	margin-left: 10px;
+}
+
+#price_consumer{
+	margin-right: 20px;
+	padding-right: 30px;
+}
+
+#deal{
+	margin-right: 20px;
+	padding-left: 35px;
+}
+
+#cost{
+	padding-right: 30px;
+}
+
+#cnt{
+	padding-right: 20px;
+}
+
+#unit{
+	margin-left: 465px;
+	font-size: xx-small;
+}
+
+/* 툴팁 기본 스타일 설정 시작 */
+.tooltip {
+  position: relative;
+  display: block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* 툴팁 화살표 기본 스타일 설정 시작 */
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  border-style: solid;
+  border-width: 5px;
+}
+
+/* 아래쪽 툴팁 시작 */
+
+.tooltip .tooltip-bottom {
+  width: 120px;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+
+.tooltip .tooltip-bottom::after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-color: transparent transparent black transparent;
+}
+
