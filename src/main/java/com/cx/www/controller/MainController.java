@@ -32,9 +32,13 @@ import com.cx.www.login.ShopResistCommand;
 import com.cx.www.login.ShopResistOkCommand;
 import com.cx.www.login.WorkMainCommand;
 import com.cx.www.orders.AllProductListAction;
+import com.cx.www.orders.InsertOrderAction;
 import com.cx.www.orders.NewProductListAction;
+import com.cx.www.orders.NewProductSixAction;
+import com.cx.www.orders.OrderMainAction;
 import com.cx.www.orders.OrdersAction;
 import com.cx.www.orders.ProductRankingListAction;
+import com.cx.www.orders.RankingTopSixAction;
 import com.cx.www.orders.SearchProductAction;
 import com.cx.www.sales.SalesAction;
 import com.cx.www.sales.SalesListAction;
@@ -169,6 +173,12 @@ public class MainController extends HttpServlet{
 		// 발주 - 석원
 		else if (type.equals("orders")) {
 			Action ac = new OrdersAction();
+			Action ac1 = new NewProductSixAction();
+			Action ac2 = new RankingTopSixAction();
+			Action ac3 = new OrderMainAction();
+			ac1.execute(req, resp);
+			ac2.execute(req, resp);
+			ac3.execute(req, resp);
 			url = ac.execute(req, resp);
 		} else if (type.equals("allProducts")) {
 			Action ac = new AllProductListAction();
@@ -181,6 +191,9 @@ public class MainController extends HttpServlet{
 			url = ac.execute(req, resp);
 		} else if (type.equals("searchProduct")) {
 			Action ac = new SearchProductAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("insertOrders")) {
+			Action ac = new InsertOrderAction();
 			url = ac.execute(req, resp);
 		}
 		

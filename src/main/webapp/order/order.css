@@ -1,0 +1,30 @@
+@charset "UTF-8";
+* {	margin: 0; }
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 5px;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.main {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		gap: 20px;
+	}
+	.prItems, .npItems {
+		border: 1px solid black;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		gap: 2px;
+		margin-bottom: 4px;
+		text-align: center;
+	}
+	form>div {
+		text-align: center;
+		padding: 0px, 15px, 0px;
+	}
+	.allOk, .orderOk { text-align: end;	}
+	.search { text-align: center;}

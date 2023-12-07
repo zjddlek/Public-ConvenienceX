@@ -36,6 +36,7 @@ public class ProductRankingListAction implements Action{
 		}
 		
 		ArrayList<ProductRankingVO> list = dao.getAll(startNo, recordPerPage);
+		/* ArrayList<ProductRankingVO> list = dao.getAll(); */
 		
 		req.setAttribute("list", list);
 		req.setAttribute("totalCount", totalCount);

@@ -1,16 +1,17 @@
 package com.cx.www.vo;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderVO {
-	String ordno;
-	String ordDate;
-	int ordCount;
-	int pnoInfo;
-	String sno;
+@Builder
+public class ProductInfoVO {
+	int pNoInfo;
+	String pNo;
+	String manudate;
+	int tCount;
 }
