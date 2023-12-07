@@ -13,7 +13,7 @@ public class ShopResistOkCommand implements Action{
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		String sname = req.getParameter("sname");
 		String sno = req.getParameter("postcode");
-		String sloc = req.getParameter("addrsdetail");
+		String sloc = req.getParameter("roadaddrs");
 		String bno = req.getParameter("businessNo");
 		
 		ShopDAO dao = new ShopDAO();
@@ -21,7 +21,9 @@ public class ShopResistOkCommand implements Action{
 		dao.addOne(svo);
 		
 		dao.close();
-
+		
+		System.out.println("등록하러옴");
+		
 		return "login/login.jsp";
 	}
 
