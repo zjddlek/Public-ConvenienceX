@@ -1,5 +1,6 @@
-package com.cx.www.login;
+package com.cx.www.ajax;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
@@ -11,18 +12,31 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import com.cx.www.action.Action;
 
-public class SendEmailCommand implements Action{
 
+@WebServlet("/sendEmail")
+public class SendEmailServlet extends HttpServlet{
+	
+
+	
 	@Override
-	public String execute(HttpServletRequest req, HttpServletResponse resp) {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
+		req.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html;charset =UTF-8");
+		
 		Properties p = new Properties();
 		HttpSession session = req.getSession();
+		String email = req.getParameter("email");
 		
 		p.put("mail.transport.protocol", "smtp");
 		p.put("mail.smtp.host", "smtp.gmail.com");
@@ -34,11 +48,13 @@ public class SendEmailCommand implements Action{
 		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		p.put("mail.smtp.socketFactory.fallback", "false");
 		
-
-		//String num = "1234"; //인증번호로 사용할예정이면 나중에는 랜덤값을 사용할예정
-		String num = ""+(int)(Math.random()*100000);
+		
+		int cnum = (int)(Math.random()*89999)+10000;
+		String num = Integer.toString(cnum);
+		 
+		
+		
 		session.setAttribute("num", num);
-		//out.println("<h3> 사용자에게 보낸 승인 번호 : "+num+"</h3>");
 
 		//보낼매세지
 		StringBuffer sb = new StringBuffer();
@@ -51,7 +67,7 @@ public class SendEmailCommand implements Action{
 		String password = "qiduvdmlbskvajzv";
 
 		//받는사람이메일
-		String receiver = "leeec1211@naver.com";
+		String receiver = email;
 
 		Session ss = Session.getInstance(p, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -60,12 +76,18 @@ public class SendEmailCommand implements Action{
 		});
 
 		//메일제목
-		String title = "LEC : test 인증번호입니다.";
+		String title = "인증 코드 : "+num;
 
+		JSONObject jobj = new JSONObject();
+		jobj.put("num", num);
+		
+		resp.setContentType("application/x-json; charset=utf-8");
+        resp.getWriter().print(jobj);
+		
 		Message message = new MimeMessage(ss);
 		//보내는사람
 		try {
-			message.setFrom(new InternetAddress(username, "고객지원센터", "UTF-8"));
+			message.setFrom(new InternetAddress(username, "ConVenienceX", "UTF-8"));
 			message.setSubject(title);
 			//받는사람
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
@@ -82,7 +104,6 @@ public class SendEmailCommand implements Action{
 			e.printStackTrace();
 		}
 		
-		return num;
 	}
 	
 	
