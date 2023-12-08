@@ -133,8 +133,7 @@
 					alert("error");
 				}
 				
-			});
-		
+			});		
 		});
 		
 		$("#sendemailcheck").on("click",()=>{

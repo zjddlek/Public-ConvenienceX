@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cx.www.action.Action;
 
-public class FindPWCommand implements Action {
+public class FindPWFormCommand implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {

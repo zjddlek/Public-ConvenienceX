@@ -71,7 +71,7 @@
 										<a href="mc?type=shopResist">점포등록하러가기</a>
 									</div>
 									<div class="w-50 text-md-right p-3" >
-										<a href="#">비밀번호를 잊으셨나요?</a>
+										<a href="mc?type=findPWForm">비밀번호를 잊으셨나요?</a>
 									</div>
 								</div>			
 							</form>
