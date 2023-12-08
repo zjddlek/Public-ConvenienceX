@@ -31,7 +31,7 @@
 		margin-right:2px;
 	}
 	span{
-		margin-top:15px;
+		margin-left: 15px;
 	}
 </style>
 <script type="text/javascript">
@@ -47,7 +47,7 @@
 	//인증 결과값
 	let emailresult = false;
 	//점포 결과값
-	let snameresult = false;
+	let idresult = false;
 
 	// 인증코드 유효시간 카운트다운 및 화면 출력
 	function timer_start(){
@@ -128,7 +128,7 @@
 		$("#numcheck").on("click",()=>{
 			// 타이머 시간 초과 확인
             if(iscodeValid()){
-                let code = $("#confirm").val();
+                let code = $("#code").val();
                 // 인증코드 일치성 검사 
                 // 통과시
                 if(num == code){
@@ -152,7 +152,37 @@
 			
 			
 		});		
+		
+		$("#changePW").on("click",()=>{
+			let id = $("#id").val();
+			$.ajax({
+				url:"/cx/idCheck",
+				async:true,
+				type:"GET",
+				data:{id:id},
+				datatype:JSON,
+				success : function(data) {
+					count= data.count;
+					if(count==0){
+						duplicationID.textContent="아이디가 유효하지않습니다."
+						duplicationID.style.color="red";
+						idresult=true;
+					}else{
+						duplicationID.textContent="인증되었습니다"
+							duplicationID.style.color="green";
+					}
+				},
+				errer : function() {
+					alert("error");
+				}
+				
+			});
+			
+		});
+		
 	});
+	
+	
 	
 </script>
 </head>
@@ -173,9 +203,12 @@
 								</div>
 							</div>
 							<form action="mc?type=findPW">
-							<div class="form-floating mb-3">
+								<div class="form-floating mb-3">
 									<input type="text" name="id" id="id" class="form-control" placeholder="찾고싶은 아이디를 입력해주세요."  required />
 									<label for="id" class="form-control-placeholder" >찾고싶은 아이디를 입력해주세요.</label>
+								</div>
+								<div class="form-floating mb-3">
+									<span id="duplicationID"></span>
 								</div>
 								<div class="form-group d-md-flex">
 									<div class="form-floating mb-3 w-50 text-left">
@@ -188,7 +221,7 @@
 										<label for="emailAddrs" class="form-control-placeholder" >이메일을 입력해주세요.</label>
 									</div>
 								</div>
-								<div class="form-group d-md-flex">
+								<div class="form-group d-md-flex align-items-center">
 									<div class="w-50 text-left">
 										<input type="button" class="form-control btn btn-primary rounded" value="인증메일보내기" id="sendemailcheck" />
 									</div>
@@ -198,14 +231,14 @@
 								</div>
 								<div class="form-floating mb-3">
 									<input type="text" name="code" id="code" class="form-control" placeholder="인증번호를 입력해주세요."  required />
-									<label for="id" class="form-control-placeholder" >인증번호를 입력해주세요.</label>
+									<label for="code" class="form-control-placeholder" >인증번호를 입력해주세요.</label>
 								</div>
-								<div class="form-group d-md-flex">
+								<div class="form-group d-md-flex align-items-center">
 									<div class="w-50 text-left">
 										<input type="button" class="form-control btn btn-primary rounded" value="인증확인" id="numcheck"/>
 									</div>
 									<div class="w-50 text-right">
-										<span id="codecheck">인증</span>
+										<span id="codecheck"></span>
 									</div>
 								</div>
 								<div class="form-floating mb-3">

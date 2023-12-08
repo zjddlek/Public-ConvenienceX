@@ -150,6 +150,7 @@
 				success : function(data) {
 					num= data.num;
 					timer_start()
+					console.log(num);
 				},
 				errer : function() {
 					alert("메일 전송에 실패했습니다. \n 이메일 확인 후 다시 시도해 주세요.")
