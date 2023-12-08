@@ -62,13 +62,14 @@ public class EmpDAO {
 
    } */
 
-   public ArrayList<EmpVO> getAll() { // 사원 전체목록 조회
+   public ArrayList<EmpVO> getAll(String sno) { // 사원 전체목록 조회
       ArrayList<EmpVO> list = new ArrayList<EmpVO>();
 
       sb.setLength(0);
-      sb.append("SELECT * FROM CXEMP WHERE SNO='03485' ");
+      sb.append("SELECT * FROM CXEMP WHERE SNO=? ");
       try {
          pstmt = conn.prepareStatement(sb.toString());
+         pstmt.setString(1, sno);
 
       } catch (SQLException e) {
          // TODO Auto-generated catch block
@@ -94,7 +95,6 @@ public class EmpDAO {
             int sal_hour = rs.getInt("sal_hour");
             String id = rs.getString("id");
             String pwd = rs.getString("PASSWORD");
-            String sno = rs.getString("sno");
             int jobno = rs.getInt("JOBNO");
             String picture = rs.getString("picture");
 
@@ -325,6 +325,21 @@ public class EmpDAO {
          // TODO Auto-generated catch block
          e.printStackTrace();
       }
+   }
+   
+   public void changePW(String id, String pw) {
+	   sb.setLength(0);
+	   sb.append("UPADTE CXEMP SET PASSWORD=? WHERE ID=?");
+	   try {
+		pstmt=conn.prepareStatement(sb.toString());
+		pstmt.setString(1, pw);
+		pstmt.setString(2, id);
+			
+		pstmt.executeUpdate();
+	   } catch (SQLException e) {
+		   // TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }	   
    }
    
    public void addOne(EmpVO vo) {// 사원등록+사원번호 자동입력
