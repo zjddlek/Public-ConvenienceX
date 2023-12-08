@@ -27,6 +27,7 @@ import com.cx.www.login.AttendanceLoginCommand;
 import com.cx.www.login.AttendanceLoginOkCommand;
 import com.cx.www.login.CalLastCommand;
 import com.cx.www.login.EmpAddOneCommand;
+import com.cx.www.login.FindPWCommand;
 import com.cx.www.login.LoginCommand;
 import com.cx.www.login.ShopResistCommand;
 import com.cx.www.login.ShopResistOkCommand;
@@ -78,6 +79,10 @@ public class MainController extends HttpServlet{
 		}
 		else if(type.equals("login")) {
 			Action ac = new LoginCommand();
+			url = ac.execute(req, resp);
+		}
+		else if(type.equals("findPW")) {
+			Action ac = new FindPWCommand();
 			url = ac.execute(req, resp);
 		}
 		
