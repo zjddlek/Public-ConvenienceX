@@ -44,7 +44,7 @@ public class RegisterOkAction extends HttpServlet{
 		String jobno1 = mr.getParameter("jobno");
 		//String picture = mr.getParameter("picture");
 
-		String picture = mr.getOriginalFileName("picture");
+		String picture = mr.getOriginalFileName("img");
 
 		
 		int sal_hour = Integer.parseInt(sal_hour1);
@@ -71,9 +71,12 @@ public class RegisterOkAction extends HttpServlet{
 		
 		dao.addOne(vo);
 
-		//System.out.println(vo);
+		System.out.println(vo);
 		dao.close();
 		
+		
+		resp.sendRedirect("mc?type=emp");
+
 		
 	}
 

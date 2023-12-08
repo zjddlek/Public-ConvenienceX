@@ -41,16 +41,26 @@
 	width:50%;
 	height:250px;
 	float:left;
-	padding-left: 
-}
+	
+	}
 #middle{
 	height:800px;
 	padding-left: 320px;
 	padding-top: 60px;
+	
 }
 #buttons{
 	text-align:center;
 }
+
+
+#picture {
+	width: 80%;
+	height: 180px;
+	margin-right: 50px;
+	
+}
+
 </style>
 <body>
 	<div class="container" id="root">
@@ -61,7 +71,7 @@
 		<form action="mc" method="get">
 			<div id="leftpicture">
 			<div class="col-md-4 offset-md-1 my-3">
-				<img src="/cx/upload/${vo.picture}" alt=""  /></div>
+				<img src="/cx/upload/${vo.picture}" alt=""  id="picture" name="picture" /></div>
 			</div>
 			<!-- 이부분 강사님께서 경로 지정해주셨는데 이해가 1도 안감.........저 폴더엔 아무것도없는데,,,??? -->
 			
