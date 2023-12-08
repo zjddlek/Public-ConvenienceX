@@ -46,8 +46,10 @@
 	let timer_thread;
 	//인증 결과값
 	let emailresult = false;
-	//점포 결과값
+	//아이디 결과값
 	let idresult = false;
+	//비밀번호 중복 체크확인값
+	let pwresult = false;
 
 	// 인증코드 유효시간 카운트다운 및 화면 출력
 	function timer_start(){
@@ -103,7 +105,9 @@
 		});
 	
 		$("#sendemailcheck").on("click",()=>{
+			
 			let email = ($("#email").val() + "@" + $("#emailAddrs").val());
+			
 			$.ajax({
 				url:"/cx/sendEmail",
 				async:true,
@@ -115,6 +119,8 @@
 				},
 				success : function(data) {
 					num= data.num;
+					
+					
 					timer_start()
 				},
 				errer : function() {
@@ -153,7 +159,7 @@
 			
 		});		
 		
-		$("#changePW").on("click",()=>{
+		$("#idcheck").on("click",()=>{
 			let id = $("#id").val();
 			$.ajax({
 				url:"/cx/idCheck",
@@ -166,22 +172,74 @@
 					if(count==0){
 						duplicationID.textContent="아이디가 유효하지않습니다."
 						duplicationID.style.color="red";
-						idresult=true;
+						$("#id").val("");
+						$("#id").focus();
+						idresult=false;
 					}else{
 						duplicationID.textContent="인증되었습니다"
-							duplicationID.style.color="green";
+						duplicationID.style.color="green";
+						idresult=true;
 					}
+									
 				},
 				errer : function() {
 					alert("error");
 				}
 				
 			});
-			
 		});
+		
+		$("#newPWcheck").on("keyup",()=>{
+			let npw = $("#newPWcheck").val();
+			let npwc = $("#newPW").val();
+			
+			if(npw==npwc){
+				duplicationPW.textContent="비밀번호가 일치합니다.";
+				duplicationPW.style.color="green";
+				pwresult = true;
+			}else{			
+				duplicationPW.textContent="비밀번호가 일치하지않습니다. 다시 확인해주세요.";
+				duplicationPW.style.color="red";
+				pwresult = false;
+			}
+		});
+		
+		
 		
 	});
 	
+	function validation(){
+		if(document.getElementById("id").value==""){
+			alert("아이디를 확인해주세요.");
+			document.getElementById("id").focus();
+			 return;		
+		}else if(document.getElementById("email").value==""||document.getElementById("emailAddrs").value==""){
+			 alert("이메일을 인증받아 주세요.");
+			 document.getElementById("email").focus();
+			 return;
+		 }else if(document.getElementById("newPW").value==""){
+			 alert("새로운 비밀번호를 입력해주세요.");
+			 document.getElementById("newPW").focus();
+			 return;
+		 }else if(document.getElementById("newPWcheck").value==""){
+			 alert("비밀번호 확인해주세요.");
+			 document.getElementById("newPWcheck").focus();
+			 return;
+		 }else if(pwresult == false){
+			 alert("비밀번호가 일치하지않습니다. \n 다시 확인해주세요.");
+			 return;
+		 }else if(idresult == false){
+			 alert(" 아이디를 확인해주세요. \n 다시 확인해주세요.");
+			 return;
+		 }else if(emailresult == false){
+			 alert(" 이메일 인증을 완료해주세요. \n 다시 확인해주세요.");
+			 return;
+		 }else {
+			 alert("비밀번호변경이 완료되었습니다!");
+			 
+		 }
+		
+	}
 	
 	
 </script>
@@ -189,26 +247,32 @@
 <body>
 	<secction class="ftco-section">
 		<div class="container">
-			<div class="row d-flex justify-content-center">
+			<div class="row d-flex justify-content-center pb-3">
 				<div class ="img" ><!-- 추후 background-img: url(jpg)로 변경 -->		
 				</div>
 			</div>
-			<div class="row d-flex justify-content-center">
+			<div class="row d-flex justify-content-center pb-3">
 				<div class="col-md-8 col-lg-6">
 					<div class="wrap">
-						<div class="findPW-wrap p-4 p-md-5">
+						<div class="findPW-wrap p-4 p-md-5 border border-primary border-3 rounded-3 ">
 							<div class="d-flex">
 								<div class="w-50">
 									<h3>패스워드 찾기</h3>
 								</div>
 							</div>
-							<form action="mc?type=findPW">
+							<form action="mc?type=findPW" method="post" >
 								<div class="form-floating mb-3">
 									<input type="text" name="id" id="id" class="form-control" placeholder="찾고싶은 아이디를 입력해주세요."  required />
 									<label for="id" class="form-control-placeholder" >찾고싶은 아이디를 입력해주세요.</label>
+									<input type="hidden" name="type" value="findPW" />
 								</div>
-								<div class="form-floating mb-3">
-									<span id="duplicationID"></span>
+								<div class="form-group d-md-flex align-items-center">
+									<div class=" mb-3 w-50">
+										<input type="button" id="idcheck" value="ID 체크하기" class="form-control btn btn-primary rounded" />
+									</div>
+									<div class="form-floating mb-3 w-50">
+										<span id="duplicationID"></span>
+									</div>
 								</div>
 								<div class="form-group d-md-flex">
 									<div class="form-floating mb-3 w-50 text-left">
@@ -242,16 +306,19 @@
 									</div>
 								</div>
 								<div class="form-floating mb-3">
-									<input type="text" name="newPW" id="newPW" class="form-control" placeholder="새로운 비밀번호를 입력해주세요."  required />
+									<input type="password" name="newPW" id="newPW" class="form-control" placeholder="새로운 비밀번호를 입력해주세요."  required />
 									<label for="newPW" class="form-control-placeholder" >새로운 비밀번호를 입력해주세요.</label>
 								</div>
 								<div class="form-floating mb-3">
-									<input type="text" name="newPWcheck" id="newPWcheck" class="form-control" placeholder="비밀번호를 다시 입력해주세요."  required />
+									<input type="password" name="newPWcheck" id="newPWcheck" class="form-control" placeholder="비밀번호를 다시 입력해주세요."  required />
 									<label for="newPWcheck" class="form-control-placeholder" >비밀번호를 다시 입력해주세요.</label>
 								</div>
-								<div class="form-group d-md-flex">
+								<div class="form-floating d-md-flex align-items-center mb-3">
+									<span id="duplicationPW" ></span>
+								</div>
+								<div class="form-group d-md-flex align-items-center">
 									<div class="w-50">
-										<input type="button" id="changePW" class="form-control btn btn-primary rounded" value="변경하기" />
+										<input type="submit" id="changePW" class="form-control btn btn-primary rounded" value="변경하기" onclick="validation()"  />
 									</div>
 									<div class="w-50">
 										<input type="button" id="back" class="form-control btn btn-success rounded" value="돌아가기" />

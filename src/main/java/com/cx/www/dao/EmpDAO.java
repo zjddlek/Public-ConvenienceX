@@ -324,7 +324,7 @@ public class EmpDAO {
 
 	public void changePW(String id, String pw) {
 		sb.setLength(0);
-		sb.append("UPADTE CXEMP SET PASSWORD=? WHERE ID=?");
+		sb.append("UPDATE CXEMP SET PASSWORD=? WHERE ID=?");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setString(1, pw);
