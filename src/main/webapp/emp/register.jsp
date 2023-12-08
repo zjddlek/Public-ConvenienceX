@@ -87,9 +87,19 @@
 	height: 180px;
 	margin-right: 50px;
 }
+
+#idChecking{
+	margin-left: 70px;
+
+}
+
+
 </style>
 
 <script>
+
+    let idresult=false;
+
 	window.onload=()=>{
 	
 		let btn=document.getElementById("btn");
@@ -150,15 +160,19 @@
 			data:{id:id},
 			datatype:JSON,
 			success:function(data){
+				
+				let idCheck=$("#idcheck"); 
+				
 				count=data.count;
 				if(count==0){
-					idCheck.textContent= "사용가능한 아이디입니다."
+					idCheck.text("사용가능한 아이디입니다.");
+					//$("#idCheck").css("color","green");
 					idCheck.style.color="green",
 					idresult=true;
 					
 					
 				}else{
-					idCheck.textContent= "이미 사용중인 아이디입니다."
+					idCheck.text("이미 사용중인 아이디입니다.");
 					idCheck.style.color="red";
 				}
 				
@@ -182,7 +196,7 @@
 			
 			<div id="leftpicture">
 				<div id="picturebox"/></div>
-		 		<img src="/${vo.picture}" id="picture" name="picture" />
+		 		<img src="${vo.picture}" id="picture" name="picture" />
 			</div>
 
 			<div id="rightside">
@@ -221,7 +235,9 @@
 						<label for="username">&nbsp;</label> 
 						<input type="button" id="bnt" class="btn btn-success" value="중복확인" />
 					</div>
-
+					<div id="idChecking">
+						<div  id="idcheck">  </div>
+					</div>
 				</div>
 
 				<div class="col-md-3 offset-md-1 row my-3">
