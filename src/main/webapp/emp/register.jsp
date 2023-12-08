@@ -11,6 +11,9 @@
 	crossorigin="anonymous"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 
 <!DOCTYPE html>
 <html>
@@ -26,6 +29,7 @@
 	margin: auto;
 	width: 1500px;
 	height: 1000px;
+	
 }
 
 #header {
@@ -33,6 +37,7 @@
 	withd: 100%;
 	height: 100px;
 	text-align: center;
+	
 }
 
 #leftpicture {
@@ -43,39 +48,45 @@
 	justify-content: right;
 	padding-top: 50px;
 	padding-left: 300px;
+	
 }
 
 #rightside {
 	width: 50%;
 	height: 250px;
-	float: left;
+	float: right;
+	
 }
 
 #middle {
 	height: 800px;
 	padding-left: 250px;
 	padding-top: 60px;
+	
 }
 
 #buttons {
 	text-align: center;
 }
 
-#picturebox {
-	width: 70%;
+/* #picturebox {
+	width: 50%;
 	height: 180px;
 	border: 1px solid black;
 	margin-right: 30px;
-}
+	background-color: red;
+	position: relative;
+}	 */
 
-#searchPic {
+#img {
 	margin-left: 390px;
 }
 
-#picture{
-	margin-right: 30px;
+#picture {
+	width: 70%;
+	height: 180px;
+	margin-right: 50px;
 }
-
 </style>
 
 <script>
@@ -84,31 +95,28 @@
 		let btn=document.getElementById("btn");
 		btn.onclick = openkakaoPostCode;
 		
-		const picture = document.querySelector("#searchPic");
 		
-		picture.addEventListener("change",(e)=> {
+		
+		
+		const img = document.querySelector("#img");
+		img.addEventListener("change",(e)=> {
 			console.log(e);
 			const reader = new FileReader()
 			reader.readAsDataURL(e.target.files[0])
-	
-			/* reader.onload  =function(event){
-				console.log(event)
+	 
+			  reader.onload  =function(event){
+				/* console.log(event)
 				const img=document.createElement("img")
 				img.setAttribute("src",event.target.result)
-				document.querySelector("#picturebox").appendChild(img) */
+				document.querySelector("#lefpticture").appendChild(img)   */ 
 				
-				const picturebox = document.querySelector("#picturebox")
-				picture.setAttribute("src",event.target.result)
-			
-			
+				  const picture = document.querySelector("#picture")
+				picture.setAttribute("src",event.target.result) 
+			}
+				
 		});
 
-	
-	
-	
-	}	
-	
-	
+			
 	
 
 	function openkakaoPostCode(){
@@ -127,8 +135,42 @@
 		
 	}
 		
-		
+	
+	
+	
+	
+	$("#bnt").on("click",()=>{
+        let id = $("#id").val();
+        console.log(id);
+        
+		$.ajax({
+			url:"/cx/idCheck",
+			async:true,
+			type:"GET",
+			data:{id:id},
+			datatype:JSON,
+			success:function(data){
+				count=data.count;
+				if(count==0){
+					idCheck.textContent= "사용가능한 아이디입니다."
+					idCheck.style.color="green",
+					idresult=true;
+					
+					
+				}else{
+					idCheck.textContent= "이미 사용중인 아이디입니다."
+					idCheck.style.color="red";
+				}
+				
+			},
+			error:function(){
+				alert("error");
+			}
+		})
 
+	})
+
+	}
 </script>
 
 <body>
@@ -137,10 +179,10 @@
 			<h3>사원 등록</h3>
 		</div>
 		<form action="registerController" method="post" enctype="multipart/form-data">
-			<div id="lefpticture">
-				<div id="picturebox" /></div>
-
-				<img src="/${vo.picture}" id="picture" name="picture" />
+			
+			<div id="leftpicture">
+				<div id="picturebox"/></div>
+		 		<img src="/${vo.picture}" id="picture" name="picture" />
 			</div>
 
 			<div id="rightside">
@@ -166,18 +208,18 @@
 
 			</div>
 
-			<input type="file" value="파일검색" id="searchPic" name="picture" />
+			<input type="file" value="파일검색" id="img" name="img" accept="image/*" />
 
 			<div id="middle">
 				<div class="row">
 					<div class="col-md-3 offset-md-1 row my-1">
-						<label for="username">아이디</label> <input type="text"
-							class="form-control" name="id" id="idsearch" />
+						<label for="username">아이디</label> 
+						<input type="text" class="form-control" name="id" id="id" />
 					</div>
 
 					<div class="col-md-2 row offset-md-1">
-						<label for="username">&nbsp;</label> <input type="button"
-							class="btn btn-success" value="중복확인" />
+						<label for="username">&nbsp;</label> 
+						<input type="button" id="bnt" class="btn btn-success" value="중복확인" />
 					</div>
 
 				</div>
@@ -247,7 +289,7 @@
 			</div>
 		</form>
 	</div>
-	
+
 
 </body>
 </html>

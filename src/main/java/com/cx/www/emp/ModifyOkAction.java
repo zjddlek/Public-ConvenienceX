@@ -51,7 +51,7 @@ public class ModifyOkAction extends HttpServlet {
 			String jobno1 = mr.getParameter("jobno");
 			
 			
-			String picture = mr.getOriginalFileName("picture");
+			String picture = mr.getOriginalFileName("img");
 
 			
 			int sal_hour = Integer.parseInt(sal_hour1);
@@ -85,6 +85,8 @@ public class ModifyOkAction extends HttpServlet {
 			dao.close();
 			
 			}
+		
+			resp.sendRedirect("mc?type=emp");
 		}
 
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {

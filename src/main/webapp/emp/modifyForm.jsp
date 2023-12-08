@@ -35,6 +35,8 @@
 	justify-content: right;
 	padding-top: 50px;
 	padding-left: 300px;
+	
+	
 
 }
 #rightside{
@@ -52,14 +54,24 @@
 #buttons{
 	text-align:center;
 }
-#picturebox{
+/* #picturebox{
 	width:70%;
 	height:180px;
 	border:1px solid black;
 	margin-right: 30px;
+	
+	background-color: green;
+}  */
+#img{
+	margin-left: 410px; 
+	
 }
-#searchPic{
-	margin-left: 390px; 
+
+#picture {
+	width: 50%;
+	height: 180px;
+	margin-right: 50px;
+	
 }
 </style>
 
@@ -69,7 +81,28 @@
 	let btn=document.getElementById("btn");
 	btn.onclick = openkakaoPostCode;
 	
-	}	
+	
+	
+	
+	const img = document.querySelector("#img");
+	img.addEventListener("change",(e)=> {
+		console.log(e);
+		const reader = new FileReader()
+		reader.readAsDataURL(e.target.files[0])
+ 
+		  reader.onload  =function(event){
+			/* console.log(event)
+			const img=document.createElement("img")
+			img.setAttribute("src",event.target.result)
+			document.querySelector("#lefpticture").appendChild(img)   */ 
+			
+			  const picture = document.querySelector("#picture")
+			picture.setAttribute("src",event.target.result) 
+		}
+			
+	});
+
+			
 
 	function openkakaoPostCode(){
 		console.log("버튼 눌림");
@@ -86,6 +119,8 @@
 		}).open();
 	
 	}
+	
+	}	
 
 </script>
 <body>
@@ -125,7 +160,7 @@
 
 			</div>
 
-			<input type="file" value="파일검색" name="picture" id="searchPic" />
+			<input type="file" value="파일검색" name="img" id="img" accept="image/*"  />
 
 
 			<div id="middle">		
