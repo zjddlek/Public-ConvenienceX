@@ -42,7 +42,6 @@ import com.cx.www.orders.ProductRankingListAction;
 import com.cx.www.orders.RankingTopSixAction;
 import com.cx.www.orders.SearchProductAction;
 import com.cx.www.sales.SalesAction;
-import com.cx.www.sales.SalesListAction;
 import com.cx.www.stock.StockListAction;
 
 
@@ -206,14 +205,6 @@ public class MainController extends HttpServlet{
 		else if(type.equals("sales")) {
 			Action sa = new SalesAction();
 			url = sa.execute(req, resp);
-		}
-		else if (type.equals("sales_list")){
-			 Action ac = new SalesListAction();
-			 url = ac.execute(req, resp);
-		}
-		else if (type.equals("sales_detail")) {
-			 Action ac = new SalesListAction();
-			 url = ac.execute(req, resp);
 		}
 		
 		// 재고

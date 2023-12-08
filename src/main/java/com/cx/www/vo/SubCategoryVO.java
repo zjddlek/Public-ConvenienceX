@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class SubCategoryVO {
-	String scNo;
-	String mcNo;
-	String scName;
+	private String scNo;
+	private String mcNo;
+	private String scName;
 }

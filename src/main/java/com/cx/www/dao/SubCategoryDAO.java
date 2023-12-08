@@ -170,6 +170,37 @@ public class SubCategoryDAO {
 		}
 	}
 	
+	// 재고리스트용 추가	
+	public ArrayList<SubCategoryVO> GetAll(String mcno) {
+		ArrayList<SubCategoryVO> list = new ArrayList<SubCategoryVO>();
+		
+		sb.setLength(0);
+		
+		sb.append("select SCNO, MCNO, SCNAME ");
+		sb.append("FROM SUB_CATEGORY ");
+		sb.append("WHERE MCNO = ? ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, mcno);
+			
+			rs = pstmt.executeQuery();
+			
+			while ( rs.next() ) {
+				String scNo = rs.getString("SCNO");
+				String scName = rs.getString("SCNAME");
+				
+				SubCategoryVO vo = new SubCategoryVO(scNo, mcno, scName);
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	public void close() {
 		try {
 			if ( rs != null ) rs.close();

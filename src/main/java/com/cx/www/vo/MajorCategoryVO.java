@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class MajorCategoryVO {
-	String mcNo;
-	String mcName;
+	private String mcNo;
+	private String mcName;
+	private String scNo;
 }
