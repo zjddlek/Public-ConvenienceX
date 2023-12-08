@@ -167,13 +167,15 @@
 				if(count==0){
 					idCheck.text("사용가능한 아이디입니다.");
 					//$("#idCheck").css("color","green");
-					idCheck.style.color="green",
+					idcheck.style.color="green",
 					idresult=true;
 					
 					
 				}else{
 					idCheck.text("이미 사용중인 아이디입니다.");
-					idCheck.style.color="red";
+					//$("#idCheck").css("color","red");
+					idcheck.style.color="red";
+
 				}
 				
 			},
@@ -236,7 +238,7 @@
 						<input type="button" id="bnt" class="btn btn-success" value="중복확인" />
 					</div>
 					<div id="idChecking">
-						<div  id="idcheck">  </div>
+						<span  id="idcheck">  </span>
 					</div>
 				</div>
 
