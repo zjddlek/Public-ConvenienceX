@@ -17,6 +17,7 @@ public class MajorCategoryDAO {
 	
 	public MajorCategoryDAO() {
 		conn = DBConnection.getConnection();
+		System.out.println("conn : " +conn);
 	}
 	
 	// 총 거래처 수
@@ -50,7 +51,7 @@ public class MajorCategoryDAO {
 				String mcNo = rs.getString("MCNO");
 				String mcName = rs.getString("MCNAME");
 				
-				MajorCategoryVO vo = new MajorCategoryVO(mcNo, mcName);
+				MajorCategoryVO vo = new MajorCategoryVO(mcNo, mcName, null);
 				
 				list.add(vo);
 			}
@@ -78,7 +79,7 @@ public class MajorCategoryDAO {
 				String mcNo = rs.getString("MCNO");
 				String mcName = rs.getString("MCNAME");
 				
-				MajorCategoryVO vo = new MajorCategoryVO(mcNo, mcName);
+				MajorCategoryVO vo = new MajorCategoryVO(mcNo, mcName, null);
 				
 				list.add(vo);
 			}
@@ -102,7 +103,7 @@ public class MajorCategoryDAO {
 			if ( rs.next() ) {
 				String mcName = rs.getString("MCNAME");
 				
-				vo = new MajorCategoryVO(mcNo, mcName);
+				vo = new MajorCategoryVO(mcNo, mcName, null);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,6 +165,37 @@ public class MajorCategoryDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 재고리스트용
+	public ArrayList<MajorCategoryVO> GetAll() {
+		ArrayList<MajorCategoryVO> list = new ArrayList<MajorCategoryVO>();
+		
+		sb.setLength(0);
+		
+		sb.append("SELECT M.MCNO, M.MCNAME, S.SCNO ");
+		sb.append("FROM MAJOR_CATEGORY M ");
+		sb.append("JOIN SUB_CATEGORY S ON M.MCNO = S.MCNO ");
+		sb.append("GROUP BY M.MCNO ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			
+			while ( rs.next() ) {
+				String mcNo = rs.getString("MCNO");
+				String mcName = rs.getString("MCNAME");
+				String scNo = rs.getString("scNo");
+				
+				MajorCategoryVO vo = new MajorCategoryVO(mcNo, mcName, scNo);
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	public void close() {

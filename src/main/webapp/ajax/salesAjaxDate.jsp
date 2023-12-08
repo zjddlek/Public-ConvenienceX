@@ -8,16 +8,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	SalesDAO dao = new SalesDAO();
 	
 	String date = request.getParameter("salesdate");
-	System.out.println("salesdate_action : " + date);
 	
-	
+	SalesDAO dao = new SalesDAO();
 	JSONArray saleArray = new JSONArray();	
 	ArrayList<SalesVO> list = dao.getDateList(date);
-	
-	System.out.println("list : " + list);
 	
 	for(SalesVO vo : list){
 		JSONObject saleObject = new JSONObject();

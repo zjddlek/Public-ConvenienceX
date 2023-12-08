@@ -9,7 +9,9 @@
 <title>sales</title>
 
 <%-- jquery --%>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <%-- 부트스트랩 --%>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -23,7 +25,7 @@
 
 </head>
 <body>
-	<div class="container min-vw-75 justify-content-center" style="border:1px solid red; margin-top:30px; padding-bottom: 20px;">
+	<div class="container min-vw-75 justify-content-center" style="margin-top:30px; padding-bottom: 20px;">
 		<h2>판매내역</h3>
 		<div>
 			<div class="picker">
@@ -65,6 +67,8 @@
 <script type="text/javascript">
 	
 	$(function(){
+		
+		$("#product_name").tooltip();
 		
 	    // datepicker에 공통 옵션
 	    $.datepicker.setDefaults({
@@ -268,13 +272,10 @@
 					if(pname.length >= 7){
 						
 						pname = pname.substr(0,6)+"...";
-						// 툴팁을 넣으니 글이 안보임..... - 물어보기
-						div += "		<div class='col-lg-3 tooltip'>" + pname;
-						div += "			<span class='tooltiptext tooltip-bottom' id='pname'>" + e.pname + "</span>";
-						div += "		</div>";
+						div += "		<div class='col-lg-3' id='product_name'title='" + e.pname + "'>" + pname + "</div>";
 					}
-					else{
-						div += "		<div class='col-lg-3' id='pname'>" + pname + "</div>";
+					else{ 
+						div += "		<div class='col-lg-3' id='pname'>" + e.pname + "</div>";
 					}
 					
 					div += "		<div class='col-sm-2' id='price_consumer' style='text-align: right;'>" + price_consumer + "</div>";
