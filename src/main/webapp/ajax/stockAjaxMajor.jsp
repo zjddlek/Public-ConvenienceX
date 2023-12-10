@@ -5,12 +5,12 @@
 <%@page import="com.cx.www.dao.MajorCategoryDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+ 
 <%
 	// 대분류 불러오기
 	MajorCategoryDAO mdao = new MajorCategoryDAO();
 	ArrayList<MajorCategoryVO> list = mdao.GetAll();
-	//ArrayList<MajorCategoryVO> list = mdao.getAll();
+	
 	JSONArray mArray = new JSONArray();
 	
 	for(MajorCategoryVO vo : list){
@@ -28,7 +28,4 @@
 	
 	// 사용하면 꼭 닫아주기!
 	mdao.close();
-	
-	
-
 %>

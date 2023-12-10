@@ -62,35 +62,6 @@ public class SubCategoryDAO {
 		return list;
 	}
 	
-	public ArrayList<SubCategoryVO> getAll(int startNo, int count) {
-		ArrayList<SubCategoryVO> list = new ArrayList<SubCategoryVO>();
-		
-		sb.setLength(0);
-		sb.append("SELECT SCNO, MCNO, SCNAME FROM SUB_CATEGORY ORDER BY LENGTH(SCNO), SCNO LIMIT ?, ?");
-		// 1행이 0, startN0 행부터 20개
-		
-		try {
-			pstmt = conn.prepareStatement(sb.toString());
-				pstmt.setInt(1, startNo);
-				pstmt.setInt(2, count);
-			rs = pstmt.executeQuery();
-			
-			while ( rs.next() ) {
-				String scNo = rs.getString("SCNO");
-				String mcNo = rs.getString("SCNO");
-				String scName = rs.getString("SCNAME");
-				
-				SubCategoryVO vo = new SubCategoryVO(scNo, mcNo, scName);
-				
-				list.add(vo);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
-	
 	public SubCategoryVO getOne(String scNo) {
 		SubCategoryVO vo = null;
 		
@@ -169,16 +140,17 @@ public class SubCategoryDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	 
 	// 재고리스트용 추가	
 	public ArrayList<SubCategoryVO> GetAll(String mcno) {
 		ArrayList<SubCategoryVO> list = new ArrayList<SubCategoryVO>();
 		
 		sb.setLength(0);
 		
-		sb.append("select SCNO, MCNO, SCNAME ");
+		sb.append("SELECT SCNO, MCNO, SCNAME ");
 		sb.append("FROM SUB_CATEGORY ");
 		sb.append("WHERE MCNO = ? ");
+		sb.append("ORDER BY LENGTH(SCNO), SCNO ");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());

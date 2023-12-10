@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+.btn:active, .btn:focus {
+	outline:0 !important;
+	box-shadow:none !important;
+	border: 0 !important;
+}
+
+h2{
+	text-align: center;
+}
+
+.mcName,#subname,#stockno{
+	cursor: pointer;
+	padding-left: 5px;
+}
+
+table, td, th {
+  border : 1px solid black;
+  border-collapse : collapse;
+}
+
+th, td {
+  vertical-align : top;
+}
+
+th{
+	padding-left: 5px;
+}
+
+table{
+	width:100%
+}
+
+#stock_list{
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+#stock{
+	height: 350px;
+}
+
+#dropdown1,#dropdown2{
+	width: 200px;
+	border:none;
+}
+
+#major,#sub{
+	border-width: 0 0 1px; 
+	width:90px;
+	text-align: center;
+	outline:0 !important;
+}
+
+.search{
+	margin-left: auto;
+	padding-top: 8px;
+}
+
+#cnt_list{
+	text-align: right;
+}
+
+#cost_list{
+	text-align: right;
+}
+
+#product_list{
+	padding-left: 10px;
+}

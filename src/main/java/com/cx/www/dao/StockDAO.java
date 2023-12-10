@@ -15,7 +15,7 @@ public class StockDAO {
 	ResultSet rs = null;
 
 	StringBuffer sb = new StringBuffer();
-
+ 
 	public StockDAO() {
 		conn = DBConnection.getConnection();
 	
@@ -55,9 +55,8 @@ public class StockDAO {
 		return list;	
 	}//method end
 	
-	// 재고 리스트용
+	// 재고 리스트용 - dropdown 누른경우
 	public ArrayList<StockVO> getAllStockNo(String scno) {
-		System.out.println("dao : " +scno);
 		
 		ArrayList<StockVO> list = new ArrayList<StockVO>();
 		StockVO vo = null;
@@ -92,8 +91,6 @@ public class StockDAO {
 				
 				vo = new StockVO(stockNo, stockCount, pnoInfo, warehousedate, pname, mcName, scName, null, null, price_consumer);
 				list.add(vo);
-				
-				System.out.println("dao : "+list);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -139,8 +136,6 @@ public class StockDAO {
 				
 				vo = new StockVO(stockNo, stockCount, pnoInfo, warehousedate, pname, mcName, scName, mcNo, scNo, price_consumer);
 				list.add(vo);
-				
-				System.out.println("dao : "+list);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -150,7 +145,52 @@ public class StockDAO {
 		return list;
 	}
 	
-	
+	// 재고 리스트 검색
+	public ArrayList<StockVO> getSearch(String pname) {
+		
+		ArrayList<StockVO> list = new ArrayList<StockVO>();
+		StockVO vo = null;
+		
+		sb.setLength(0);
+
+		sb.append(" select ST.STOCKNO, MC.MCNAME, SC.SCNAME, PA.PNAME, P.PRICE_CONSUMER, ST.STOCK_COUNT, ST.PNO_INFO, ST.WAREHOUSEDATE  ");
+		sb.append(" FROM MAJOR_CATEGORY MC ");
+		sb.append(" JOIN SUB_CATEGORY SC ON MC.MCNO = SC.MCNO ");
+		sb.append(" JOIN PRODUCT P ON SC.SCNO = P.SCNO ");
+		sb.append(" JOIN PRODUCT_ACCOUNT PA ON P.PNO_ACCOUNT = PA.PNO_ACCOUNT ");		
+		sb.append(" JOIN PRODUCT_INFO PI ON P.PNO = PI.PNO ");		
+		sb.append(" JOIN STOCK ST ON PI.PNO_INFO = ST.PNO_INFO ");
+		sb.append(" WHERE PA.PNAME LIKE ? ");
+		sb.append(" group by ST.STOCKNO ");
+		sb.append(" order by length(ST.STOCKNO), ST.STOCKNO ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, pname + "%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String stockNo = rs.getString("STOCKNO");
+				int stockCount = rs.getInt("STOCK_COUNT");
+				String pnoInfo = rs.getString("PNO_INFO");
+				String warehousedate = rs.getString("WAREHOUSEDATE");
+				String mcName = rs.getString("mcName");
+				String scName = rs.getString("scName");
+				int price_consumer = rs.getInt("PRICE_CONSUMER");
+				
+				vo = new StockVO(stockNo, stockCount, pnoInfo, warehousedate, pname, mcName, scName, null, null, price_consumer);
+				list.add(vo);
+				
+				System.out.println(list);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;	
+	}//method end
 	
 	public void close() {
 
