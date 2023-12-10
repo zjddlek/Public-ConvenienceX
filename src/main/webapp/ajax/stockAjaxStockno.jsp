@@ -4,7 +4,7 @@
 <%@page import="com.cx.www.vo.StockVO"%>
 <%@page import="com.cx.www.dao.StockDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <%
 	String scno = request.getParameter("scno");
 	System.out.println(scno);

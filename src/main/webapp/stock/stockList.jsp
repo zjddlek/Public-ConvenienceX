@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>재고현황</title>
-
+ 
 <%-- jquery --%>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

@@ -140,7 +140,7 @@ public class SubCategoryDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	 
 	// 재고리스트용 추가	
 	public ArrayList<SubCategoryVO> GetAll(String mcno) {
 		ArrayList<SubCategoryVO> list = new ArrayList<SubCategoryVO>();

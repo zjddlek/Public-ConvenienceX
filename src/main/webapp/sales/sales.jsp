@@ -265,7 +265,7 @@
 					let cnt = e.cnt.toLocaleString('ko-KR');
 					
 					div += "<div class='row'>";
-					
+				    	
 					if(pname.length >= 7){
 						
 						pname = pname.substr(0,6)+"...";

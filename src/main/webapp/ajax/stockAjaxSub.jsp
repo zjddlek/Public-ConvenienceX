@@ -23,7 +23,7 @@
 		
 		subArray.add(saleObject);
 	}
-	
+	 
 	// 출력
 	out.println(subArray.toJSONString());
 	

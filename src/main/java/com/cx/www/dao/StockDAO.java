@@ -15,7 +15,7 @@ public class StockDAO {
 	ResultSet rs = null;
 
 	StringBuffer sb = new StringBuffer();
-
+ 
 	public StockDAO() {
 		conn = DBConnection.getConnection();
 	

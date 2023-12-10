@@ -6,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	
+	 
 	String searchVal = request.getParameter("searchVal");
 	StockDAO stdao = new StockDAO();
 	JSONArray stArray = new JSONArray();
