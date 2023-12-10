@@ -10,8 +10,7 @@
 	String mcno = request.getParameter("mcno");
 
 	SubCategoryDAO subdao = new SubCategoryDAO();
-	//ArrayList<SubCategoryVO> list = subdao.GetAll(mcno);
-	ArrayList<SubCategoryVO> list = subdao.getAll();
+	ArrayList<SubCategoryVO> list = subdao.GetAll(mcno);
 	
 	JSONArray subArray = new JSONArray();
 	

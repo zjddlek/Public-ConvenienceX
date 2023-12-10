@@ -11,16 +11,14 @@
 <%-- jquery --%>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <%-- 부트스트랩 --%>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 <%-- datepicker --%>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
  <link rel="stylesheet" href="./style/sales.css" />
 
 </head>
@@ -266,13 +264,12 @@
 					let cost = e.cost.toLocaleString('ko-KR');
 					let cnt = e.cnt.toLocaleString('ko-KR');
 					
-					
 					div += "<div class='row'>";
 					
 					if(pname.length >= 7){
 						
 						pname = pname.substr(0,6)+"...";
-						div += "		<div class='col-lg-3' id='product_name'title='" + e.pname + "'>" + pname + "</div>";
+						div += "		<div class='col-lg-3' id='product_name' title='" + e.pname + "'>" + pname + "</div>";
 					}
 					else{ 
 						div += "		<div class='col-lg-3' id='pname'>" + e.pname + "</div>";
