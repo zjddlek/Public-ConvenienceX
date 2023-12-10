@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html> 
-<head>
+<head> 
 </head>
 <meta charset="UTF-8">
 <title>재고현황</title>

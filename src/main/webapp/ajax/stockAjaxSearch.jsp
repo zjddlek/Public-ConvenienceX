@@ -25,10 +25,8 @@
 		
 	// 출력
 	out.println(stArray.toJSONString());
+	
 	// 사용하면 꼭 닫아주기!
 	stdao.close();
-		
-
-	
 
 %>

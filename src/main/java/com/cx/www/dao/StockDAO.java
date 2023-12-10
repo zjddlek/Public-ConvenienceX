@@ -145,7 +145,7 @@ public class StockDAO {
 		return list;
 	}
 	
-	// 재고 리스트 검색
+	// 재고 리스트 검색 
 	public ArrayList<StockVO> getSearch(String pname) {
 		
 		ArrayList<StockVO> list = new ArrayList<StockVO>();
