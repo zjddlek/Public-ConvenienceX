@@ -40,7 +40,7 @@
 	          		<a class="nav-link" href="mc?type=dispose">폐기</a>
 	        	</li>
 	        	<li class="nav-item">
-	          		<a class="nav-link" href="mc?type=emp&sno=${svo.sno }">인사관리</a>
+	          		<a class="nav-link" href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno }">인사관리</a>
 	        	</li>
 	        	<li class="nav-item">
 	          		<a class="nav-link" href="mc?type=workmain&sno=${svo.sno }">출퇴근</a>

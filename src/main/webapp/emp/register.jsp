@@ -25,10 +25,11 @@
 <style>
 #root {
 	margin: auto;
-	width: 800px;
+	width: 60px;
 	margin: auto;
 	width: 1500px;
-	height: 1000px;
+	height: 1300px;
+	margin-top: 50px;
 	
 }
 
@@ -120,6 +121,8 @@
 				img.setAttribute("src",event.target.result)
 				document.querySelector("#lefpticture").appendChild(img)   */ 
 				
+				$("#pic").hide();
+				
 				  const picture = document.querySelector("#picture")
 				picture.setAttribute("src",event.target.result) 
 			}
@@ -190,14 +193,14 @@
 </script>
 
 <body>
-	<div class="container" id="root">
+	<div class="container border border-primary border-3 rounded-3" id="root">
 		<div id="header">
 			<h3>사원 등록</h3>
 		</div>
 		<form action="registerController" method="post" enctype="multipart/form-data">
 			
 			<div id="leftpicture">
-				<div id="picturebox"/></div>
+				<div id="picturebox"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACgCAMAAACBpqFQAAAAMFBMVEXu7u6ZmZmurq7Z2dnDw8Pe3t7Ozs6+vr6enp7p6enJycmpqanj4+Ojo6O5ubmzs7NLxFgzAAAB2klEQVR4nO3X3XLCIBCGYZa/BEjM/d9tWYgprXbGHtS25n0OVCLj6De7YTUGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAvTHZc2WlYRBs+7w77pZS9dz/7xf4iK+NKxui8XPMIm8yXpb5w/VKYpRqDfW0p+qjPGla0TehhTW2Rh7BqNmWVko6wVokprHJTeC+q1UZZelheGtfDsm0Rh7AmXV2ktt6lX5JSH7L4X/wBz7RKXqYezZ6Ku4bV316GsKzUoopi90SNmbWorMTf+vbP5doNp8gXYWW5mCEsX3cne2zS4KRIK68ziK2Ftlo/98IKvYCOsNIstWs3c4Rl3NbuaucQNJWawd3K0vvZHMbTME17NrrJj07RiVY2X7S8eljZuXwNK84So6b1HtZB5ywZ2Xsf/mrSVn+ptuLNaVhzitqn6xiWjq7T1MdUNzrN9NAeNSzXW2rplZV1+jTxQ2XpLmvNPjmYPpfZ80ylu4cm+D572Xp8pr5t1qzO0YOjR8PyfrWLtJHiuo2whsVNGxZZe1pS9H5FWMPicxvWv86ptGtnOgq/L+oBkJ3+/9blmYYsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4EneAHYKB+xqekqbAAAAAElFTkSuQmCC" alt="" id="pic" /></div>
 		 		<img src="${vo.picture}" id="picture" name="picture" />
 			</div>
 
@@ -208,10 +211,6 @@
 						name="type" value="registerOk" />
 				</div>
 
-				<div class="col-md-4 offset-md-2 row my-3">
-					<input type="hidden" name="empno" />
-					<!-- empno는 자동 생성되도록 넣어줌 -->
-				</div>
 
 				<div class="col-md-4 offset-md-1 row my-3">
 					<label for="username">생년월일</label> <input type="date"
@@ -222,6 +221,10 @@
 						class="form-control" name="phone" />
 				</div>
 
+				<div class="col-md-4 offset-md-2 row my-3">
+					<input type="hidden" name="empno" />
+					<!-- empno는 자동 생성되도록 넣어줌 -->
+				</div>
 			</div>
 
 			<input type="file" value="파일검색" id="img" name="img" accept="image/*" />
@@ -300,7 +303,7 @@
 
 				<div class="col-md-6 offset-md-4">
 					<button type="submit" class="btn btn-primary">등록하기</button>
-					<a href="mc?type=emp"> <input type="button"
+					<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"> <input type="button"
 						class="btn btn-danger" value="취소" />
 					</a>
 				</div>

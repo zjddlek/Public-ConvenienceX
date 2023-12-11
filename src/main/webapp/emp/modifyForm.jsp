@@ -17,7 +17,8 @@
 	width:800px;
 	margin:auto;
 	width:1500px;
-	height:1000px;
+	height:1300px;
+	margin-top: 50px;
 
 }
 #header{
@@ -125,7 +126,7 @@
 </script>
 <body>
 	<div>
-	<div class="container" id="root">
+	<div class="container border border-primary border-3 rounded-3 " id="root">
 
 		<div id="header" >
 			<h3>사원정보 수정</h3>
@@ -255,7 +256,7 @@
           
 			<div class="col-md-6 offset-md-4">
           		<input type="submit" class="btn btn-primary" value="수정" />
-				<a href="mc?type=emp"><input type="button" class="btn btn-danger" value="취소" /></a>
+				<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"><input type="button" class="btn btn-danger" value="취소" /></a>
           	</div>
           	</div>
           	
