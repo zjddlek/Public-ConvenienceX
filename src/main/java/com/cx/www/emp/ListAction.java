@@ -18,6 +18,11 @@ public class ListAction  implements Action{
       String period = req.getParameter("period");
       String period2 = req.getParameter("period2");
       String sno = req.getParameter("sno");
+      String jobno = req.getParameter("jobno"); 
+      
+      int jobno1=Integer.parseInt(jobno);
+      
+      
       
       EmpDAO dao = new EmpDAO();
 		/*
@@ -40,7 +45,7 @@ public class ListAction  implements Action{
          
          else    
          {
-            ArrayList<EmpVO> list= dao.getAll(sno);
+            ArrayList<EmpVO> list= dao.getAllByJobno(sno,jobno1);
             req.setAttribute("list",list);
          }
          
@@ -54,7 +59,8 @@ public class ListAction  implements Action{
          
       }
       
-
+      
+    
       
       dao.close();
       

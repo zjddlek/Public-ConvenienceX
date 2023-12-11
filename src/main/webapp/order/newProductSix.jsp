@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="./style/order.css">
 </head> -->
 <body>
-	<div class="col"><h2>이달의 신상</h2>
+	<div class="right" style="margin-left: 10px;"><h2>이달의 신상</h2>
 		<c:forEach var="vo" items="${npList }">
 			<div class="npItems">
 				<span>${vo.accName }</span>

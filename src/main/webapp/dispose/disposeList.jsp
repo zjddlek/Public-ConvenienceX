@@ -8,9 +8,8 @@
 <meta charset="UTF-8">
 <title>폐기리스트</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <style type="text/css">
 	#resultTable {
 		width: 800px;
@@ -24,31 +23,48 @@
 	      gap: 5px;
 	      flex-direction: row;
 	   }
+	
+	#despose_search{
+		float: right;
+	}
+	
+	form{
+		margin-bottom: 20px;
+	}
+	
+	h3{
+		text-align:center;
+		margin-bottom: 20px !important;
+	}
 </style>
 
 </head>
 <body>
-	<h3>폐기 검색 </h3>
-	
-	<form action="mc">
-		<input type="hidden" name="type" value="disposeSearch"/>
-		<input type="text" name="date" id="date" />날짜 
-		<!-- <input type="date" name="date" id="" /> -->
-		<input type="text" name="shopNo" id="shopNo" />점주 번호
-		<input type="submit" value="검색"/>
-	</form>
-	
-	<a href="/mc?type=expiredItems"><input type="button" value="유통기한이 지난 상품 조회" /></a>
-	
-	<div class="total">
-		<div id="myBarChart" class="border">
-		</div>
-		<div class="container-sm" id="resultTable">
-			<table class="table table-striped" >
-			</table>
-		</div>
-	</div>
+	<div class="container">
+		<jsp:include page="/main/nav.jsp"></jsp:include> 
 		
+		<h3>폐기 검색 </h3>
+	
+		<form action="mc">
+			<input type="hidden" name="type" value="disposeSearch"/>
+			<span>날짜</span>
+			<input type="text" name="date" id="date" placeholder="ex) 2023/11/01"/> 
+			
+			<span>점포 번호</span>
+			<input type="text" name="shopNo" id="shopNo" placeholder="ex) 03485"/>
+			<input type="submit" value="검색"/>
+			
+			<a href="/mc?type=expiredItems"><input type="button" id="despose_search" value="유통기한이 지난 상품 조회" /></a>
+		</form>
+		
+		<div class="total">
+			<div id="myBarChart" class="border">
+			</div>
+			<div class="container-sm" id="resultTable">
+				<table class="table table-striped" ></table>
+			</div>
+		</div>
+	</div>	
 <script>
 	if(${param.date} != null){
   		  google.charts.load('current', {packages: ['corechart']});

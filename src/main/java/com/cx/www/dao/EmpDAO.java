@@ -61,6 +61,9 @@ public class EmpDAO {
 		ArrayList<EmpVO> list = new ArrayList<EmpVO>();
 
 		sb.setLength(0);
+		
+		//String snoLogin= (String)session.getAttribute("id");
+		
 		sb.append("SELECT * FROM CXEMP WHERE SNO=? ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -476,6 +479,70 @@ public class EmpDAO {
 		}	
 		return count;
 	}
+	
+	
+	
+	
+	public ArrayList<EmpVO> getAllByJobno(String sno,int jobno) { // 직책에따라 정보조회하기
+		ArrayList<EmpVO> list = new ArrayList<EmpVO>(); 
+				
+		sb.setLength(0);
+		
+		
+		sb.append("SELECT * FROM CXEMP WHERE SNO=? and JOBNO <= ? ");
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, sno);
+			pstmt.setInt(2, jobno);
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				
+				String empno = rs.getString("empno");
+				String ename = rs.getString("ename");
+				String date = rs.getString("BIRTHDATE");
+				String phone = rs.getString("phone");
+				String address = rs.getString("address");
+				String address_detail = rs.getString("address_detail");
+				String email = rs.getString("email");
+				String hiredate = rs.getString("hiredate");
+				String is_retire = rs.getString("ISRETIRE");
+				int sal_hour = rs.getInt("sal_hour");
+				String id = rs.getString("id");
+				String pwd = rs.getString("PASSWORD");
+				//String sno = rs.getString("sno");
+				//int jobno = rs.getInt("JOBNO");
+				String picture = rs.getString("picture");
+
+			
+				
+				EmpVO vo = new EmpVO(empno, ename, date, phone, address, address_detail, email, hiredate, is_retire,
+						sal_hour, id, pwd, sno, jobno, picture);
+				
+			
+
+				
+				list.add(vo);
+				}
+				
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	
+	
 	
 	
 	

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cx.www.action.Action;
+import com.cx.www.cal.CalLAction;
 import com.cx.www.cal.CalMainAction;
 import com.cx.www.cal.TotalProfitAction;
 import com.cx.www.discard.DisposeAction;
@@ -124,12 +125,6 @@ public class MainController extends HttpServlet{
 			url = ac.execute(req, resp);
 		}
 		
-		// 정산
-		else if(type.equals("calLast")) {
-			Action ac = new CalLastCommand();
-			url = ac.execute(req, resp);
-		}
-		
 		// 폐기- 밝음
 		else if(type.equals("dispose")) {
 			Action ac = new DisposeAction();
@@ -226,6 +221,18 @@ public class MainController extends HttpServlet{
 			Action ac = new CalMainAction();
 			url = ac.execute(req, resp);
 		}
+		
+		// 정산
+		else if(type.equals("calLast")) {
+			Action ac = new CalLastCommand();
+			url = ac.execute(req, resp);
+		}
+		else if(type.equals("calList")) {
+			Action ac = new CalLAction();
+			url = ac.execute(req, resp);
+		}
+		
+		// 매출현황
 		else if (type.equals("profit")) {
 			Action ac = new TotalProfitAction();
 			url = ac.execute(req, resp);

@@ -16,7 +16,9 @@
 <link rel="stylesheet" href="./style/order.css">
 </head>
 <body> --%>
-	<div class="col"> <h2>매출 TOP</h2>
+
+	<div class="left" style="margin-right: 10px;"> <h2>매출 TOP</h2>
+
 		<c:forEach var="vo" items="${prList }">
 			<div class="prItems">
 				<span>
