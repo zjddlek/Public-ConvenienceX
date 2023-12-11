@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cx.www.action.Action;
-import com.cx.www.cal.CalLAction;
+import com.cx.www.cal.CalListAction;
 import com.cx.www.cal.CalMainAction;
 import com.cx.www.cal.TotalProfitAction;
 import com.cx.www.discard.DisposeAction;
@@ -228,7 +228,7 @@ public class MainController extends HttpServlet{
 			url = ac.execute(req, resp);
 		}
 		else if(type.equals("calList")) {
-			Action ac = new CalLAction();
+			Action ac = new CalListAction();
 			url = ac.execute(req, resp);
 		}
 		
