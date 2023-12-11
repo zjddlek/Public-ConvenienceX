@@ -10,7 +10,7 @@ h2{
 	text-align: center; 
 }
 
-.mcName,#subname,#stockno{
+.mcName,#subname{
 	cursor: pointer;
 	padding-left: 5px;
 }
@@ -33,10 +33,17 @@ table{
 	width:100%
 }
 
-#stock_list{
-	overflow-y: scroll;
-	overflow-x: hidden;
+#stock_list,#product_list,#cnt_list{
+	/*overflow-y: scroll; 
+	overflow-x: hidden;*/
+	border-right: 1px solid black;
 }
+
+#stockno{
+	margin-left: 10px;
+	
+}
+
 #stock{
 	height: 350px;
 }

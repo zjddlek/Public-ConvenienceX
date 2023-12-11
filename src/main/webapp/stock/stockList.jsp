@@ -12,10 +12,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<%-- 부트스트랩 --%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
 <link rel="stylesheet" href="./style/stock.css" />
 
 </head>
@@ -113,38 +109,38 @@
 				"scno" : scno
 			},
 			success:function(data){
-				console.log(data);
 				
-				// 값이 없는 경우 처리 ----> 아무런 값 없이 []만 나오는데 if문에 안걸림 물어보기
-				if (data.trim() == ""){
-					console.log("1");
+				data = data.trim();
+				let obj = JSON.parse(data);
+
+ 				if (obj.length == 0){
+					alert("해당 분류에는 상품이 존재하지 않습니다.");
 				}
-				
-				let obj = JSON.parse(data.trim());
-				
-				// 리스트 초기화
-				$("#stock_list *").remove();
-				$("#product_list *").remove();
-				$("#cost_list *").remove();
-				$("#cnt_list *").remove();
-				
-				$.each(obj, function(i, e){
-					let pname = e.pname;
-					let cost = e.price_consumer.toLocaleString('ko-KR');
-					
-					let stno = "<div id='stockno'>" + e.stockNo + "</div>";
-					
-					pname = "<div id='pname'>" + e.pname + "</div>";
-					
-					cost = "<div id='cost' style='text-align:center;'>" + cost + "</div>";
-					let cnt = "<div id='cnt' style='text-align:center;'>" + e.stock_count + "</div>";
-					
-					$("#stock_list").append(stno);
-					$("#product_list").append(pname);
-					$("#cost_list").append(cost);
-					$("#cnt_list").append(cnt);
-					
-				});
+ 				else{
+ 				// 리스트 초기화
+ 					$("#stock_list *").remove();
+ 					$("#product_list *").remove();
+ 					$("#cost_list *").remove();
+ 					$("#cnt_list *").remove();
+ 					
+ 					$.each(obj, function(i, e){
+ 						let pname = e.pname;
+ 						let cost = e.price_consumer.toLocaleString('ko-KR');
+ 						
+ 						let stno = "<div id='stockno'>" + e.stockNo + "</div>";
+ 						
+ 						pname = "<div id='pname'>" + e.pname + "</div>";
+ 						
+ 						cost = "<div id='cost' style='text-align:center;'>" + cost + "</div>";
+ 						let cnt = "<div id='cnt' style='text-align:center;'>" + e.stock_count + "</div>";
+ 						
+ 						$("#stock_list").append(stno);
+ 						$("#product_list").append(pname);
+ 						$("#cost_list").append(cost);
+ 						$("#cnt_list").append(cnt);
+ 						
+ 					});
+ 				}	
 			}
 		});
 	}
@@ -193,7 +189,7 @@
 </script>
 <body>
 	<div class="container" style="padding-bottom: 20px;">
-	<jsp:include page="/main/nav.jsp"></jsp:include> 
+	<jsp:include page="/main/nav.jsp"></jsp:include>
 		<h2>재고리스트</h2>
 		<div>
 			<div style="display: flex;">
