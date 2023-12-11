@@ -10,7 +10,7 @@ public class CalLAction implements Action {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
-		return "";
+		return "cal/calList.jsp";
 	}
 
 }

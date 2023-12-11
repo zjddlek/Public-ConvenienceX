@@ -10,7 +10,7 @@ public class CalMainAction implements Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
-		return "cal/calList.jsp";
+		return "cal/calMain.jsp";
 	}
 
 }
