@@ -20,25 +20,36 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-	#goregist {
-		height: 80px;
-		width: 180px;
+	.img{
+		background-image: url('./images/ConvenienceXLogo1.png');
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: center;
+		width:600px;
+		height:400px;
+	}
+	.form-group{
+		margin-bottom: 10px;
+	}
+	p{
+		margin-top: 15px;
+	}
+	#back{
+		margin-left: 2px;
+	}
+	#changePW{
+		margin-right:2px;
+	}
+	span{
+		margin-left: 15px;
+	}
+	#postcode{
+		margin-right: 2px;
+	}
+	#postcodebtn{
+		margin-left:10px;
 	}
 	
-	#back {
-		height: 80px;
-		width: 180px;
-	}
-	.input_container{
-        position: relative;
-		display: inline-block;
-
- 	 }
-     #timer{
-        position: absolute;
-        right: 5px;
-        top: 2px;
-     }
 </style>
 <script type="text/javascript">
 	//코드번호
@@ -254,82 +265,112 @@
 </script>
 
 </head>
-<body>
-	<div class="container">
-		<form action="mc?type=shopResistOk">
-			<table class="table table-striped">
-				<div class="text-center">
-					<h3>ConvenienceX</h3>
+<section class="ftco-section">
+		<div class="container">
+			<div class="row d-flex justify-content-center pb-3">
+				<div class ="img" ><!-- 추후 background-img: url(jpg)로 변경 -->		
 				</div>
-
-				<tr>
-					<td>점포명</td>
-					<td><input type="text" name="sname" id="sname" style="width: 500px" placeholder="점포명을 입력하세요" />
-					<input type="button" value="중복확인" id="shopcheck" />
-					<span id="checksname"></span> 
-					<input type="hidden" name="type" value="shopResistOk" /></td>
-
-				</tr>
-				<tr>
-					<td>점포위치</td>
-					<td><input type="text" name="postcode" id="postcode" placeholder="우편번호" readonly="readonly" />
-					<input type="button" value="주소찾기" onclick="adress();" /></td>
-
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="text" name="roadaddrs" id="roadaddrs" placeholder="도로명주소" style="width: 500px" readonly="readonly" />
-					<input type="text" name="jibunaddrs" id="jibunaddrs" placeholder="지번" style="width: 500px" readonly="readonly" /></td>
-				</tr>
-
-				<tr>
-					<td></td>
-					<td><input type="text" name="addrsdetail" id="addrsdetail"
-						placeholder="상세주소" style="width: 500px" /></td>
-				</tr>
-				<tr>
-					<td>사업자번호</td>
-					<td><input type="text" name="businessNo" id="businessNo"
-						style="width: 500px" /></td>
-				</tr>
-				<tr>
-					<td>이메일</td>
-					<td><input type="text" name="email" id="email" />@<input type="text" name="emailAddrs" id="emailAddrs" /> 
-						<select name="emailAddrsSelect" id="emailAddrsSelect" onchange="changeEmail()">
-							<option name="emailAddrsSelect" value="default">주소를 선택해주세요</option>
-							<option name="emailAddrsSelect" value="naver.com">naver.com</option>
-							<option name="emailAddrsSelect" value="daum.net">daum.net</option>
-							<option name="emailAddrsSelect" value="gmail.com">gmail.com</option>
-						</select>
-						<input type="button" value="인증요청" id="sendemailcheck" />
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<div class="input_container">
-							<input type="text" name="confirm" id="confirm" style="width: 500px" placeholder="인증번호를 입력하세요" />
-							<span id="timer"></span>
-						</div>
-						<input type="button" value="인증확인" id="numcheck" /><span id="codecheck"></span>
-					</td>
-
-				</tr>
-				<tr>
-					<td></td>
-					<td><textarea name="terms" id="" cols="80" rows="10" disabled>이용약관</textarea><br />
-						<input type="checkbox" name="termscheck" id="termscheck" />모두 읽었으며 동의합니다.
-					</td>
-				</tr>
-			</table>
-			<div class="text-center">
-				<input type="submit" id="goregist" value="등록하기" onclick="validation()" /> 
-				<a href="mc"><input id="back" type="button" value="돌아가기" /></a>
 			</div>
-		</form>
-	</div>
-	<script type="text/javascript">
-
-	</script>
+			<div class="row d-flex justify-content-center pb-3">
+				<div class="col-md-8 col-lg-6">
+					<div class="wrap">
+						<div class="findPW-wrap p-4 p-md-5 border border-primary border-3 rounded-3 ">
+							<div class="d-flex">
+								<div class="w-50">
+									<h3>점포 등록</h3>
+								</div>
+							</div>
+							<form action="mc?type=shopResistOk">
+								<div class="form-floating mb-3">
+									<input type="text" name="sname" id="sname" class="form-control" placeholder="점포명"  required />
+									<label for="sname" class="form-control-placeholder" >점포명</label>
+									<input type="hidden" name="type" value="shopResistOk" />
+								</div>
+								<div class="form-group d-md-flex align-items-center">
+									<div class=" mb-3 w-50">
+										<input type="button" id="shopcheck" value="중복확인" class="form-control btn btn-primary rounded" />
+									</div>
+									<div class="form-floating mb-3 w-50">
+										<span id="checksname"></span>
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-center" >
+									<div class="form-floating mb-3 w-50 text-left" >
+										<input type="text" name="postcode" id="postcode" class="form-control" placeholder="우편번호"  readonly />
+										<label for="postcode" class="form-control-placeholder" >우편번호</label>
+									</div>
+									<div class="form-floating mb-3 w-25 text-right" >
+										<input type="button" id="postcodebtn" value="주소찾기" onclick="adress();" class="form-control btn btn-primary rounded" />
+									</div>
+								</div>
+								<div class="form-floating mb-3">
+									<input type="text" name="roadaddrs" id="roadaddrs" placeholder="도로명주소"  class="form-control"  readonly />
+									<label for=roadaddrs class="form-control-placeholder" >도로명주소</label>				
+								</div>
+								<div class="form-floating mb-3">
+									<input type="text" name="jibunaddrs" id="jibunaddrs" placeholder="지번" class="form-control"   readonly />
+									<label for="jibunaddrs" class="form-control-placeholder" >지번 주소</label>
+								</div>
+								<div class="form-floating mb-3" >
+										<input type="text" name="addrsdetail" id="addrsdetail" placeholder="상세주소" class="form-control"  />
+										<label for="addrsdetail" class="form-control-placeholder" >상세 주소</label>
+									</div>
+								<div class="form-group d-md-flex">
+									<div class="form-floating mb-3 w-50 text-left">
+										<input type="text" name="eamil" id="email" class="form-control" placeholder="이메일을 입력해주세요."  required />
+										<label for="email" class="form-control-placeholder" >이메일을 입력해주세요.</label>
+									</div>
+										<p>@</p>
+									<div class="form-floating mb-3 w-50 text-right">
+										<input type="text" name="emailAddrs" id="emailAddrs" class="form-control" placeholder="이메일을 입력해주세요."  required />
+										<label for="emailAddrs" class="form-control-placeholder" >이메일을 입력해주세요.</label>
+									</div>
+								</div>
+								<div class="form-group d-md-flex align-items-center">
+									<div class="w-50 text-left">
+										<input type="button" class="form-control btn btn-primary rounded" value="인증메일보내기" id="sendemailcheck" />
+									</div>
+									<div class="w-50 text-right">
+										<span id="timer"></span>
+									</div>
+								</div>
+								<div class="form-floating mb-3">
+									<input type="text" name="confirm" id="confirm" class="form-control" placeholder="인증번호를 입력해주세요."  required />
+									<label for="confirm" class="form-control-placeholder" >인증번호를 입력해주세요.</label>
+								</div>
+								<div class="form-group d-md-flex align-items-center">
+									<div class="w-50 text-left">
+										<input type="button" class="form-control btn btn-primary rounded" value="인증확인" id="numcheck"/>
+									</div>
+									<div class="w-50 text-right">
+										<span id="codecheck"></span>
+									</div>
+								</div>
+								<div class="form-floating mb-3">
+									<textarea name="terms" id="" cols="80" rows="10" class="form-control" placeholder="이용약관" disabled>이용약관 입니다.</textarea>
+									<label for="terms" class="form-control-placeholder" >이용약관</label>
+								</div>
+								<div class="form-floating mb-3">								
+									<div class="form-check form-switch mt-2">
+						            	<input class="form-check-input" type="checkbox" id="termscheck">
+						            	<label class="form-check-label" for="termscheck">모두 읽었으며 동의합니다.</label>
+        							</div>
+								</div>
+								<div class="form-group d-md-flex align-items-center">
+									<div class="w-50">
+										<input type="submit" id=goregist class="form-control btn btn-primary rounded" value="등록하기" onclick="validation()"  />
+									</div>
+									<div class="w-50">
+										<a href="mc"><input type="button" id="back" class="form-control btn btn-success rounded" value="돌아가기" /></a>
+									</div>
+								</div>
+							</form>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
 </html>

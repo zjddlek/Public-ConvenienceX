@@ -245,7 +245,7 @@
 </script>
 </head>
 <body>
-	<secction class="ftco-section">
+	<section class="ftco-section">
 		<div class="container">
 			<div class="row d-flex justify-content-center pb-3">
 				<div class ="img" ><!-- 추후 background-img: url(jpg)로 변경 -->		
@@ -331,6 +331,6 @@
 				</div>
 			</div>
 		</div>
-	</secction>
+	</section>
 </body>
 </html>
