@@ -61,6 +61,10 @@ public class EmpDAO {
 		ArrayList<EmpVO> list = new ArrayList<EmpVO>();
 
 		sb.setLength(0);
+		
+		
+		//String snoLogin= (String)session.getAttribute("id");
+		
 		sb.append("SELECT * FROM CXEMP WHERE SNO=? ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());

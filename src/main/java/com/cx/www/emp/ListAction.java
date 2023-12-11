@@ -18,6 +18,7 @@ public class ListAction  implements Action{
       String period = req.getParameter("period");
       String period2 = req.getParameter("period2");
       String sno = req.getParameter("sno");
+       
       
       EmpDAO dao = new EmpDAO();
 		/*
