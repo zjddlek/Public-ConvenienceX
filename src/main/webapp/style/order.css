@@ -28,3 +28,7 @@
 	}
 	.allOk, .orderOk { text-align: end;	}
 	.search { text-align: center;}
+	
+	.navbar{
+		width: 100%;
+	}

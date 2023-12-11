@@ -9,17 +9,12 @@
 </head>
 
 <body>
-	<h3>메인 페이지 </h3>
-
-	<a href="mc?type=sales"><input type="button" value="판매 관리" /></a>
-	<a href="mc?type=orders&sno=${svo.sno }"><input type="button" value="발주" /></a>
-	<a href="mc?type=stock"><input type="button" value="재고관리 - 접속불가" /></a>
-	<a href="mc?type=calMain"><input type="button" value="정산- 접속불가" /></a>
-	<a href="mc?type=dispose"><input type="button" value="폐기" /></a>
-	<a href="mc?type=emp"><input type="button" value="인사관리" /></a>
-	<a href="mc?type=workmain&sno=${svo.sno }"><input type="button" value="출퇴근" /></a>
-	<a href="mc?type=etc"><input type="button" value="부대비용관리 - 접속불가" /></a>
+	<div class="container">
+		<jsp:include page="/main/nav.jsp"></jsp:include>
+		<%-- 요기아래서부터 작업하시면 됩니다. --%>
+		
+		
+	</div>
+	
 </body>
-
-
 </html>

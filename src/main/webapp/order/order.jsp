@@ -13,17 +13,24 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 <link rel="stylesheet" href="./style/order.css">
 <script src="./js/order.js"></script>
+<script src="./js/orderCookie.js"></script>
+
 </head>
 <body>
 	<div class="container">
+		<jsp:include page="/main/nav.jsp"></jsp:include> 
 		
-		<c:import url="./rankingTopSix.jsp"></c:import>
+		<div style="display:flex;">
+			<c:import url="./rankingTopSix.jsp"></c:import>
 		
-		<c:import url="./orderMain.jsp"></c:import>
+			<c:import url="./orderMain.jsp"></c:import>
+			
+			<c:import url="./newProductSix.jsp"></c:import>
+		</div>
 		
-		<c:import url="./newProductSix.jsp"></c:import>
 		
 	</div>
 </body>

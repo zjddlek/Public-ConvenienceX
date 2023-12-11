@@ -192,7 +192,8 @@
 
 </script>
 <body>
-	<div class="container" style="border: 1px solid red; margin-top:30px; padding-bottom: 20px;">
+	<div class="container" style="padding-bottom: 20px;">
+	<jsp:include page="/main/nav.jsp"></jsp:include> 
 		<h2>재고리스트</h2>
 		<div>
 			<div style="display: flex;">
@@ -236,7 +237,7 @@
 					<col style="width:3%"/>
 					<col style="width:8%"/>
 				</colgroup>
-				<thead>
+				<thead style="border-bottom: 1px solid black;">
 					<tr>
 						<%-- sort는 언젠간.... 기능 제거함 --%>
 						<th>
