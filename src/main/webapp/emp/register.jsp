@@ -25,10 +25,11 @@
 <style>
 #root {
 	margin: auto;
-	width: 800px;
+	width: 60px;
 	margin: auto;
 	width: 1500px;
-	height: 1000px;
+	height: 1300px;
+	margin-top: 50px;
 	
 }
 
@@ -190,7 +191,7 @@
 </script>
 
 <body>
-	<div class="container" id="root">
+	<div class="container border border-primary border-3 rounded-3" id="root">
 		<div id="header">
 			<h3>사원 등록</h3>
 		</div>
@@ -208,10 +209,6 @@
 						name="type" value="registerOk" />
 				</div>
 
-				<div class="col-md-4 offset-md-2 row my-3">
-					<input type="hidden" name="empno" />
-					<!-- empno는 자동 생성되도록 넣어줌 -->
-				</div>
 
 				<div class="col-md-4 offset-md-1 row my-3">
 					<label for="username">생년월일</label> <input type="date"
@@ -222,6 +219,10 @@
 						class="form-control" name="phone" />
 				</div>
 
+				<div class="col-md-4 offset-md-2 row my-3">
+					<input type="hidden" name="empno" />
+					<!-- empno는 자동 생성되도록 넣어줌 -->
+				</div>
 			</div>
 
 			<input type="file" value="파일검색" id="img" name="img" accept="image/*" />
@@ -300,7 +301,7 @@
 
 				<div class="col-md-6 offset-md-4">
 					<button type="submit" class="btn btn-primary">등록하기</button>
-					<a href="mc?type=emp"> <input type="button"
+					<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"> <input type="button"
 						class="btn btn-danger" value="취소" />
 					</a>
 				</div>

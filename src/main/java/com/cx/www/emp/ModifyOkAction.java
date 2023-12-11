@@ -7,10 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.cx.www.action.Action;
 import com.cx.www.dao.EmpDAO;
 import com.cx.www.vo.EmpVO;
+import com.cx.www.vo.ShopVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -86,7 +87,20 @@ public class ModifyOkAction extends HttpServlet {
 			
 			}
 		
-			resp.sendRedirect("mc?type=emp");
+		HttpSession sesssion = req.getSession();
+		Object s = sesssion.getAttribute("svo");
+		ShopVO svo  = (ShopVO)s;
+		String sno = svo.getSno();
+		
+		
+		Object e = sesssion.getAttribute("vo"); EmpVO vo = (EmpVO)e; int jobno =
+		vo.getJobno();
+		 
+		
+		
+		// TODO ;  jobno 세션처리 끝난후에 밑에부분 +jobno 로 바꾸주면 실행됨!
+		
+				resp.sendRedirect("mc?type=emp&sno="+sno+"&jobno="+jobno);
 		}
 
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
