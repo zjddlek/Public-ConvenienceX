@@ -57,7 +57,7 @@
 				<td></td>
 				<td colspan="2">
 					<a href="mc?type=orders&sno=${svo.sno }">
-						<input type="button" value="발주 리스트로 돌아가기">
+						<input type="button" class="btn btn-secondary" value="발주 리스트로 돌아가기">
 					</a>
 				</td>
 			</tr>

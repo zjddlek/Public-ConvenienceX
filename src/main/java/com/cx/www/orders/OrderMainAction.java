@@ -20,7 +20,7 @@ public class OrderMainAction implements Action{
 		
 		String[] values = null;
 		Cookie[] cookies = req.getCookies();
-		ArrayList<AllProductVO> searchList = new ArrayList<AllProductVO>();
+		ArrayList<AllProductVO> list = new ArrayList<AllProductVO>();
 		AllProductVO vo = null;
 		
 		if ( cookies != null ) {
@@ -31,13 +31,13 @@ public class OrderMainAction implements Action{
 					values = value.split("%2C");
 					for ( String pno : values ) {
 						vo = dao.getSearchPno(pno);
-						searchList.add(vo);
+						list.add(vo);
 					}
 				}
 			}
 		}
 		
-		req.setAttribute("searchList", searchList);
+		req.setAttribute("list", list);
 		
 		dao.close();
 		

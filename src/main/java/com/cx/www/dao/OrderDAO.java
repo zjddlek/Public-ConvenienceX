@@ -106,11 +106,14 @@ public class OrderDAO {
 	}
 	
 	public OrderVO getLastOne(String sno) {
+		OrderVO vo = null;
+	
 		sb.setLength(0);
 		sb.append("SELECT ORDNO, ORDDATE, ORD_COUNT, PNO_INFO, SNO "
-				+ "FROM ORDERS WHERE SNO = ? "
-				+ "ORDER BY LENGTH(ORDNO) DESC, ORDNO DESC ");
-		OrderVO vo = null;
+				+ "FROM ORDERS "
+				+ "WHERE SNO = ? "
+				+ "ORDER BY ORDDATE DESC, LENGTH(ORDNO) DESC, ORDNO DESC "
+				+ "LIMIT 1");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -118,10 +121,10 @@ public class OrderDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				vo = new OrderVO(
-						rs.getString("ordno"),
-						rs.getString("ordDate"), 
-						rs.getInt("ord_Count"), 
-						rs.getInt("pno_Info"),
+						rs.getString("ORDNO"),
+						rs.getString("ORDDATE"), 
+						rs.getInt("ORD_COUNT"), 
+						rs.getInt("PNO_INFO"),
 						sno);
 			}
 
@@ -134,20 +137,24 @@ public class OrderDAO {
 
 	public void addOne(OrderVO vo) {
 		
-		sb.setLength(0);
-		sb.append("insert into ORDERS values (?,NOW(),?,?,?)");
-		/* 			 ORDNO, ORDDATE, ORD_COUNT, PNO_INFO, SNO */
+	
+			
+			sb.setLength(0);
+			sb.append("insert into ORDERS values (?,NOW(),?,?,?)");
+			/* 			 ORDNO, ORDDATE, ORD_COUNT, PNO_INFO, SNO */
+			
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+					pstmt.setString(1, vo.getOrdno());
+					pstmt.setInt(2, vo.getOrdCount());
+					pstmt.setInt(3, vo.getPnoInfo());
+					pstmt.setString(4, vo.getSno());
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		
-		try {
-			pstmt = conn.prepareStatement(sb.toString());
-				pstmt.setString(1, vo.getOrdno());
-				pstmt.setInt(2, vo.getOrdCount());
-				pstmt.setInt(3, vo.getPnoInfo());
-				pstmt.setString(5, vo.getSno());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 	}
 	
 	public void deleteOne(String ordno) {

@@ -17,14 +17,16 @@
 <script src="./js/order.js"></script>
 </head>
 <body>
-	<div class="container">
-		
-		<c:import url="./rankingTopSix.jsp"></c:import>
-		
-		<c:import url="./orderMain.jsp"></c:import>
-		
-		<c:import url="./newProductSix.jsp"></c:import>
-		
+	<div class="container-fluid text-center">
+		<div class="row">
+			
+			<c:import url="./rankingTopSix.jsp"></c:import>
+			
+			<c:import url="./orderMain.jsp"></c:import>
+			
+			<c:import url="./newProductSix.jsp"></c:import>
+			
+		</div>
 	</div>
 </body>
 </html>

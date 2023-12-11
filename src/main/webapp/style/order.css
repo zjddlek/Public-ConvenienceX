@@ -28,3 +28,9 @@
 	}
 	.allOk, .orderOk { text-align: end;	}
 	.search { text-align: center;}
+	
+	.orderOk {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}

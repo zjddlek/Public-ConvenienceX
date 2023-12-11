@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>발주 완료 창</title>
+<title>발주 완료 창2</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -26,12 +26,16 @@
 	})
 	
 </script>
+<style>
+	h1 {text-align: center;}
+</style>
 </head>
 <body>
 	<div class="container-fluid">
-		<input type="date" name="date" id="date" />
+		<input type="date" name="date" id="date" value="${yyyyMMdd }" />
 		<input type="hidden" name="sno" id="sno" value="${sno }" />
-		<table class="table table-striped table-hover table-sm">
+		<table class="table table-striped table-hover table-sm caption-top">
+			<caption><h1>${yyyyMMdd }</h1></caption>
 			<tr>
 				<th>주문날짜</th>
 				<th>주문번호</th>
@@ -53,31 +57,31 @@
 			<tr>
 				<td style='text-align: end'>
 					<nav aria-label="Page navigation">
-						  <ul class="pagination justify-content-center">
-						    <li class="page-item"><a class="page-link" href="mc?type=orderList&sno=${sno }&cp=1">첫 페이지로</a></li>
-						  </ul>
+						<ul class="pagination justify-content-center">
+							<li class="page-item"><a class="page-link" href="mc?type=orderDayList&sno=${sno }&yyyymmdd=${yyyyMMdd }&cp=1">첫 페이지로</a></li>
+						</ul>
 					</nav>
 				</td>
 				<td colspan='4' style='text-align: center'>
 					<nav aria-label="Page navigation">
 						<ul class="pagination justify-content-center">
 							<c:if test="${currentPage > 1}">
-								<li class="page-item"><a class="page-link" href="mc?type=orderList&sno=${sno }&cp=${currentPage -1 }">Previous</a></li>
+								<li class="page-item"><a class="page-link" href="mc?type=orderDayList&sno=${sno }&yyyymmdd=${yyyyMMdd }&cp=${currentPage -1 }">Previous</a></li>
 							</c:if>
 							<c:forEach var="i" begin="${startPage }" end="${endPage }" >
-								<li class="page-item"><a class="page-link" href="mc?type=orderList&sno=${sno }&cp=${i }">${i }</a></li>
-						    </c:forEach>
-						    <c:if test="${currentPage < totalPage}">
-								<li class="page-item"><a class="page-link" href="mc?type=orderList&sno=${sno }&cp=${currentPage +1 }">Next</a></li>
+								<li class="page-item"><a class="page-link" href="mc?type=orderDayList&sno=${sno }&yyyymmdd=${yyyyMMdd }&cp=${i }">${i }</a></li>
+							</c:forEach>
+							<c:if test="${currentPage < totalPage}">
+								<li class="page-item"><a class="page-link" href="mc?type=orderDayList&sno=${sno }&yyyymmdd=${yyyyMMdd }&cp=${currentPage +1 }">Next</a></li>
 							</c:if>
 						</ul>
 					</nav>
 				</td>
 				<td>
 					<nav aria-label="Page navigation">
-						  <ul class="pagination justify-content-center">
-						    <li class="page-item"><a class="page-link" href="mc?type=orderList&sno=${sno }&cp=${totalPage }">마지막 페이지로</a></li>
-						  </ul>
+						<ul class="pagination justify-content-center">
+							<li class="page-item"><a class="page-link" href="mc?type=orderDayList&sno=${sno }&yyyymmdd=${yyyyMMdd }&cp=${totalPage }">마지막 페이지로</a></li>
+						</ul>
 					</nav>
 				</td>
 			</tr>

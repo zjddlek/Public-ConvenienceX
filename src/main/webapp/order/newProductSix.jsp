@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="./style/order.css">
 </head> -->
 <body>
-	<div class="right"><h2>이달의 신상</h2>
+	<div class="col"><h2>이달의 신상</h2>
 		<c:forEach var="vo" items="${npList }">
 			<div class="npItems">
 				<span>${vo.accName }</span>
@@ -27,7 +27,7 @@
 			</div>
 		</c:forEach>
 		<a href="mc?type=newProducts&sno=${svo.sno }">
-			<input type="button" value="신상품 보러가기" name="showNewProduct" />
+			<input type="button" class="btn btn-primary" value="신상품 보러가기" name="showNewProduct" />
 		</a>
 	</div>
 </body>

@@ -4,21 +4,22 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="main">
+<div class="col-9">
 	<div class="allOk">
-		<a href="mc?type=allProducts">
-			<input type="button" value="전체상품리스트" name="showAllProduct" id="showAllProductList"/>
+		<a href="mc?type=allProducts&sno=${svo.sno }">
+			<input type="button" class="btn btn-primary" value="전체상품리스트" name="showAllProduct" id="showAllProductList"/>
 		</a>
 	</div>
 	<div class="search">
-		<form action="mc?type=searchProduct">
+		<form action="mc?">
 			<input type="hidden" name="type" value="searchProduct" />
+			<input type="hidden" name="sno" value="${svo.sno }" />
 			<label for="pname">상품명</label>
 			<input type="text" name="pname" id="pname">
-			<input type="submit" value="상품검색">
+			<input type="submit" class="btn btn-success" value="상품검색">
 		</form>
 	</div>
-	<div class="orderItems"  style="width:930px; height:653px; overflow:auto">
+	<div class="orderItems"  style="width:100%; height:718px; overflow:auto">
 		<table class="table table-striped table-hover table-sm">
 			<tr style="text-align:center;">
 				<th><input type="checkbox" name="" id="" class="allChecked" checked /></th>
@@ -28,8 +29,8 @@
 				<th>총 가격</th>
 			</tr>
 			 
-			<c:if test="${searchList != null }">
-				<c:forEach var="vo" items="${searchList }">
+			<c:if test="${list != null }">
+				<c:forEach var="vo" items="${list }">
 					<tr>
 						<td><input class="perChecked" type="checkbox" value="${vo.PNo }" onchange="perCheckedOnchange()" checked /></td>
 						<td class="orderName" name="selectPname" value="${vo.PName }" >${vo.PName }</td>
@@ -53,8 +54,11 @@
 		</table>
 	</div>
 	<div class="orderOk">
+		<a href="mc?type=orderList&sno=${svo.sno }">
+			<input type="button" class="btn btn-primary" value="발주 완료 리스트 보러가기" />
+		</a>
 		<a href="mc?type=insertOrders&sno=${svo.sno }">
-			<input type="button" value="선택상품 발주하기" />
+			<input type="button" class="btn btn-danger" value="선택상품 발주하기" />
 		</a>
 	</div>
 </div>

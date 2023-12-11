@@ -36,6 +36,8 @@ import com.cx.www.orders.AllProductListAction;
 import com.cx.www.orders.InsertOrderAction;
 import com.cx.www.orders.NewProductListAction;
 import com.cx.www.orders.NewProductSixAction;
+import com.cx.www.orders.OrderDayListAction;
+import com.cx.www.orders.OrderListAction;
 import com.cx.www.orders.OrderMainAction;
 import com.cx.www.orders.OrdersAction;
 import com.cx.www.orders.ProductRankingListAction;
@@ -198,6 +200,12 @@ public class MainController extends HttpServlet{
 			url = ac.execute(req, resp);
 		} else if (type.equals("insertOrders")) {
 			Action ac = new InsertOrderAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("orderList")) {
+			Action ac = new OrderListAction();
+			url = ac.execute(req, resp);
+		} else if (type.equals("orderDayList")) {
+			Action ac = new OrderDayListAction();
 			url = ac.execute(req, resp);
 		}
 		
