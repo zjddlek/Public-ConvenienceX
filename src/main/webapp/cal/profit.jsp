@@ -6,199 +6,238 @@
 <head> 
 </head>
 <meta charset="UTF-8">
-<title>재고현황</title>
+<title>매출현황</title>
 
 <%-- jquery --%>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+<link rel="stylesheet" href="./style/profit.css" />
 
 <style>
-    #calendar {
-        width: 80vw;
-        height: 80vh;
-    }
-
-    #yrModal {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(50, 150, 150, 0.7);
-        display: none;
-        z-index: 1000;
-    }
-
-    #cont {
-        margin: 50px auto;
-        width: 50%;
-        height: 70%;
-        background-color: darkblue;
-        color: yellow;
-    }
     
-    table{
-    	border:1px solid red;
-    }
-    
-    tr{
-    	border:1px solid red;
-    }
 </style>
 
 <body>
 	<div class="container">
-		<!-- 실제 화면을 담을 영역 -->
-	    <div id="Wrapper" style="display: flex;">
-	        <div id='calendar'></div>
-	        <div>
-	        	<table>
-	        		<tr>
-	        			<th>주간 매출</th>
-	        		</tr>
-	        		<tr>
-	        			<td>11111</td>
-	        		</tr>
-	        		<tr>
-	        			<td>11111</td>
-	        		</tr>
-	        		<tr>
-	        			<td>11111</td>
-	        		</tr>
-	        		<tr>
-	        			<td>11111</td>
-	        		</tr>
-	        		<tr>
-	        			<th>월간 매출</th>
-	        		</tr>
-	        		<tr>
-	        			<td>111111</td>
-	        		</tr>
-	        	</table>
-	        </div>
-	    </div>
+		<jsp:include page="/main/nav.jsp"></jsp:include>
+		<h3>매출현황</h3>
+	    <table class="scriptCalendar">
+	        <thead>
+	            <tr>
+	                <td class="calendarBtn" id="btnPrevCalendar">&#60;&#60;</td>
+	                <td colspan="5">
+	                    <span id="calYear">YYYY</span>년
+	                    <span id="calMonth">MM</span>월
+	                </td>
+	                <td class="calendarBtn" id="nextNextCalendar">&#62;&#62;</td>
+	            </tr>
+	            <tr>
+	                <td>일</td>
+	                <td>월</td>
+	                <td>화</td>
+	                <td>수</td>
+	                <td>목</td>
+	                <td>금</td>
+	                <td>토</td>
+	            </tr>
+	        </thead>
+	        <tbody></tbody>
+	    </table>
 	</div>
-    
-    <script>
-        const calendarEl = document.querySelector('#calendar');
-        const mySchStart = document.querySelector("#schStart");
-        const mySchEnd = document.querySelector("#schEnd");
-        const mySchTitle = document.querySelector("#schTitle");
-        const mySchAllday = document.querySelector("#allDay");
-        const mySchBColor = document.querySelector("#schBColor");
-        const mySchFColor = document.querySelector("#schFColor");
-
-        //캘린더 헤더 옵션
-        const headerToolbar = {
-            left: 'prevYear,prev,next,nextYear today',
-            center: 'title',
-            right: 'dayGridMonth,dayGridWeek,timeGridDay'
-        }
-
-        // 캘린더 생성 옵션(참공)
-        const calendarOption = {
-            height: '700px', // calendar 높이 설정
-            expandRows: true, // 화면에 맞게 높이 재설정
-            slotMinTime: '09:00', // Day 캘린더 시작 시간
-            slotMaxTime: '18:00', // Day 캘린더 종료 시간
-            // 맨 위 헤더 지정
-            headerToolbar: headerToolbar,
-            initialView: 'dayGridMonth',  // default: dayGridMonth 'dayGridWeek', 'timeGridDay', 'listWeek'
-            locale: 'kr',        // 언어 설정
-            selectable: true,    // 영역 선택
-            selectMirror: true,  // 오직 TimeGrid view에만 적용됨, default false
-            navLinks: true,      // 날짜,WeekNumber 클릭 여부, default false
-            weekNumbers: true,   // WeekNumber 출력여부, default false
-            editable: true,      // event(일정) 
-            /* 시작일 및 기간 수정가능여부
-            eventStartEditable: false,
-            eventDurationEditable: true,
-            */
-            dayMaxEventRows: true,  // Row 높이보다 많으면 +숫자 more 링크 보임!
-            /*
-            views: {
-                dayGridMonth: {
-                    dayMaxEventRows: 3
-                }
-            },
-            */
-            nowIndicator: true,
-            //events:[],
-            eventSources: [
-                './commonEvents.json',  // Ajax 요청 URL임에 유의!
-                './KYREvents.json',
-                './SYREvents.json'
-            ]
-        }
-
-        // 캘린더 생성
-        const calendar = new FullCalendar.Calendar(calendarEl, calendarOption);
-
-        // 캘린더 그리깅
-        calendar.render();
-
-        // 캘린더 이벤트 등록
-        calendar.on("eventAdd", info => console.log("Add:", info));
-        calendar.on("eventChange", info => console.log("Change:", info));
-        calendar.on("eventRemove", info => console.log("Remove:", info));
-        calendar.on("eventClick", info => {
-            console.log("eClick:", info);
-            console.log('Event: ', info.event.extendedProps);
-            console.log('Coordinates: ', info.jsEvent);
-            console.log('View: ', info.view);
-            // 재미로 그냥 보더색 바꾸깅
-            info.el.style.borderColor = 'red';
-        });
-        calendar.on("eventMouseEnter", info => console.log("eEnter:", info));
-        calendar.on("eventMouseLeave", info => console.log("eLeave:", info));
-        calendar.on("dateClick", info => console.log("dateClick:", info));
-        calendar.on("select", info => {
-
-            mySchStart.value = info.startStr;
-            mySchEnd.value = info.endStr;
-
-            YrModal.style.display = "block";
-        });
-
-        // 일정(이벤트) 추가하깅
-        function fCalAdd() {
-            if (!mySchTitle.value) {
-                alert("제모게 머라도 써주삼")
-                mySchTitle.focus();
-                return;
-            }
-            let bColor = mySchBColor.value;
-            let fColor = mySchFColor.value;
-            if (fColor == bColor) {
-                bColor = "black";
-                fColor = "yellow";
-            }
-
-            let event = {
-                start: mySchStart.value,
-                end: mySchEnd.value,
-                title: mySchTitle.value,
-                allDay: mySchAllday.checked,
-                backgroundColor: bColor,
-                textColor: fColor
-            };
-
-            calendar.addEvent(event);
-            fMClose();
-        }
-
-        // 모달 닫기
-        function fMClose() {
-            YrModal.style.display = "none";
-        }
-        
-      //이벤트 업데이트!, 이벤트소스 다시 가져와서 다시 그리깅
-       function fCalUpdate() {
-           console.log("흥치치");
-           calendar.refetchEvents();
-       }
-    </script>
 </body>
-
 </html>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        buildCalendar();
+        
+        document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
+            prevCalendar();
+        });
+        
+        document.getElementById("nextNextCalendar").addEventListener("click", function(event) {
+            nextCalendar();
+        });
+    });
+
+    var toDay = new Date();
+    var nowDate = new Date();
+    
+    // @brief   이전달 버튼 클릭시
+    function prevCalendar() {
+        this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() - 1, toDay.getDate());
+        buildCalendar();    // @param 전월 캘린더 출력 요청
+    }
+
+    // @brief   다음달 버튼 클릭시
+    function nextCalendar() {
+        this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() + 1, toDay.getDate());
+        buildCalendar();    // @param 명월 캘린더 출력 요청
+    }
+
+     // @brief   캘린더 오픈
+     // @details 날짜 값을 받아 캘린더 폼을 생성하고, 날짜값을 채워넣는다.
+    function buildCalendar() {
+
+        let doMonth = new Date(toDay.getFullYear(), toDay.getMonth(), 1);
+        let lastDate = new Date(toDay.getFullYear(), toDay.getMonth() + 1, 0);
+
+        let tbCalendar = document.querySelector(".scriptCalendar > tbody");
+
+        document.getElementById("calYear").innerText = toDay.getFullYear();                       // @param YYYY월
+        document.getElementById("calMonth").innerText = autoLeftPad((toDay.getMonth() + 1), 2);   // @param MM월
+        
+
+        // @details 이전 캘린더의 출력결과가 남아있다면, 이전 캘린더를 삭제한다.
+        while(tbCalendar.rows.length > 0) {
+            tbCalendar.deleteRow(tbCalendar.rows.length - 1);
+        }
+
+        // @param 첫번째 개행
+        let row = tbCalendar.insertRow();
+
+        // @param 날짜가 표기될 열의 증가값
+        let dom = 1;
+
+        // @details 시작일의 요일값( doMonth.getDay() ) + 해당월의 전체일( lastDate.getDate())을  더해준 값에서
+        //               7로 나눈값을 올림( Math.ceil() )하고 다시 시작일의 요일값( doMonth.getDay() )을 빼준다.
+        let daysLength = (Math.ceil((doMonth.getDay() + lastDate.getDate()) / 7) * 7) - doMonth.getDay();
+
+        // @param 달력 출력
+        // @details 시작값은 1일을 직접 지정하고 요일값( doMonth.getDay() )를 빼서 마이너스( - )로 for문을 시작한다.
+        for(let day = 1 - doMonth.getDay(); daysLength >= day; day++) {
+
+            let column = row.insertCell();
+
+            // @param 평일( 전월일과 익월일의 데이터 제외 )
+            if(Math.sign(day) == 1 && lastDate.getDate() >= day) {
+
+                // @param 평일 날짜 데이터 삽입
+                column.innerText = autoLeftPad(day, 2);
+
+                // @param 일요일인 경우
+                if(dom % 7 == 1) {
+                    column.style.color = "#FF4D4D";
+                }
+
+                // @param 토요일인 경우
+                if(dom % 7 == 0) {
+                    column.style.color = "#4D4DFF";
+                    row = tbCalendar.insertRow();   // @param 토요일이 지나면 다시 가로 행을 한줄 추가한다.
+                }
+
+            }
+
+            // @param 평일 전월일과 익월일의 데이터 날짜변경
+            else {
+                let exceptDay = new Date(doMonth.getFullYear(), doMonth.getMonth(), day);
+                column.innerText = autoLeftPad(exceptDay.getDate(), 2);
+                column.style.color = "#A9A9A9";
+            }
+
+            // @brief   전월, 명월 음영처리
+            // @details 현재년과 선택 년도가 같은경우
+            if(toDay.getFullYear() == nowDate.getFullYear()) {
+
+                // @details 현재월과 선택월이 같은경우
+                if(toDay.getMonth() == nowDate.getMonth()) {
+
+                    // @details 현재일보다 이전인 경우이면서 현재월에 포함되는 일인경우
+                    if(nowDate.getDate() > day && Math.sign(day) == 1) {
+                        column.style.backgroundColor = "#E5E5E5";
+                    }
+
+                    // @details 현재일보다 이후이면서 현재월에 포함되는 일인경우
+                    else if(nowDate.getDate() < day && lastDate.getDate() >= day) {
+                        column.style.backgroundColor = "#FFFFFF";
+                        column.style.cursor = "pointer";
+                        column.onclick = function(){ calendarChoiceDay(this); }
+                    }
+
+                    // @details 현재일인 경우
+                    else if(nowDate.getDate() == day) {
+                        column.style.backgroundColor = "#FFFFE6";
+                        column.style.cursor = "pointer";
+                        column.onclick = function(){ calendarChoiceDay(this); }
+                    }
+
+                // @details 현재월보다 이전인경우
+                } else if(toDay.getMonth() < nowDate.getMonth()) {
+                    if(Math.sign(day) == 1 && day <= lastDate.getDate()) {
+                        column.style.backgroundColor = "#E5E5E5";
+                    }
+                }
+
+                // @details 현재월보다 이후인경우
+                else {
+                    if(Math.sign(day) == 1 && day <= lastDate.getDate()) {
+                        column.style.backgroundColor = "#FFFFFF";
+                        column.style.cursor = "pointer";
+                        column.onclick = function(){ calendarChoiceDay(this); }
+                    }
+                }
+            }
+
+            // @details 선택한년도가 현재년도보다 작은경우
+            else if(toDay.getFullYear() < nowDate.getFullYear()) {
+                if(Math.sign(day) == 1 && day <= lastDate.getDate()) {
+                    column.style.backgroundColor = "#E5E5E5";
+                }
+            }
+
+            // @details 선택한년도가 현재년도보다 큰경우
+            else {
+                if(Math.sign(day) == 1 && day <= lastDate.getDate()) {
+                    column.style.backgroundColor = "#FFFFFF";
+                    column.style.cursor = "pointer";
+                    column.onclick = function(){ calendarChoiceDay(this); }
+                }
+            }
+            dom++;
+        }
+    }
+
+    /**
+     * @brief   날짜 선택
+     * @details 사용자가 선택한 날짜에 체크표시를 남긴다.
+     */
+    function calendarChoiceDay(column) {
+
+        // @param 기존 선택일이 존재하는 경우 기존 선택일의 표시형식을 초기화 한다.
+        if(document.getElementsByClassName("choiceDay")[0]) {
+            
+            // @see 금일인 경우
+            if(document.getElementById("calMonth").innerText == autoLeftPad((nowDate.getMonth() + 1), 2) && document.getElementsByClassName("choiceDay")[0].innerText == autoLeftPad(toDay.getDate(), 2)) {
+                document.getElementsByClassName("choiceDay")[0].style.backgroundColor = "#FFFFE6";  
+            }
+            
+            // @see 금일이 아닌 경우
+            else {
+                document.getElementsByClassName("choiceDay")[0].style.backgroundColor = "#FFFFFF";
+            }
+            document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");
+        }
+
+        // @param 선택일 체크 표시
+        column.style.backgroundColor = "#FF9999";
+
+        // @param 선택일 클래스명 변경
+        column.classList.add("choiceDay");
+    }
+
+    /**
+     * @brief   숫자 두자릿수( 00 ) 변경
+     * @details 자릿수가 한자리인 ( 1, 2, 3등 )의 값을 10, 11, 12등과 같은 두자리수 형식으로 맞추기위해 0을 붙인다.
+     * @param   num     앞에 0을 붙일 숫자 값
+     * @param   digit   글자의 자릿수를 지정 ( 2자릿수인 경우 00, 3자릿수인 경우 000 … )
+     */
+    function autoLeftPad(num, digit) {
+        if(String(num).length < digit) {
+            num = new Array(digit - String(num).length + 1).join("0") + num;
+        }
+        return num;
+    }
+
+</script>

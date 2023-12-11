@@ -25,38 +25,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 <style>  
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  font-size: 14px;
+a { 
+	color:#000000;text-decoration:none; 
 }
-#external-events {
-  position: fixed;
-  z-index: 2;
-  top: 20px;
-  left: 20px;
-  width: 150px;
-  padding: 0 10px;
-  border: 1px solid #ccc;
-  background: #eee;
-}
-.demo-topbar + #external-events { /* will get stripped out */
-  top: 60px;
-}
-#external-events .fc-event {
-  margin: 1em 0;
-  cursor: move;
-}
-#calendar-container {
-  position: relative;
-  z-index: 1;
-  margin-left: 200px;
-}
-#calendar {
-  max-width: 900px;
-  margin: 20px auto;
-}
+.scriptCalendar { text-align:center; }
+.scriptCalendar > thead > tr > td { width:50px;height:50px; }
+.scriptCalendar > thead > tr:first-child > td { font-weight:bold; }
+.scriptCalendar > thead > tr:last-child > td { background-color:#90EE90; }
+.scriptCalendar > tbody > tr > td { width:50px;height:50px; }
+.calendarBtn { 
+   	cursor:pointer; 
+} 
 
 </style>
 
