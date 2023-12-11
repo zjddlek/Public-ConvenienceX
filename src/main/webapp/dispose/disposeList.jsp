@@ -58,8 +58,7 @@
 		</form>
 		
 		<div class="total">
-			<div id="myBarChart" class="border">
-			</div>
+			<div id="myBarChart" class="border"></div>
 			<div class="container-sm" id="resultTable">
 				<table class="table table-striped" ></table>
 			</div>
@@ -102,7 +101,7 @@
       					}, 
       			success: function (data){
       				 let obj = JSON.parse(data); 
-      				
+      					
       					$("table").empty();
       					
       					$("table").append(

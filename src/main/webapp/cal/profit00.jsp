@@ -6,7 +6,7 @@
 <head> 
 </head>
 <meta charset="UTF-8">
-<title>매출현황 - 원본 페이지</title>
+<title>매출현황 - JQUERY로 변경</title>
 
 <%-- jquery --%>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -21,7 +21,7 @@
 <body>
 	<div class="container">
 		<jsp:include page="/main/nav.jsp"></jsp:include>
-		<h3>매출현황 - 원본 페이지</h3>
+		<h3>매출현황</h3>
 	    <table class="scriptCalendar">
 	        <thead>
 	            <tr>
@@ -42,27 +42,29 @@
 	                <td>토</td>
 	            </tr>
 	        </thead>
-	        <tbody></tbody>
+	        <tbody id="tbody"></tbody>
 	    </table>
 	</div>
 </body>
 </html>
 
 <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        buildCalendar();
-        
-        document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
-            prevCalendar();
-        });
-        
-        document.getElementById("nextNextCalendar").addEventListener("click", function(event) {
-            nextCalendar();
-        });
-    });
 
+	$(document).ready(function(){
+		buildCalendar();
+		
+		$("#btnPrevCalendar").on("click",function(){
+			 prevCalendar();
+		});
+		
+		$("#nextNextCalendar").on("click",function(){
+			nextCalendar();
+		});
+	});
+	
     var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
     var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정값
+    var oneYearAgo = new Date(toDay.setFullYear(toDay.getFullYear() - 1)); // 일년 전
     
     /**
      * @brief   이전달 버튼 클릭시
@@ -90,9 +92,13 @@
         let lastDate = new Date(toDay.getFullYear(), toDay.getMonth() + 1, 0);
 
         let tbCalendar = document.querySelector(".scriptCalendar > tbody");
+        console.log(tbCalendar);
 
-        document.getElementById("calYear").innerText = toDay.getFullYear();                       // @param YYYY월
-        document.getElementById("calMonth").innerText = autoLeftPad((toDay.getMonth() + 1), 2);   // @param MM월
+        $("calYear").innerText = toDay.getFullYear();                       // @param YYYY월
+        $("calMonth").innerText = autoLeftPad((toDay.getMonth() + 1), 2);   // @param MM월
+        
+        //document.getElementById("calYear").innerText = toDay.getFullYear();                       // @param YYYY월
+        //document.getElementById("calMonth").innerText = autoLeftPad((toDay.getMonth() + 1), 2);   // @param MM월
         
 
         // @details 이전 캘린더의 출력결과가 남아있다면, 이전 캘린더를 삭제한다.
