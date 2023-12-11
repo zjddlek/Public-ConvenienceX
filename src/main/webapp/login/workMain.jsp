@@ -20,6 +20,8 @@
 </head>
 <body>
 	<div class="container">
+		<jsp:include page="/main/nav.jsp"></jsp:include>
+		
 		<div class="text-center">
 			<h3>출퇴근 기록</h3>
 		</div>
@@ -52,23 +54,26 @@
 						<td>${vo.attstart }</td>
 						<td>${vo.attend }</td>
 						<c:if test="${vo.attend == null }">
-							<td><a
-								href="mc?type=calLast&empno=${vo.empno }&sno=${svo.sno }"><input
-									type="button" value="정산하기" /></a></td>
+							<td>
+								<a href="mc?type=calLast&empno=${vo.empno }&sno=${svo.sno }">
+								<input type="button" value="정산하기" />
+								</a>
+							</td>
 						</c:if>
 						<c:if test="${vo.attend != null }">
 							<td><h5>퇴근 완료</h5></td>
 						</c:if>
-
 					</tr>
 				</c:forEach>
 			</tbody>
 			<tfoot>
-				<div>
-					<a href="mc?type=attendanceLogin&sno=${svo.sno }"><input
-						type="button" value="출근" /></a> <a
-						href="mc?type=main&sno=${svo.sno }"><input type="button"
-						value="돌아가기" /></a>
+				<div style="margin-bottom: 20px;">
+					<a href="mc?type=attendanceLogin&sno=${svo.sno }">
+						<input type="button" value="출근" />
+					</a> 
+					<a href="mc?type=main&sno=${svo.sno }">
+						<input type="button"value="돌아가기" />
+					</a>
 				</div>
 			</tfoot>
 		</table>

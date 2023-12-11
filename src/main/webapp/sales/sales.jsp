@@ -23,8 +23,10 @@
 
 </head>
 <body>
-	<div class="container min-vw-75 justify-content-center" style="margin-top:30px; padding-bottom: 20px;">
-		<h2>판매내역</h3>
+	<div class="container min-vw-75 justify-content-center" style="padding-bottom: 20px;">
+		<jsp:include page="/main/nav.jsp"></jsp:include>
+		
+		<h2>판매내역</h2>
 		<div>
 			<div class="picker">
 				<div class="ui-block-a">

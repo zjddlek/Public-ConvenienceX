@@ -7,10 +7,12 @@
 <title>calMain</title>
 </head>
 <body>
-	
-	<h2>정산</h2>
-	<a href="mc?type=calLast"><input type="button" value="중간/마감정산"/></a>
-	<a href="mc?type=profit"><input type="button" value="매출현황"/></a>
-	
+	<div class="container">
+		<jsp:include page="/main/nav.jsp"></jsp:include>
+		
+		<h2 style="text-align: center;">정산</h2>
+		<a href="mc?type=calLast"><input type="button" value="중간/마감정산"/></a>
+		<a href="mc?type=profit"><input type="button" value="매출현황"/></a> 
+	</div>
 </body>
 </html>
