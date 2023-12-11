@@ -52,6 +52,7 @@
 <body>
 	<div id="root">
 		<div class="container">
+			<jsp:include page="/main/nav.jsp"></jsp:include>
 			<form action="mc">
 				<div id=search class="border border-primary border-3 rounded-3">
 					<div id="head" class="border border-primary border-3 rounded-3">
@@ -67,6 +68,8 @@
 						</div>
 
 						<input type="hidden" name="type" value="emp" />
+						<input type="hidden" name="jobno" name="jobno"/>
+						
 
 
 						<div class="col-auto">
