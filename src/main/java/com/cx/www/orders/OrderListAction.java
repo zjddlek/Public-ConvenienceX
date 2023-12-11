@@ -6,23 +6,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cx.www.action.Action;
-import com.cx.www.dao.AllProductDAO;
-import com.cx.www.dao.ProductRankingDAO;
-import com.cx.www.vo.AllProductVO;
-import com.cx.www.vo.ProductRankingVO;
+import com.cx.www.dao.OrderListDAO;
+import com.cx.www.vo.OrderListVO;
 
-public class ProductRankingListAction implements Action{
+public class OrderListAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
-		ProductRankingDAO dao = new ProductRankingDAO();
+		OrderListDAO dao = new OrderListDAO();
 		
-		int totalCount = dao.getTotalCount();
+		String sno = req.getParameter("sno");
+		String cp = req.getParameter("cp");
+		
+		int totalCount = dao.getShopCount(sno);
 		int recordPerPage = 15;
 		int totalPage = totalCount % recordPerPage == 0 ? totalCount / recordPerPage : totalCount / recordPerPage + 1;
 		int currentPage = 0;
-		String cp = req.getParameter("cp");
 		currentPage = cp != null ? Integer.parseInt(cp) : 1;
 		int startNo = recordPerPage * ( currentPage - 1 );
 		int endNo = recordPerPage * currentPage;
@@ -34,9 +34,8 @@ public class ProductRankingListAction implements Action{
 			if ( currentPage <= 5 ) endPage = totalPage > 10 ? 10 : totalPage;
 			else endPage = currentPage + 4;
 		}
-		
-		ArrayList<ProductRankingVO> list = dao.getAll(startNo, recordPerPage);
-		/* ArrayList<ProductRankingVO> list = dao.getAll(); */
+		System.out.println("currentPage : " + currentPage + ", totalPage : " +totalPage);
+		ArrayList<OrderListVO> list = dao.getShopAll(sno, startNo, recordPerPage);
 		
 		req.setAttribute("list", list);
 		req.setAttribute("totalCount", totalCount);
@@ -47,10 +46,11 @@ public class ProductRankingListAction implements Action{
 		req.setAttribute("endNo", endNo);
 		req.setAttribute("startPage", startPage);
 		req.setAttribute("endPage", endPage);
+		req.setAttribute("sno", sno);
 		
 		dao.close();
 		
-		return "/order/productRankingList.jsp";
+		return "order/orderList.jsp";
 	}
 
 }

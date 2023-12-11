@@ -28,8 +28,6 @@
 			
 			<c:import url="./newProductSix.jsp"></c:import>
 		</div>
-		
-		
 	</div>
 </body>
 </html>

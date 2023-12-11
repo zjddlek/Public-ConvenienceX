@@ -16,7 +16,9 @@
 <link rel="stylesheet" href="./style/order.css">
 </head>
 <body> --%>
+
 	<div class="left" style="margin-right: 10px;"> <h2>매출 TOP</h2>
+
 		<c:forEach var="vo" items="${prList }">
 			<div class="prItems">
 				<span>
@@ -30,7 +32,7 @@
 			</div>
 		</c:forEach>
 		<a href="mc?type=productRank&sno=${svo.sno }">
-			<input type="button" value="전체 랭킹 보러가기" name="showAllProductRanking" />
+			<input type="button" class="btn btn-primary" value="전체 랭킹 보러가기" name="showAllProductRanking" />
 		</a>
 	</div>
 <!-- </body>

@@ -54,25 +54,29 @@
 				<td colspan='2' style='text-align: end'>
 					<nav aria-label="Page navigation">
 						  <ul class="pagination justify-content-center">
-						    <li class="page-item"><a class="page-link" href="mc?type=productRank&cp=1">첫 페이지로</a></li>
+						    <li class="page-item"><a class="page-link" href="mc?type=productRank&sno=${svo.sno }&cp=1">첫 페이지로</a></li>
 						  </ul>
 					</nav>
 				</td>
 				<td colspan='7' style='text-align: center'>
 					<nav aria-label="Page navigation">
-					  <ul class="pagination justify-content-center">
-					    <li class="page-item"><a class="page-link" href="mc?type=productRank&cp=${currentPage -1 }">Previous</a></li>
-					    <c:forEach var="i" begin="${startPage }" end="${endPage }" >
-					    <li class="page-item"><a class="page-link" href="mc?type=productRank&cp=${i }">${i }</a></li>
-						</c:forEach>
-					    <li class="page-item"><a class="page-link" href="mc?type=productRank&cp=${currentPage +1 }">Next</a></li>
-					  </ul>
+						<ul class="pagination justify-content-center">
+							<c:if test="${currentPage > 1}">
+								<li class="page-item"><a class="page-link" href="mc?type=productRank&sno=${svo.sno }&cp=${currentPage -1 }">Previous</a></li>
+							</c:if>
+							<c:forEach var="i" begin="${startPage }" end="${endPage }" >
+								<li class="page-item"><a class="page-link" href="mc?type=productRank&sno=${svo.sno }&cp=${i }">${i }</a></li>
+							</c:forEach>
+							<c:if test="${currentPage < totalPage}">
+								<li class="page-item"><a class="page-link" href="mc?type=productRank&sno=${svo.sno }&cp=${currentPage +1 }">Next</a></li>
+							</c:if>
+						</ul>
 					</nav>
 				</td>
 				<td colspan='2' >
 					<nav aria-label="Page navigation">
 						  <ul class="pagination justify-content-center">
-						    <li class="page-item"><a class="page-link" href="mc?type=productRank&cp=${totalPage }">마지막 페이지로</a></li>
+						    <li class="page-item"><a class="page-link" href="mc?type=productRank&sno=${svo.sno }&cp=${totalPage }">마지막 페이지로</a></li>
 						  </ul>
 					</nav>
 				</td>
@@ -89,7 +93,7 @@
 				<td></td>
 				<td colspan="2">
 					<a href="mc?type=orders&sno=${svo.sno }">
-						<input type="button" value="발주 리스트로 돌아가기">
+						<input type="button" class="btn btn-secondary" value="발주 리스트로 돌아가기">
 					</a>
 				</td>
 			</tr>

@@ -3,7 +3,6 @@ package com.cx.www.orders;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +23,9 @@ public class InsertOrderAction implements Action{
 		String yymmdd = now.format(dtf);
 		
 		String sno = req.getParameter("sno");
-		int no = 0;
-		
+
 		Cookie[] cookies = req.getCookies();
-		String name = null, value = null;
+		String pno = null, value = null;
 		if ( cookies == null ) {
 			try {
 				resp.sendRedirect("mc?type=order");
@@ -38,21 +36,20 @@ public class InsertOrderAction implements Action{
 			for ( int i = 0; i < cookies.length; i++ ) {
 				if ( cookies[i].getName().equals("JSESSIONID") == false 
 						&& cookies[i].getValue().equals("0") == false ) {
-					no++;
-					name = cookies[i].getName();
+					pno = cookies[i].getName();
 					value = cookies[i].getValue();
 					int cnt = Integer.parseInt(value);
 					cookies[i].setMaxAge(0);
 					resp.addCookie(cookies[i]);
 					
 					ProductInfoDAO piDao = new ProductInfoDAO();
-					ProductInfoVO piVo = piDao.getOne(name);
+					ProductInfoVO piVo = piDao.getOne(pno);
 					int pnoInfo = piVo.getPNoInfo();
 					piDao.close();
 					
 					OrderDAO oDao = new OrderDAO();
 					OrderVO vo1 = oDao.getLastOne(sno);
-					String testOrderno = vo1.getOrdno();
+					String testOrdno = vo1.getOrdno();
 					
 					OrderVO vo2 = new OrderVO();
 					
@@ -60,12 +57,12 @@ public class InsertOrderAction implements Action{
 					vo2.setOrdCount(cnt);
 					vo2.setPnoInfo(pnoInfo);
 					vo2.setSno(sno);
-					if ( testOrderno.substring(0,6).equals(yymmdd) ) {
-						int seq = Integer.parseInt(testOrderno.substring(9));
-						seq += no;
+					if ( testOrdno.substring(0,6).equals(yymmdd) ) {
+						int seq = Integer.parseInt(testOrdno.substring(11));
+						seq++;
 						ordno = yymmdd + sno + seq;
 					} else {
-						ordno = yymmdd + sno + no;
+						ordno = yymmdd + sno + 1;
 					}
 					vo2.setOrdno(ordno);
 					
@@ -75,12 +72,7 @@ public class InsertOrderAction implements Action{
 			}
 		}
 		
-		OrderDAO dao = new OrderDAO();
-		ArrayList<OrderVO> list = dao.getAll();
-		
-		req.setAttribute("list", list);
-		
-		return "/order/orderList.jsp";
+		return "mc?type=orderList&sno="+sno;
 	}
 
 }

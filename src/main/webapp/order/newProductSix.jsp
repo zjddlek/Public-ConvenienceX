@@ -27,7 +27,7 @@
 			</div>
 		</c:forEach>
 		<a href="mc?type=newProducts&sno=${svo.sno }">
-			<input type="button" value="신상품 보러가기" name="showNewProduct" />
+			<input type="button" class="btn btn-primary" value="신상품 보러가기" name="showNewProduct" />
 		</a>
 	</div>
 </body>

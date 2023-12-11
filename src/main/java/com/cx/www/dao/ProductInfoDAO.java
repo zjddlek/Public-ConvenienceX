@@ -122,7 +122,7 @@ public class ProductInfoDAO {
 		
 		sb.setLength(0);
 		sb.append("SELECT PNO_INFO, PNO, MANUDATE, T_COUNT FROM PRODUCT_INFO "
-				+ "WHERE PNO=? ORDER BY MANUDATE LIMIT 1");
+				+ "WHERE PNO=? ORDER BY MANUDATE DESC LIMIT 1");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());

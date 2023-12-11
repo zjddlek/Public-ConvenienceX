@@ -17,7 +17,7 @@ public class NewProductListAction implements Action{
 		AllProductDAO dao = new AllProductDAO();
 		
 		int totalCount = dao.getNewCount();
-		int recordPerPage = 20;
+		int recordPerPage = 15;
 		int totalPage = totalCount % recordPerPage == 0 ? totalCount / recordPerPage : totalCount / recordPerPage + 1;
 		int currentPage = 0;
 		String cp = req.getParameter("cp");
