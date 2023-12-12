@@ -24,13 +24,16 @@ public class AttendanceLoginOkCommand implements Action {
 		EmpVO vo = dao.getOneSM(id, pwd);
 		String empno = vo.getEmpno();
 		AttendanceDAO adao = new AttendanceDAO();
-		AttendanceVO avo2 = adao.attGetOne(empno);
 		ArrayList<AttendanceRecodVO> list = adao.getRecordAll(sno);
 
-		if (vo.getId() == null || vo.getPwd() == null) {
+		if (vo.getId() == null || vo.getPwd() == null||vo == null) {
+			req.setAttribute("sno", sno);
+			dao.close();
+			adao.close();
 			return "login/attendanceLogin.jsp";
-		} else {
-			if (avo2 != null) {
+			
+		} else{
+				
 				AttendanceVO avo = new AttendanceVO();
 				avo.setEmpno(empno);
 				adao.addOne(avo);
@@ -39,14 +42,8 @@ public class AttendanceLoginOkCommand implements Action {
 				adao.close();
 				//System.out.println("출근");
 				return "login/attendanceLoginOk.jsp";
-			} else {
-				System.out.println("회원이아님");
-				req.setAttribute("list", list);
-				dao.close();
-				adao.close();
-				return "login/workMain.jsp";
 			}
 		}
 	}
 
-}
+

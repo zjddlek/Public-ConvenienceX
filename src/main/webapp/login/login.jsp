@@ -44,7 +44,7 @@
 			<div class="row d-flex justify-content-center">
 				<div class="col-md-7 col-lg-5">
 					<div class="wrap">
-						<div class="login-wrap p-4 p-md-5" >
+						<div class="login-wrap p-4 p-md-5 border border-primary border-3 rounded" >
 							<div class="d-flex">
 								<div class="w-100">
 									<h3>Sign In</h3>
