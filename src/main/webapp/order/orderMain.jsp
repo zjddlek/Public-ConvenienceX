@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="col-9">
+<div class="center">
 	<div class="allOk">
 		<a href="mc?type=allProducts&sno=${svo.sno }">
 			<input type="button" class="btn btn-primary" value="전체상품리스트" name="showAllProduct" id="showAllProductList"/>
@@ -19,7 +19,7 @@
 			<input type="submit" class="btn btn-success" value="상품검색">
 		</form>
 	</div>
-	<div class="orderItems"  style="width:100%; height:718px; overflow:auto">
+	<div class="orderItems">
 		<table class="table table-striped table-hover table-sm">
 			<tr style="text-align:center;">
 				<th><input type="checkbox" name="" id="" class="allChecked" checked /></th>
@@ -33,7 +33,13 @@
 				<c:forEach var="vo" items="${list }">
 					<tr>
 						<td><input class="perChecked" type="checkbox" value="${vo.PNo }" onchange="perCheckedOnchange()" checked /></td>
-						<td class="orderName" name="selectPname" value="${vo.PName }" >${vo.PName }</td>
+						<c:set var="pname" value="${vo.PName }" />
+							<c:if test="${fn:length(pname) >= 34 }">
+								<td  class="pname" name="selectPname" value="${vo.PName }">${fn:substring(pname, 0, 33) }...</td>
+							</c:if>
+							<c:if test="${fn:length(pname) < 34 }">
+								<td  class="pname" name="selectPname" value="${vo.PName }">${vo.PName }</td>
+							</c:if>
 						<td id="${vo.PNo }">${vo.priceServer}</td>
 						<td><input type="number" name="countPerProduct" id="" value="1" style="text-align:center; width: 80px;" /></td>
 						<td><label class="totalPricePerProduct" for="">${vo.priceServer}</label></td>

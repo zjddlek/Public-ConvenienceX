@@ -47,8 +47,6 @@ public class AllProductListAction implements Action{
 		
 		dao.close();
 		
-		
-		
 		return "/order/allProductList.jsp";
 	}
 

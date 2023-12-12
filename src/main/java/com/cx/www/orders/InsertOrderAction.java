@@ -23,7 +23,7 @@ public class InsertOrderAction implements Action{
 		String yymmdd = now.format(dtf);
 		
 		String sno = req.getParameter("sno");
-
+		
 		Cookie[] cookies = req.getCookies();
 		String pno = null, value = null;
 		if ( cookies == null ) {
