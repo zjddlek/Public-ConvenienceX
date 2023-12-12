@@ -34,7 +34,7 @@ public class SalesDAO{
 		sb.append(" select SALENO, substr(SALEDATE,1,10) as sdate, SALEDATE ");
 		sb.append(" from SALES ");
 		sb.append(" where substr(SALEDATE,1,10) <= ? ");
-		sb.append(" GROUP BY SALEDATE ");
+		sb.append(" GROUP BY sdate ");
 		sb.append(" ORDER by substr(SALEDATE,1,10) desc LIMIT 7 ");
 		
 		try {
