@@ -23,6 +23,9 @@ public class ListAction  implements Action{
       int jobno1 = 0;
       
       System.out.println("jobno : " + jobno);
+      System.out.println("sno : " + sno);
+
+      
       if( jobno != null && !jobno.isEmpty()) {
     	  jobno1=Integer.parseInt(jobno);
       }
@@ -39,12 +42,14 @@ public class ListAction  implements Action{
          if( period != null && period2 != null)
          {
             
-            ArrayList<EmpVO> list= dao.getAllByDate(period, period2 );
+            ArrayList<EmpVO> list= dao.getAllByDate(period,period2,sno);
             //System.out.println(list == null ? "empty" : "not empty");
             //System.out.println(list.isEmpty()? "empty" : "not empty");
    
             req.setAttribute("list",list);
             
+            System.out.println(sno);
+            System.out.println("period list:"+list);
          }
          
          else    
@@ -58,7 +63,7 @@ public class ListAction  implements Action{
          EmpVO empvo = dao.getOne(name);
 
          
-         req.setAttribute("empvo", empvo);
+         req.setAttribute("empvo", empvo);    
 
          System.out.println("empvo vo:"+empvo);
       

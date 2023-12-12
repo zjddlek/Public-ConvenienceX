@@ -239,16 +239,18 @@ public class EmpDAO {
 
 	}
 
-	public ArrayList<EmpVO> getAllByDate(String startDate, String endDate) { // 근무일자로 정보검색
+	public ArrayList<EmpVO> getAllByDate(String startDate, String endDate,String sno) { // 근무일자로 정보검색
 		ArrayList<EmpVO> list = new ArrayList<EmpVO>();
 
 		sb.setLength(0);
-		sb.append("SELECT * FROM CXEMP WHERE HIREDATE BETWEEN ? AND ? ");
+		sb.append("SELECT * FROM CXEMP WHERE HIREDATE BETWEEN ? AND ? AND SNO=? ");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setString(1, startDate);
 			pstmt.setString(2, endDate);
+			pstmt.setString(3, sno);
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -274,7 +276,7 @@ public class EmpDAO {
 				int sal_hour = rs.getInt("sal_hour");
 				String id = rs.getString("id");
 				String pwd = rs.getString("PASSWORD");
-				String sno = rs.getString("sno");
+				//String sno = rs.getString("sno");
 				int jobno = rs.getInt("JOBNO");
 				String picture = rs.getString("picture");
 

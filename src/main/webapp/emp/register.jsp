@@ -27,10 +27,11 @@
 	margin: auto;
 	width: 60px;
 	margin: auto;
-	width: 1500px;
-	height: 1300px;
+	width: 900px;
+	height: 1200px;
 	margin-top: 50px;
-	
+	margin-bottom: 50px;
+	background-color: pink;
 }
 
 #header {
@@ -49,6 +50,7 @@
 	justify-content: right;
 	padding-top: 50px;
 	padding-left: 300px;
+	background-color: yellow;
 	
 }
 
@@ -60,38 +62,39 @@
 }
 
 #middle {
-	height: 800px;
+	height: 650px;
 	padding-left: 250px;
-	padding-top: 60px;
+	padding-top: 20px;
 	
 }
 
 #buttons {
 	text-align: center;
+	margin: auto;
 }
 
-/* #picturebox {
-	width: 50%;
-	height: 180px;
-	border: 1px solid black;
-	margin-right: 30px;
-	background-color: red;
-	position: relative;
-}	 */
 
 #img {
-	margin-left: 390px;
+	margin-left: 150px;
+	background-color: gray;
 }
 
 #picture {
-	width: 70%;
+	width: 100%;
 	height: 180px;
-	margin-right: 50px;
+	margin-right: 120px;
+	background-color: orange;
 }
 
 #idChecking{
 	margin-left: 70px;
 
+}
+
+#picturebox{
+	margin-left: 200px;
+	width:200px;
+	background-color: blue;
 }
 
 
@@ -193,6 +196,8 @@
 </script>
 
 <body>
+	<jsp:include page="/main/nav.jsp"></jsp:include>
+
 	<div class="container border border-primary border-3 rounded-3" id="root">
 		<div id="header">
 			<h3>사원 등록</h3>
@@ -200,7 +205,9 @@
 		<form action="registerController" method="post" enctype="multipart/form-data">
 			
 			<div id="leftpicture">
-				<div id="picturebox"/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACgCAMAAACBpqFQAAAAMFBMVEXu7u6ZmZmurq7Z2dnDw8Pe3t7Ozs6+vr6enp7p6enJycmpqanj4+Ojo6O5ubmzs7NLxFgzAAAB2klEQVR4nO3X3XLCIBCGYZa/BEjM/d9tWYgprXbGHtS25n0OVCLj6De7YTUGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAvTHZc2WlYRBs+7w77pZS9dz/7xf4iK+NKxui8XPMIm8yXpb5w/VKYpRqDfW0p+qjPGla0TehhTW2Rh7BqNmWVko6wVokprHJTeC+q1UZZelheGtfDsm0Rh7AmXV2ktt6lX5JSH7L4X/wBz7RKXqYezZ6Ku4bV316GsKzUoopi90SNmbWorMTf+vbP5doNp8gXYWW5mCEsX3cne2zS4KRIK68ziK2Ftlo/98IKvYCOsNIstWs3c4Rl3NbuaucQNJWawd3K0vvZHMbTME17NrrJj07RiVY2X7S8eljZuXwNK84So6b1HtZB5ywZ2Xsf/mrSVn+ptuLNaVhzitqn6xiWjq7T1MdUNzrN9NAeNSzXW2rplZV1+jTxQ2XpLmvNPjmYPpfZ80ylu4cm+D572Xp8pr5t1qzO0YOjR8PyfrWLtJHiuo2whsVNGxZZe1pS9H5FWMPicxvWv86ptGtnOgq/L+oBkJ3+/9blmYYsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4EneAHYKB+xqekqbAAAAAElFTkSuQmCC" alt="" id="pic" /></div>
+				<div id="picturebox">
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACgCAMAAACBpqFQAAAAMFBMVEXu7u6ZmZmurq7Z2dnDw8Pe3t7Ozs6+vr6enp7p6enJycmpqanj4+Ojo6O5ubmzs7NLxFgzAAAB2klEQVR4nO3X3XLCIBCGYZa/BEjM/d9tWYgprXbGHtS25n0OVCLj6De7YTUGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAvTHZc2WlYRBs+7w77pZS9dz/7xf4iK+NKxui8XPMIm8yXpb5w/VKYpRqDfW0p+qjPGla0TehhTW2Rh7BqNmWVko6wVokprHJTeC+q1UZZelheGtfDsm0Rh7AmXV2ktt6lX5JSH7L4X/wBz7RKXqYezZ6Ku4bV316GsKzUoopi90SNmbWorMTf+vbP5doNp8gXYWW5mCEsX3cne2zS4KRIK68ziK2Ftlo/98IKvYCOsNIstWs3c4Rl3NbuaucQNJWawd3K0vvZHMbTME17NrrJj07RiVY2X7S8eljZuXwNK84So6b1HtZB5ywZ2Xsf/mrSVn+ptuLNaVhzitqn6xiWjq7T1MdUNzrN9NAeNSzXW2rplZV1+jTxQ2XpLmvNPjmYPpfZ80ylu4cm+D572Xp8pr5t1qzO0YOjR8PyfrWLtJHiuo2whsVNGxZZe1pS9H5FWMPicxvWv86ptGtnOgq/L+oBkJ3+/9blmYYsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4EneAHYKB+xqekqbAAAAAElFTkSuQmCC" alt="" id="pic" />
+				</div>
 		 		<img src="${vo.picture}" id="picture" name="picture" />
 			</div>
 

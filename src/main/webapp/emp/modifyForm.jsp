@@ -126,6 +126,8 @@
 </script>
 <body>
 	<div>
+	<jsp:include page="/main/nav.jsp"></jsp:include>
+	
 	<div class="container border border-primary border-3 rounded-3 " id="root">
 
 		<div id="header" >
@@ -172,11 +174,11 @@
 				<input type="text" class="form-control" name="id" value="${empvo.id }" /> 
 				
 			</div>
-			
+			<!-- 
 			<div class="col-md-2 row offset-md-1">
 				<label for="username">&nbsp;</label>
 				<input type="button" class="btn btn-success"  value="중복확인" />
-			</div>
+			</div> -->
 			
 			</div>
 					
@@ -261,6 +263,7 @@
           	</div>
           	          	
     	</form>
+	</div>
 	</div>
 	
 </body>

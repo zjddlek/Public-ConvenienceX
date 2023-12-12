@@ -39,8 +39,8 @@
 }
 
 #table {
-	width: 1450px;
-	height:800px;
+	width: 1200px;
+	height:600px;
 	margin: auto;
 	position: relative;
 	top: 50px;
@@ -53,8 +53,8 @@
 	<div id="root">
 		<div class="container">
 			<jsp:include page="/main/nav.jsp"></jsp:include>
-			<form action="mc">
-				<div id=search class="border border-primary border-3 rounded-3">
+			<form action="mc?">
+							<div id=search class="border border-primary border-3 rounded-3">
 					<div id="head" class="border border-primary border-3 rounded-3">
 						<h2>사원 검색</h2>
 					</div>
@@ -69,6 +69,7 @@
 
 						<input type="hidden" name="type" value="emp" />
 						<input type="hidden" name="jobno" name="jobno"/>
+						<input type="hidden" name="sno" name="sno" value="${vo.sno }"/>
 						
 
 
@@ -106,14 +107,15 @@
 				</div>
 
 
-				<div class="container border border-primary border-3 rounded-3 my-5" id="table">
+				<div class="container my-5" id="table">
 
 					<table class="table table-hover table-striped table-bordered">
 						<tr>
 							<th>사원번호</th>
-							<th>사원이름</th>
+							<th>사원명</th>
 							<th>전화번호</th>
-							<th>주소</th>
+							<th>이메일</th>
+							<th>지역</th>
 						</tr>
 
 						<c:if test="${list != null }">
@@ -122,6 +124,7 @@
 									<td><a href="mc?type=detail&empno=${vo.empno}">${vo.empno }</a></td>
 									<td>${vo.ename }</td>
 									<td>${vo.phone }</td>
+									<td>${vo.email }</td>								
 									<td>${vo.address }</td>
 								</tr>
 							</c:forEach>
@@ -133,9 +136,10 @@
 
 								<td><a href="mc?type=detail&empno=${vo.empno}">${vo.empno }</a></td>
 
-								<td>${vo.ename }</td>
-								<td>${vo.phone }</td>
-								<td>${vo.address }</td>
+								<td>${empvo.ename }</td>
+								<td>${empvo.phone }</td>
+								<td>${empvo.email }</td>
+								<td>${empvo.address }</td>
 							
 
 							</tr>

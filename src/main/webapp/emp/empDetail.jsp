@@ -19,9 +19,11 @@
 #root {
 	margin: auto;
 	margin: auto;
-	width: 1300px;
+	width: 900px;
 	height: 1000px;
 	margin-top: 50px;
+	margin-bottom: 50px;
+	
 }
 
 #header {
@@ -48,8 +50,9 @@
 
 #middle {
 	height: 800px;
-	padding-left: 320px;
+	padding-left: 250px;
 	padding-top: 60px;
+	
 }
 
 #buttons {
@@ -57,13 +60,15 @@
 }
 
 #picture {
-	width: 80%;
+	width: 110%;
 	height: 180px;
-	margin-right: 50px;
+	margin-right: 150px;
 }
 </style>
 <body>
+	<jsp:include page="/main/nav.jsp"></jsp:include>
 	<div class="container border border-primary border-3 rounded-3" id="root">
+	
 		<div id="header">
 			<h3>사원정보 조회</h3>
 		</div>
