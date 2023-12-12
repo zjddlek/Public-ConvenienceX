@@ -20,8 +20,12 @@ public class ListAction  implements Action{
       String sno = req.getParameter("sno");
       String jobno = req.getParameter("jobno"); 
       
-      int jobno1=Integer.parseInt(jobno);
+      int jobno1 = 0;
       
+      System.out.println("jobno : " + jobno);
+      if( jobno != null && !jobno.isEmpty()) {
+    	  jobno1=Integer.parseInt(jobno);
+      }
       
       
       EmpDAO dao = new EmpDAO();
@@ -51,10 +55,12 @@ public class ListAction  implements Action{
          
       }
       else if(name != null ) {
-         EmpVO vo = dao.getOne(name);
+         EmpVO empvo = dao.getOne(name);
 
-         req.setAttribute("vo", vo);
-         System.out.println("getOne vo:"+vo);
+         
+         req.setAttribute("empvo", empvo);
+
+         System.out.println("empvo vo:"+empvo);
       
          
       }

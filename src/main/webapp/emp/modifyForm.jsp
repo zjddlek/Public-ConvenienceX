@@ -134,11 +134,11 @@
 			<form action="modifyController" method="post" enctype="multipart/form-data">
 				<div id="leftpicture">
 					<div id="picturebox"/></div>
-					<img src="/${vo.picture }" id="picture" name="picture"  />
+					<img src="/cx/upload/${empvo.picture }" id="picture" name="picture"  />
 				</div>
 			
 			<div class="col-md-4 offset-md-2 row my-3">
-				<input type="hidden" class="form-control" name="empno" value="${vo.empno}">
+				<input type="hidden" class="form-control" name="empno" value="${empvo.empno}">
 				<input type="hidden" name="type" value="modifyOk"/>
 			</div>
 
@@ -146,17 +146,17 @@
 
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">사원명</label>
-				<input type="text" class="form-control" name="ename" value="${vo.ename }" />
+				<input type="text" class="form-control" name="ename" value="${empvo.ename }" />
 			</div>
 			
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">생년월일</label>
-				<input type="date" class="form-control" name="date" value="${vo.date }" />
+				<input type="date" class="form-control" name="date" value="${empvo.date }" />
 			</div>
 			
 			<div class="col-md-4 offset-md-2 row my-3">
 				<label for="username">전화번호</label>
-				<input type="text" class="form-control" name="phone" value="${vo.phone }"  />
+				<input type="text" class="form-control" name="phone" value="${empvo.phone }"  />
 			</div>
 
 			</div>
@@ -169,7 +169,7 @@
 
 			<div class="col-md-3 offset-md-1 row my-1">
 				<label for="username">아이디</label>
-				<input type="text" class="form-control" name="id" value="${vo.id }" /> 
+				<input type="text" class="form-control" name="id" value="${empvo.id }" /> 
 				
 			</div>
 			
@@ -184,25 +184,25 @@
 			
 			<div class="col-md-3 offset-md-1 row my-3">
 				<label for="username">비밀번호</label>
-				<input type="text" class="form-control" name="pwd" value="${vo.pwd }" />
+				<input type="text" class="form-control" name="pwd" value="${empvo.pwd }" />
 			</div>
 			
 			
 			<div class="col-md-7 offset-md-1 row my-3">
 				<label for="username">이메일</label>
-				<input type="text" class="form-control" name="email" value="${vo.email }"   />
+				<input type="text" class="form-control" name="email" value="${empvo.email }"   />
 			</div>
 
 
 			<div class="col-md-7 offset-md-1 row my-3">
 				<label for="username">주소</label>
-				<input type="text" class="form-control" name="address" id="address"  value="${vo.address }" />
+				<input type="text" class="form-control" name="address" id="address"  value="${empvo.address }" />
 				
 			</div >
 			
 			<div class="col-md-7 offset-md-1 row my-3">
 				<label for="username">상세주소</label>
-				<input type="text" class="form-control" name="address_detail" id="address_detail"   value="${vo.address_detail }"/>
+				<input type="text" class="form-control" name="address_detail" id="address_detail"   value="${empvo.address_detail }"/>
 			</div>
 
 			<div class="col-md-6 offset-md-4">
@@ -212,7 +212,7 @@
 			
 			<div class="col-md-4 offset-md-1 row my-3">
 				<label for="username">입사일자</label>
-				<input type="date" class="form-control" name="hiredate" value="${vo.hiredate }"  />
+				<input type="date" class="form-control" name="hiredate" value="${empvo.hiredate }"  />
 			</div>
 			
 			<div class="col-md-4 offset-md-1 row my-4">
@@ -259,7 +259,7 @@
 				<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"><input type="button" class="btn btn-danger" value="취소" /></a>
           	</div>
           	</div>
-          	
+          	          	
     	</form>
 	</div>
 	

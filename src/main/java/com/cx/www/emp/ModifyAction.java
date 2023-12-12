@@ -18,12 +18,12 @@ public class ModifyAction implements Action{
 		if (b != null) {
 
 			EmpDAO dao = new EmpDAO();
-			EmpVO vo = dao.getOneByEmpno(b);
+			EmpVO empvo = dao.getOneByEmpno(b);
 			
 
-			req.setAttribute("vo", vo);
+			req.setAttribute("empvo", empvo);
 			
-			System.out.println(vo);
+			System.out.println(empvo);
 			
 			System.out.println("ModifyAction 실행중");
 

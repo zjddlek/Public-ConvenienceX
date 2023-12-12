@@ -29,11 +29,14 @@ public class LoginCommand implements Action {
 			sdao.close();
 			
 			dao.close();
-			//System.out.println(vo.getSno());
+			System.out.println(vo.getSno());
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("svo", svo);
-			req.setAttribute("vo", vo);
+			session.setAttribute("vo", vo);
+			
+			
+			
 			return "main/main.jsp";
 		}
 	}

@@ -18,16 +18,15 @@ public class DetailAction implements Action {
 		
 		if(empno!= null) {
 			EmpDAO dao = new EmpDAO();
-			EmpVO vo = dao.getOneByEmpno(empno);
+			EmpVO empvo = dao.getOneByEmpno(empno);
 			
-			req.setAttribute("vo", vo);
+			req.setAttribute("empvo", empvo);
 			
-			System.out.println("ActionVO:"+vo);
+			System.out.println("ActionVO:"+empvo);
 			
 			dao.close();
 			
-			HttpSession Session = req.getSession();
-			Session.setAttribute("vo", vo);
+			
 		}
 		
 		return "emp/empDetail.jsp";

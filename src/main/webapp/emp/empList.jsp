@@ -17,7 +17,7 @@
 <style>
 #root {
 	width: 1500px;
-	height: 1300px;
+	height: 600px;
 }
 
 #head {
@@ -40,7 +40,7 @@
 
 #table {
 	width: 1450px;
-	height: 1000px;
+	height:800px;
 	margin: auto;
 	position: relative;
 	top: 50px;

@@ -25,12 +25,15 @@ public class ProfitDAO {
 	
 	public ArrayList<ProfitVO> getList() { // 리스트 가져오기
 		ArrayList<ProfitVO> list = new ArrayList<ProfitVO>();
+		ProfitVO vo = null;
 
 		sb.setLength(0);		
 		sb.append("SELECT * FROM CALCULATION ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
 
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,7 +41,6 @@ public class ProfitDAO {
 
 		try {
 
-			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 
@@ -51,7 +53,7 @@ public class ProfitDAO {
 				
 				
 			
-				ProfitVO vo = new ProfitVO(calno, attno, calculate, caltime, salesamount, difference);
+				vo = new ProfitVO(calno, attno, calculate, caltime, salesamount, difference);
 
 				list.add(vo);
 				System.out.println(vo);
