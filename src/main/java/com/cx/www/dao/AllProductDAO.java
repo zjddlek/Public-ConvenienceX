@@ -62,6 +62,29 @@ public class AllProductDAO {
 		return count;
 	}
 	
+	public int getSearchCount(String pname) {
+		sb.setLength(0);
+		sb.append("SELECT COUNT(*) CNT "
+				+ "FROM MAJOR_CATEGORY MC, SUB_CATEGORY SC, PRODUCT P, PRODUCT_ACCOUNT PA, ACCOUNTS A "
+				+ "WHERE MC.MCNO = SC.MCNO "
+				+ "AND SC.SCNO = P.SCNO "
+				+ "AND PA.PNO_ACCOUNT = P.PNO_ACCOUNT "
+				+ "AND PA.ACCNO = A.ACCNO "
+				+ "AND PA.PNAME LIKE ? ");
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, pname);
+			rs = pstmt.executeQuery();
+			rs.next();
+			count = rs.getInt("CNT");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 	public ArrayList<AllProductVO> getAll() {
 		ArrayList<AllProductVO> list = new ArrayList<AllProductVO>();
 		
@@ -279,6 +302,48 @@ public class AllProductDAO {
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 				pstmt.setString(1, pName);
+			rs = pstmt.executeQuery();
+			while ( rs.next() ) {
+				String mcName = rs.getString("MCNAME");
+				String scName = rs.getString("SCNAME");
+				String accName = rs.getString("ACCNAME");
+				String pNo = rs.getString("PNO");
+				pName = rs.getString("PNAME");
+				String expirydate = rs.getString("EXPIRYDATE");
+				int priceServer = rs.getInt("PRICE_SERVER");
+				int priceConsumer = rs.getInt("PRICE_CONSUMER");
+				String regdate = rs.getString("REGDATE");
+				
+				AllProductVO vo = new AllProductVO(mcName, scName, accName, pNo, pName, expirydate, priceServer, priceConsumer, regdate);
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<AllProductVO> getSearchPname(String pName, int startNo, int recordPerPage) {
+		ArrayList<AllProductVO> list = new ArrayList<AllProductVO>();
+		
+		sb.setLength(0);
+		sb.append("SELECT MC.MCNAME, SC.SCNAME, A.ACCNAME, P.PNO, PA.PNAME, PA.EXPIRYDATE, PA.PRICE_SERVER, P.PRICE_CONSUMER, P.REGDATE "
+				+ "FROM MAJOR_CATEGORY MC, SUB_CATEGORY SC, PRODUCT P, PRODUCT_ACCOUNT PA, ACCOUNTS A "
+				+ "WHERE MC.MCNO = SC.MCNO "
+				+ "AND SC.SCNO = P.SCNO "
+				+ "AND PA.PNO_ACCOUNT = P.PNO_ACCOUNT "
+				+ "AND PA.ACCNO = A.ACCNO "
+				+ "AND PA.PNAME LIKE ? "
+				+ "ORDER BY P.REGDATE DESC "
+				+ "LIMIT ?, ?");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, pName);
+				pstmt.setInt(2, startNo);
+				pstmt.setInt(3, recordPerPage);
 			rs = pstmt.executeQuery();
 			while ( rs.next() ) {
 				String mcName = rs.getString("MCNAME");
