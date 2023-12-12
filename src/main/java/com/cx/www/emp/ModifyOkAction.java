@@ -91,6 +91,7 @@ public class ModifyOkAction extends HttpServlet {
 		Object s = sesssion.getAttribute("svo");
 		ShopVO svo  = (ShopVO)s;
 		String sno = svo.getSno();
+		System.out.println(sno);
 		
 		
 		Object e = sesssion.getAttribute("vo"); EmpVO vo = (EmpVO)e; int jobno =

@@ -1,4 +1,4 @@
-<%-- <%@page import="com.cx.www.dao.ProfitDAO"%>
+<%@page import="com.cx.www.dao.ProfitDAO"%>
 <%@page import="com.cx.www.vo.ProfitVO"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.JSONArray"%>
@@ -12,17 +12,17 @@
 	System.out.println("calno:"+calno1);
 	
 	String attno = request.getParameter("attno");
-	String calculate1=request.getParameter("calculate");
+	String calculate=request.getParameter("calculate");
 	String caltime= request.getParameter("caltime");
-	String salesamount1= request.getParameter("salesamount");
-	String difference1= request.getParameter("difference");
+	
+	String salesamount= request.getParameter("salesamount");
+	String difference= request.getParameter("difference");
 
-/* 	
-	int calno=Integer.parseInt(calno1);
+	/* int calno=Integer.parseInt(calno1);
 	int calculate=Integer.parseInt(calculate1);
 	int salesamount=Integer.parseInt(salesamount1);
-	int difference=Integer.parseInt(difference1);
-			 */
+	int difference=Integer.parseInt(difference1); */
+			 
 			 
 			 
 	ProfitDAO dao = new ProfitDAO();
@@ -32,14 +32,15 @@
 	ArrayList<ProfitVO> list = dao.getList();
 	
 	for(ProfitVO vo: list){
-		
+
 		JSONObject profitListObject = new JSONObject();
-		profitListObject.put("calno",vo.getCalno );
-		profitListObject.put("attno",vo.getAttno );
-		profitListObject.put("calculate",vo.getCalculate );
-		profitListObject.put("caltime",vo.getCaltime );
-		profitListObject.put("salesamount",vo.getSalesamount );
-		profitListObject.put("difference",vo.getDiffrence );
+		
+		profitListObject.put("calno",vo.getCALNO());
+		profitListObject.put("attno",vo.getATTNO());
+		profitListObject.put("calculate",vo.getCALCULATE());
+		profitListObject.put("caltime",vo.getCALTIME());
+		profitListObject.put("salesamount",vo.getSALESAMOUNT());
+		profitListObject.put("difference",vo.getDIFFERENCE());
 
 		
 		
@@ -47,8 +48,9 @@
 	}
 	
 	
+	out.println(prArray.toJSONString());
 	
 	
-	System.out.println(profitListObject.toJSONString());
+		
     
-    %> --%>
+%>
