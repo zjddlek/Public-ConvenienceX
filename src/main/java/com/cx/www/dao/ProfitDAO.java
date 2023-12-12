@@ -66,5 +66,50 @@ public class ProfitDAO {
 		return list;
 	}
 	
+	public void addProfit(ProfitVO vo) {
+		sb.setLength(0);
+		sb.append("SELECT CALNO FROM CALCULATION ORDER BY CALNO DESC LIMIT 1;");
+		int calno = 0;
+		try {
+			pstmt=conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+			calno = (rs.getInt("CALNO")+1);
+
+			}
+			sb.setLength(0); 
+			sb.append("INSERT INTO CALCULATION VALUES(?, ?, ?, now(), ?, ?) ");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, calno);
+			pstmt.setString(2, vo.getATTNO());
+			pstmt.setInt(3, vo.getCALCULATE());
+			pstmt.setInt(4, vo.getSALESAMOUNT());
+			pstmt.setInt(5, vo.getDIFFERENCE());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void close() {
+		try {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	
 }

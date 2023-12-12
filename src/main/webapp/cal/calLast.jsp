@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>중간/마감정산</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <style>
 .tabss .tab {
@@ -38,7 +40,7 @@
 </style>
 <script type="text/javascript">
 
-	
+	let tab=1;
 
 	$(()=>{
 		$("#cashfiftythousand").on("click",()=>{
@@ -85,15 +87,18 @@
 		  if (num == 1) {
 		    $(".tab_1").addClass("active");
 		    $(".tab_2").removeClass("active");
-
+	
 		    $("#tab_1").show();
 		    $("#tab_2").hide();
+		    
+		    tab = 1;
 		  } else {
 		    $(".tab_2").addClass("active");
 		    $(".tab_1").removeClass("active");
 
 		    $("#tab_1").hide();
 		    $("#tab_2").show();
+		    tab = 2;
 		  }
 		}
 
@@ -132,6 +137,21 @@
 					<div>
 						<table class="table table-striped table-bordered">
 							<tr>
+								<th colspan="3" class="text-center">카드</th>
+							</tr>
+							<tr>
+								<th colspan="2">카드 총매출</th>
+								<td><div id="cashsales">
+										<c:set var="cardtotal" value="0" />
+										<c:forEach var="vo" items="${list}">
+											<c:set var="cardtotal"
+												value="${cardtotal + (vo.price*vo.cnt)}" />
+										</c:forEach>
+										<c:out value="${cardtotal}" />
+									</div></td>
+							</tr>
+						<table class="table table-striped table-bordered">
+							<tr>
 								<th colspan="2" class="text-center">현금</th>
 								<td><input type="button" value="차액구하기"
 									id="cashdifferencebtn" /></td>
@@ -197,7 +217,7 @@
 								<th colspan="2">매출액</th>
 								<td><div id="cashsales">
 										<c:set var="cashtotal" value="0" />
-										<c:forEach var="vo" items="${list}">
+										<c:forEach var="vo" items="${list2}">
 											<c:set var="cashtotal"
 												value="${cashtotal + (vo.price*vo.cnt)}" />
 										</c:forEach>
@@ -252,7 +272,7 @@
 								<th colspan="2">매출액</th>
 								<td><div id="giftsales">
 										<c:set var="gifttotal" value="0" />
-										<c:forEach var="vo" items="${list2}">
+										<c:forEach var="vo" items="${list3}">
 											<c:set var="gifttotal"
 												value="${gifttotal + (vo.price*vo.cnt)}" />
 										</c:forEach>
@@ -265,8 +285,9 @@
 							</tr>
 
 						</table>
-						<input type="button" value="정산하기" /> <input type="hidden"
-							name="empno" value="<%=request.getParameter("empno")%>" />
+						<div class="form-control text-center">
+							<input type="button" value="정산하기" class="btn btn-primary rounded w-75" /> <input type="hidden" name="empno" value="<%=request.getParameter("empno")%>" />
+						</div>
 					</div>
 
 				</div>
@@ -276,6 +297,24 @@
 					<div>
 						<table class="table table-striped table-bordered">
 							<tr>
+								<th colspan="3" class="text-center">카드</th>
+							</tr>
+							<tr>
+								<th colspan="2">카드 총매출</th>
+								<td><div id="cashsales">
+										<c:set var="cardtotal" value="0" />
+										<c:forEach var="vo" items="${list}">
+											<c:set var="cardtotal"
+												value="${cardtotal + (vo.price*vo.cnt)}" />
+										</c:forEach>
+										<c:out value="${cardtotal}" />
+									</div></td>
+							</tr>
+						</table>
+						
+						
+						<table class="table table-striped table-bordered">
+							<tr>
 								<th colspan="2" class="text-center">현금</th>
 								<td><input type="button" value="차액구하기"
 									id="cashdifferencebtn" /></td>
@@ -341,7 +380,7 @@
 								<th colspan="2">매출액</th>
 								<td><div id="cashsales">
 										<c:set var="cashtotal" value="0" />
-										<c:forEach var="vo" items="${list}">
+										<c:forEach var="vo" items="${list2}">
 											<c:set var="cashtotal"
 												value="${cashtotal + (vo.price*vo.cnt)}" />
 										</c:forEach>
@@ -396,7 +435,7 @@
 								<th colspan="2">매출액</th>
 								<td><div id="giftsales">
 										<c:set var="gifttotal" value="0" />
-										<c:forEach var="vo" items="${list2}">
+										<c:forEach var="vo" items="${list3}">
 											<c:set var="gifttotal"
 												value="${gifttotal + (vo.price*vo.cnt)}" />
 										</c:forEach>
@@ -409,8 +448,11 @@
 							</tr>
 
 						</table>
-						<input type="button" value="정산하기" /> <input type="hidden"
-							name="empno" value="<%=request.getParameter("empno")%>" />
+						<div class="form-control text-center">
+							<input type="button" value="정산하기" class="btn btn-primary rounded w-75" />
+							<input type="hidden" name="empno" value="<%=request.getParameter("empno")%>" />
+							
+						</div>	
 					</div>
 
 				</div>
@@ -419,45 +461,56 @@
 	</div>
 
 	<script type="text/javascript">
-		$(()=>{
-			$
-			
-			
-			
+	let allDifference = ((($("#cashfiftythousand").val()*50000)+($("#cashtenthousand").val()*10000)+($("#cashfivethousand").val()*5000)+($("#cashonethousand").val()*1000)+($("#cashfivehundread").val()*500)+($("#cashonehundread").val()*100)
+			+($("#cashfifty").val()*50)+($("#cashten").val()*10))-${cashtotal})+((($("#giftfiftythousand").val()*50000)+($("#gifttenthousand").val()*10000)+($("#giftfivethousand").val()*5000)+($("#giftonethousand").val()*1000))-${gifttotal});
+	let allSales = ${cashtotal+cardtotal+gifttotal};
+		$(()=>{		
 			$("#cashfiftythousand").on("keyup",()=>{
+				if($("#cashfiftythousand").val()==0)$("#sumcashfiftythousand").text(0);
 				$("#sumcashfiftythousand").text($("#cashfiftythousand").val()*50000);	
 			});
 			$("#cashtenthousand").on("keyup",()=>{
+				if($("#cashtenthousand").val()==0)$("#sumcashtenthousand").text(0);
 				$("#sumcashtenthousand").text($("#cashtenthousand").val()*10000);	
 			});
 			$("#cashfivethousand").on("keyup",()=>{
+				if($("#cashfivethousand").val()==0)$("#sumcashfivethousand").text(0);				
 				$("#sumcashfivethousand").text($("#cashfivethousand").val()*5000);	
 			});
 			$("#cashonethousand").on("keyup",()=>{
+				if($("#cashonethousand").val()==0)$("#sumcashonethousand").text(0);				
 				$("#sumcashonethousand").text($("#cashonethousand").val()*1000);	
 			});
 			$("#cashfivehundread").on("keyup",()=>{
+				if($("#cashfivehundread").val()==0)$("#sumcashfivehundread").text(0);				
 				$("#sumcashfivehundread").text($("#cashfivehundread").val()*500);	
 			});
 			$("#cashonehundread").on("keyup",()=>{
+				if($("#cashonehundread").val()==0)$("#sumcashonehundread").text(0);				
 				$("#sumcashonehundread").text($("#cashonehundread").val()*100);	
 			});
 			$("#cashfifty").on("keyup",()=>{
+				if($("#cashfifty").val()==0)$("#sumcashfifty").text(0);				
 				$("#sumcashfifty").text($("#cashfifty").val()*50);	
 			});
 			$("#cashten").on("keyup",()=>{
+				if($("#cashten").val()==0)$("#sumcashten").text(0);				
 				$("#sumcashten").text($("#cashten").val()*10);	
 			});
 			$("#giftfiftythousand").on("keyup",()=>{
+				if($("#giftfiftythousand").val()==0)$("#sumgiftfiftythousand").text(0);				
 				$("#sumgiftfiftythousand").text($("#giftfiftythousand").val()*50000);	
 			});
 			$("#gifttenthousand").on("keyup",()=>{
+				if($("#gifttenthousand").val()==0)$("#sumgifttenthousand").text(0);				
 				$("#sumgifttenthousand").text($("#gifttenthousand").val()*10000);	
 			});
 			$("#giftfivethousand").on("keyup",()=>{
+				if($("#giftfivethousand").val()==0)$("#sumgiftfivethousand").text(0);				
 				$("#sumgiftfivethousand").text($("#giftfivethousand").val()*5000);	
 			});
 			$("#giftonethousand").on("keyup",()=>{
+				if($("#giftonethousand").val()==0)$("#sumgiftonethousand").text(0);				
 				$("#sumgiftonethousand").text($("#giftonethousand").val()*1000);	
 			});
 			
@@ -474,14 +527,13 @@
 		$("#giftdifferencebtn").on("click",()=>{
 			$("#giftsum").text(($("#giftfiftythousand").val()*50000)+($("#gifttenthousand").val()*10000)+($("#giftfivethousand").val()*5000)+($("#giftonethousand").val()*1000));
 			$("#giftdifference").text((($("#giftfiftythousand").val()*50000)+($("#gifttenthousand").val()*10000)+($("#giftfivethousand").val()*5000)+($("#giftonethousand").val()*1000))-${gifttotal});
-						
 		});
 
 		
 		$("input[value='정산하기']").on("click",()=>{
 			if(confirm("정산을 완료하시겠습니까? \n 확인을 누르시면 더이상 수정할 수 없습니다.")){
 				alert("정산완료");
-				location.href="mc?type=attend&sno=${svo.sno }&empno=<%=request.getParameter("empno")%>";
+				location.href="mc?type=attend&sno=${svo.sno }&empno=<%=request.getParameter("empno")%>&allDifference="+allDifference+"&allSales="+allSales+"&tab="+tab;
 			}else{
 				return false;
 			}

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.cx.www.dbconnection.DBConnection;
+import com.cx.www.vo.SubCategorySalesVO;
 import com.cx.www.vo.SubCategoryVO;
 
 public class SubCategoryDAO {
@@ -181,5 +182,38 @@ public class SubCategoryDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<SubCategorySalesVO> getAllTop(String sno) {
+		ArrayList<SubCategorySalesVO> list = new ArrayList<SubCategorySalesVO>();
+		
+		sb.setLength(0);
+		sb.append("SELECT SC.SCNAME, SC.SCNO, SUM(AA.CNT * P.PRICE_CONSUMER) TOTAL, S.SNO "
+				+ "FROM (SELECT STOCKNO, SUM(CNT) CNT "
+				+ "FROM SALES NATURAL JOIN SALES_DETAIL "
+				+ "WHERE SALEDATE > DATE_SUB(NOW(), INTERVAL 30 DAY) "
+				+ "GROUP BY STOCKNO) AA NATURAL JOIN STOCK NATURAL JOIN PRODUCT_INFO PI NATURAL JOIN PRODUCT P NATURAL JOIN PRODUCT_ACCOUNT PA LEFT JOIN SUB_CATEGORY SC ON P.SCNO = SC.SCNO  JOIN ORDERS O ON O.PNO_INFO = PI.PNO_INFO JOIN SHOP S ON S.SNO=O.SNO "
+				+ "WHERE S.SNO = ? "
+				+ "GROUP BY SC.SCNO "
+				+ "ORDER BY TOTAL DESC LIMIT 5 ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, sno);
+			rs = pstmt.executeQuery();
+			
+			while ( rs.next() ) {
+				String scName = rs.getString("SC.SCNAME");
+				int sum = rs.getInt("TOTAL");
+				
+				SubCategorySalesVO vo = new SubCategorySalesVO(scName, sum);
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 }

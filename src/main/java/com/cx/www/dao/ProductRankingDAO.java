@@ -195,5 +195,4 @@ public class ProductRankingDAO {
 			e.printStackTrace();
 		}
 	}
-
 }
