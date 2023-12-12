@@ -17,6 +17,7 @@
 </head>
 
 <script>
+
 	$(document).ready(function(){
 		goStockMain();
 		

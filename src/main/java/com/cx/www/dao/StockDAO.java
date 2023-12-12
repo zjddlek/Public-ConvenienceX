@@ -55,7 +55,7 @@ public class StockDAO {
 		return list;	
 	}//method end
 	
-	// 재고 리스트용 - dropdown 누른경우
+	// 재고 리스트용 - 중분류까지 누른경우
 	public ArrayList<StockVO> getAllStockNo(String scno) {
 		
 		ArrayList<StockVO> list = new ArrayList<StockVO>();
@@ -107,15 +107,28 @@ public class StockDAO {
 		
 		sb.setLength(0);
 		
-		sb.append(" select MC.MCNAME, SC.SCNAME, MC.MCNO, SC.SCNO, ST.STOCKNO, PA.PNAME, P.PRICE_CONSUMER, ST.STOCK_COUNT, ST.PNO_INFO, ST.WAREHOUSEDATE ");
-		sb.append(" FROM MAJOR_CATEGORY MC ");
-		sb.append(" JOIN SUB_CATEGORY SC ON MC.MCNO = SC.MCNO ");
-		sb.append(" JOIN PRODUCT P ON SC.SCNO = P.SCNO ");
-		sb.append(" JOIN PRODUCT_ACCOUNT PA ON P.PNO_ACCOUNT = PA.PNO_ACCOUNT ");
-		sb.append(" JOIN PRODUCT_INFO PI ON P.PNO = PI.PNO ");
-		sb.append(" JOIN STOCK ST ON PI.PNO_INFO = ST.PNO_INFO ");
-		sb.append(" group by ST.STOCKNO ");
-		sb.append(" order by length(ST.STOCKNO), ST.STOCKNO ");
+		sb.append(" SELECT MCNAME, SCNAME, MCNO, SCNO, STOCKNO, PNAME, PRICE_CONSUMER, REALSTOCK, PNO_INFO, WAREHOUSEDATE FROM  "
+				+ "(SELECT STOCKNO, STCNT-SADCNT-DISCNT REALSTOCK FROM "
+				+ "(SELECT ST.STOCKNO, ST.CNT STCNT, IFNULL(SAD.CNT, 0) SADCNT, IFNULL(DIS.CNT, 0) DISCNT FROM "
+				+ "(SELECT STOCKNO, STOCK_COUNT CNT FROM STOCK WHERE SUBSTRING(STOCKNO, 1, 5) = ?) ST "
+				+ "LEFT JOIN (SELECT STOCKNO, CNT FROM SALES_DETAIL WHERE SUBSTRING(STOCKNO, 1, 5) = ? GROUP BY STOCKNO) SAD ON ST.STOCKNO = SAD.STOCKNO "
+				+ "LEFT JOIN (SELECT STOCKNO, DISCARD_COUNT CNT FROM DISCARD WHERE SUBSTRING(STOCKNO, 1, 5) = ?) DIS ON ST.STOCKNO = DIS.STOCKNO) AA "
+				+ "WHERE STCNT-SADCNT-DISCNT > 0) BB NATURAL JOIN STOCK ST NATURAL JOIN PRODUCT_INFO  "
+				+ "NATURAL JOIN PRODUCT P NATURAL JOIN SUB_CATEGORY SC NATURAL JOIN MAJOR_CATEGORY NATURAL JOIN PRODUCT_ACCOUNT "
+				+ "ORDER BY LENGTH(STOCKNO), STOCKNO");
+		
+		/*
+		 * sb.
+		 * append(" select MC.MCNAME, SC.SCNAME, MC.MCNO, SC.SCNO, ST.STOCKNO, PA.PNAME, P.PRICE_CONSUMER, ST.STOCK_COUNT, ST.PNO_INFO, ST.WAREHOUSEDATE "
+		 * ); sb.append(" FROM MAJOR_CATEGORY MC ");
+		 * sb.append(" JOIN SUB_CATEGORY SC ON MC.MCNO = SC.MCNO ");
+		 * sb.append(" JOIN PRODUCT P ON SC.SCNO = P.SCNO ");
+		 * sb.append(" JOIN PRODUCT_ACCOUNT PA ON P.PNO_ACCOUNT = PA.PNO_ACCOUNT ");
+		 * sb.append(" JOIN PRODUCT_INFO PI ON P.PNO = PI.PNO ");
+		 * sb.append(" JOIN STOCK ST ON PI.PNO_INFO = ST.PNO_INFO ");
+		 * sb.append(" group by ST.STOCKNO ");
+		 * sb.append(" order by length(ST.STOCKNO), ST.STOCKNO ");
+		 */
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -136,6 +149,8 @@ public class StockDAO {
 				
 				vo = new StockVO(stockNo, stockCount, pnoInfo, warehousedate, pname, mcName, scName, mcNo, scNo, price_consumer);
 				list.add(vo);
+				
+				System.out.println(list);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -42,6 +42,8 @@
 			stArray.add(saleObject);
 		}
 		
+		System.out.println(list);
+		
 		// 출력
 		out.println(stArray.toJSONString());		
 	}

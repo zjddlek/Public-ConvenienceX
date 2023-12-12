@@ -147,7 +147,6 @@
 	
 	// 일자별 리스트
 	function goList(obj, salesDate){
-		
 		$(".date").css("font-weight","normal");
 		$(obj).css("font-weight", "bold");
 		
@@ -213,8 +212,8 @@
 		let sdate = saleno.substr(0,10);
 		let num = saleno.substr(11);
 		
-		$("#saleNo").css("font-weight","normal");
-		$(e).css("font-weight", "bold");
+		$("div[id='listBody']").css("font-weight","normal");
+		$(e).parent().css("font-weight", "bold");
 		
 		$("#detail_list").show();
 		
