@@ -16,39 +16,39 @@
       		<span class="navbar-toggler-icon"></span>
     	</button>
     	<div class="collapse navbar-collapse" id="navbarNav">
-    		<img src="./images/conveni.PNG" alt="" />
-	      	<ul class="navbar-nav">
-	        	<li class="nav-item">
-	         	 	<a class="nav-link" href="mc?type=main">메인 페이지</a>
-	       	 	</li>
-	        	<li class="nav-item">
-	         	 	<a class="nav-link" href="mc?type=sales&sno=${svo.sno }">판매 관리</a>
-	       	 	</li>
-	        	<li class="nav-item">
-	         	 	<a class="nav-link" href="mc?type=orders&sno=${svo.sno }">발주</a>
-	        	</li>
-	        	<li class="nav-item">
-	          		<a class="nav-link" href="mc?type=stock&sno=${svo.sno }">재고관리</a>
-	        	</li>
-	        	<li class="nav-item">
-	          		<a class="nav-link" href="mc?type=calMain&sno=${svo.sno }">정산 - 작업중</a>
-	        	</li>
-	        	<li class="nav-item">
-	          		<a class="nav-link" href="mc?type=dispose&sno=${svo.sno }">폐기</a>
-	        	</li>
-	        	<li class="nav-item">
-	          		<a class="nav-link" href="mc?type=emp&sno=${svo.sno}&jobno=${vo.jobno}">인사관리</a>
-	        	</li>
-	        	<li class="nav-item">
-	          		<a class="nav-link" href="mc?type=workmain&sno=${svo.sno }">출퇴근</a>
-	        	</li>
-	        	<li class="nav-item">
-	          		<a class="nav-link" href="mc?type=etc&sno=${svo.sno }">부대비용관리 - 작업x</a>
-	        	</li>
-	      	</ul>
-    	</div>
-    	<div>
-    		<h5>${svo.sname }</h5>
+    		<div>
+	    		<img src="./images/conveni.PNG" alt="" />
+		      	<ul class="navbar-nav">
+		        	<li class="nav-item">
+		         	 	<a class="nav-link" href="mc?type=main">메인 페이지</a>
+		       	 	</li>
+		        	<li class="nav-item">
+		         	 	<a class="nav-link" href="mc?type=sales&sno=${svo.sno }">판매 관리</a>
+		       	 	</li>
+		        	<li class="nav-item">
+		         	 	<a class="nav-link" href="mc?type=orders&sno=${svo.sno }">발주</a>
+		        	</li>
+		        	<li class="nav-item">
+		          		<a class="nav-link" href="mc?type=stock&sno=${svo.sno }">재고관리</a>
+		        	</li>
+		        	<li class="nav-item">
+		          		<a class="nav-link" href="mc?type=calMain&sno=${svo.sno }">정산 - 작업중</a>
+		        	</li>
+		        	<li class="nav-item">
+		          		<a class="nav-link" href="mc?type=dispose&sno=${svo.sno }">폐기</a>
+		        	</li>
+		        	<li class="nav-item">
+		          		<a class="nav-link" href="mc?type=emp&sno=${svo.sno}&jobno=${vo.jobno}">인사관리</a>
+		        	</li>
+		        	<li class="nav-item">
+		          		<a class="nav-link" href="mc?type=workmain&sno=${svo.sno }">출퇴근</a>
+		        	</li>
+		        	<li class="nav-item">
+		          		<a class="nav-link" href="mc?type=etc&sno=${svo.sno }">부대비용관리 - 작업x</a>
+		        	</li>
+		      	</ul>
+	      	</div>
+    		<h5><strong>${svo.sname }</strong></h5>
     	</div>
   	</div>
 </nav>
