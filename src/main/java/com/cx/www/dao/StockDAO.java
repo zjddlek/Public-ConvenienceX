@@ -56,7 +56,7 @@ public class StockDAO {
 	}//method end
 	
 	// 재고리스트 메인
-	public ArrayList<StockVO> getAllStock(String sno, int starNO, int endNO) {
+	public ArrayList<StockVO> getAllStock(String sno) {
 		ArrayList<StockVO> list = new ArrayList<StockVO>();
 		StockVO vo = null;
 		
@@ -70,7 +70,7 @@ public class StockDAO {
 				+ "LEFT JOIN (SELECT STOCKNO, DISCARD_COUNT CNT FROM DISCARD WHERE SUBSTRING(STOCKNO, 1, 5) = ?) DIS ON ST.STOCKNO = DIS.STOCKNO) AA "
 				+ "WHERE STCNT-SADCNT-DISCNT > 0) BB NATURAL JOIN STOCK ST NATURAL JOIN PRODUCT_INFO  "
 				+ "NATURAL JOIN PRODUCT P NATURAL JOIN SUB_CATEGORY SC NATURAL JOIN MAJOR_CATEGORY NATURAL JOIN PRODUCT_ACCOUNT "
-				+ "ORDER BY LENGTH(STOCKNO), STOCKNO LIMIT ? OFFSET ? ");
+				+ "ORDER BY LENGTH(STOCKNO), STOCKNO ");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -78,8 +78,6 @@ public class StockDAO {
 			pstmt.setString(1, sno);
 			pstmt.setString(2, sno);
 			pstmt.setString(3, sno);
-			pstmt.setInt(4, endNO);
-			pstmt.setInt(5, starNO);
 			
 			rs = pstmt.executeQuery();
 			
@@ -110,7 +108,7 @@ public class StockDAO {
 	
 	
 	// 재고리스트 중분류 선택시 작동
-	public ArrayList<StockVO> getSelectAllStockNo(String scno, String sno, int starNO, int endNO ) {
+	public ArrayList<StockVO> getSelectAllStockNo(String scno, String sno) {
 		ArrayList<StockVO> list = new ArrayList<StockVO>();
 		StockVO vo = null;
 		
@@ -125,7 +123,7 @@ public class StockDAO {
 				+ "WHERE STCNT-SADCNT-DISCNT > 0) BB NATURAL JOIN STOCK ST NATURAL JOIN PRODUCT_INFO  "
 				+ "NATURAL JOIN PRODUCT P NATURAL JOIN SUB_CATEGORY SC NATURAL JOIN MAJOR_CATEGORY NATURAL JOIN PRODUCT_ACCOUNT "
 				+ "WHERE SCNO = ? "
-				+ "ORDER BY LENGTH(STOCKNO), STOCKNO LIMIT ? OFFSET ? ");
+				+ "ORDER BY LENGTH(STOCKNO), STOCKNO ");
 				
 		
 		try {
@@ -135,8 +133,6 @@ public class StockDAO {
 			pstmt.setString(2, sno);
 			pstmt.setString(3, sno);
 			pstmt.setString(4, scno);
-			pstmt.setInt(5, starNO);
-			pstmt.setInt(6, endNO);
 			
 			rs = pstmt.executeQuery();
 			

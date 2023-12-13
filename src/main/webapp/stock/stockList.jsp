@@ -37,7 +37,9 @@
 		$.ajax({
 			url : "ajax/stockAjaxStockno.jsp",
 			data : {
-				"sno" : sno
+				"sno" : sno,
+				"startno" : startno,
+				"endno" : endno
 			},
 			success:function(data){
 				
@@ -78,7 +80,8 @@
 			$("#subList").empty();
 			
 			let msg = "<li id='subname'>대분류를 선택해주세요.</li>";
-			$("#subList").append(msg);		}
+			$("#subList").append(msg);		
+		}
 		else{
 			$.ajax({
 				url : "ajax/stockAjaxSub.jsp",
@@ -113,7 +116,9 @@
 			url : "ajax/stockAjaxStockno.jsp",
 			data: {
 				"scno" : scno,
-				"sno" : sno
+				"sno" : sno,
+				"startno" : startno,
+				"endno" : endno
 			},
 			success:function(data){
 				
@@ -278,26 +283,6 @@
 					</tr>
 				</tbody>
 			</table>
-			<%-- 페이징 --%>
-			<div>
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">	
-						<li class="page-item">
-							<a class="page-link" href="#">◀</a>
-						</li>
-						
-						<c:forEach var="i" begin="${startPage}" end="${endPage}">
-							<li class="page-item">
-								<a class="page-link" href="mc?type=sales&cp=${i}">${i}</a>
-							</li>
-						</c:forEach>		
-										        
-						<li class="page-item">
-							<a class="page-link" href="#">▶</a>
-						</li>
-					</ul>
-				</nav>					
-			</div>
 		</div>
 	</div>
 </body>
