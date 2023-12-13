@@ -16,11 +16,10 @@ public class DisposeSearchDay implements Action{
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String date = req.getParameter("date");
-		String shopNo = req.getParameter("shopNo");
+		String shopNo = req.getParameter("sno");
 		
 		DiscardDAO dao = new DiscardDAO();
-		ArrayList<DiscardVO> list = dao.getOneday(date, shopNo);
-		req.setAttribute("list", list);
+
 		req.setAttribute("date", date);
 		
 		ArrayList<DiscardMonthVO> listMonth = dao.getOneMonth(date.substring(0, 7), shopNo);

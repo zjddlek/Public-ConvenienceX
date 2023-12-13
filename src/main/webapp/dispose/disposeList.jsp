@@ -12,17 +12,14 @@
 
 <style type="text/css">
 	#resultTable {
-		width: 800px;
 		margin: 0;
-		padding-top: 100px;
+		padding-top: 20px;
 	}
 
-	.total {
-	      display: flex;
-	      flex-wrap: wrap;
-	      gap: 5px;
-	      flex-direction: row;
-	   }
+	#myColumnChart{
+		textaling: center;
+		padding-left: 50px;
+	}
 	
 	#despose_search{
 		float: right;
@@ -37,32 +34,42 @@
 		margin-bottom: 20px !important;
 	}
 </style>
-
+<script type="text/javascript">
+	$(()=>{
+		$("#next").click(function(){
+			if($("#datepicker").val()==""){
+				alert("날짜를 선택해 주세요");
+				return false;
+			}
+			$("#nextForm").submit();
+		});
+	
+	})
+</script>
 </head>
 <body>
+	<jsp:include page="/main/nav.jsp"></jsp:include> 
 	<div class="container">
-		<jsp:include page="/main/nav.jsp"></jsp:include> 
 		
 		<h3>폐기 검색 </h3>
 	
-		<form action="mc">
+		<form id ="nextForm" action="mc">
 			<input type="hidden" name="type" value="disposeSearch"/>
 			<span>날짜</span>
-			<input type="text" name="date" id="date" placeholder="ex) 2023/11/01"/> 
+			<input type="date" name="date" id="datepicker" />
+			<!-- <input type="text" name="date" id="date" placeholder="ex) 2023-11-01"/>  -->
+			<input type="hidden" name="sno" value="${svo.sno }"/>
+			<input id="next" type="button" value="검색"/>
 			
-			<span>점포 번호</span>
-			<input type="text" name="shopNo" id="shopNo" placeholder="ex) 03485"/>
-			<input type="submit" value="검색"/>
-			
-			<a href="/mc?type=expiredItems"><input type="button" id="despose_search" value="유통기한이 지난 상품 조회" /></a>
+			<a href="mc?type=expiredItems&sno=${svo.sno }"><input type="button" id="despose_search" value="유통기한 지난 상품 조회" /></a>
 		</form>
 		
-		<div class="total">
-			<div id="myBarChart" class="border"></div>
-			<div class="container-sm" id="resultTable">
-				<table class="table table-striped" ></table>
+		
+			<div id="myColumnChart" ></div>
+			<div id="resultTable">
+				<table class="table table-striped table-sm" ></table>
 			</div>
-		</div>
+		
 	</div>	
 <script>
 	if(${param.date} != null){
@@ -77,27 +84,29 @@
       ]);
       
       var options = {
-    		  'title': '일별 폐기 금액',
-    		  'width': 680,
-    		  'height': 750, 
-    		  'vAxis' : {title: '날짜'},
-    		  'hAxis' : {title: '폐기 금액'}
+    		  title: '일별 폐기 금액',
+    		  width: 1280,
+    		  height: 400, 
+    		  vAxis : {title: '날짜'},
+    		  hAxis : {title: '폐기 금액'},
+    		  legend:'none'
       };
 
-      var chart = new google.visualization.BarChart(document.getElementById('myBarChart'));
+      var chart = new google.visualization.ColumnChart(document.getElementById('myColumnChart'));
       
       function selectHandler(){
       	var selection = chart.getSelection()[0];
       	var totalsum = data.getValue(selection.row, 1);
       	var selecteValue = data.getValue(selection.row, 0);
-      	//console.log(selecteValue);
+      	
+      	//console.log(${svo.sno });
       	
       	 	 $.ajax({
       			url:"ajax/discardAjaxDayList.jsp",
       			type: "GET",
       			data: {
       					date: selecteValue,
-      					sno: $("#shopNo").val()
+      					sno: ${svo.sno }
       					}, 
       			success: function (data){
       				 let obj = JSON.parse(data); 
@@ -105,13 +114,14 @@
       					$("table").empty();
       					
       					$("table").append(
-				      						"<tr><th>폐기 번호</th>"
+				      						"<tbody>"
+				      						+"<tr><th>폐기 번호</th>"
 				      						+"<th>재고 번호</th>"
 				      						+"<th>제품명</th>"
 				      						+"<th>개수</th>"
 				      						+"<th>제품가격</th>"
 				      						+"<th>합계</th>"
-				      						+"<th>제조회사명</th></tr>");
+				      						+"<th>제조사</th></tr>");
       					
       					var currentDate= null;
       					
@@ -131,8 +141,8 @@
       					$("table").append("<caption align='top'>"+currentDate+"</catption>")
       					$("table").append(
       										"<tr><td colspan='5'>총합</td>"
-      										+"<td colspan='2'>"+totalsum
-      										+"</td></tr>");
+      										+"<td colspan='2'>"+totalsum+"원"
+      										+"</td></tr></tbody>");
       				}//success end
       			});//ajax end
       	 

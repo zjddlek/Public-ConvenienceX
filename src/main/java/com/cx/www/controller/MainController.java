@@ -14,7 +14,9 @@ import com.cx.www.cal.CalListAction;
 import com.cx.www.cal.CalMainAction;
 import com.cx.www.cal.TotalProfitAction;
 import com.cx.www.discard.DisposeAction;
+import com.cx.www.discard.DisposeInsert;
 import com.cx.www.discard.DisposeSearchDay;
+import com.cx.www.discard.ExpiredItems;
 import com.cx.www.emp.DeleteAction;
 import com.cx.www.emp.DetailAction;
 import com.cx.www.emp.ListAction;
@@ -134,7 +136,14 @@ public class MainController extends HttpServlet{
 			Action ac = new DisposeSearchDay();
 			url = ac.execute(req, resp);
 		}
-		
+		else if(type.equals("expiredItems")) {
+			Action ac = new ExpiredItems();
+			url = ac.execute(req, resp);
+		}
+		else if(type.equals("disposeInsert")) {
+			Action ac = new DisposeInsert();
+			url = ac.execute(req, resp);
+		}
 		// 인사 - 수진
 		else if(type.equals("emp")) {
 			Action ac = new ListAction();
