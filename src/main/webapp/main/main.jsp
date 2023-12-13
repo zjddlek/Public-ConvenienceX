@@ -175,9 +175,6 @@ p {
 		<div class="wrap_nav">
 			<nav class="navbar navbar-expand-lg">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="mc?type=main&sno=${svo.sno }"> <img
-						src="./images/conveni.PNG" alt="" />
-					</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarNav"
 						aria-controls="navbarNav" aria-expanded="false"
@@ -185,6 +182,7 @@ p {
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarNav">
+						<img src="./images/conveni.PNG" alt="" />
 						<ul class="navbar-nav">
 							<li class="nav-item">
 								<a class="nav-link" href="mc?type=main">메인 페이지</a>
@@ -321,22 +319,25 @@ p {
 	let sc_TOP4_Sales=${SCSlist[3].sum};
 	let sc_TOP5_Sales=${SCSlist[4].sum}; 
 	
-	//지난 2주간 요일별 매출액
-	let sat = ${DSlist[0].saleamount};
-	let sun = ${DSlist[1].saleamount};
-	let mon = ${DSlist[2].saleamount};
-	let tue = ${DSlist[3].saleamount};
-	let wed = ${DSlist[4].saleamount};
-	let thu = ${DSlist[5].saleamount};
-	let fri = ${DSlist[6].saleamount};
 	
-	let lastSat =  ${DSlist[7].saleamount};
-	let lastSun =  ${DSlist[8].saleamount};
-	let lastMon =  ${DSlist[9].saleamount};
-	let lastTue =  ${DSlist[10].saleamount};
-	let lastWed =  ${DSlist[11].saleamount};
-	let lastThu =  ${DSlist[12].saleamount};
-	let lastFri =  ${DSlist[13].saleamount};
+	
+	console.dir(thisweek.length);
+	//지난 2주간 요일별 매출액
+	let sun = ${DSlist[7].saleamount};
+	let mon = ${DSlist[8].saleamount};
+	let tue = ${DSlist[9].saleamount};
+	let wed = ${DSlist[10].saleamount};
+	let thu = ${DSlist[11].saleamount};
+	let fri = ${DSlist[12].saleamount};
+	let sat = ${DSlist[13].saleamount};
+	
+	let lastSun =  ${DSlist[0].saleamount};
+	let lastMon =  ${DSlist[1].saleamount};
+	let lastTue =  ${DSlist[2].saleamount};
+	let lastWed =  ${DSlist[3].saleamount};
+	let lastThu =  ${DSlist[4].saleamount};
+	let lastFri =  ${DSlist[5].saleamount};
+	let lastSat =  ${DSlist[6].saleamount};
 	
 
 	//파이 그래프
@@ -364,14 +365,15 @@ p {
 	new Chart(document.getElementById("line-chart"), {
 	  type: 'line',
 	  data: {
-	    labels: ['월','화','수','목','금','토','일'],
+	    labels: ['일','월','화','수','목','금','토'],
 	    datasets: [{ 
-	        data: [mon,tue,wed,thu,fri,sat,sun],
+	        data: [sun,mon,tue,wed,thu,fri,],
 	        label: "이번주",
 	        borderColor: "#3e95cd",
 	        fill: false
+	        
 	      }, { 
-	        data: [lastMon,lastTue,lastWed,lastThu,lastFri,lastSat,lastSun],
+	        data: [lastSun,lastMon,lastTue,lastWed,lastThu,lastFri,lastSat],
 	        label: "지난주",
 	        borderColor: "#8e5ea2",
 	        fill: false
@@ -380,8 +382,8 @@ p {
 	  },
 	  options: {
 	    title: {
-	      display: true,
-	      text: '일별 매출액 비교'
+	    	display: true,
+	    	text: '일별 매출액 비교'
 	    }
 	  }
 	});

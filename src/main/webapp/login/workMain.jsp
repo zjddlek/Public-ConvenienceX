@@ -18,6 +18,10 @@
 		margin-left: 5px;
 		width:100px;
 	}
+	.table{
+		margin-left: auto;;
+		margin-right: auto;
+	}
 </style>
 </head>
 <body>
@@ -28,13 +32,14 @@
 			<h3>출퇴근 기록</h3>
 		</div>
 		<div>
-			<table class=" table table-bordered table-striped text-center">
+			<table class="table table-bordered table-striped text-center">
 				<thead>
 					<tr>
 						<th>이름</th>
 						<th>직책</th>
 						<th>출근시간</th>
 						<th>퇴근시간</th>
+						<th>퇴근여부</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -56,15 +61,17 @@
 	
 							<td>${vo.attstart }</td>
 							<td>${vo.attend }</td>
-							<c:if test="${vo.attend == null }">
-								<td><a
-									href="mc?type=calLast&empno=${vo.empno }&sno=${svo.sno }"> <input
-										type="button" value="정산하기" />
-								</a></td>
-							</c:if>
-							<c:if test="${vo.attend != null }">
-								<td><h5>퇴근 완료</h5></td>
-							</c:if>
+							
+								<c:if test="${vo.attend == null }">
+									<td><a
+										href="mc?type=calLast&empno=${vo.empno }&sno=${svo.sno }"> <input
+											type="button" value="정산하기" />
+									</a></td>
+								</c:if>
+								<c:if test="${vo.attend != null }">
+									<td><h5>퇴근 완료</h5></td>
+								</c:if>
+							
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -82,17 +89,17 @@
 					</div>
 				</div>
 				<tr>
-					<td colspan='2' style='text-align: end'>
+					<td colspan='1' style='text-align: end'>
 						<nav aria-label="Page navigation">
 							  <ul class="pagination justify-content-center">
 							    <li class="page-item"><a class="page-link" href="mc?type=workmain&sno=${svo.sno }&cp=1">첫 페이지로</a></li>
 							  </ul>
 						</nav>
 					</td>
-					<td colspan='6' style='text-align: center'>
+					<td colspan='3' style='text-align: center'>
 						<nav aria-label="Page navigation">
 						  <ul class="pagination justify-content-center">
-						    <li class="page-item"><a class="page-link" href="mc?type=mc?type=workmain&sno=${svo.sno }&cp=${currentPage -1 }">Previous</a></li>
+						    <li class="page-item"><a class="page-link" href="mc?type=workmain&sno=${svo.sno }&cp=${currentPage -1 }">Previous</a></li>
 						    <c:forEach var="i" begin="${startPage }" end="${endPage }" >
 						    <li class="page-item"><a class="page-link" href="mc?type=workmain&sno=${svo.sno }&cp=${i }">${i }</a></li>
 							</c:forEach>
@@ -100,7 +107,7 @@
 						  </ul>
 						</nav>
 					</td>
-					<td colspan='2' >
+					<td colspan='1' >
 						<nav aria-label="Page navigation">
 							  <ul class="pagination justify-content-center">
 							    <li class="page-item"><a class="page-link" href="mc?type=workmain&sno=${svo.sno }&cp=${totalPage }">마지막 페이지로</a></li>

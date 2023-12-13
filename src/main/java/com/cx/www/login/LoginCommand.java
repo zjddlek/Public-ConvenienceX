@@ -37,6 +37,8 @@ public class LoginCommand implements Action {
 			ArrayList<SubCategorySalesVO> SCSlist = scdao.getAllTop(sno);
 			CalDAO cdao = new CalDAO();
 			ArrayList<DailySalesVO> DSlist = cdao.dailyCal(sno);
+				
+			
 			sdao.close();
 			
 			dao.close();
