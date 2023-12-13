@@ -11,7 +11,7 @@
 	DiscardDAO dao = new DiscardDAO();
 	
 	String discardDate = request.getParameter("date") ;  
-	String sno = request.getParameter("sno") ;
+	String sno = "0"+request.getParameter("sno") ;
 	
 	ArrayList<DiscardVO> list = dao.getOneday(discardDate, sno);
 	dao.close();
