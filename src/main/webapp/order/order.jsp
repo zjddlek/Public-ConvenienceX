@@ -129,10 +129,8 @@ function perCheckedOnchange() {
 </script>
 </head>
 <body>
+	<div><jsp:include page="/main/nav.jsp"></jsp:include></div>
 	<div class="container">
-		<div>
-			<jsp:include page="/main/nav.jsp"></jsp:include>
-		</div>
 
 		<div class="main">
 			<c:import url="./rankingTopSix.jsp"></c:import>

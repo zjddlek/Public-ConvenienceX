@@ -39,10 +39,8 @@
 </script>
 </head>
 <body>
+	<div><jsp:include page="/main/nav.jsp"></jsp:include></div>
 	<div class="container">
-		<div>
-			<jsp:include page="/main/nav.jsp"></jsp:include>
-		</div>
 		<input type="date" name="date" id="date" style="width: 170px" /> 
 		<input type="hidden" name="sno" id="sno" value="${sno }" />
 		<table class="table table-striped table-hover table-sm">

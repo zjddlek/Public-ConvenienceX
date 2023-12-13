@@ -24,6 +24,14 @@
 	.search { text-align: center;}
 	.navbar { width: 100%; }
 	h2 { text-align: center;}
+	h1 { 
+		display: inline;
+		margin-left: 100px;
+		margin-right: 100px;	
+	}
+	#yesterday, #tomorrow {
+		margin-bottom: 15px;
+	}
 	
 	.main {
 		display: flex;
