@@ -44,10 +44,8 @@
 
 </head>
 <body>
+	<div><jsp:include page="/main/nav.jsp"></jsp:include></div>
 	<div class="container">
-		<div>
-			<jsp:include page="/main/nav.jsp"></jsp:include>
-		</div>
 		<table class="table table-striped table-hover table-sm">
 			<tr>
 				<th>대분류</th>

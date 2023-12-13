@@ -27,10 +27,8 @@
 <script src="./js/orderCookie.js"></script>
 </head>
 <body>
+	<div><jsp:include page="/main/nav.jsp"></jsp:include></div>
 	<div class="container">
-		<div>
-			<jsp:include page="/main/nav.jsp"></jsp:include>
-		</div>
 		<table class="table table-striped table-hover table-sm">
 			<h2>'${searchPname }'(으)로 검색한 결과</h2>
 			<tr>

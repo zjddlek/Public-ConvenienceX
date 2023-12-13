@@ -29,10 +29,70 @@
 <script>
 	$(()=>{
 		$("#date").on("change",()=>{
+			console.dir($("#date"));
 			let date = $("#date").val();
 			let sno = $("#sno").val();
-			console.log("date : " + date + ", sno : " + sno);
+			
 			location.href = 'mc?type=orderDayList&sno='+sno+'&yyyymmdd='+date;
+		})
+		
+		$("#yesterday").on("click",()=>{
+			let date = $("#date").val();
+			let sno = $("#sno").val();
+		
+			let yyyy = date.substring(0,4);
+			let mm = date.substring(5,7);
+			let dd = date.substring(8,10);
+			
+			let today = new Date(yyyy,(mm-1),dd);
+			
+			today.setDate(today.getDate() - 1);
+
+			yyyy=today.getFullYear();
+			mm=today.getMonth()+1;
+			dd=today.getDate();
+			
+			if ( mm >= 10 && dd >= 10) {
+				$("#date").val(yyyy+'-'+(mm)+'-'+dd);
+			} else if ( mm < 10 && dd >= 10 ) {
+				$("#date").val(yyyy+'-0'+(mm)+'-'+dd);
+			} else if ( mm >= 10 && dd < 10 ) {
+				$("#date").val(yyyy+'-'+(mm)+'-0'+dd);
+			} else {
+				$("#date").val(yyyy+'-0'+(mm)+'-0'+dd);
+			}			
+			
+			location.href = 'mc?type=orderDayList&sno='+sno+'&yyyymmdd='+$("#date").val();
+
+		})
+		
+		$("#tomorrow").on("click",()=>{
+			let date = $("#date").val();
+			let sno = $("#sno").val();
+		
+			let yyyy = date.substring(0,4);
+			let mm = date.substring(5,7);
+			let dd = date.substring(8,10);
+			
+			let today = new Date(yyyy,(mm-1),dd);
+			
+			today.setDate(today.getDate() + 1);
+
+			yyyy=today.getFullYear();
+			mm=today.getMonth()+1;
+			dd=today.getDate();
+			
+			if ( mm >= 10 && dd >= 10) {
+				$("#date").val(yyyy+'-'+(mm)+'-'+dd);
+			} else if ( mm < 10 && dd >= 10 ) {
+				$("#date").val(yyyy+'-0'+(mm)+'-'+dd);
+			} else if ( mm >= 10 && dd < 10 ) {
+				$("#date").val(yyyy+'-'+(mm)+'-0'+dd);
+			} else {
+				$("#date").val(yyyy+'-0'+(mm)+'-0'+dd);
+			}			
+
+			location.href = 'mc?type=orderDayList&sno='+sno+'&yyyymmdd='+$("#date").val();
 		})
 	})
 	
@@ -44,15 +104,15 @@ h1 {
 </style>
 </head>
 <body>
+	<div><jsp:include page="/main/nav.jsp"></jsp:include></div>
 	<div class="container">
-		<div>
-			<jsp:include page="/main/nav.jsp"></jsp:include>
-		</div>
 		<input type="date" name="date" id="date" value="${yyyyMMdd }" style="width: 170px" /> 
 		<input type="hidden" name="sno" id="sno" value="${sno }" />
 		<table class="table table-striped table-hover table-sm caption-top">
-			<caption>
+			<caption style="text-align: center">
+				<input class="btn btn-dark" type="button" value="&lt;" id="yesterday" />
 				<h1>${yyyyMMdd }</h1>
+				<input class="btn btn-dark" type="button" value="&gt;" id="tomorrow" />
 			</caption>
 			<tr>
 				<th>주문날짜</th>
