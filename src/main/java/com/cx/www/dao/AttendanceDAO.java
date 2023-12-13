@@ -200,6 +200,50 @@ public class AttendanceDAO {
 		}
 
 	}
+	
+	public ArrayList<AttendanceRecodVO> getRecordAll(String sno, int startno, int recordperpage) {
+		sb.setLength(0);
+		sb.append(
+				" SELECT C.JOBNO, C.ENAME, A.ATTSTART,A.ATTEND, C.EMPNO, C.SNO FROM SHOP S JOIN CXEMP C JOIN ATTENDANCE A WHERE S.SNO = C.SNO AND C.EMPNO = A.EMPNO AND C.SNO=? ORDER BY A.ATTSTART DESC LIMIT ?, ? ");
+		ArrayList<AttendanceRecodVO> list = new ArrayList<AttendanceRecodVO>();
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, sno);
+			pstmt.setInt(2, startno);
+			pstmt.setInt(3, recordperpage);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				AttendanceRecodVO vo = new AttendanceRecodVO(rs.getString("ename"), rs.getInt("jobno"),
+						rs.getString("attstart"), rs.getString("attend"), rs.getString("empno"), rs.getString("sno"));
+				list.add(vo);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int getTotalCount(String sno) {
+		sb.setLength(0);
+		sb.append("SELECT COUNT(*) CNT FROM SHOP S JOIN CXEMP C JOIN ATTENDANCE A WHERE S.SNO = C.SNO AND C.EMPNO = A.EMPNO AND C.SNO=? ");
+
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, sno);
+			rs = pstmt.executeQuery();
+			rs.next();
+			count = rs.getInt("CNT");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 
 	public void close() {
 		try {
