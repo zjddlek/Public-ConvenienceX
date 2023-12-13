@@ -195,9 +195,14 @@ p {
 							<li class="nav-item">
 								<a class="nav-link" href="mc?type=stock&sno=${svo.sno }">재고관리</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="mc?type=calMain&sno=${svo.sno }">정산 - 작업중</a>
-							</li>
+							<li class="nav-item dropdown">
+				          		<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="">정산</a>
+				          		<div class="dropdown-menu" >
+				          			<a href="mc?type=calList&sno=${svo.sno }" class="dropdown-item">중간/마감 이력</a>
+				          			<div class="dropdown-divider"></div>
+		                            <a href="mc?type=profit&sno=${svo.sno }" class="dropdown-item">매출 현황</a>
+			          			</div>
+		        			</li>
 							<li class="nav-item">
 								<a class="nav-link" href="mc?type=dispose&sno=${svo.sno }">폐기</a>
 							</li>

@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="./style/nav.css" />
 
+
 <nav class="navbar navbar-expand-lg">
   	<div class="container-fluid">
     	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,8 +32,13 @@
 		        	<li class="nav-item">
 		          		<a class="nav-link" href="mc?type=stock&sno=${svo.sno }">재고관리</a>
 		        	</li>
-		        	<li class="nav-item">
-		          		<a class="nav-link" href="mc?type=calMain&sno=${svo.sno }">정산</a>
+		        	<li class="nav-item dropdown">
+		          		<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="">정산</a>
+		          		<div class="dropdown-menu" >
+		          			<a href="mc?type=calList&sno=${svo.sno }" class="dropdown-item">중간/마감 이력</a>
+		          			<div class="dropdown-divider"></div>
+                            <a href="mc?type=profit&sno=${svo.sno }" class="dropdown-item">매출 현황</a>
+		          		</div>
 		        	</li>
 		        	<li class="nav-item">
 		          		<a class="nav-link" href="mc?type=dispose&sno=${svo.sno }">폐기</a>

@@ -21,12 +21,10 @@ public class AttendCommand implements Action{
 		int allDifference = Integer.parseInt(req.getParameter("allDifference"));
 		int allSales = Integer.parseInt(req.getParameter("allSales"));
 		int tap = Integer.parseInt(req.getParameter("tab"));
-			
+		
 		AttendanceDAO dao = new AttendanceDAO();
 		AttendanceVO vo = dao.attGetOne(empno);
-		ArrayList<AttendanceRecodVO> list = dao.getRecordAll(sno);
-		dao.updateEnd(vo);
-		
+			
 		ProfitDAO pdao = new ProfitDAO();
 		ProfitVO pvo = new ProfitVO();
 		pvo.setATTNO(vo.getAttno());
@@ -34,14 +32,30 @@ public class AttendCommand implements Action{
 		pvo.setSALESAMOUNT(allSales);
 		pvo.setDIFFERENCE(allDifference);
 		
+		if(tap==1) {
+		
+		ArrayList<AttendanceRecodVO> list = dao.getRecordAll(sno);
+		dao.updateEnd(vo);
+		
+		
 		pdao.addProfit(pvo);
 		dao.close();
 		pdao.close();
 
 		req.setAttribute("list", list);
-		
-		
 		return "login/attendanceLoginOk.jsp";
+		}else {
+			ArrayList<AttendanceRecodVO> list = dao.getRecordAll(sno);
+					
+			pdao.addProfit(pvo);
+			dao.close();
+			pdao.close();
+
+			req.setAttribute("list", list);
+			return "login/attendanceLoginOk.jsp";
+			
+		}
+		
 	}
 
 }
