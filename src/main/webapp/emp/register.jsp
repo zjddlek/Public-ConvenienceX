@@ -31,7 +31,6 @@
 	height: 1200px;
 	margin-top: 50px;
 	margin-bottom: 50px;
-	background-color: pink;
 }
 
 #header {
@@ -50,7 +49,6 @@
 	justify-content: right;
 	padding-top: 50px;
 	padding-left: 300px;
-	background-color: yellow;
 	
 }
 
@@ -58,12 +56,13 @@
 	width: 50%;
 	height: 250px;
 	float: right;
+	margin-top:20px;
 	
 }
 
 #middle {
 	height: 650px;
-	padding-left: 250px;
+	padding-left: 200px;
 	padding-top: 20px;
 	
 }
@@ -76,14 +75,12 @@
 
 #img {
 	margin-left: 150px;
-	background-color: gray;
 }
 
 #picture {
 	width: 100%;
 	height: 180px;
 	margin-right: 120px;
-	background-color: orange;
 }
 
 #idChecking{
@@ -91,12 +88,22 @@
 
 }
 
-#picturebox{
-	margin-left: 200px;
-	width:200px;
-	background-color: blue;
+
+#pic{
+	width:220px;
+	height:200px;
+	padding-left: 40px;
+	padding-bottom: 20px;
 }
 
+
+.navbar{
+
+  display: inline-block;
+
+  float: none;
+
+}
 
 </style>
 
@@ -262,19 +269,26 @@
 						class="form-control" name="email" />
 				</div>
 
-				<div class="col-md-7 offset-md-1 row my-3">
+				<div class="row">
+				<div class="col-md-5 offset-md-1 row my-1">
 					<label for="username">주소</label> <input type="text"
 						class="form-control" name="address" id="address" />
-
 				</div>
+				<div class="col-md-2 row offset-md-1">
+					<label for="username">&nbsp;</label> 
+					<input type="button" value="주소검색" id="btn" class="btn btn-success" />
+				</div>
+				
+				</div>
+				
 
-				<div class="col-md-7 offset-md-1 row my-3">
+				<div class="col-md-8 offset-md-1 row my-3">
 					<label for="username">상세주소</label> <input type="text"
 						class="form-control" name="address_detail" id="address_detail" />
 				</div>
-				<div class="col-md-6 offset-md-4">
+				<!-- <div class="col-md-6 offset-md-4">
 					<input type="button" value="주소검색" id="btn" class="btn btn-success" />
-				</div>
+				</div> -->
 
 				<div class="col-md-4 offset-md-1 row my-3">
 					<label for="username">입사일자</label> <input type="date"
@@ -310,8 +324,8 @@
 
 				<div class="col-md-6 offset-md-4">
 					<button type="submit" class="btn btn-primary">등록하기</button>
-					<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"> <input type="button"
-						class="btn btn-danger" value="취소" />
+					<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"> 
+					<input type="button" class="btn btn-danger" value="취소" />
 					</a>
 				</div>
 			</div>

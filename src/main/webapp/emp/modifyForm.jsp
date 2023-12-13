@@ -14,11 +14,12 @@
 <style>
 #root{
 	margin: auto;
-	width:800px;
+	width:900px;
 	margin:auto;
-	width:1500px;
-	height:1300px;
+	height:1250px;
 	margin-top: 50px;
+	margin-bottom: 50px;
+	
 
 }
 #header{
@@ -32,11 +33,8 @@
 	width:50%;
 	height:250px;
 	float:left;
-	display: flex;
-	justify-content: right;
 	padding-top: 50px;
-	padding-left: 300px;
-	
+	padding-left: 250px;
 	
 
 }
@@ -44,16 +42,17 @@
 	width:50%;
 	height:250px;
 	float:left;
-
 }
 #middle{
 	height:800px;
-	padding-left: 250px;
-	padding-top: 60px;
+	padding-left: 200px;
+	padding-top: 40px;
 
 }
 #buttons{
 	text-align:center;
+	padding-bottom: 100px;
+	
 }
 /* #picturebox{
 	width:70%;
@@ -64,12 +63,12 @@
 	background-color: green;
 }  */
 #img{
-	margin-left: 410px; 
+	margin-left: 300px; 
 	
 }
 
 #picture {
-	width: 50%;
+	width: 100%;
 	height: 180px;
 	margin-right: 50px;
 	
@@ -171,7 +170,7 @@
 
 			<div class="col-md-3 offset-md-1 row my-1">
 				<label for="username">아이디</label>
-				<input type="text" class="form-control" name="id" value="${empvo.id }" /> 
+				<input type="text" class="form-control" name="id" value="${empvo.id }" readonly /> 
 				
 			</div>
 			<!-- 
@@ -186,7 +185,7 @@
 			
 			<div class="col-md-3 offset-md-1 row my-3">
 				<label for="username">비밀번호</label>
-				<input type="text" class="form-control" name="pwd" value="${empvo.pwd }" />
+				<input type="text" class="form-control" name="pwd" value="${empvo.pwd }" readonly />
 			</div>
 			
 			
@@ -196,20 +195,26 @@
 			</div>
 
 
-			<div class="col-md-7 offset-md-1 row my-3">
+
+			<div class="row">
+			<div class="col-md-5 offset-md-1 row my-1">
 				<label for="username">주소</label>
 				<input type="text" class="form-control" name="address" id="address"  value="${empvo.address }" />
 				
 			</div >
+			<div class="col-md-2 row offset-md-1">
+			<label for="username">&nbsp;</label> 
+				<input type="button" value="주소검색" id="btn" class="btn btn-success"/>
+			</div>
+			</div>
+			
+			
 			
 			<div class="col-md-7 offset-md-1 row my-3">
 				<label for="username">상세주소</label>
 				<input type="text" class="form-control" name="address_detail" id="address_detail"   value="${empvo.address_detail }"/>
 			</div>
 
-			<div class="col-md-6 offset-md-4">
-				<input type="button" value="주소검색" id="btn" class="btn btn-success"/>
-			</div>
 			
 			
 			<div class="col-md-4 offset-md-1 row my-3">
@@ -236,6 +241,13 @@
 				</select>
 			</div>
 			
+       		<div id="buttons">
+          
+			<div class="col-md-6 offset-md-4">
+          		<input type="submit" class="btn btn-primary" value="수정" />
+				<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"><input type="button" class="btn btn-danger" value="취소" /></a>
+          	</div>
+          	</div>
 			</div>
 			
 			<%-- <div class="col-md-4 offset-md-2 row my-3">
@@ -254,13 +266,6 @@
 				<input type="hidden" class="form-control" name="sno" value="${vo.sno }"/>
 			</div>
        
-       		<div id="buttons">
-          
-			<div class="col-md-6 offset-md-4">
-          		<input type="submit" class="btn btn-primary" value="수정" />
-				<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"><input type="button" class="btn btn-danger" value="취소" /></a>
-          	</div>
-          	</div>
           	          	
     	</form>
 	</div>

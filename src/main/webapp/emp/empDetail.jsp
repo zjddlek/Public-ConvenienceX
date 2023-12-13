@@ -37,8 +37,7 @@
 	width: 50%;
 	height: 250px;
 	float: left;
-	display: flex;
-	justify-content: right;
+	padding-left:180px;
 	padding-top: 20px;
 }
 
@@ -50,7 +49,7 @@
 
 #middle {
 	height: 800px;
-	padding-left: 250px;
+	padding-left: 200px;
 	padding-top: 60px;
 	
 }
@@ -60,10 +59,14 @@
 }
 
 #picture {
-	width: 110%;
+	width:200px;
 	height: 180px;
-	margin-right: 150px;
-}
+
+}  
+
+
+
+
 </style>
 <body>
 	<jsp:include page="/main/nav.jsp"></jsp:include>
@@ -143,13 +146,12 @@
 				</div>
 				<div id="buttons">
 					<div class="col-md-6 offset-md-4 pt-5 bt-5">
-						<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"> <input type="button"
-							class="btn btn-success" value="목록" />
-						</a> <a href="mc?type=modify&empno=${empvo.empno }&jobno=${empvo.jobno}"> <input
-							type="button" class="btn btn-primary" value="수정" />
-						</a> <a href="mc?type=delete&empno=${vo.empno }"> <input
-							type="button" class="btn btn-danger" value="삭제" />
-						</a>
+						<a href="mc?type=emp&sno=${svo.sno }&jobno=${vo.jobno}"> 
+						<input type="button" class="btn btn-success" value="목록" /></a> 
+						<a href="mc?type=modify&empno=${empvo.empno }&jobno=${empvo.jobno}"> 
+						<input type="button" class="btn btn-primary" value="수정" /></a> 
+						<a href="mc?type=delete&empno=${vo.empno }"> 
+						<input type="button" class="btn btn-danger" value="삭제" /></a>
 					</div>
 				</div>
 			</div>
