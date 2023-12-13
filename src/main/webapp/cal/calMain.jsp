@@ -7,9 +7,9 @@
 <title>calMain</title>
 </head>
 <body>
-	<div class="container">
-		<jsp:include page="/main/nav.jsp"></jsp:include>
-		
+	<jsp:include page="/main/nav.jsp"></jsp:include>
+	
+	<div class="container">		
 		<h2 style="text-align: center;">정산</h2>
 		<a href="mc?type=calLast"><input type="button" value="중간/마감 정산"/></a>
 		<a href="mc?type=calList"><input type="button" value="중간/마감 이력"/></a>
