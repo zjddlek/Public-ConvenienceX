@@ -16,5 +16,7 @@ public class ProfitVO {
 	private String CALTIME; // 정산시간
 	private int SALESAMOUNT; // 매출액
 	private int DIFFERENCE; // 차액
+	private String date; // 정산시간
+	private String calday; // 정산시간
 	
 }

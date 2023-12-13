@@ -19,11 +19,7 @@ public class ProfitDAO {
 		conn = DBConnection.getConnection();
 	}
 	
-	   
-	
-	
-	
-	public ArrayList<ProfitVO> getList() { // 리스트 가져오기
+	public ArrayList<ProfitVO> getList() { // 리스트 가져오기 - 시간별 정산
 		ArrayList<ProfitVO> list = new ArrayList<ProfitVO>();
 		ProfitVO vo = null;
 
@@ -38,10 +34,8 @@ public class ProfitDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		try {
-
-
+			
 			while (rs.next()) {
 
 				int calno = rs.getInt("CALNO");
@@ -50,14 +44,54 @@ public class ProfitDAO {
 				String caltime = rs.getString("CALTIME");
 				int salesamount = rs.getInt("SALESAMOUNT");
 				int difference = rs.getInt("DIFFERENCE");
-				
-				
+				String day = rs.getString("DATE");
+				String calday = rs.getString("CALDAY");
 			
-				vo = new ProfitVO(calno, attno, calculate, caltime, salesamount, difference);
+				vo = new ProfitVO(calno, attno, calculate, caltime, salesamount, difference, day, calday);
 
 				list.add(vo);
-				System.out.println(vo);
+				System.out.println(list);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<ProfitVO> getListDay() { // 리스트 가져오기 - 일자별 정산
+		ArrayList<ProfitVO> list = new ArrayList<ProfitVO>();
+		ProfitVO vo = null;
+		
+		sb.setLength(0);
+		
+		sb.append("SELECT DATE, SUM(CALTIME) CALDAY ");
+		sb.append("FROM (SELECT ATTNO, SUM(CNT * PRICE_CONSUMER) CALTIME, SUBSTRING(SALEDATE,1,10) DATE ");
+		sb.append("FROM (SELECT SA.SALENO, ATT.ATTNO, ATT.EMPNO, SA.SALEDATE ");
+		sb.append("FROM SALES SA, ATTENDANCE ATT ");
+		sb.append("WHERE SA.SALEDATE BETWEEN ATT.ATTSTART AND ATT.ATTEND) AA  ");
+		sb.append("NATURAL JOIN SALES_DETAIL NATURAL JOIN STOCK NATURAL JOIN PRODUCT_INFO NATURAL JOIN PRODUCT ");
+		sb.append("GROUP BY ATTNO) BB GROUP BY DATE ORDER BY DATE ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			
+			while (rs.next()) {
 				
+				String day = rs.getString("DATE");
+				String calday = rs.getString("CALDAY");
+				
+				vo = new ProfitVO(0, null, 0, null, 0, 0, day, calday);
+				
+				list.add(vo);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -92,8 +126,7 @@ public class ProfitDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 	
 	public void close() {
