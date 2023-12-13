@@ -37,9 +37,7 @@
 		$.ajax({
 			url : "ajax/stockAjaxStockno.jsp",
 			data : {
-				"sno" : sno,
-				"startno" : startno,
-				"endno" : endno
+				"sno" : sno
 			},
 			success:function(data){
 				
@@ -116,9 +114,7 @@
 			url : "ajax/stockAjaxStockno.jsp",
 			data: {
 				"scno" : scno,
-				"sno" : sno,
-				"startno" : startno,
-				"endno" : endno
+				"sno" : sno
 			},
 			success:function(data){
 				

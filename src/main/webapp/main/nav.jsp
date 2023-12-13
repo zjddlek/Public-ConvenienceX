@@ -32,7 +32,7 @@
 		          		<a class="nav-link" href="mc?type=stock&sno=${svo.sno }">재고관리</a>
 		        	</li>
 		        	<li class="nav-item">
-		          		<a class="nav-link" href="mc?type=calMain&sno=${svo.sno }">정산 - 작업중</a>
+		          		<a class="nav-link" href="mc?type=calMain&sno=${svo.sno }">정산</a>
 		        	</li>
 		        	<li class="nav-item">
 		          		<a class="nav-link" href="mc?type=dispose&sno=${svo.sno }">폐기</a>
@@ -42,9 +42,6 @@
 		        	</li>
 		        	<li class="nav-item">
 		          		<a class="nav-link" href="mc?type=workmain&sno=${svo.sno }">출퇴근</a>
-		        	</li>
-		        	<li class="nav-item">
-		          		<a class="nav-link" href="mc?type=etc&sno=${svo.sno }">부대비용관리 - 작업x</a>
 		        	</li>
 		      	</ul>
 	      	</div>
