@@ -158,6 +158,11 @@
 		
 		let searchVal = $("#search_text").val();
 		
+		if(searchVal == ''){
+			alert("검색어가 없습니다.");
+			return;
+		}
+		
 		$.ajax({
 			url : "ajax/stockAjaxSearch.jsp",
 			data: {
@@ -166,6 +171,12 @@
 			success:function(data){
 				
 				let obj = JSON.parse(data.trim());
+				
+				if (obj.length == 0){
+					alert("해당 상품이 존재하지 않습니다.");
+					goStockMain();
+					$("#search_text").val("");
+				}
 				
 				// 리스트 초기화
 				$("#stock_list *").remove();
@@ -194,8 +205,6 @@
 		});
 	}
 	
-	
-
 </script>
 <body>
 	<jsp:include page="/main/nav.jsp"></jsp:include>
@@ -245,7 +254,6 @@
 				</colgroup>
 				<thead style="border-bottom: 1px solid black;">
 					<tr>
-						<%-- sort는 언젠간.... 기능 제거함 --%>
 						<th>
 							<span style="text-align: center;">상품코드</span>
 						</th>

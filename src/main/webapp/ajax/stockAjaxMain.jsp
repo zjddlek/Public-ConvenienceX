@@ -8,10 +8,12 @@
     pageEncoding="UTF-8"%>
 <%
  
+	String sno = request.getParameter("sno");
+
 	StockDAO stdao = new StockDAO();
 	JSONArray stArray = new JSONArray();
 	
-	ArrayList<StockVO> list = stdao.getAllStock();
+	ArrayList<StockVO> list = stdao.getAllStock(sno);
 	
 	System.out.println(list);
 	
