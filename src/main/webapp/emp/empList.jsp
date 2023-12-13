@@ -51,8 +51,8 @@
 </head>
 <body>
 	<div id="root">
-		<div class="container">
 			<jsp:include page="/main/nav.jsp"></jsp:include>
+		<div class="container">
 			<form action="mc?">
 							<div id=search class="border border-primary border-3 rounded-3">
 					<div id="head" class="border border-primary border-3 rounded-3">
