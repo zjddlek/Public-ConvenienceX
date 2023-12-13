@@ -37,12 +37,22 @@ public class LoginCommand implements Action {
 			ArrayList<SubCategorySalesVO> SCSlist = scdao.getAllTop(sno);
 			CalDAO cdao = new CalDAO();
 			ArrayList<DailySalesVO> DSlist = cdao.dailyCal(sno);
-				
+			ArrayList<DailySalesVO> firstList = new ArrayList<DailySalesVO>();
+			ArrayList<DailySalesVO> secondList = new ArrayList<DailySalesVO>();
+			for(int i=0; i<DSlist.size(); i++) {
+				if(i<7) {
+					firstList.add(DSlist.get(i));
+				}else {
+					secondList.add(DSlist.get(i));
+				}
+			}
 			
 			sdao.close();
-			
+			cdao.close();
 			dao.close();
 
+			
+			
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("svo", svo);
@@ -52,7 +62,8 @@ public class LoginCommand implements Action {
 
 			req.setAttribute("vo", vo);
 			session.setAttribute("SCSlist", SCSlist);
-			session.setAttribute("DSlist", DSlist);
+			session.setAttribute("firstList", firstList);
+			session.setAttribute("secondList", secondList);
 			
 			
 			cdao.close();

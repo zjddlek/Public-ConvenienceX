@@ -215,7 +215,6 @@ p {
 					</div>
 				</div>
 			</nav>
-			<%-- 요기아래서부터 작업하시면 됩니다. --%>
 		</div>
 		<div class="wrap_contents d-flex align-items-center">
 			<div class="col-md-4">
@@ -303,6 +302,19 @@ p {
 		</div>
 
 	</div>
+	
+	<div id="first" style="display:none;">
+		<c:forEach var="vo" items="${firstList }">
+		<span>${vo.saleamount }</span>
+		</c:forEach>
+	</div>
+	<div id="second" style="display:none;">
+		<c:forEach var="vo" items="${secondList }">
+		<span>${vo.saleamount }</span>
+		</c:forEach>
+	</div>
+	
+	
 </body>
 <script>
 	//서브카테고리 매출액 탑5 이름,값
@@ -319,26 +331,19 @@ p {
 	let sc_TOP4_Sales=${SCSlist[3].sum};
 	let sc_TOP5_Sales=${SCSlist[4].sum}; 
 	
-	
-	
-	console.dir(thisweek.length);
 	//지난 2주간 요일별 매출액
-	let sun = ${DSlist[7].saleamount};
-	let mon = ${DSlist[8].saleamount};
-	let tue = ${DSlist[9].saleamount};
-	let wed = ${DSlist[10].saleamount};
-	let thu = ${DSlist[11].saleamount};
-	let fri = ${DSlist[12].saleamount};
-	let sat = ${DSlist[13].saleamount};
+	var lastweek = new Array();
+	$("#first span").each((idx, el) => {
+		let saleamount = $(el).text();
+		lastweek.push(saleamount);
+	});
+	var thisweek = new Array();
+	$("#second span").each((idx, el) => {
+		let saleamount = $(el).text();
+		thisweek.push(saleamount);
+	});
 	
-	let lastSun =  ${DSlist[0].saleamount};
-	let lastMon =  ${DSlist[1].saleamount};
-	let lastTue =  ${DSlist[2].saleamount};
-	let lastWed =  ${DSlist[3].saleamount};
-	let lastThu =  ${DSlist[4].saleamount};
-	let lastFri =  ${DSlist[5].saleamount};
-	let lastSat =  ${DSlist[6].saleamount};
-	
+
 
 	//파이 그래프
 	new Chart(document.getElementById("pie-chart"), {
@@ -347,7 +352,7 @@ p {
 	      labels: [sc_TOP1,sc_TOP2,sc_TOP3,sc_TOP4,sc_TOP5],
 	      datasets: [{
 	        label: "Population (millions)",
-	        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+	        backgroundColor: ["#3678F1", "#9591D9","#F19292","#FFE155","#EB731C"],
 	        
 	        data: [sc_TOP1_Sales,sc_TOP2_Sales,sc_TOP3_Sales,sc_TOP4_Sales,sc_TOP5_Sales]
 	      }]
@@ -367,15 +372,15 @@ p {
 	  data: {
 	    labels: ['일','월','화','수','목','금','토'],
 	    datasets: [{ 
-	        data: [sun,mon,tue,wed,thu,fri,],
+	        data: thisweek,
 	        label: "이번주",
-	        borderColor: "#3e95cd",
+	        borderColor: "#98E294",
 	        fill: false
 	        
 	      }, { 
-	        data: [lastSun,lastMon,lastTue,lastWed,lastThu,lastFri,lastSat],
+	        data: lastweek,
 	        label: "지난주",
-	        borderColor: "#8e5ea2",
+	        borderColor: "#3DDAEE",
 	        fill: false
 	      }
 	    ]

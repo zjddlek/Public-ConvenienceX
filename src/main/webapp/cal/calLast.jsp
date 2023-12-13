@@ -303,7 +303,7 @@
 								<th colspan="2">카드 총매출</th>
 								<td><div id="cashsales">
 										<c:set var="cardtotal" value="0" />
-										<c:forEach var="vo" items="${list}">
+										<c:forEach var="vo" items="${endCardCal}">
 											<c:set var="cardtotal"
 												value="${cardtotal + (vo.price*vo.cnt)}" />
 										</c:forEach>
@@ -380,7 +380,7 @@
 								<th colspan="2">매출액</th>
 								<td><div id="cashsales">
 										<c:set var="cashtotal" value="0" />
-										<c:forEach var="vo" items="${list2}">
+										<c:forEach var="vo" items="${endCashCal}">
 											<c:set var="cashtotal"
 												value="${cashtotal + (vo.price*vo.cnt)}" />
 										</c:forEach>
@@ -435,7 +435,7 @@
 								<th colspan="2">매출액</th>
 								<td><div id="giftsales">
 										<c:set var="gifttotal" value="0" />
-										<c:forEach var="vo" items="${list3}">
+										<c:forEach var="vo" items="${endGiftCal}">
 											<c:set var="gifttotal"
 												value="${gifttotal + (vo.price*vo.cnt)}" />
 										</c:forEach>

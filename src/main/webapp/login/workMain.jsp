@@ -25,8 +25,8 @@
 </style>
 </head>
 <body>
-	<div class="container">
 		<jsp:include page="/main/nav.jsp"></jsp:include>
+	<div class="container">
 
 		<div class="text-center">
 			<h3>출퇴근 기록</h3>
