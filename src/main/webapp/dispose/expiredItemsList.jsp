@@ -30,7 +30,7 @@
 	<div class="container">
 		<h2>유통기한 지난 상품 </h2>
 		
-			<table class="table-sm" style="width:100%">
+			<table class="table table-striped table-sm" style="width:100%">
 				<tr>
 					<th>재고 번호</th>
 					<th>상품 구분 번호</th>
@@ -47,13 +47,13 @@
 					<td id="check">${vo.stockNO} </td>
 					<td>${vo.pnoInfo}</td> 
 					<td>${vo.pname} </td>
-					<td>${vo.stockCount}</td>
-					<td>${vo.salesSum}</td>
-					<td>${vo.remainCount}</td>
+					<td style=" text-align: center">${vo.stockCount}</td>
+					<td style=" text-align: center">${vo.salesSum}</td>
+					<td style=" text-align: center">${vo.remainCount}</td>
 					<%-- <td>${vo.manudate}</td> --%>
 					<td>${vo.warehouseDate}</td>
 					<td>${vo.expiryEndDate}</td>
-				</tr>
+				</tr> 
 			</c:forEach>
 			</table>
 		<input type="button" value="폐기 등록" onclick = "discardInsert()"/>
