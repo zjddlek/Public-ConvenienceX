@@ -70,6 +70,7 @@
 </style>
 <body>
 	<jsp:include page="/main/nav.jsp"></jsp:include>
+	
 	<div class="container border border-primary border-3 rounded-3" id="root">
 	
 		<div id="header">
