@@ -160,7 +160,7 @@
 		
 		if(searchVal == ''){
 			alert("검색어가 없습니다.");
-			return;
+			goStockMain();
 		}
 		
 		$.ajax({
@@ -186,6 +186,8 @@
 				
 				$.each(obj, function(i, e){
 					let pname = e.pname;
+					console.log("pname : " + pname);
+					
 					let cost = e.price_consumer.toLocaleString('ko-KR');
 					
 					let stno = "<div id='stockno'>" + e.stockNo + "</div>";

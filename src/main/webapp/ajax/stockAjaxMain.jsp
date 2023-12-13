@@ -15,8 +15,6 @@
 	
 	ArrayList<StockVO> list = stdao.getAllStock(sno);
 	
-	System.out.println(list);
-	
 	for(StockVO vo : list){
 		JSONObject saleObject = new JSONObject();
 			

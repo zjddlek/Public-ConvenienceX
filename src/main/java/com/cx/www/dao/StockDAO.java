@@ -19,7 +19,7 @@ public class StockDAO {
 	public StockDAO() {
 		conn = DBConnection.getConnection();
 	
-		 System.out.println("conn : " +conn);
+		 //System.out.println("conn : " +conn);
 	}
 	
 	
@@ -96,7 +96,6 @@ public class StockDAO {
 				vo = new StockVO(stockNo, stockCount, pnoInfo, warehousedate, pname, mcName, scName, mcNo, scNo, price_consumer);
 				list.add(vo);
 				
-				System.out.println(list);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -150,7 +149,6 @@ public class StockDAO {
 				vo = new StockVO(stockNo, stockCount, pnoInfo, warehousedate, pname, mcName, scName, mcNo, scno, price_consumer);
 				list.add(vo);
 				
-				System.out.println(list);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -181,12 +179,13 @@ public class StockDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setString(1, pname + "%");
+			pstmt.setString(1, "%" + pname + "%");
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				String stockNo = rs.getString("STOCKNO");
+				String Pname = rs.getString("PNAME");
 				int stockCount = rs.getInt("STOCK_COUNT");
 				String pnoInfo = rs.getString("PNO_INFO");
 				String warehousedate = rs.getString("WAREHOUSEDATE");
@@ -194,10 +193,9 @@ public class StockDAO {
 				String scName = rs.getString("scName");
 				int price_consumer = rs.getInt("PRICE_CONSUMER");
 				
-				vo = new StockVO(stockNo, stockCount, pnoInfo, warehousedate, pname, mcName, scName, null, null, price_consumer);
+				vo = new StockVO(stockNo, stockCount, pnoInfo, warehousedate, Pname, mcName, scName, null, null, price_consumer);
 				list.add(vo);
 				
-				System.out.println(list);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
