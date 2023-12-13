@@ -15,8 +15,9 @@
 <link rel="stylesheet" href="./style/profit.css" />
 
 <body>
+	<jsp:include page="/main/nav.jsp"></jsp:include>
+	
 	<div class="container">
-		<jsp:include page="/main/nav.jsp"></jsp:include>
 		<h3>매출현황</h3>
 		
 	    <div id='calendar-container'>    

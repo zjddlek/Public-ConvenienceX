@@ -38,12 +38,12 @@ h3{
 #history{
 	overflow-y : auto;
 	overflow-x : hidden; 
-	height : 270px;
+	height : 365px;
 	width:100%;
 }
 
 #history2{
-	height : 195px;
+	height : 295px;
 	width:100%;
 	overflow-y : auto;
 	overflow-x : hidden; 

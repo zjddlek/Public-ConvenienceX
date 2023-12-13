@@ -40,8 +40,8 @@
 
 </head>
 <body>
+	<jsp:include page="/main/nav.jsp"></jsp:include> 
 	<div class="container">
-		<jsp:include page="/main/nav.jsp"></jsp:include> 
 		
 		<h3>폐기 검색 </h3>
 	
