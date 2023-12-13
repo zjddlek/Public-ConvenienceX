@@ -137,6 +137,114 @@ public class CalDAO {
 		return list;
 	}
 	
+	
+	public ArrayList<CalVO> getCardCalEnd() {
+		sb.setLength(0);
+		sb.append(
+				"SELECT P.PNO, P.PRICE_CONSUMER,  PI.PNO_INFO, AA.CNT, AA.DEALNO, AA.SALEDATE "
+				+ "FROM PRODUCT_INFO PI, PRODUCT P, "
+				+ "(SELECT SAD.DETAILNO, SAD.SALENO, PI.PNO_INFO, SAD.CNT, SAD.ISREFUND, SAD.DEALNO, SA.SALEDATE "
+				+ "FROM SALES_DETAIL SAD, SALES SA, STOCK ST, PRODUCT_INFO PI "
+				+ "WHERE SAD.STOCKNO = ST.STOCKNO "
+				+ "AND ST.PNO_INFO = PI.PNO_INFO "
+				+ "AND SAD.SALENO = SA.SALENO "
+				+ "AND SA.SALEDATE BETWEEN ( "
+				+ "SELECT C.CALTIME "
+				+ "FROM CALCULATION C "
+				+ "WHERE C.CALCULATE=2 "
+				+ "ORDER BY C.CALTIME DESC LIMIT 1 "
+				+ ") AND NOW() ) AA "
+				+ "WHERE P.PNO = PI.PNO AND PI.PNO_INFO = AA.PNO_INFO AND DEALNO = 1 ");
+
+		ArrayList<CalVO> list = new ArrayList<CalVO>();
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CalVO vo = new CalVO(rs.getString("pno"), rs.getInt("price_consumer"), rs.getInt("pno_info"),
+						rs.getInt("cnt"), rs.getInt("dealno"), rs.getString("saledate"));
+				list.add(vo);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<CalVO> getCashCalEnd() {
+		sb.setLength(0);
+		sb.append(
+				"SELECT P.PNO, P.PRICE_CONSUMER,  PI.PNO_INFO, AA.CNT, AA.DEALNO, AA.SALEDATE "
+				+ "FROM PRODUCT_INFO PI, PRODUCT P, "
+				+ "(SELECT SAD.DETAILNO, SAD.SALENO, PI.PNO_INFO, SAD.CNT, SAD.ISREFUND, SAD.DEALNO, SA.SALEDATE "
+				+ "FROM SALES_DETAIL SAD, SALES SA, STOCK ST, PRODUCT_INFO PI "
+				+ "WHERE SAD.STOCKNO = ST.STOCKNO "
+				+ "AND ST.PNO_INFO = PI.PNO_INFO "
+				+ "AND SAD.SALENO = SA.SALENO "
+				+ "AND SA.SALEDATE BETWEEN ( "
+				+ "SELECT C.CALTIME "
+				+ "FROM CALCULATION C "
+				+ "WHERE C.CALCULATE=2 "
+				+ "ORDER BY C.CALTIME DESC LIMIT 1 "
+				+ ") AND NOW() ) AA "
+				+ "WHERE P.PNO = PI.PNO AND PI.PNO_INFO = AA.PNO_INFO AND DEALNO = 2 ");
+
+		ArrayList<CalVO> list = new ArrayList<CalVO>();
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CalVO vo = new CalVO(rs.getString("pno"), rs.getInt("price_consumer"), rs.getInt("pno_info"),
+						rs.getInt("cnt"), rs.getInt("dealno"), rs.getString("saledate"));
+				list.add(vo);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<CalVO> getGiftCalEnd() {
+		sb.setLength(0);
+		sb.append(
+				"SELECT P.PNO, P.PRICE_CONSUMER,  PI.PNO_INFO, AA.CNT, AA.DEALNO, AA.SALEDATE "
+				+ "FROM PRODUCT_INFO PI, PRODUCT P, "
+				+ "(SELECT SAD.DETAILNO, SAD.SALENO, PI.PNO_INFO, SAD.CNT, SAD.ISREFUND, SAD.DEALNO, SA.SALEDATE "
+				+ "FROM SALES_DETAIL SAD, SALES SA, STOCK ST, PRODUCT_INFO PI "
+				+ "WHERE SAD.STOCKNO = ST.STOCKNO "
+				+ "AND ST.PNO_INFO = PI.PNO_INFO "
+				+ "AND SAD.SALENO = SA.SALENO "
+				+ "AND SA.SALEDATE BETWEEN ( "
+				+ "SELECT C.CALTIME "
+				+ "FROM CALCULATION C "
+				+ "WHERE C.CALCULATE=2 "
+				+ "ORDER BY C.CALTIME DESC LIMIT 1 "
+				+ ") AND NOW() ) AA "
+				+ "WHERE P.PNO = PI.PNO AND PI.PNO_INFO = AA.PNO_INFO AND DEALNO = 3 ");
+
+		ArrayList<CalVO> list = new ArrayList<CalVO>();
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CalVO vo = new CalVO(rs.getString("pno"), rs.getInt("price_consumer"), rs.getInt("pno_info"),
+						rs.getInt("cnt"), rs.getInt("dealno"), rs.getString("saledate"));
+				list.add(vo);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 		
 	public ArrayList<DailySalesVO> dailyCal(String sno) {
 		sb.setLength(0);
@@ -144,7 +252,7 @@ public class CalDAO {
 				"SELECT C.ATTNO, C.SALESAMOUNT, E.EMPNO, S.SNO, C.CALTIME, C.CALCULATE, DAYOFWEEK(C.CALTIME) DAYNUM, DAYNAME(C.CALTIME) "
 				+ "FROM SHOP S JOIN CXEMP E ON S.SNO=E.SNO JOIN ATTENDANCE A ON E.EMPNO=A.EMPNO JOIN CALCULATION C ON A.ATTNO=C.ATTNO "
 				+ "WHERE S.SNO = ? AND C.CALCULATE = 2 "
-				+ "AND CALTIME >= (SELECT DISTINCT(SUBSTRING(CALTIME,1,10)) DATE FROM CALCULATION WHERE DAYOFWEEK(CALTIME) = 1 AND CALTIME >= DATE_SUB('2023-11-11', INTERVAL 14 DAY) ORDER BY CALTIME LIMIT 1) "
+				+ "AND CALTIME >= (SELECT DISTINCT(SUBSTRING(CALTIME,1,10)) DATE FROM CALCULATION WHERE DAYOFWEEK(CALTIME) = 1 AND CALTIME >= DATE_SUB('2023-11-29', INTERVAL 14 DAY) ORDER BY CALTIME LIMIT 1) "
 				+ "ORDER BY CALTIME ");
 
 		ArrayList<DailySalesVO> list = new ArrayList<DailySalesVO>();
@@ -160,7 +268,7 @@ public class CalDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block 
 			e.printStackTrace();
 		}
 		return list;

@@ -49,5 +49,8 @@
 	        	</li>
 	      	</ul>
     	</div>
+    	<div>
+    		<h5>${svo.sname }</h5>
+    	</div>
   	</div>
 </nav>

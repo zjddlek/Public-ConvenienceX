@@ -18,13 +18,22 @@ public class CalLastCommand implements Action{
 		String empno = req.getParameter("empno");
 		
 		CalDAO dao = new CalDAO();
+		ArrayList<CalVO> list = dao.getCardCal(empno);
 		ArrayList<CalVO> list2 = dao.getCashCal(empno);
 		ArrayList<CalVO> list3 = dao.getGiftCal(empno);
-		ArrayList<CalVO> list = dao.getCardCal(empno);
+		
+		ArrayList<CalVO> endCardCal = dao.getCardCalEnd();
+		ArrayList<CalVO> endCashCal = dao.getCashCalEnd();
+		ArrayList<CalVO> endGiftCal = dao.getGiftCalEnd();
+		
 		dao.close();
 		req.setAttribute("list", list);
 		req.setAttribute("list2", list2);
 		req.setAttribute("list3", list3);
+		
+		req.setAttribute("endCardCal", endCardCal);
+		req.setAttribute("endCashCal", endCashCal);
+		req.setAttribute("endGiftCal", endGiftCal);
 		//System.out.println("list : " + list);
 		
 		
