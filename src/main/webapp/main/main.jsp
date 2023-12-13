@@ -181,7 +181,7 @@ p {
 						aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-					<div class="collapse navbar-collapse" id="navbarNav">
+					<div class="collapse navbar-collapse" id="navbarNav" style="justify-content: center">
 						<img src="./images/conveni.PNG" alt="" />
 						<ul class="navbar-nav">
 							<li class="nav-item">
