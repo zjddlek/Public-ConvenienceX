@@ -97,6 +97,9 @@
 		
 		// 출력
 		out.println(stArray.toJSONString());
+		
+		// 페이징때문에 추가
+		request.setAttribute("list", list);
 	}
 	else{
 		ArrayList<StockVO> list = stdao.getAllStock(sno, starNo, endNo);
@@ -115,7 +118,10 @@
 		System.out.println(list);
 		
 		// 출력
-		out.println(stArray.toJSONString());		
+		out.println(stArray.toJSONString());
+		
+		// 페이징때문에 추가
+		request.setAttribute("list", list);
 	}
 	
 	// 사용하면 꼭 닫아주기!
