@@ -18,6 +18,8 @@
 #root {
 	width: 1500px;
 	height: 600px;
+	text-align: center;
+	margin: auto;
 }
 
 #head {
@@ -50,8 +52,9 @@
 <title>EMP MAIN</title>
 </head>
 <body>
+	<jsp:include page="/main/nav.jsp"></jsp:include>
+	
 	<div id="root">
-			<jsp:include page="/main/nav.jsp"></jsp:include>
 		<div class="container">
 			<form action="mc?">
 							<div id=search class="border border-primary border-3 rounded-3">

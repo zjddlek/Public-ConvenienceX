@@ -79,6 +79,7 @@
 
 #picture {
 	width: 100%;
+	width:180px;
 	height: 180px;
 	margin-right: 120px;
 }
@@ -90,7 +91,7 @@
 
 
 #pic{
-	width:220px;
+	width:250px;
 	height:200px;
 	padding-left: 40px;
 	padding-bottom: 20px;
