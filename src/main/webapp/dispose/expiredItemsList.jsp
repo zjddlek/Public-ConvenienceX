@@ -53,7 +53,7 @@
 					<%-- <td>${vo.manudate}</td> --%>
 					<td>${vo.warehouseDate}</td>
 					<td>${vo.expiryEndDate}</td>
-				</tr>
+				</tr> 
 			</c:forEach>
 			</table>
 		<input type="button" value="폐기 등록" onclick = "discardInsert()"/>
