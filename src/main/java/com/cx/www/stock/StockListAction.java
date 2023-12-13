@@ -26,7 +26,6 @@ public class StockListAction implements Action{
 		System.out.println("파라미터 sno : " +sno); // ---> 이렇게는 받아짐
 		
 		req.setAttribute("sno", sno);
-		System.out.println(sno);
 		
 		/*
 		 * StockDAO stdao = new StockDAO(); JSONArray stArray = new JSONArray();

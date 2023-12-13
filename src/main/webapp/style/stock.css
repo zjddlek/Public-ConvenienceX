@@ -33,19 +33,20 @@ table{
 	width:100%
 }
 
-#stock_list,#product_list,#cnt_list{
-	/*overflow-y: scroll; 
-	overflow-x: hidden;*/
+/*#product_list,#cnt_list{
+	overflow-y: scroll; 
+	overflow-x: hidden;
 	border-right: 1px solid black;
-}
+}*/
 
 #stockno{
 	margin-left: 10px;
 	
 }
 
-#stock{
+#stock, #product,.cnt,.cost{
 	height: 350px;
+	border: 1px solid black; 
 }
 
 #dropdown1,#dropdown2{
@@ -75,4 +76,9 @@ table{
 
 #product_list{
 	padding-left: 10px;
+}
+
+.pagination{
+	padding-top: 10px;
+	margin-left: 570px;
 }

@@ -19,9 +19,8 @@
 
 </head>
 <body>
-	<div class="container min-vw-75 justify-content-center" style="padding-bottom: 20px;">
-		<jsp:include page="/main/nav.jsp"></jsp:include>
-		
+	<jsp:include page="/main/nav.jsp"></jsp:include>
+	<div class="container min-vw-75 justify-content-center" style="padding-bottom: 20px;">	
 		<h2>판매내역</h2>
 		<div>
 			<div class="picker">
@@ -39,7 +38,7 @@
 					</div>
 				</div>
 				
-				<div class="index" style="width:50%;">
+				<div class="index" style="width:50%; height: 500px;">
 					<div class="sale_list">
 						<h3 style='margin-top: 10px;'>판매일자</h3>
 						<div id="select_date"></div>

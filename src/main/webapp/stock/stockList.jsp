@@ -17,6 +17,8 @@
 </head>
 
 <script>
+	
+	let sno = "${sno}";
 
 	$(document).ready(function(){
 		goStockMain();
@@ -34,6 +36,9 @@
 	function goStockMain(){
 		$.ajax({
 			url : "ajax/stockAjaxStockno.jsp",
+			data : {
+				"sno" : sno
+			},
 			success:function(data){
 				
 				let obj = JSON.parse(data.trim());
@@ -95,7 +100,7 @@
 		}
 	}	
 	
-	// 재고번호 불러오기 - stock_list, product_list에 overflow-y : scroll 넣고싶은데 안되는거 물어보기
+	// 재고번호 불러오기 - 중분류 선택했을시 작동
 	function goStockNo(obj, snum){
 		
 		sc = snum.split('/');
@@ -107,7 +112,8 @@
 		$.ajax({
 			url : "ajax/stockAjaxStockno.jsp",
 			data: {
-				"scno" : scno
+				"scno" : scno,
+				"sno" : sno
 			},
 			success:function(data){
 				
@@ -186,11 +192,13 @@
 			}
 		});
 	}
+	
+	
 
 </script>
 <body>
-	<div class="container" style="padding-bottom: 20px;">
 	<jsp:include page="/main/nav.jsp"></jsp:include>
+	<div class="container" style="padding-bottom: 20px;">
 		<h2>재고리스트</h2>
 		<div>
 			<div style="display: flex;">
@@ -258,12 +266,38 @@
 						<td id="stock">
 							<div id="stock_list"></div>
 						</td>
-						<td id="product_list"></td>
-						<td id="cnt_list"></td>
-						<td id="cost_list"></td>
+						<td id="product">
+							<div id="product_list"></div>						
+						</td>
+						<td class="cnt">
+							<div id="cnt_list"></div>
+						</td>
+						<td calss="cost">
+							<div id="cost_list"></div>						
+						</td>
 					</tr>
 				</tbody>
 			</table>
+			<%-- 페이징 --%>
+			<div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">	
+						<li class="page-item">
+							<a class="page-link" href="#">◀</a>
+						</li>
+						
+						<c:forEach var="i" begin="${startPage}" end="${endPage}">
+							<li class="page-item">
+								<a class="page-link" href="mc?type=sales&cp=${i}">${i}</a>
+							</li>
+						</c:forEach>		
+										        
+						<li class="page-item">
+							<a class="page-link" href="#">▶</a>
+						</li>
+					</ul>
+				</nav>					
+			</div>
 		</div>
 	</div>
 </body>
