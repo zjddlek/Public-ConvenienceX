@@ -34,7 +34,6 @@ public class OrderListAction implements Action{
 			if ( currentPage <= 5 ) endPage = totalPage > 10 ? 10 : totalPage;
 			else endPage = currentPage + 4;
 		}
-		System.out.println("currentPage : " + currentPage + ", totalPage : " +totalPage);
 		ArrayList<OrderListVO> list = dao.getShopAll(sno, startNo, recordPerPage);
 		
 		req.setAttribute("list", list);

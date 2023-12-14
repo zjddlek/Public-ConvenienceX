@@ -22,17 +22,12 @@ public class ModifyOkAction extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
-		
 		String saveDir = req.getRealPath("/upload");
 		int maxFileSize = 1024*1024*30;
 
-		MultipartRequest mr=
-				new MultipartRequest(req,saveDir,
-						maxFileSize,"UTF-8", new DefaultFileRenamePolicy());
+		MultipartRequest mr= new MultipartRequest(req,saveDir, maxFileSize,"UTF-8", new DefaultFileRenamePolicy());
 		
 		String b= mr.getParameter("empno");
-		System.out.println("b:"+b);
 		
 		if(b !=null) {
 
@@ -51,16 +46,13 @@ public class ModifyOkAction extends HttpServlet {
 			String sno = mr.getParameter("sno");
 			String jobno1 = mr.getParameter("jobno");
 			
-			
 			String picture = mr.getOriginalFileName("img");
 
-			
 			int sal_hour = Integer.parseInt(sal_hour1);
 			int jobno = Integer.parseInt(jobno1);
 
 			EmpDAO dao = new EmpDAO();
 			EmpVO vo = new EmpVO();
-			
 			
 			vo.setEmpno(empno);
 			vo.setEname(ename);
@@ -79,25 +71,18 @@ public class ModifyOkAction extends HttpServlet {
 			vo.setPicture(picture);
 
 			dao.modifyOne(vo);
-			
-			System.out.println("ModifyOkAction 실행중");
-			System.out.println("vo:"+vo);
 
 			dao.close();
 			
-			}
+		}
 		
 		HttpSession sesssion = req.getSession();
 		Object s = sesssion.getAttribute("svo");
 		ShopVO svo  = (ShopVO)s;
 		String sno = svo.getSno();
-		System.out.println(sno);
-		
 		
 		Object e = sesssion.getAttribute("vo"); EmpVO vo = (EmpVO)e; int jobno =
 		vo.getJobno();
-		 
-		
 		
 		// TODO ;  jobno 세션처리 끝난후에 밑에부분 +jobno 로 바꾸주면 실행됨!
 		
@@ -109,4 +94,4 @@ public class ModifyOkAction extends HttpServlet {
 		return null;
 	}
 
-	}
+}

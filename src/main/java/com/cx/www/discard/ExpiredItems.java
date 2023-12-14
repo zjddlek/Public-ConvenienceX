@@ -15,11 +15,9 @@ public class ExpiredItems implements Action {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String shopNo = req.getParameter("sno");
-			//System.out.println("exp action :"+shopNo);
 		DiscardDAO dao = new DiscardDAO();
 		ArrayList<ExpiredItemsVO> listExpired =dao.searchExpredItems(shopNo);
 		dao.close();
-		System.out.println(listExpired);
 		req.setAttribute("expired", listExpired);
 		
 		return "/dispose/expiredItemsList.jsp";

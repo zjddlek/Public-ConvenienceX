@@ -12,20 +12,13 @@ public class ModifyAction implements Action{
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
 		String b = req.getParameter("empno");
-		
-		System.out.println("empno: "+b);
 
 		if (b != null) {
 
 			EmpDAO dao = new EmpDAO();
 			EmpVO empvo = dao.getOneByEmpno(b);
-			
 
 			req.setAttribute("empvo", empvo);
-			
-			System.out.println(empvo);
-			
-			System.out.println("ModifyAction 실행중");
 
 			dao.close();
 

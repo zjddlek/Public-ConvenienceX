@@ -71,12 +71,10 @@ public class RegisterOkAction extends HttpServlet{
 		
 		dao.addOne(vo,sno);
 
-		System.out.println(vo);
 		dao.close();
 		
 		req.setAttribute("vo", vo);
 		resp.sendRedirect("mc?type=emp");
-
 		
 	}
 

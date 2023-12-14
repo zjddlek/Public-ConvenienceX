@@ -21,39 +21,23 @@ public class ListAction  implements Action{
       String jobno = req.getParameter("jobno"); 
       
       int jobno1 = 0;
-      
-      System.out.println("jobno : " + jobno);
-      System.out.println("sno : " + sno);
 
-      
       if( jobno != null && !jobno.isEmpty()) {
     	  jobno1=Integer.parseInt(jobno);
       }
       
       
       EmpDAO dao = new EmpDAO();
-		/*
-		 * System.out.println(name); System.out.println(period);
-		 * System.out.println(period2);
-		 */
-      
+		
       if (name == null  || name.isEmpty()) {
          
-         if( period != null && period2 != null)
-         {
+         if( period != null && period2 != null){
             
             ArrayList<EmpVO> list= dao.getAllByDate(period,period2,sno);
-            //System.out.println(list == null ? "empty" : "not empty");
-            //System.out.println(list.isEmpty()? "empty" : "not empty");
-   
             req.setAttribute("list",list);
             
-            System.out.println(sno);
-            System.out.println("period list:"+list);
          }
-         
-         else    
-         {
+         else{
             ArrayList<EmpVO> list= dao.getAllByJobno(sno,jobno1);
             req.setAttribute("list",list);
          }
@@ -61,18 +45,9 @@ public class ListAction  implements Action{
       }
       else if(name != null ) {
          EmpVO empvo = dao.getOne(name);
-
-         
-         req.setAttribute("empvo", empvo);    
-
-         System.out.println("empvo vo:"+empvo);
-      
-         
+         req.setAttribute("empvo", empvo);           
       }
-      
-      
     
-      
       dao.close();
       
       return "emp/empList.jsp";

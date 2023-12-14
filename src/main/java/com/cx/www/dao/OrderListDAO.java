@@ -1194,7 +1194,6 @@ public class OrderListDAO {
 	}
 	
 	public void addOne(OrderListVO vo) {
-		System.out.println(vo);
 		sb.setLength(0);
 		sb.append("SELECT PNO_INFO  "
 				+ "FROM PRODUCT_INFO  "

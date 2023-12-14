@@ -14,19 +14,14 @@ public class DetailAction implements Action {
 
 		String empno = req.getParameter("empno");
 		
-		System.out.println("detailAction 실행중");
-		
 		if(empno!= null) {
 			EmpDAO dao = new EmpDAO();
 			EmpVO empvo = dao.getOneByEmpno(empno);
 			
 			req.setAttribute("empvo", empvo);
 			
-			System.out.println("ActionVO:"+empvo);
-			
 			dao.close();
-			
-			
+
 		}
 		
 		return "emp/empDetail.jsp";

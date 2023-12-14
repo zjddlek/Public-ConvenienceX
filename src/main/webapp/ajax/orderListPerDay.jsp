@@ -12,7 +12,6 @@
 	String yyyyMMdd = request.getParameter("date");
 	
 	yyyyMMdd = yyyyMMdd + '%';
-	System.out.println("sno : " + sno + ", yyyyMMdd : " + yyyyMMdd);
 	
 	int totalCount = dao.getShopDayCount(sno, yyyyMMdd);
 	int recordPerPage = 15;

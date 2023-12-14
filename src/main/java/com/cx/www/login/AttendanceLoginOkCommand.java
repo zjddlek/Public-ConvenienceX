@@ -40,7 +40,6 @@ public class AttendanceLoginOkCommand implements Action {
 				req.setAttribute("list", list);
 				dao.close();
 				adao.close();
-				//System.out.println("출근");
 				return "login/attendanceLoginOk.jsp";
 			}
 		}

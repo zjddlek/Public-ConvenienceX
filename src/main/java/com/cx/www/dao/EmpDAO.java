@@ -355,19 +355,12 @@ public class EmpDAO {
 
 			if (rs.next()) {
 				String empno1 = rs.getString("EMPNO");
-				System.out.println("empno1 : " + empno1);
 
 				int empno2 = Integer.parseInt(empno1.substring(7));
-				System.out.println("empno2 : " + empno2);
-
 				int empno3 = empno2 + 1;
 				String empno4 = Integer.toString(empno3);
-
 				String sno1 = rs.getString("SNO");
-
 				String empno = 23 + sno1 + empno4;
-
-				System.out.println(empno);
 
 				sb.setLength(0);
 				sb.append("INSERT INTO CXEMP values( ?,?,?,?,?,?,?,now(),?,?,?,?,?,?,? ) ");
@@ -403,13 +396,8 @@ public class EmpDAO {
 //	            String empno4 = Integer.toString(empno3);
 
 	            // sql => 지점 정보 
-	            
-	            
-	           
 
 	            String empno = 23 + sno+ (jobno + 1);
-
-	            System.out.println(empno);
 
 	            sb.setLength(0);
 	            sb.append("INSERT INTO CXEMP values( ?,?,?,?,?,?,?,now(),?,?,?,?,?,?,? ) ");

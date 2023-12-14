@@ -13,9 +13,6 @@ public class FindPWCommand implements Action {
 		String id = req.getParameter("id");
 		String pw = req.getParameter("newPW");
 		
-		//System.out.println("id: "+id);
-		//System.out.println("pw: "+pw);
-		
 		EmpDAO dao= new EmpDAO();
 		
 		dao.changePW(id, pw);

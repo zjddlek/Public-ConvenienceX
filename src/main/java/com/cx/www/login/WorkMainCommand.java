@@ -32,9 +32,6 @@ public class WorkMainCommand implements Action {
 			if ( currentPage <= 5 ) endPage = totalPage > 10 ? 10 : totalPage;
 			else endPage = currentPage + 4;
 		}
-		//System.out.println(totalCount);
-		//System.out.println(startNo);
-		//System.out.println(recordPerPage);
 
 		ArrayList<AttendanceRecodVO> list = dao.getRecordAll(sno, startNo, recordPerPage);
 

@@ -34,8 +34,6 @@ public class CalLastCommand implements Action{
 		req.setAttribute("endCardCal", endCardCal);
 		req.setAttribute("endCashCal", endCashCal);
 		req.setAttribute("endGiftCal", endGiftCal);
-		//System.out.println("list : " + list);
-		
 		
 		return "cal/calLast.jsp";
 	}

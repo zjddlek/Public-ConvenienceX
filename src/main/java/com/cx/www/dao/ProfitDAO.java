@@ -50,7 +50,6 @@ public class ProfitDAO {
 				vo = new ProfitVO(calno, attno, calculate, caltime, salesamount, difference, day, calday);
 
 				list.add(vo);
-				System.out.println(list);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
