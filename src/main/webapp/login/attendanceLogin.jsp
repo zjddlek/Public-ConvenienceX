@@ -74,7 +74,7 @@
 								</div>	
 								<div class="form-group d-md-flex">
 									<div class="w-50 text-left p-3"  >
-										<a href="mc?type=empAddOne&sno=${svo.sno }"><h6>직원등록을 아직안하셨나요? 등록하러가기</h6></a>
+										<a href="mc?type=register&sno=${svo.sno }"><h6>직원등록을 아직안하셨나요? 등록하러가기</h6></a>
 									</div>
 									<div class="w-50 text-md-right p-3" >
 										<a href="#"><h6>비밀번호를 잊으셨나요?</h6></a>

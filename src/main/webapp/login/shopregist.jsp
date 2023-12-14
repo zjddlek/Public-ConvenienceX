@@ -302,7 +302,7 @@
 										<input type="text" name="postcode" id="postcode" class="form-control" placeholder="우편번호"  readonly />
 										<label for="postcode" class="form-control-placeholder" >우편번호</label>
 									</div>
-									<div class="form-floating mb-3 w-25 text-right" >
+									<div class="form-floating mb-3 w-25 text-right">
 										<input type="button" id="postcodebtn" value="주소찾기" onclick="adress();" class="form-control btn btn-primary rounded" />
 									</div>
 								</div>
@@ -393,7 +393,7 @@
 											본 사이트는 이용자의 귀책사유로 인한 서비스 이용의 장애에 대하여 책임을 지지않습니다.
 											본 사이트는 이용자가 서비스를 이용하여 기대하는 손익이나 서비스를 통하여 얻은자료로 인한 손해에 관하여 책임을 지지 않습니다.
 											제12조 (저작권)											
-											본 사이트에서 볼 수 있는 모든 자료는 예문사 에서 본 사이트로만 제공하는 정보입니다.
+											본 사이트에서 볼 수 있는 모든 자료는 ConveniencX 에서 본 사이트로만 제공하는 정보입니다.
 									</textarea>
 									<label for="terms" class="form-control-placeholder" >이용약관</label>
 								</div>
