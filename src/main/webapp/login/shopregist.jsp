@@ -283,7 +283,7 @@
 									<h3>점포 등록</h3>
 								</div>
 							</div>
-							<form action="mc?type=shopResistOk">
+							<form action="mc?type=shopResistOk" method="post">
 								<div class="form-floating mb-3">
 									<input type="text" name="sname" id="sname" class="form-control" placeholder="점포명"  required />
 									<label for="sname" class="form-control-placeholder" >점포명</label>
