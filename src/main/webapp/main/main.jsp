@@ -187,8 +187,8 @@ p {
 							<li class="nav-item">
 								<a class="nav-link" href="mc?type=main">메인 페이지</a>
 							</li>
-							<li class="nav-item"><a class="nav-link"
-								href="mc?type=sales">판매 관리</a></li>
+							<li class="nav-item">
+								<a class="nav-link" href="mc?type=sales&sno=${svo.sno }">판매 관리</a></li>
 							<li class="nav-item">
 								<a class="nav-link" href="mc?type=orders&sno=${svo.sno }">발주</a>
 							</li>

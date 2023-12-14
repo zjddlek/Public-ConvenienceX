@@ -10,7 +10,10 @@ public class SalesAction implements Action {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
-		return "sales/sales.jsp"; // ---> 여기서는 돌려줄 주소로 ㅇㅁㅇ~
+		String sno = req.getParameter("sno");
+		req.setAttribute("sno", sno);
+		
+		return "sales/sales.jsp";
 	}
 
 }

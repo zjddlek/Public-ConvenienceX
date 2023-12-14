@@ -1,5 +1,5 @@
-<%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="org.json.simple.JSONObject"%>
 <%@page import="com.cx.www.dao.SalesDAO"%>
 <%@page import="com.cx.www.vo.SalesVO"%>
 <%@page import="org.json.simple.JSONArray"%>
@@ -13,6 +13,8 @@
 	JSONArray saleArray = new JSONArray();
 	SalesDAO dao = new SalesDAO();
 	ArrayList<SalesVO> list = dao.getDetailList(salesno, sno);
+	
+	System.out.println(list);
 	
 	for(SalesVO vo : list){
 		

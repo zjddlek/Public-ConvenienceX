@@ -61,6 +61,8 @@
 </html>
 <script type="text/javascript">
 	
+	let sno = "${sno}";
+	
 	$(function(){
 		
 		$("#product_name").tooltip();
@@ -102,7 +104,8 @@
 		$.ajax({
 			url : "ajax/salesAjaxDate.jsp",
 			data : {
-				"salesdate" : date
+				"salesdate" : date,
+				"sno" : sno
 			},
 			success:function(data){
 				
@@ -126,7 +129,8 @@
 		$.ajax({
 			url : "ajax/salesAjaxDate.jsp",
 			data : {
-				"salesdate" : date
+				"salesdate" : date,
+				"sno" : sno
 			},
 			success:function(data){
 					
@@ -219,7 +223,8 @@
 		$.ajax({
 			url : "ajax/salesAjaxDetail.jsp",
 			data : {
-				"salesno" : num
+				"salesno" : num,
+				"sno" : sno
 			},
 			success:function(data){
 				

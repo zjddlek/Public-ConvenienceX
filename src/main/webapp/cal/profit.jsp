@@ -30,7 +30,6 @@
 <script type="text/javascript">
 
 	let sno = "${sno}";
-	console.log(sno);
 
 	(function() {
 		calendarMaker($("#calendarForm"), new Date());

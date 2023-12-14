@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import javax.naming.Context;
+
 import com.cx.www.dbconnection.DBConnection;
 import com.cx.www.vo.SalesVO;
 
@@ -28,18 +30,23 @@ public class SalesDAO{
 	}
 	
 	// 날짜 변경시 해당 날짜 포함한 7일전 날짜만 리스트에 보여줌 
-	public ArrayList<SalesVO> getDateList(String date){
+	public ArrayList<SalesVO> getDateList(String date, String sno){
 		
 		sb.setLength(0);
-		sb.append(" select SALENO, substr(SALEDATE,1,10) as sdate, SALEDATE ");
-		sb.append(" from SALES ");
+		
+		sb.append(" select s.SALENO, substr(SALEDATE,1,10) as sdate, s.SALEDATE ");
+		sb.append(" from SALES s ");
+		sb.append(" join SALES_DETAIL sd on s.SALENO = sd.SALENO ");
+		sb.append(" join STOCK st on sd.STOCKNO = st.STOCKNO ");
 		sb.append(" where substr(SALEDATE,1,10) <= ? ");
+		sb.append(" and substring(st.STOCKNO, 1,5) = ? ");
 		sb.append(" GROUP BY sdate ");
 		sb.append(" ORDER by substr(SALEDATE,1,10) desc LIMIT 7 ");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setString(1, date+"%");
+			pstmt.setString(2, sno);
 			
 			rs = pstmt.executeQuery();
 			
@@ -49,10 +56,6 @@ public class SalesDAO{
 				String sdate = rs.getString("sdate");
 				
 				SalesVO vo = new SalesVO(saleno, salesdate, sdate);
-				
-				System.out.println("saleno: " + saleno);
-				System.out.println("salesdate : "+salesdate);
-				System.out.println("sdate : "+sdate);
 				
 				list.add(vo);
 			}
@@ -160,12 +163,13 @@ public class SalesDAO{
 		sb.append(" JOIN PRODUCT_INFO PI ON ST.PNO_INFO = PI.PNO_INFO ");
 		sb.append(" JOIN PRODUCT P ON PI.PNO = P.PNO ");
 		sb.append(" JOIN PRODUCT_ACCOUNT PA ON PA.PNO_ACCOUNT = P.PNO_ACCOUNT ");
-		sb.append(" WHERE S.SALENO LIKE ? ");
+		sb.append(" WHERE S.SALENO = ? ");
+		sb.append(" AND SUBSTRING( ST.STOCKNO, 1,5 ) = ? ");
 		sb.append(" ORDER BY S.SALEDATE DESC ");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setString(1, num+"%");
+			pstmt.setString(1, num);
 			
 			rs = pstmt.executeQuery();
 			

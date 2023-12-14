@@ -70,9 +70,6 @@ public class MainController extends HttpServlet{
 		// 2. type 파라미터값 가져오기
 		String type = req.getParameter("type");
 		
-		System.out.println("메인컨트롤러 입니다.");
-		System.out.println("type : "+type);
-		
 		String url = "";
 		
 		boolean isRedirect = false;
