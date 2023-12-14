@@ -212,10 +212,6 @@ p {
 							<li class="nav-item">
 								<a class="nav-link"href="mc?type=workmain&sno=${svo.sno }">출퇴근</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="mc?type=etc">부대비용관리 - 작업x</a>
-							</li>
-
 						</ul>
 					</div>
 				</div>
