@@ -79,8 +79,43 @@
 		$("#giftonethousand").on("click",()=>{
 			$("#giftonethousand").val("");				
 		});
-		
-
+		//마감
+		$("#endcashfiftythousand").on("click",()=>{
+			$("#endcashfiftythousand").val("");				
+		});	
+		$("#endcashtenthousand").on("click",()=>{
+			$("#endcashtenthousand").val("");				
+		});	
+		$("#endcashfivethousand").on("click",()=>{
+			$("#endcashfivethousand").val("");				
+		});	
+		$("#endcashonethousand").on("click",()=>{
+			$("#endcashonethousand").val("");				
+		});	
+		$("#endcashfivehundread").on("click",()=>{
+			$("#endcashfivehundread").val("");				
+		});	
+		$("#endcashonehundread").on("click",()=>{
+			$("#endcashonehundread").val("");				
+		});	
+		$("#endcashfifty").on("click",()=>{
+			$("#endcashfifty").val("");				
+		});	
+		$("#endcashten").on("click",()=>{
+			$("#endcashten").val("");				
+		});	
+		$("#endgiftfiftythousand").on("click",()=>{
+			$("#endgiftfiftythousand").val("");				
+		});	
+		$("#endgifttenthousand").on("click",()=>{
+			$("#endgifttenthousand").val("");				
+		});	
+		$("#endgiftfivethousand").on("click",()=>{
+			$("#endgiftfivethousand").val("");				
+		});	
+		$("#endgiftonethousand").on("click",()=>{
+			$("#endgiftonethousand").val("");				
+		});
 	});
 	
 	function tabSelect(num) {
@@ -283,8 +318,8 @@
 								<th colspan="2">차액</th>
 								<td><div id="giftdifference"></div></td>
 							</tr>
-
 						</table>
+						<!-- 마감 -->
 						<div class="form-control text-center">
 							<input type="button" value="정산하기" class="btn btn-primary rounded w-75" /> <input type="hidden" name="empno" value="<%=request.getParameter("empno")%>" />
 						</div>
@@ -302,12 +337,12 @@
 							<tr>
 								<th colspan="2">카드 총매출</th>
 								<td><div id="cashsales">
-										<c:set var="cardtotal" value="0" />
-										<c:forEach var="vo" items="${endCardCal}">
-											<c:set var="cardtotal"
-												value="${cardtotal + (vo.price*vo.cnt)}" />
+										<c:set var="cardendtotal" value="0" />
+										<c:forEach var="evo" items="${endCardCal}">
+											<c:set var="cardendtotal"
+												value="${cardtotal + (evo.price*evo.cnt)}" />
 										</c:forEach>
-										<c:out value="${cardtotal}" />
+										<c:out value="${cardendtotal}" />
 									</div></td>
 							</tr>
 						</table>
@@ -317,7 +352,7 @@
 							<tr>
 								<th colspan="2" class="text-center">현금</th>
 								<td><input type="button" value="차액구하기"
-									id="cashdifferencebtn" /></td>
+									id="endcashdifferencebtn" /></td>
 							</tr>
 							<tr>
 								<th>권종</th>
@@ -327,76 +362,76 @@
 							<tr>
 								<th>50000원</th>
 								<td><input type="text" name="cashfiftythousand"
-									id="cashfiftythousand" class="money" value=0 /></td>
-								<td><div id="sumcashfiftythousand"></div></td>
+									id="endcashfiftythousand" class="money" value=0 /></td>
+								<td><div id="endsumcashfiftythousand"></div></td>
 							</tr>
 							<tr>
 								<th>10000원</th>
 								<td><input type="text" name="cashtenthousand"
-									id="cashtenthousand" class="money" value=0 /></td>
-								<td><div id="sumcashtenthousand"></div></td>
+									id="endcashtenthousand" class="money" value=0 /></td>
+								<td><div id="endsumcashtenthousand"></div></td>
 							</tr>
 							<tr>
 								<th>5000원</th>
 								<td><input type="text" name="cashfivethousand"
-									id="cashfivethousand" class="money" value=0 /></td>
-								<td><div id="sumcashfivethousand"></div></td>
+									id="endcashfivethousand" class="money" value=0 /></td>
+								<td><div id="endsumcashfivethousand"></div></td>
 							</tr>
 							<tr>
 								<th>1000원</th>
 								<td><input type="text" name="cashonethousand"
-									id="cashonethousand" class="money" value=0 /></td>
-								<td><div id="sumcashonethousand"></div></td>
+									id="endcashonethousand" class="money" value=0 /></td>
+								<td><div id="endsumcashonethousand"></div></td>
 							</tr>
 							<tr>
 								<th>500원</th>
 								<td><input type="text" name="cashfivehundread"
-									id="cashfivehundread" class="money" value=0 /></td>
-								<td><div id="sumcashfivehundread"></div></td>
+									id="endcashfivehundread" class="money" value=0 /></td>
+								<td><div id="endsumcashfivehundread"></div></td>
 							</tr>
 							<tr>
 								<th>100원</th>
 								<td><input type="text" name="cashonehundread"
-									id="cashonehundread" class="money" value=0 /></td>
-								<td><div id="sumcashonehundread"></div></td>
+									id="endcashonehundread" class="money" value=0 /></td>
+								<td><div id="endsumcashonehundread"></div></td>
 							</tr>
 							<tr>
 								<th>50원</th>
-								<td><input type="text" name="cashfifty" id="cashfifty"
+								<td><input type="text" name="cashfifty" id="endcashfifty"
 									class="money" value=0 /></td>
-								<td><div id="sumcashfifty"></div></td>
+								<td><div id="endsumcashfifty"></div></td>
 							</tr>
 							<tr>
 								<th>10원</th>
-								<td><input type="text" name="cashten" id="cashten"
+								<td><input type="text" name="cashten" id="endcashten"
 									class="money" value=0 /></td>
-								<td><div id="sumcashten"></div></td>
+								<td><div id="endsumcashten"></div></td>
 							</tr>
 							<tr>
 								<th colspan="2">합계</th>
-								<td><div id="cashsum"></div></td>
+								<td><div id="endcashsum"></div></td>
 							</tr>
 							<tr>
 								<th colspan="2">매출액</th>
 								<td><div id="cashsales">
-										<c:set var="cashtotal" value="0" />
-										<c:forEach var="vo" items="${endCashCal}">
-											<c:set var="cashtotal"
-												value="${cashtotal + (vo.price*vo.cnt)}" />
+										<c:set var="cashendtotal" value="0" />
+										<c:forEach var="evo" items="${endCashCal}">
+											<c:set var="cashendtotal"
+												value="${cashendtotal + (evo.price*evo.cnt)}" />
 										</c:forEach>
-										<c:out value="${cashtotal}" />
+										<c:out value="${cashendtotal}" />
 									</div></td>
 							</tr>
 							<tr>
 								<th colspan="2">차액</th>
-								<td><div id="cashdifference"></div></td>
+								<td><div id="endcashdifference"></div></td>
 							</tr>
 						</table>
 						<table class="table table-striped table-bordered">
 							<tr>
 								<th colspan="2" class="text-center">상품권</th>
 								<td><input type="button" value="차액구하기"
-									id="giftdifferencebtn" /></td>
+									id="endgiftdifferencebtn" /></td>
 							</tr>
 							<tr>
 								<th>권종</th>
@@ -406,45 +441,45 @@
 							<tr>
 								<th>50000원</th>
 								<td><input type="text" name="giftfiftythousand"
-									id="giftfiftythousand" class="money" value=0 /></td>
-								<td><div id="sumgiftfiftythousand"></div></td>
+									id="endgiftfiftythousand" class="money" value=0 /></td>
+								<td><div id="endsumgiftfiftythousand"></div></td>
 							</tr>
 							<tr>
 								<th>10000원</th>
 								<td><input type="text" name="gifttenthousand"
-									id="gifttenthousand" class="money" value=0 /></td>
-								<td><div id="sumgifttenthousand"></div></td>
+									id="endgifttenthousand" class="money" value=0 /></td>
+								<td><div id="endsumgifttenthousand"></div></td>
 							</tr>
 							<tr>
 								<th>5000원</th>
 								<td><input type="text" name="giftfivethousand"
-									id="giftfivethousand" class="money" value=0 /></td>
-								<td><div id="sumgiftfivethousand"></div></td>
+									id="endgiftfivethousand" class="money" value=0 /></td>
+								<td><div id="endsumgiftfivethousand"></div></td>
 							</tr>
 							<tr>
 								<th>1000원</th>
 								<td><input type="text" name="giftonethousand"
-									id="giftonethousand" class="money" value=0 /></td>
-								<td><div id="sumgiftonethousand"></div></td>
+									id="endgiftonethousand" class="money" value=0 /></td>
+								<td><div id="endsumgiftonethousand"></div></td>
 							</tr>
 							<tr>
 								<th colspan="2">합계</th>
-								<td><div id="giftsum"></div></td>
+								<td><div id="endgiftsum"></div></td>
 							</tr>
 							<tr>
 								<th colspan="2">매출액</th>
 								<td><div id="giftsales">
-										<c:set var="gifttotal" value="0" />
+										<c:set var="giftendtotal" value="0" />
 										<c:forEach var="vo" items="${endGiftCal}">
-											<c:set var="gifttotal"
-												value="${gifttotal + (vo.price*vo.cnt)}" />
+											<c:set var="giftendtotal"
+												value="${giftendtotal + (vo.price*vo.cnt)}" />
 										</c:forEach>
-										<c:out value="${gifttotal }" />
+										<c:out value="${giftendtotal }" />
 									</div></td>
 							</tr>
 							<tr>
 								<th colspan="2">차액</th>
-								<td><div id="giftdifference"></div></td>
+								<td><div id="endgiftdifference"></div></td>
 							</tr>
 
 						</table>
@@ -464,6 +499,9 @@
 	let allDifference = ((($("#cashfiftythousand").val()*50000)+($("#cashtenthousand").val()*10000)+($("#cashfivethousand").val()*5000)+($("#cashonethousand").val()*1000)+($("#cashfivehundread").val()*500)+($("#cashonehundread").val()*100)
 			+($("#cashfifty").val()*50)+($("#cashten").val()*10))-${cashtotal})+((($("#giftfiftythousand").val()*50000)+($("#gifttenthousand").val()*10000)+($("#giftfivethousand").val()*5000)+($("#giftonethousand").val()*1000))-${gifttotal});
 	let allSales = ${cashtotal+cardtotal+gifttotal};
+	let allEndDifference = ((($("#endcashfiftythousand").val()*50000)+($("#endcashtenthousand").val()*10000)+($("#endcashfivethousand").val()*5000)+($("#endcashonethousand").val()*1000)+($("#endcashfivehundread").val()*500)+($("#endcashonehundread").val()*100)
+			+($("#endcashfifty").val()*50)+($("#endcashten").val()*10))-${cashendtotal})+((($("#endgiftfiftythousand").val()*50000)+($("#endgifttenthousand").val()*10000)+($("#endgiftfivethousand").val()*5000)+($("#endgiftonethousand").val()*1000))-${giftendtotal});
+	let allEndSales = ${cashendtotal+cardendtotal+giftendtotal};
 		$(()=>{		
 			$("#cashfiftythousand").on("keyup",()=>{
 				if($("#cashfiftythousand").val()==0)$("#sumcashfiftythousand").text(0);
@@ -514,6 +552,55 @@
 				$("#sumgiftonethousand").text($("#giftonethousand").val()*1000);	
 			});
 			
+			//마감
+			$("#endcashfiftythousand").on("keyup",()=>{
+				if($("#endcashfiftythousand").val()==0)$("#endsumcashfiftythousand").text(0);
+				$("#endsumcashfiftythousand").text($("#endcashfiftythousand").val()*50000);	
+			});
+			$("#endcashtenthousand").on("keyup",()=>{
+				if($("#endcashtenthousand").val()==0)$("#endsumcashtenthousand").text(0);
+				$("#endsumcashtenthousand").text($("#endcashtenthousand").val()*10000);	
+			});
+			$("#endcashfivethousand").on("keyup",()=>{
+				if($("#endcashfivethousand").val()==0)$("#endsumcashfivethousand").text(0);				
+				$("#endsumcashfivethousand").text($("#endcashfivethousand").val()*5000);	
+			});
+			$("#endcashonethousand").on("keyup",()=>{
+				if($("#endcashonethousand").val()==0)$("#endsumcashonethousand").text(0);				
+				$("#endsumcashonethousand").text($("#endcashonethousand").val()*1000);	
+			});
+			$("#endcashfivehundread").on("keyup",()=>{
+				if($("#endcashfivehundread").val()==0)$("#endsumcashfivehundread").text(0);				
+				$("#endsumcashfivehundread").text($("#endcashfivehundread").val()*500);	
+			});
+			$("#endcashonehundread").on("keyup",()=>{
+				if($("#endcashonehundread").val()==0)$("#endsumcashonehundread").text(0);				
+				$("#endsumcashonehundread").text($("#endcashonehundread").val()*100);	
+			});
+			$("#endcashfifty").on("keyup",()=>{
+				if($("#endcashfifty").val()==0)$("#endsumcashfifty").text(0);				
+				$("#endsumcashfifty").text($("#endcashfifty").val()*50);	
+			});
+			$("#endcashten").on("keyup",()=>{
+				if($("#endcashten").val()==0)$("#endsumcashten").text(0);				
+				$("#endsumcashten").text($("#endcashten").val()*10);	
+			});
+			$("#endgiftfiftythousand").on("keyup",()=>{
+				if($("#endgiftfiftythousand").val()==0)$("#endsumgiftfiftythousand").text(0);				
+				$("#endsumgiftfiftythousand").text($("#endgiftfiftythousand").val()*50000);	
+			});
+			$("#endgifttenthousand").on("keyup",()=>{
+				if($("#endgifttenthousand").val()==0)$("#endsumgifttenthousand").text(0);				
+				$("#endsumgifttenthousand").text($("#endgifttenthousand").val()*10000);	
+			});
+			$("#endgiftfivethousand").on("keyup",()=>{
+				if($("#endgiftfivethousand").val()==0)$("#endsumgiftfivethousand").text(0);				
+				$("#endsumgiftfivethousand").text($("#endgiftfivethousand").val()*5000);	
+			});
+			$("#endgiftonethousand").on("keyup",()=>{
+				if($("#endgiftonethousand").val()==0)$("#endsumgiftonethousand").text(0);				
+				$("#endsumgiftonethousand").text($("#endgiftonethousand").val()*1000);	
+			});
 			
 				
 			 $("#cashdifferencebtn").on("click",()=>{
@@ -523,17 +610,30 @@
 				+($("#cashfifty").val()*50)+($("#cashten").val()*10))-${cashtotal}));
 							
 			});
+			 //마감
+			 $("#endcashdifferencebtn").on("click",()=>{
+					$("#endcashsum").text(($("#endcashfiftythousand").val()*50000)+($("#endcashtenthousand").val()*10000)+($("#endcashfivethousand").val()*5000)+($("#endcashonethousand").val()*1000)+($("#endcashfivehundread").val()*500)+($("#endcashonehundread").val()*100)
+							+($("#endcashfifty").val()*50)+($("#endcashten").val()*10));
+					$("#endcashdifference").text(((($("#endcashfiftythousand").val()*50000)+($("#endcashtenthousand").val()*10000)+($("#endcashfivethousand").val()*5000)+($("#endcashonethousand").val()*1000)+($("#endcashfivehundread").val()*500)+($("#endcashonehundread").val()*100)
+					+($("#endcashfifty").val()*50)+($("#endcashten").val()*10))-${cashendtotal}));
+								
+				});
 		
 		$("#giftdifferencebtn").on("click",()=>{
 			$("#giftsum").text(($("#giftfiftythousand").val()*50000)+($("#gifttenthousand").val()*10000)+($("#giftfivethousand").val()*5000)+($("#giftonethousand").val()*1000));
 			$("#giftdifference").text((($("#giftfiftythousand").val()*50000)+($("#gifttenthousand").val()*10000)+($("#giftfivethousand").val()*5000)+($("#giftonethousand").val()*1000))-${gifttotal});
+		});
+		//마감
+		$("#endgiftdifferencebtn").on("click",()=>{
+			$("#endgiftsum").text(($("#endgiftfiftythousand").val()*50000)+($("#endgifttenthousand").val()*10000)+($("#endgiftfivethousand").val()*5000)+($("#endgiftonethousand").val()*1000));
+			$("#endgiftdifference").text((($("#endgiftfiftythousand").val()*50000)+($("#endgifttenthousand").val()*10000)+($("#endgiftfivethousand").val()*5000)+($("#endgiftonethousand").val()*1000))-${giftendtotal});
 		});
 
 		
 		$("input[value='정산하기']").on("click",()=>{
 			if(confirm("정산을 완료하시겠습니까? \n 확인을 누르시면 더이상 수정할 수 없습니다.")){
 				alert("정산완료");
-				location.href="mc?type=attend&sno=${svo.sno }&empno=<%=request.getParameter("empno")%>&allDifference="+allDifference+"&allSales="+allSales+"&tab="+tab;
+				location.href="mc?type=attend&sno=${svo.sno }&empno=<%=request.getParameter("empno")%>&allDifference="+allDifference+"&allSales="+allSales+"&allEndDifference="+allEndDifference+"&allEndSales="+allEndSales+"&tab="+tab;
 			}else{
 				return false;
 			}
