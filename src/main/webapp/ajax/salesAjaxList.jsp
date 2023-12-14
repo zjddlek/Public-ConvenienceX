@@ -10,6 +10,7 @@
 <%
 
 	String salesDate = request.getParameter("salesDate");
+	String sno = request.getParameter("sno");
 	
 	JSONArray saleArray = new JSONArray();
 	SalesDAO dao = new SalesDAO();
