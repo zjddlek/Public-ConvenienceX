@@ -25,7 +25,7 @@ public class ShopResistOkCommand implements Action{
 		dao.close();
 		
 		HttpSession session = req.getSession();
-		session.setAttribute("sno", sno);
+		session.setAttribute("svo", svo);
 		session.setAttribute("email", email);
 		
 		

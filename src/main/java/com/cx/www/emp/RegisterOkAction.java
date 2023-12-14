@@ -74,7 +74,7 @@ public class RegisterOkAction extends HttpServlet{
 		System.out.println(vo);
 		dao.close();
 		
-		
+		req.setAttribute("vo", vo);
 		resp.sendRedirect("mc?type=emp");
 
 		
