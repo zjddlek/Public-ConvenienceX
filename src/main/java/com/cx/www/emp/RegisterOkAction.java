@@ -69,7 +69,7 @@ public class RegisterOkAction extends HttpServlet{
 		vo.setJobno(jobno);
 		vo.setPicture(picture);
 		
-		dao.addOne(vo);
+		dao.addOne(vo,sno);
 
 		System.out.println(vo);
 		dao.close();

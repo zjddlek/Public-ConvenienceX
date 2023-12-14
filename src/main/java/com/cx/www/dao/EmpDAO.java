@@ -342,7 +342,7 @@ public class EmpDAO {
 		}
 	}
 
-	public void addOne(EmpVO vo) {// 사원등록+사원번호 자동입력
+	public void addOne(EmpVO vo, String sno) {// 사원등록+사원번호 자동입력
 		sb.setLength(0);
 		sb.append("SELECT EMPNO,SNO FROM CXEMP WHERE JOBNO=? and SNO=? ORDER BY EMPNO DESC LIMIT 1");
 
@@ -390,7 +390,49 @@ public class EmpDAO {
 
 				pstmt.executeUpdate();
 
-			}
+			} else {
+	            int jobno = vo.getJobno();
+
+	            //String empno1 = rs.getString("EMPNO");
+	            //System.out.println("empno1 : " + empno1);
+
+//	            int empno2 = Integer.parseInt(empno1.substring(7));
+//	            System.out.println("empno2 : " + empno2);
+//
+//	            int empno3 = empno2 + 1;
+//	            String empno4 = Integer.toString(empno3);
+
+	            // sql => 지점 정보 
+	            
+	            
+	           
+
+	            String empno = 23 + sno+ (jobno + 1);
+
+	            System.out.println(empno);
+
+	            sb.setLength(0);
+	            sb.append("INSERT INTO CXEMP values( ?,?,?,?,?,?,?,now(),?,?,?,?,?,?,? ) ");
+	            pstmt = conn.prepareStatement(sb.toString());
+
+	            pstmt.setString(1, empno);
+	            pstmt.setString(2, vo.getEname());
+	            pstmt.setString(3, vo.getDate());
+	            pstmt.setString(4, vo.getPhone());
+	            pstmt.setString(5, vo.getAddress());
+	            pstmt.setString(6, vo.getAddress_detail());
+	            pstmt.setString(7, vo.getEmail());
+	            pstmt.setString(8, vo.getIsretire());
+	            pstmt.setInt(9, vo.getSal_hour());
+	            pstmt.setString(10, vo.getId());
+	            pstmt.setString(11, vo.getPwd());
+	            pstmt.setString(12, vo.getSno());
+	            pstmt.setInt(13, vo.getJobno());
+	            pstmt.setString(14, vo.getPicture());
+
+	            pstmt.executeUpdate();
+
+	         }
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
