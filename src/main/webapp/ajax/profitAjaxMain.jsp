@@ -9,9 +9,6 @@
 
 	String sno = request.getParameter("sno");
 	String yyyymm = request.getParameter("yyyymm");
-	
-	System.out.println(sno);
-	System.out.println(yyyymm);
 
 	ProfitDAO pdao = new ProfitDAO();
 
@@ -29,8 +26,6 @@
 	
 	// 출력
 	out.println(stArray.toJSONString());
-	
-	System.out.println(list);
 
 	// 사용하면 꼭 닫아주기!
 	pdao.close();

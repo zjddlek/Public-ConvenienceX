@@ -14,8 +14,6 @@
 	SalesDAO dao = new SalesDAO();
 	ArrayList<SalesVO> list = dao.getDetailList(salesno, sno);
 	
-	System.out.println(list);
-	
 	for(SalesVO vo : list){
 		
 		JSONObject saleObject = new JSONObject();

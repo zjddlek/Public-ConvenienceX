@@ -18,8 +18,6 @@
 	
 	ArrayList<SalesVO> list = dao.getSalesList(salesDate);
 	
-	System.out.println(list);
-	
 	for(SalesVO vo : list){
 		
 		JSONObject saleObject = new JSONObject();

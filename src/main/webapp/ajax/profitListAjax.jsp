@@ -9,7 +9,6 @@
     <%
     
 	String calno1 = request.getParameter("calno");
-	System.out.println("calno:"+calno1);
 	
 	String attno = request.getParameter("attno");
 	String calculate=request.getParameter("calculate");
