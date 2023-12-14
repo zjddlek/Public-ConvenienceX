@@ -303,7 +303,7 @@
 			<div id="buttons">
 
 				<div class="col-md-4 offset-md-2 row my-3">
-					<input type="hidden" class="form-control" name="sno" value="03485" />
+					<input type="hidden" class="form-control" name="sno" value="${svo.sno }" />
 				</div>
 
 				<div class="col-md-4 offset-md-2 row my-3">
