@@ -223,7 +223,7 @@
 			
 			<div class="col-md-4 offset-md-1 row my-4">
 				<label for="username">퇴사여부</label>
-				<select name="isretire" id="isretire" >
+				<select name="isretire" id="isretire" class="form-control" >
 					<option value="N">재직중</option>
 					<option value="Y">퇴사</option>
 				</select>	
@@ -232,7 +232,7 @@
 			
             <div class="col-md-4 offset-md-1 row my-4">
 				<label for="username">구분</label>
-				<select name="jobno" id="jobno" >
+				<select name="jobno" id="jobno" class="form-control">
 					<option value="100">아르바이트</option>
 					<option value="200">사원</option>
 					<option value="300">매니저</option>

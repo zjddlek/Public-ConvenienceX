@@ -289,7 +289,7 @@
 				</div>
 
 				<div class="col-md-4 offset-md-1 row my-3">
-					<label for="username">구분</label> <select name="jobno" id="jobno">
+					<label for="username">구분</label> <select name="jobno" id="jobno" class="form-control">
 						<option value="">---선택하세요---</option>
 						<option value="100">아르바이트</option>
 						<option value="200">사원</option>
