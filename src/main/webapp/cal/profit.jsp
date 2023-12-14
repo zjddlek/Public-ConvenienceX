@@ -46,14 +46,22 @@
 		nowDate = date;
 		if ($(target).length > 0) {
 			var year = nowDate.getFullYear();
-			//var month = nowDate.getMonth() + 1;
-			var month = nowDate.getMonth();
-			$(target).empty().append(assembly(year, month));
+			var month = nowDate.getMonth() + 1;
+			
+			let oneMonthAgo = nowDate.getMonth();	// 한달 전 - 제목으로 갈꺼
+			
+			$(target).empty().append(assembly(year, oneMonthAgo));
+			
 		} else {
 			console.error("custom_calendar Target is empty!!!");
 			return;
 		}
 
+		// 달력 초기셋팅을 11월로 맞추기 위해 추가 
+		var lastMonth = new Date(nowDate.getFullYear(), nowDate.getMonth(), -1);
+		var LastmonthDay = new Date(nowDate.getFullYear(),nowDate.getMonth(), 0);
+		
+		// 현재의 달, 일자
 		var thisMonth = new Date(nowDate.getFullYear(), nowDate.getMonth(), 1);
 		var thisLastDay = new Date(nowDate.getFullYear(),nowDate.getMonth()+1, 0);
 
@@ -71,7 +79,7 @@
 				var tag = "<tr>";
 				
 				//빈 공백 만들어주기
-				for (i = 0; i < thisMonth.getDay(); i++) {
+				for (i = 0; i < lastMonth.getDay(); i++) {
 				    tag += "<td id='emp' style='border: 1px solid blue;'></td>";
 				    cnt++;
 				}
@@ -98,7 +106,7 @@
 					}
 		    	}
 				
-				for (i = 1; i <= thisLastDay.getDate(); i++) {
+				for (i = 1; i <= LastmonthDay.getDate(); i++) {
 					
 					if ( cnt % 7 == 0 ) { 
 				    	tag += "<tr>"; 
@@ -124,7 +132,7 @@
 				    
 				    if(emptyrow == 5){
 				    	tag += "<tr>";
-				    	for(var k = pos; k <= thisLastDay.getDate(); k++){
+				    	for(var k = pos; k <= LastmonthDay.getDate(); k++){
 							tag += "<td id='"+td_k+"'>" + valueList[k] +"</td>";
 						}	
 				    	tag += "</tr>";
