@@ -106,6 +106,48 @@ public class SalesDAO{
 		return list;
 	}
 	
+	// 거래일자로 검색하기 + 점포별
+	public ArrayList<SalesVO> getSalesList(String salesDate, String sno){
+		
+		sb.setLength(0);
+		sb.append(" SELECT SD.DETAILNO, S.SALENO, S.SALEDATE, SD.DEALNO, (P.PRICE_CONSUMER *cnt ) COST, SUM(P.PRICE_CONSUMER * cnt ) TOTAL ");
+		sb.append(" FROM SALES S ");
+		sb.append(" JOIN SALES_DETAIL SD ON S.SALENO = SD.SALENO ");
+		sb.append(" JOIN STOCK ST ON SD.STOCKNO = ST.STOCKNO ");
+		sb.append(" JOIN PRODUCT_INFO PI ON ST.PNO_INFO = PI.PNO_INFO ");
+		sb.append(" JOIN PRODUCT P ON PI.PNO = P.PNO ");
+		sb.append(" JOIN PRODUCT_ACCOUNT PA ON PA.PNO_ACCOUNT = P.PNO_ACCOUNT ");
+		sb.append(" WHERE S.SALEDATE LIKE ?  AND SUBSTRING(ST.STOCKNO,1,5) = ? ");
+		sb.append(" GROUP BY S.SALENO ");
+		sb.append(" ORDER BY S.SALEDATE DESC ");
+
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, salesDate+"%");
+			pstmt.setString(2, sno);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String saleno = rs.getString("saleno");
+				String salesdate = rs.getString("SALEDATE");
+				int dealno = rs.getInt("dealno");
+				int detailno = rs.getInt("DETAILNO");
+				int cost = rs.getInt("cost");
+				int total = rs.getInt("total");
+				
+				vo = new SalesVO(saleno, salesdate, null, null, 0, dealno, detailno, null, null, 0, cost, total);
+				
+				list.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	// 거래번호로 검색하기
 	public ArrayList<SalesVO> getDetailList(String num){
 		
@@ -151,6 +193,52 @@ public class SalesDAO{
 		return list;
 	}
 	
+	// 거래번호로 검색하기 + 점포 내
+	public ArrayList<SalesVO> getDetailList(String num, String sno){
+		
+		sb.setLength(0);
+		
+		sb.append(" SELECT SD.DETAILNO, S.SALENO,(P.PRICE_CONSUMER *cnt ) COST, SD.STOCKNO, S.SALEDATE, PA.PNAME, SD.CNT, SD.ISREFUND, SD.DEALNO, P.PRICE_CONSUMER ");
+		sb.append(" FROM SALES S ");
+		sb.append(" JOIN SALES_DETAIL SD ON S.SALENO = SD.SALENO ");
+		sb.append(" JOIN STOCK ST ON SD.STOCKNO = ST.STOCKNO ");
+		sb.append(" JOIN PRODUCT_INFO PI ON ST.PNO_INFO = PI.PNO_INFO ");
+		sb.append(" JOIN PRODUCT P ON PI.PNO = P.PNO ");
+		sb.append(" JOIN PRODUCT_ACCOUNT PA ON PA.PNO_ACCOUNT = P.PNO_ACCOUNT ");
+		sb.append(" WHERE S.SALENO LIKE ?  AND SUBSTRING(ST.STOCKNO,1,5) = ? ");
+		sb.append(" ORDER BY S.SALEDATE DESC ");
+
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, num+"%");
+			pstmt.setString(2, sno);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String saleno = rs.getString("saleno");
+				String salesdate = rs.getString("SALEDATE");
+				String stockno = rs.getString("stockno");
+				int cnt = rs.getInt("cnt");
+				int dealno = rs.getInt("dealno");
+				int detailno = rs.getInt("DETAILNO");
+				String isrefund = rs.getString("isrefund");
+				String pname = rs.getString("pname");
+				int price_consumer = rs.getInt("price_consumer");
+				int cost = rs.getInt("cost");
+				
+				vo = new SalesVO(saleno, salesdate, stockno, null, cnt, dealno, detailno, isrefund, pname, price_consumer, cost, 0);
+				
+				list.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 	
 	public void close() {
 		try {
