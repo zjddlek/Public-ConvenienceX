@@ -30,6 +30,7 @@
 <script type="text/javascript">
 
 	let sno = "${sno}";
+	console.log(sno);
 
 	(function() {
 		calendarMaker($("#calendarForm"), new Date());
@@ -43,43 +44,43 @@
 			date = new Date();
 		}
 
+		let year = '';
+		let month = '';
 		nowDate = date;
+		
 		if ($(target).length > 0) {
-			var year = nowDate.getFullYear();
-			var month = nowDate.getMonth() + 1;
+			year = nowDate.getFullYear();
+			month = nowDate.getMonth() + 1;
 			
-			let oneMonthAgo = nowDate.getMonth();	// 한달 전 - 제목으로 갈꺼
-			
-			$(target).empty().append(assembly(year, oneMonthAgo));
+			$(target).empty().append(assembly(year, month));
 			
 		} else {
 			console.error("custom_calendar Target is empty!!!");
 			return;
 		}
 
-		// 달력 초기셋팅을 11월로 맞추기 위해 추가 
-		var lastMonth = new Date(nowDate.getFullYear(), nowDate.getMonth(), -1);
-		var LastmonthDay = new Date(nowDate.getFullYear(),nowDate.getMonth(), 0);
-		
 		// 현재의 달, 일자
 		var thisMonth = new Date(nowDate.getFullYear(), nowDate.getMonth(), 1);
 		var thisLastDay = new Date(nowDate.getFullYear(),nowDate.getMonth()+1, 0);
 
 		var tag = "<tr>";
 		var cnt = 0;
-
+		
 		// 일자넣기에 ajax
 		$.ajax({
 			url : "ajax/profitAjaxMain.jsp",
+			data : {
+				"sno" : sno,
+				"yyyymm" : year+"-"+month
+			},
 			success : function(data) {
 
 				let obj = JSON.parse(data.trim());
 				
-				
 				var tag = "<tr>";
 				
 				//빈 공백 만들어주기
-				for (i = 0; i < lastMonth.getDay(); i++) {
+				for (i = 0; i < thisMonth.getDay(); i++) {
 				    tag += "<td id='emp' style='border: 1px solid blue;'></td>";
 				    cnt++;
 				}
@@ -96,6 +97,8 @@
 				}
 				
 				$.each(obj, function(idx, e){
+					console.log(e);
+					
 					valueList.push(e.calday);
 				});
 				
@@ -106,7 +109,7 @@
 					}
 		    	}
 				
-				for (i = 1; i <= LastmonthDay.getDate(); i++) {
+				for (i = 1; i <= thisLastDay.getDate(); i++) {
 					
 					if ( cnt % 7 == 0 ) { 
 				    	tag += "<tr>"; 
@@ -132,14 +135,14 @@
 				    
 				    if(emptyrow == 5){
 				    	tag += "<tr>";
-				    	for(var k = pos; k <= LastmonthDay.getDate(); k++){
+				    	for(var k = pos; k <= thisLastDay.getDate(); k++){
 							tag += "<td id='"+td_k+"'>" + valueList[k] +"</td>";
 						}	
 				    	tag += "</tr>";
 				    }
 				}	
 				
-				// 줄이 4줄이면서 cnt가 30~35 사이인 경우
+				// 줄이 4줄이면서 cnt가 30~35 사이인 경우 값추가
 				if(emptyrow == 4 && ( cnt >= 30 && cnt <= 35 ) ){
 			    	
 			    	tag += "<tr>";
@@ -150,6 +153,16 @@
 					
 				    tag += "</tr>";
 			    }
+				// 줄이 5줄이면서 cnt가 36~42 사이인 경우 값추가
+				else if( emptyrow == 5 && ( cnt >= 36 && cnt <= 42 ) ){
+					tag += "<tr>";
+			    	
+					for(var l = pos; l <= valueList.length-1; l++){			
+						tag += "<td id='td_"+l+"'>" + valueList[l] +"</td>";		
+					}
+					
+				    tag += "</tr>";
+				}
 
 				$(target).find("#custom_set_date").append(tag);
 				calMoveEvtFn();
@@ -207,5 +220,12 @@
 		} // calMoveEvtFn end
 
 	} //calendarMaker end
+	
+	function nvl(expr1, expr2) {
+		if (expr1 === undefined || expr1 == null || expr1 == "" || expr1 === 0) {
+			expr1 = "-";
+		}
+		return expr1;
+	}
 
 </script>

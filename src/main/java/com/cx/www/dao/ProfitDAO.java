@@ -100,6 +100,64 @@ public class ProfitDAO {
 		return list;
 	}
 	
+	public ArrayList<ProfitVO> getListDay( String yyyymm, String sno ) { // 리스트 가져오기 - 일자별 정산
+		ArrayList<ProfitVO> list = new ArrayList<ProfitVO>();
+		ProfitVO vo = null;
+		
+		sb.setLength(0);
+		
+		sb.append("select ifnull(a.day, b.seq) DATE, ifnull(a.calday,0) CALDAY ");
+		sb.append("from (SELECT date_format(DATE,'%d') day , SUM(CALTIME) CALDAY ");
+		sb.append("FROM (SELECT ATTNO, SUM(CNT * PRICE_CONSUMER) CALTIME, SUBSTRING(SALEDATE,1,10) DATE ");
+		sb.append("FROM (SELECT SA.SALENO, ATT.ATTNO, ATT.EMPNO, SA.SALEDATE ");
+		sb.append("FROM SALES SA, ATTENDANCE ATT  ");
+		sb.append("WHERE SA.SALEDATE BETWEEN ATT.ATTSTART AND ATT.ATTEND) AA  ");
+		sb.append("NATURAL JOIN SALES_DETAIL NATURAL JOIN STOCK NATURAL JOIN PRODUCT_INFO NATURAL JOIN PRODUCT  ");
+		sb.append("WHERE AA.SALEDATE LIKE ? ");
+		sb.append("AND SUBSTRING(STOCK.STOCKNO,1,5) = ? ");
+		sb.append("GROUP BY ATTNO) BB GROUP BY DATE ORDER BY DATE ) a right outer join dummy b ");
+		sb.append("on a.day =  b.seq ");
+
+		/*sb.append("SELECT DATE, SUM(CALTIME) CALDAY ");
+		sb.append("FROM (SELECT ATTNO, SUM(CNT * PRICE_CONSUMER) CALTIME, SUBSTRING(SALEDATE,1,10) DATE  ");
+		sb.append("FROM (SELECT SA.SALENO, ATT.ATTNO, ATT.EMPNO, SA.SALEDATE ");
+		sb.append("FROM SALES SA, ATTENDANCE ATT ");
+		sb.append("WHERE SA.SALEDATE BETWEEN ATT.ATTSTART AND ATT.ATTEND) AA  ");
+		sb.append("NATURAL JOIN SALES_DETAIL NATURAL JOIN STOCK NATURAL JOIN PRODUCT_INFO NATURAL JOIN PRODUCT ");
+		sb.append("WHERE AA.SALEDATE LIKE ? ");
+		sb.append("AND SUBSTRING(STOCK.STOCKNO,1,5) = ? ");
+		sb.append("GROUP BY ATTNO) BB GROUP BY DATE ORDER BY DATE ");*/
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, yyyymm + "%");
+			pstmt.setString(2, sno);
+			
+			rs = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			
+			while (rs.next()) {
+				
+				String day = rs.getString("DATE");
+				String calday = rs.getString("CALDAY");
+				
+				vo = new ProfitVO(0, null, 0, null, 0, 0, day, calday);
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public void addProfit(ProfitVO vo) {
 		sb.setLength(0);
 		sb.append("SELECT CALNO FROM CALCULATION ORDER BY CALNO DESC LIMIT 1;");
