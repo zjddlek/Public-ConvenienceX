@@ -203,6 +203,54 @@ public class StockDAO {
 		}
 		
 		return list;	
+	}
+	
+	// 재고 리스트 검색 + 점포만
+	public ArrayList<StockVO> getSearch(String pname, String sno) {
+		
+		ArrayList<StockVO> list = new ArrayList<StockVO>();
+		StockVO vo = null;
+		
+		sb.setLength(0);
+
+		sb.append(" select ST.STOCKNO, MC.MCNAME, SC.SCNAME, PA.PNAME, P.PRICE_CONSUMER, ST.STOCK_COUNT, ST.PNO_INFO, ST.WAREHOUSEDATE  ");
+		sb.append(" FROM MAJOR_CATEGORY MC ");
+		sb.append(" JOIN SUB_CATEGORY SC ON MC.MCNO = SC.MCNO ");
+		sb.append(" JOIN PRODUCT P ON SC.SCNO = P.SCNO ");
+		sb.append(" JOIN PRODUCT_ACCOUNT PA ON P.PNO_ACCOUNT = PA.PNO_ACCOUNT ");		
+		sb.append(" JOIN PRODUCT_INFO PI ON P.PNO = PI.PNO ");		
+		sb.append(" JOIN STOCK ST ON PI.PNO_INFO = ST.PNO_INFO ");
+		sb.append(" WHERE PA.PNAME LIKE ?  AND SUBSTRING(ST.STOCKNO,1,5) = ? ");
+		sb.append(" group by ST.STOCKNO ");
+		sb.append(" order by length(ST.STOCKNO), ST.STOCKNO ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, "%" + pname + "%");
+			pstmt.setString(2, sno);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String stockNo = rs.getString("STOCKNO");
+				String Pname = rs.getString("PNAME");
+				int stockCount = rs.getInt("STOCK_COUNT");
+				String pnoInfo = rs.getString("PNO_INFO");
+				String warehousedate = rs.getString("WAREHOUSEDATE");
+				String mcName = rs.getString("mcName");
+				String scName = rs.getString("scName");
+				int price_consumer = rs.getInt("PRICE_CONSUMER");
+				
+				vo = new StockVO(stockNo, stockCount, pnoInfo, warehousedate, Pname, mcName, scName, null, null, price_consumer);
+				list.add(vo);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;	
 	}//method end
 	
 	

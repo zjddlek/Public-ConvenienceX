@@ -44,7 +44,7 @@
 		<input type="date" name="date" id="date" style="width: 170px" /> 
 		<input type="hidden" name="sno" id="sno" value="${sno }" />
 		<table class="table table-striped table-hover table-sm">
-			<tr>
+			<tr style="text-align:center;">
 				<th>주문날짜</th>
 				<th>주문번호</th>
 				<th>상품명</th>
@@ -54,8 +54,8 @@
 			</tr>
 			<c:forEach var="vo" items="${list }">
 				<tr>
-					<td>${vo.ordDate }</td>
-					<td>${vo.ordno }</td>
+					<td style="text-align:center;">${vo.ordDate }</td>
+					<td style="text-align:center;">${vo.ordno }</td>
 					<c:set var="pname" value="${vo.pname }" />
 						<c:if test="${fn:length(pname) >= 34 }">
 							<td  class="pname" value="${vo.pname }">${fn:substring(pname, 0, 33) }...</td>
@@ -63,9 +63,9 @@
 						<c:if test="${fn:length(pname) < 34 }">
 							<td  class="pname" value="${vo.pname }">${vo.pname }</td>
 						</c:if>
-					<td>${vo.ordCount }</td>
-					<td>${vo.manudate }</td>
-					<td>${vo.expirydate}</td>
+					<td style="text-align:center;">${vo.ordCount }</td>
+					<td style="text-align:center;">${vo.manudate }</td>
+					<td style="text-align:center;">${vo.expirydate}</td>
 				</tr>
 			</c:forEach>
 			<tr>

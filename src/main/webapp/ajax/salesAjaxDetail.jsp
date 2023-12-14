@@ -7,12 +7,12 @@
     pageEncoding="UTF-8"%>
 
 <%
-
+	String sno = request.getParameter("sno");
 	String salesno = request.getParameter("salesno");
 	
 	JSONArray saleArray = new JSONArray();
 	SalesDAO dao = new SalesDAO();
-	ArrayList<SalesVO> list = dao.getDetailList(salesno);
+	ArrayList<SalesVO> list = dao.getDetailList(salesno, sno);
 	
 	for(SalesVO vo : list){
 		

@@ -34,7 +34,7 @@
 	<div><jsp:include page="/main/nav.jsp"></jsp:include></div>
 	<div class="container">
 		<table class="table table-striped table-hover table-sm">
-			<tr>
+			<tr style="text-align:center;">
 				<th>대분류</th>
 				<th>중분류</th>
 				<th>회사</th>
@@ -58,7 +58,7 @@
 						<c:if test="${fn:length(pname) < 34 }">
 							<td  class="pname" value="${vo.PName }">${vo.PName }</td>
 						</c:if>
-					<td>${vo.expirydate }</td>
+					<td style="text-align:center;">${vo.expirydate }</td>
 					<td><fmt:setLocale value="ko_KR" /><fmt:formatNumber type="currency" value="${vo.priceServer }" /></td>
 					<td><fmt:setLocale value="ko_KR" /><fmt:formatNumber type="currency" value="${vo.priceConsumer }" /></td>
 					<td><fmt:formatNumber value="${(vo.priceConsumer-vo.priceServer) / vo.priceServer }" type="percent" /></td>

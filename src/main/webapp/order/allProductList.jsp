@@ -47,7 +47,7 @@
 	<div><jsp:include page="/main/nav.jsp"></jsp:include></div>
 	<div class="container">
 		<table class="table table-striped table-hover table-sm">
-			<tr>
+			<tr style="text-align:center;">
 				<th>대분류</th>
 				<th>중분류</th>
 				<th>회사</th>
@@ -56,7 +56,7 @@
 				<th>발주가격</th>
 				<th>판매가격</th>
 				<th>이익률</th>
-				<th>상품등록일자</th>
+<!-- 				<th>상품등록일자</th> -->
 				<th></th>
 			</tr>
 			<c:forEach var="vo" items="${list }">
@@ -71,11 +71,11 @@
 						<c:if test="${fn:length(pname) < 34 }">
 							<td  class="pname" value="${vo.PName }">${vo.PName }</td>
 						</c:if>
-					<td>${vo.expirydate }</td>
+					<td style="text-align:center;">${vo.expirydate }</td>
 					<td><fmt:setLocale value="ko_KR" /><fmt:formatNumber type="currency" value="${vo.priceServer }" /></td>
 					<td><fmt:setLocale value="ko_KR" /><fmt:formatNumber type="currency" value="${vo.priceConsumer }" /></td>
 					<td><fmt:formatNumber value="${(vo.priceConsumer-vo.priceServer) / vo.priceServer }" type="percent" /></td>
-					<td><c:set var="date" value="${vo.regdate }" />	${fn:substring(date, 0, 10) }</td>
+<%-- 					<td><c:set var="date" value="${vo.regdate }" />	${fn:substring(date, 0, 10) }</td> --%>
 					<td><input type="button" id="${vo.PNo }" value="발주 리스트에 추가" class="addOrder" /></td>
 				</tr>
 			</c:forEach>
@@ -87,7 +87,8 @@
 						</ul>
 					</nav>
 				</td>
-				<td colspan='6' style='text-align: center'>
+<!-- 				<td colspan='6' style='text-align: center'> -->
+				<td colspan='5' style='text-align: center'>
 					<nav aria-label="Page navigation">
 						<ul class="pagination justify-content-center">
 							<c:if test="${currentPage > 1}">
@@ -116,7 +117,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
+<!-- 				<td></td> -->
 				<td></td>
 				<td></td>
 				<td colspan="2"><a href="mc?type=orders&sno=${svo.sno }"> <input type="button" class="btn btn-secondary" value="발주 리스트로 돌아가기"></a></td>
