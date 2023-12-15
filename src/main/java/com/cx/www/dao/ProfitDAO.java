@@ -44,10 +44,11 @@ public class ProfitDAO {
 				String caltime = rs.getString("CALTIME");
 				int salesamount = rs.getInt("SALESAMOUNT");
 				int difference = rs.getInt("DIFFERENCE");
-				String day = rs.getString("DATE");
-				String calday = rs.getString("CALDAY");
+				/*
+				 * String day = rs.getString("DATE"); String calday = rs.getString("CALDAY");
+				 */
 			
-				vo = new ProfitVO(calno, attno, calculate, caltime, salesamount, difference, day, calday);
+				vo = new ProfitVO(calno, attno, calculate, caltime, salesamount, difference, null, null);
 
 				list.add(vo);
 			}

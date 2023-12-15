@@ -74,7 +74,7 @@ $(document).ready(function(){
 
 </script>
 <body>
-
+	<jsp:include page="/main/nav.jsp"></jsp:include>
 	<div class="container" style="padding-bottom: 20px;">
 		<h2>정산 이력</h2>
 		<form action="">
