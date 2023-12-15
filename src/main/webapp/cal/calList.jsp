@@ -119,7 +119,7 @@ $(document).ready(function(){
 
 </body>
 
-<script>
+<!-- <script>
 
 let todoData=[];
 const recordPerPage=15; //페이지당 몇줄?
@@ -129,5 +129,5 @@ const currentPage=0;//현재 페이지번호
 const cp =
 
 
-</script>
+</script> -->
 </html>
