@@ -96,17 +96,15 @@
 				}
 				
 				$.each(obj, function(idx, e){
-					console.log(e);
-					
 					valueList.push(e.calday);
 				});
 				
 				// 칸에 맞춰서 값에 공백추가 ---> 값이 0부터 시작됨
-				if ( valueList.length >= 31 && valueList.length <= 34 ){
+				/* if ( valueList.length >= 31 && valueList.length <= 34 ){
 		    		for(var t = valueList.length; t <= 34; t++){
 		    			valueList.push("");
 					}
-		    	}
+		    	} */
 				
 				for (i = 1; i <= thisLastDay.getDate(); i++) {
 					
@@ -125,7 +123,7 @@
 				        tag += "<tr>";
 					    	
 						for(var k = pos; k < (pos+7); k++){
-							tag += "<td id='td_"+k+"'>" + valueList[k] +"</td>";
+							tag += "<td id='td_"+k+"'>" + nvl(valueList[k]) +"</td>";
 								
 						}
 				    	pos = k ;
@@ -135,7 +133,7 @@
 				    if(emptyrow == 5){
 				    	tag += "<tr>";
 				    	for(var k = pos; k <= thisLastDay.getDate(); k++){
-							tag += "<td id='"+td_k+"'>" + valueList[k] +"</td>";
+							tag += "<td id='td_"+k+"'>" + nvl(valueList[k]) +"</td>";
 						}	
 				    	tag += "</tr>";
 				    }
@@ -147,7 +145,7 @@
 			    	tag += "<tr>";
 			    	
 					for(var l = pos; l <= valueList.length-1; l++){			
-						tag += "<td id='td_"+l+"'>" + valueList[l] +"</td>";		
+						tag += "<td id='td_"+l+"'>" + nvl(valueList[l]) +"</td>";		
 					}
 					
 				    tag += "</tr>";
@@ -157,7 +155,7 @@
 					tag += "<tr>";
 			    	
 					for(var l = pos; l <= valueList.length-1; l++){			
-						tag += "<td id='td_"+l+"'>" + valueList[l] +"</td>";		
+						tag += "<td id='td_"+l+"'>" + nvl(valueList[l]) +"</td>";		
 					}
 					
 				    tag += "</tr>";
@@ -220,9 +218,9 @@
 
 	} //calendarMaker end
 	
-	function nvl(expr1, expr2) {
-		if (expr1 === undefined || expr1 == null || expr1 == "" || expr1 === 0) {
-			expr1 = "-";
+	function nvl(expr1) {
+		if (expr1 === undefined || expr1 == null || expr1 == "" || expr1 == 0) {
+			expr1 = "&nbsp;";
 		}
 		return expr1;
 	}
