@@ -4,4 +4,4 @@
 
 <script>
 	location.href = "mc?type=workmain&sno=${svo.sno }";
-</script>
+</script> 

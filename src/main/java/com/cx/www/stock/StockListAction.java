@@ -20,7 +20,7 @@ public class StockListAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		
+ 		
 		String sno = req.getParameter("sno");
 		req.setAttribute("sno", sno);
 		

@@ -7,7 +7,7 @@
     pageEncoding="UTF-8"%>
 <% 
 	OrderListDAO dao = new OrderListDAO();
-	
+	 
 	String sno = request.getParameter("sno");
 	String yyyyMMdd = request.getParameter("date");
 	

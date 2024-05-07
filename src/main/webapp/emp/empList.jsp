@@ -7,7 +7,7 @@
 <html>
 <head>
 <style>
-#root {
+#root { 
 	width: 1500px;
 	height: 600px;
 	text-align: center;

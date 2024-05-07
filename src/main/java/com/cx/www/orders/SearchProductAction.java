@@ -10,7 +10,7 @@ import com.cx.www.dao.AllProductDAO;
 import com.cx.www.vo.AllProductVO;
 
 public class SearchProductAction implements Action {
-
+ 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		

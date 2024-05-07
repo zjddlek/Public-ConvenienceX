@@ -9,7 +9,7 @@
 <%
 	String sno = request.getParameter("sno");
 	String salesno = request.getParameter("salesno");
-	
+	 
 	JSONArray saleArray = new JSONArray();
 	SalesDAO dao = new SalesDAO();
 	ArrayList<SalesVO> list = dao.getDetailList(salesno, sno);

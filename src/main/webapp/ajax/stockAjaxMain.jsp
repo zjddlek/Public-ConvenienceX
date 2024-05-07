@@ -9,7 +9,7 @@
 <%
  
 	String sno = request.getParameter("sno");
-
+ 
 	StockDAO stdao = new StockDAO();
 	JSONArray stArray = new JSONArray();
 	

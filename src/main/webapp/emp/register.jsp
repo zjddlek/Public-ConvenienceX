@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-
+ 
 <style>
 #root {
 	margin: auto;

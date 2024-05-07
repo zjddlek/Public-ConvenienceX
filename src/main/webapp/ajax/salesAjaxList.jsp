@@ -8,7 +8,7 @@
     pageEncoding="UTF-8"%>
 
 <%
-
+ 
 	String salesDate = request.getParameter("salesDate");
 	String sno = request.getParameter("sno");
 	

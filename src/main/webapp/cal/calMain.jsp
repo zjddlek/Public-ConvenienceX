@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>calMain</title>
 </head>
-<body>
+<body> 
 	<jsp:include page="/main/nav.jsp"></jsp:include>
 	
 	<div class="container">		

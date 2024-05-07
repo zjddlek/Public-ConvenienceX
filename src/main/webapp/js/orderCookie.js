@@ -4,7 +4,7 @@ let idArray = [];
 if ( $.cookie("pno") != null )	{
 	idArray.push($.cookie("pno"));
 }
-
+ 
 $(()=>{
 	$(".addOrder").on("click",(e)=>{
 		let id = $(e.currentTarget).attr("id");

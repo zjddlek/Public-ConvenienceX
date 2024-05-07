@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cx.www.action.Action;
 import com.cx.www.dao.AllProductDAO;
 import com.cx.www.vo.AllProductVO;
-
+ 
 public class NewProductSixAction implements Action{
 
 	@Override

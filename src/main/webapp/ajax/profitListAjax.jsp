@@ -7,7 +7,7 @@
     pageEncoding="UTF-8"%>
 
     <%
-    
+     
 	String calno1 = request.getParameter("calno");
 	
 	String attno = request.getParameter("attno");

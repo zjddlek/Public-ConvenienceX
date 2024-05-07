@@ -1,7 +1,7 @@
 //let totalPrice = 0;
 //let finalTotalProductName = null;
 //$(()=>{
-//	
+//	 
 //	totalfn();
 //	
 //	$("input[type=number]").on("change",(e)=>{

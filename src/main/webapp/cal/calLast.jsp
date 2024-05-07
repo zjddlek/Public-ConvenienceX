@@ -25,7 +25,7 @@
 .tabss .tab a {
 	color: black;
 }
-
+  
 .tabss .tab.active {
 	background-color: DimGray;
 }

@@ -10,7 +10,7 @@ import com.cx.www.dao.ProductRankingDAO;
 import com.cx.www.vo.ProductRankingVO;
 
 public class RankingTopSixAction implements Action {
-
+ 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		ProductRankingDAO dao = new ProductRankingDAO();

@@ -1,5 +1,5 @@
 package com.cx.www.vo;
-
+ 
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;

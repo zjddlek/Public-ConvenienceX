@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import com.cx.www.dbconnection.DBConnection;
 import com.cx.www.vo.JobVO;
-
+ 
 public class JobDAO {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
